@@ -1,14 +1,20 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-class JobBoard extends React.Component{
-	render(){
-		return(
-			<h1>Loaded up react</h1>
+import {EmployerComponent} from './components/employerComponent';
+
+class App extends React.Component {
+	render() {
+		return (
+			<div>
+				<h1>Loaded up react</h1>
+				<EmployerComponent />
+			
+			</div>
 		)
 	}
 }
 
-render(<JobBoard/>, document.getElementById('root'));
+render(<App/>, document.getElementById('root'));
 
 // export default JobBoard;
