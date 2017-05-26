@@ -9,6 +9,16 @@ import {UserComponent} from './components/userComponent';
 
 
 class App extends React.Component {
+	componentDidMount() {
+		axios.get('/user')
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}
+	
 	render() {
 		return (
 			<HashRouter>
