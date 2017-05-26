@@ -71,7 +71,6 @@ router.param('jobId', function (req, res, next, jobId) {
     });
 });
 
-// =============================
 router.get('/:jobId', function (req, res, next) {
     console.log('inside the jobId');
     console.log(req.params);
@@ -82,6 +81,21 @@ router.get('/:jobId', function (req, res, next) {
         employer: req.employerModel
     })
 });
+// =============================
+router.get('/', function (req, res,next) {
+    console.log("looking for jobs");
+	Jobs.find({}, function(err, jobs) {
+		// var jobMap = [];
+		//
+		// jobs.forEach(function(job) {
+		// 	jobMap[job._id] = job;
+		// });
+        console.log('found them');
+		console.log(jobs);
+		res.send(jobs);
+	});
+});
+// =============================
 
 router.patch('/:jobId', function (req, res, next) {
 

@@ -80,10 +80,9 @@ router.get('/home', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-    console.log('inside / of app.js');
-    res.render('index');
-    console.log("does this really refresh");
-	// res.send('Hello World!');
+    // console.log('inside / of app.js');
+    // res.render('index');
+	res.send('Hello World!');
 	// next();
 });
 

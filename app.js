@@ -47,7 +47,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/uploads', uploads);
-app.use('/jobpost', jobPosts);
+app.use('/jobposts', jobPosts);
 app.use('/user', userRoutes);
 app.use('/employer', employerRoutes);
 app.use('/', appRoutes);

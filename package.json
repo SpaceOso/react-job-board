@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A job board app made with React",
   "main": "./src/index.js",
-  "proxy": "localhost:4200/",
   "scripts": {
     "start": "node bin/www",
     "ricodev": "nodemon bin/www",
@@ -51,6 +50,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.0.0",
     "css-loader": "^0.28.2",
     "mongoose-unique-validator": "^1.0.5",
     "node-sass": "^4.5.3",
