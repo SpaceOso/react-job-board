@@ -1,5 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
+import {Provider} from 'react-redux';
+import store from './store';
+
 
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
@@ -9,29 +12,12 @@ import {UserComponent} from './components/userComponent';
 
 //Utils
 import {URL} from './utils/utils';
+import JobListContainer from './containers/jobListContainer';
+
 
 class App extends React.Component {
 	constructor(props){
 		super(props);
-		
-		this.state = {jobs: ''};
-		// this.componentDidMount = this.componentDidMount.bind(this);
-	}
-	
-	componentDidMount() {
-		console.log("monuting..");
-		let self = this;
-		
-		axios.get(`${URL}${'jobposts'}`)
-			.then(function (response) {
-				console.log(response.data);
-				let jobs = response.data.map(obj => obj.jobTitle);
-				console.log("wut", jobs);
-				self.setState({jobs});
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
 	}
 	
 	
@@ -39,10 +25,11 @@ class App extends React.Component {
 		console.log('render', this.state);
 
 		return (
+			<Provider  store={store}>
 			<HashRouter>
 				<div>
 					<p><Link to="/user">Click me!</Link></p>
-					<p>the jobs {this.state.jobs}</p>
+					<JobListContainer/>
 					<LayoutComponent >
 						<Switch>
 							
@@ -54,6 +41,7 @@ class App extends React.Component {
 					</LayoutComponent>
 				</div>
 			</HashRouter>
+		</Provider>
 		)
 	}
 }
