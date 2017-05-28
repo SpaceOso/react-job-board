@@ -2,13 +2,23 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store';
+import {createStore, applyMiddleware} from 'redux';
+import ReduxPromise from 'redux-promise';
 
-import App from './components/app';
 
+//styles;
+import styles from './styles/main.scss';
 
 //Utils
 import {URL} from './utils/utils';
 
+//reducers
+import rootReducer from './reducers/index';
+
+//components
+import App from './components/app';
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 class JobBoard extends React.Component {
     constructor(props) {
@@ -20,7 +30,7 @@ class JobBoard extends React.Component {
         console.log('render', this.state);
 
         return (
-            <Provider store={store}>
+            <Provider store={createStoreWithMiddleware(rootReducer)}>
                 <App />
             </Provider>
         )

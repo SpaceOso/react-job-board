@@ -5,4 +5,4 @@ function JobReducer(state=[], action){
 	return state;
 }
 
-export default JobReducer
+export default JobReducer;
