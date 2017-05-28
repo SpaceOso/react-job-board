@@ -1,0 +1,24 @@
+$watermelon: #ff3b3f;
+$carbon: #a9a9a9;
+$sky: #caebf2;
+$neutral: #efefef;
+$panelBg: #FDFDFD;
+$jobTitle: #0089FF;
+$adminBackground: #63B7FF;
+$jobLocation: #ffffff;
+$headers: #EBEFF3;
+$white: #ffffff;
+$borders: #999999;
+$button: #1455B3;
+$buttonActivated: #1CB314;
+$disabled: #dcdcdc;
+$dark: #080404;
+$testcolor: red;
+
+$contentPadding: 15px;
+
+@mixin panelShadow() {
+  -webkit-box-shadow: 0px 11px 5px -5px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0px 11px 5px -5px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 11px 5px -5px rgba(0, 0, 0, 0.24);
+}

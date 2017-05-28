@@ -1,4 +1,112 @@
+@import "variables";
+@import "header.scss";
+
 body{
-  background-color: #594b4b;
+  background-color: $carbon;
   color: #ffffff;
+}
+
+
+html{
+  /*font-size: 62.5%;*/
+}
+
+body{
+  text-align: center;
+  //background-color: #EFEFEF;
+  box-sizing: border-box;
+  /*color: white;*/
+  /*font-size: 62.5%;*/
+  /*font-size: 1.2em;*/
+}
+/*=======================================*/
+/*- HELPER CLASSES*/
+/*=======================================*/
+.text-left{
+  text-align: left;
+}
+
+
+.full-width{
+  width: 100%;
+}
+
+hr.style1 {
+  border-top: 3px double #8c8b8b;
+}
+
+
+.job-container{
+  display: flex;
+  //align-content: flex-start;
+  //justify-content: flex-start;
+  width: 100%;
+  background-color: palevioletred;
+}
+
+
+
+.inlineblock{
+  display: inline-block;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.bottom5 { margin-bottom:5px; }
+.bottom7 { margin-bottom:7px; }
+.bottom10 { margin-bottom:10px; }
+.bottom15 { margin-bottom:15px; }
+.bottom17 { margin-bottom:17px; }
+.bottom30 { margin-bottom:30px; }
+
+
+.jb-shadow{
+  -webkit-box-shadow: 0px 11px 5px -5px rgba(0,0,0,0.24);
+  -moz-box-shadow: 0px 11px 5px -5px rgba(0,0,0,0.24);
+  box-shadow: 0px 11px 5px -5px rgba(0,0,0,0.24);
+
+}
+
+/*=======================================*/
+/*- EMPLOYER PAGE*/
+/*=======================================*/
+
+.jumbotron1 {
+  padding: 30px 15px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #f9f9f9;
+  text-align: center;
+  background-size: cover;
+  background-image: url("http://www.online-image-editor.com//styles/2014/images/example_image.png")
+}
+
+.employer-jumbotron{
+  /*background-image: url("./assets/images/employer-frontpage.jpg");*/
+}
+
+.job-submit{
+  text-align: left;
+}
+
+@media (min-width: 1200px){
+  .container {
+    width: 970px;
+  }
+}
+
+/*=======================================*/
+/*- FRONT PAGE*/
+/*=======================================*/
+
+.app-container{
+  width: 80%;
+  background-color: $neutral;
+  margin: auto;
 }

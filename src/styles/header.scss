@@ -1,0 +1,22 @@
+@import "variables";
+
+.header-component{
+  width: 100%;
+  background-color: $dark;
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+
+  #header-logo{
+
+  }
+
+  #nav-item{
+    margin: 0 15px;
+  }
+  #nav-links{
+
+  }
+}

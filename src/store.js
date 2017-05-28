@@ -4,7 +4,7 @@ import rootReducer from './reducers/index';
 
 //state property names match the name of the reducers
 const defaultState = {
-	jobs: []
+	jobs: {}
 };
 
 let store = createStore(rootReducer, defaultState);

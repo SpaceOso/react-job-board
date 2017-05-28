@@ -9,22 +9,19 @@ import {UserComponent} from './userComponent';
 import JobListContainer from '../containers/jobListContainer';
 
 
-class App extends React.Component{
-    render(){
+class App extends React.Component {
+    render() {
         return (
             <HashRouter>
-                <div>
-                    <p><Link to="/user">Click me!</Link></p>
-                    <JobListContainer/>
-                    <LayoutComponent >
+                <LayoutComponent >
+                    <div className="app-container">
                         <Switch>
-                            <Route exact path="/" component={EmployerComponent}/>
+                            <Route exact path="/" component={JobListContainer}/>
+                            <Route path="/employer" component={EmployerComponent}/>
                             <Route path="/user" component={UserComponent}/>
-                            {/*<EmployerComponent/>*/}
-                            {/*<h2>I'm between the header and footer...</h2>*/}
                         </Switch>
-                    </LayoutComponent>
-                </div>
+                    </div>
+                </LayoutComponent>
             </HashRouter>
         )
     }

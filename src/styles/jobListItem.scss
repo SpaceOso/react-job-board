@@ -1,0 +1,12 @@
+@import "variables";
+
+.job-list-item{
+  text-align: left;
+  color: $jobTitle;
+
+  img{
+    width: 200px;
+  }
+
+
+}
