@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {Link } from 'react-router-dom'
 //styles
 import jobListItemStyles from '../styles/jobListItem.scss';
 
@@ -14,6 +15,7 @@ class JobListItem extends React.Component {
     render() {
         let job = this.props.job;
 
+        console.log("job info", job);
         return (
             <div className="job-list-item">
                 <div className="job-list-logo">
@@ -23,9 +25,13 @@ class JobListItem extends React.Component {
                     />
                 </div>
                 <div className="job-list-info">
-                    <h1 className="job-title">{job.jobTitle}</h1>
-                    <h2 className="job-employer">{job.employerName}</h2>
-                    <p className="job-description" dangerouslySetInnerHTML={{__html: job.jobDescription}}></p>
+                    <Link to={`/jobposts/${job._id}`}>
+                        <h1 className="job-title">
+                            {job.jobTitle}
+                        </h1>
+                        <h2 className="job-employer">{job.employerName}</h2>
+                        <p className="job-description" dangerouslySetInnerHTML={{__html: job.jobDescription}}></p>
+                    </Link>
                     {/*<p className="job-description">{job.jobDescription}</p>*/}
                 </div>
             </div>
