@@ -4,21 +4,32 @@
 body{
   background-color: $carbon;
   color: #ffffff;
+  margin: 0;
 }
 
 
-html{
-  /*font-size: 62.5%;*/
+html {
+  font-size: 62.5%; /* font-size 1em = 10px on default browser settings */
 }
 
 body{
   text-align: center;
   //background-color: #EFEFEF;
   box-sizing: border-box;
-  /*color: white;*/
-  /*font-size: 62.5%;*/
-  /*font-size: 1.2em;*/
+  font-family: 'Ubuntu', sans-serif;
 }
+
+/*=======================================*/
+/*STANDARD SIZES*/
+/*=======================================*/
+h1{
+  font-size: 2.6rem;
+}
+
+h3{
+  font-size: 2.0rem;
+}
+
 /*=======================================*/
 /*- HELPER CLASSES*/
 /*=======================================*/
@@ -43,7 +54,6 @@ hr.style1 {
   width: 100%;
   background-color: palevioletred;
 }
-
 
 
 .inlineblock{
@@ -109,4 +119,21 @@ hr.style1 {
   width: 80%;
   background-color: $neutral;
   margin: auto;
+}
+
+.jumboTron{
+  width: 100%;
+  height: 250px;
+  background-color: $dark;
+  display: flex;
+  flex-direction: column;
+
+  #site-title{
+    font-size: 5.6rem;
+  }
+
+  #site-subtext{
+    font-size: 4.8rem;
+    margin: 0 auto;
+  }
 }

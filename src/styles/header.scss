@@ -2,19 +2,20 @@
 
 .header-component{
   width: 100%;
-  background-color: $dark;
+  background-color: $header;
   display: flex;
-  height: auto;
+  height: 55px;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   justify-content: flex-start;
 
   #header-logo{
-
+    margin-left: 23px;
   }
 
-  #nav-item{
-    margin: 0 15px;
+  .nav-item{
+    margin: 0 50px;
+    font-size: 1.8rem;
   }
   #nav-links{
 
