@@ -2,20 +2,18 @@ import React from 'react';
 
 import {Link } from 'react-router-dom'
 //styles
-import jobListItemStyles from '../styles/jobListItem.scss';
+import jobListItemStyles from './jobListItem.scss';
 
 class JobListItem extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props.job);
     }
 
 
     render() {
         let job = this.props.job;
 
-        console.log("job info", job);
         return (
             <div className="job-list-item">
                 <div className="job-list-logo">

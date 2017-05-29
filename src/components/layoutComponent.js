@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {HeaderComponent} from './headerComponent';
-import {JumboTron} from './jumboTron';
-import {FooterComponent} from './footerComponent';
+import {HeaderComponent} from './header/headerComponent';
+import {JumboTron} from './home/jumboTron';
+import {FooterComponent} from './footer/footerComponent';
 
 class LayoutComponent extends React.Component {
     render() {

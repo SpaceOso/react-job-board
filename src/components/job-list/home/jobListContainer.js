@@ -1,13 +1,13 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {getJobs} from '../actions/jobActions';
+import {getJobs} from '../../../actions/jobActions';
 
 //style
-import jobListStyles from '../styles/joblistContainer.scss';
+import jobListStyles from './joblistContainer.scss';
 
 //component
-import JobListItem from '../components/jobListItem';
+import JobListItem from './jobListItemComponent';
 
 class JobListContainer extends React.Component {
 	constructor(props) {

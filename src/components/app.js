@@ -3,12 +3,12 @@ import React from 'react';
 
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
-import {EmployerComponent} from './employerComponent';
+import {EmployerComponent} from './employer/employerComponent';
 import LayoutComponent from './layoutComponent';
-import {UserComponent} from './userComponent';
-import JobListContainer from '../containers/jobListContainer';
-import {JumboTron} from '../components/jumboTron';
-import JobPostComponent from '../components/jobPostComponent';
+import {UserComponent} from './applicant/userComponent';
+import JobListContainer from './job-list/home/jobListContainer';
+import {JumboTron} from './home/jumboTron';
+import JobPostComponent from './job-posts/jobPostComponent';
 
 
 class App extends React.Component {
