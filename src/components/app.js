@@ -11,22 +11,22 @@ import {JumboTron} from '../components/jumboTron';
 
 
 class App extends React.Component {
-	render() {
-		return (
-			<HashRouter>
-				<LayoutComponent >
-					<div className="app-container">
-						<Route path="/" components={JumboTron}/>
-						<Route path="/" component={JobListContainer}/>
-						<Switch>
-							<Route path="/employer" component={EmployerComponent}/>
-							<Route path="/user" component={UserComponent}/>
-						</Switch>
-					</div>
-				</LayoutComponent>
-			</HashRouter>
-		)
-	}
+    render() {
+        return (
+            <HashRouter>
+                <LayoutComponent >
+                    <Route exact path="/" component={JumboTron}/>
+                    <div className="app-container">
+                        <Route exact path="/" component={JobListContainer}/>
+                        <Switch>
+                            <Route path="/employer" component={EmployerComponent}/>
+                            <Route path="/user" component={UserComponent}/>
+                        </Switch>
+                    </div>
+                </LayoutComponent>
+            </HashRouter>
+        )
+    }
 }
 
 export default App;

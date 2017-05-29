@@ -36,8 +36,6 @@ class JobListContainer extends React.Component {
 	render() {
 		return (
 			<div className="joblist-container">
-				I'm a joblist container omg work
-				<button onClick={this.getJobs}>click me for jobs!!</button>
 				{Object.keys(this.props.jobs).map(job => this.returnJobList(job))}
 			</div>
 		)
