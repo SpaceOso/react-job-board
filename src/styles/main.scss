@@ -19,6 +19,10 @@ body{
   font-family: 'Ubuntu', sans-serif;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
 /*=======================================*/
 /*STANDARD SIZES*/
 /*=======================================*/
@@ -118,7 +122,6 @@ hr.style1 {
 .app-container{
   width: 80%;
   max-width: 940px;
-  background-color: $neutral;
   margin: auto;
 }
 

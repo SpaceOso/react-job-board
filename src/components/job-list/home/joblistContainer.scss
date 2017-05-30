@@ -1,3 +1,11 @@
-.joblist-container{
+@import "../../../styles/variables";
+
+.job-list-container{
   //background-color: orange;
+}
+
+#job-post-header{
+  margin: 0;
+  text-align: left;
+  color: $jobTitle;
 }

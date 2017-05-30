@@ -8,7 +8,7 @@ import LayoutComponent from './layoutComponent';
 import {UserComponent} from './applicant/userComponent';
 import JobListContainer from './job-list/home/jobListContainer';
 import {JumboTron} from './home/jumboTron';
-import JobPostComponent from './job-posts/jobPostComponent';
+import JobPostContainer from './job-posts/jobPostContainer';
 
 
 class App extends React.Component {
@@ -21,7 +21,7 @@ class App extends React.Component {
                         <Route exact path="/" component={JobListContainer}/>
                         <Switch>
                             <Route path="/employer" component={EmployerComponent}/>
-                            <Route path="/jobposts/:jobId" component={JobPostComponent}/>
+                            <Route path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route path="/user" component={UserComponent}/>
                         </Switch>
                     </div>

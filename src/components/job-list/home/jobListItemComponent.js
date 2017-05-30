@@ -10,7 +10,6 @@ class JobListItem extends React.Component {
 
     }
 
-
     render() {
         let job = this.props.job;
 
