@@ -7,6 +7,8 @@ function currentJobReducer(state = null, action){
 
         case FIND_JOB_BY_ID:
             console.log("we are trying to find a job by id");
+            console.log("state:", state);
+            console.log("action:", action);
             return state;
 
         default:

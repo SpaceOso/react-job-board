@@ -11,8 +11,12 @@ var Applicants = require('../models/applicants');
 // =============================
 router.param('jobId', function (req, res, next, jobId) {
     // TODO: decipher why the hell we need this for
-    Jobs.findById(req.query.jobId, function (err, doc) {
+    console.log("inside router.param jobId");
+    console.log("looking for:", req.params.jobId);
+
+    Jobs.findById(req.params.jobId, function (err, doc) {
         if (err) {
+            console.log('if err');
             res.status(404).json({
                 title: 'An error occurred finding first job',
                 error: err
@@ -20,6 +24,7 @@ router.param('jobId', function (req, res, next, jobId) {
         }
 
         if (!doc) {
+            console.log("if no doc");
             res.status(404).json({
                 title: 'No user found',
                 error: {message: 'User could not be found'}
@@ -32,13 +37,6 @@ router.param('jobId', function (req, res, next, jobId) {
             //this will make it easier when we need to display job
             // and employer info in the job post pages
 
-            // Employer.findById(doc.employer)
-            //     .populate("jobs")
-            //     .exec(function (err, employer) {
-            //         if(err) return handleError(err);
-            //         console.log("The jobs are ", employer)
-            //     });
-            //
 
             Employer.findById(doc.employer, function (err, employer) {
                 if (err) {
@@ -73,7 +71,7 @@ router.param('jobId', function (req, res, next, jobId) {
 
 router.get('/:jobId', function (req, res, next) {
     console.log('inside the jobId');
-    console.log(req.params);
+    // console.log(req.params);
     // Jobs.find();
     res.status(200).json({
         message: 'Success',
@@ -81,6 +79,7 @@ router.get('/:jobId', function (req, res, next) {
         employer: req.employerModel
     })
 });
+
 // =============================
 router.get('/', function (req, res,next) {
     console.log("looking for jobs");
@@ -90,8 +89,8 @@ router.get('/', function (req, res,next) {
 		// jobs.forEach(function(job) {
 		// 	jobMap[job._id] = job;
 		// });
-        console.log('found them');
-		console.log(jobs);
+        // console.log('found them');
+        // console.log(jobs);
 		res.send(jobs);
 	});
 });
