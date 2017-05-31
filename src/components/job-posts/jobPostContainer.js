@@ -5,33 +5,35 @@ import {getJobById} from '../../actions/jobActions';
 
 import JobPostInfoComponent from './jobPostInfoComponent';
 import JobPostEmployerInfoComponent from "./jobPostEmployerInfoComponent";
+import SpinnerComponent from '../spinners/spinnerComponent';
 
 class JobPostContainer extends React.Component{
     constructor(props){
         super(props);
-
-        // this.getJobData = this.getJobData.bind(this);
-        
-	    // this.getJobData(this.props.match.params.jobId);
-     
+        this.dataReady = this.dataReady.bind(this);
     }
-	
-	componentDidMount(){
-        console.log("DidMount with:", this.props.match.params.jobId);
+
+    componentDidMount(){
 		this.props.getJobById(this.props.match.params.jobId);
     }
 
-    // getJobData(){
-    //     this.props.getJobById(this.props.match.params.jobId);
-    // }
+    dataReady(){
+        if(!this.props.currentJob.job){
+            return <SpinnerComponent />
+        } else{
+            return (
+                <div>
+                    <JobPostInfoComponent job={this.props.currentJob.job}/>
+                    <JobPostEmployerInfoComponent employer={this.props.currentJob.employer} />
+                </div>
+            )
+        }
+    }
 
     render(){
         return(
             <div>
-                I'm the job post container
-                <button onClick={this.getJobData}>GetJob</button>
-                <JobPostInfoComponent job={this.props.currentJob.job}/>
-                <JobPostEmployerInfoComponent />
+                {this.dataReady()}
             </div>
         )
     }

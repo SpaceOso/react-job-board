@@ -14,7 +14,7 @@ class JobListContainer extends React.Component {
         super(props);
 
         this.returnJobList = this.returnJobList.bind(this);
-        this.getJobs = this.getJobs.bind(this);
+        // this.getJobs = this.getJobs.bind(this);
     }
 
     returnJobList(job) {
@@ -28,7 +28,7 @@ class JobListContainer extends React.Component {
         this.props.getJobs();
     }
 
-    getJobs() {
+    getdJobs() {
         this.props.getJobs();
     }
 

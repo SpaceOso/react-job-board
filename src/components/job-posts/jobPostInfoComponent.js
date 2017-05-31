@@ -6,15 +6,16 @@ class JobPostComponent extends React.Component{
     constructor(props){
         super(props);
 
-        console.log("JobPostcomponent props:", this.props.job);
-        
     }
-    
+
+
     render(){
-    console.log("inside the job post component:", this.props.job);
+        console.log("So we are here now with..", this.props.job);
         return (
             <div className="job-post">
-               <h1>You are viweing job {this.props.job !== null ? this.props.job.jobTitle : ''}</h1>
+               <h1 className="jp-job-header">{this.props.job.jobTitle }</h1>
+                <div className="job-description" dangerouslySetInnerHTML={{__html: this.props.job.jobDescription}}></div>
+                <button>Apply Now</button>
             </div>
         )
     }

@@ -1,14 +1,14 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
-.job-post{
-  font-size: 1.8rem;
+.jp-employer-aside{
   background-color: $white;
   color: $carbon;
   text-align: left;
-  padding: 10px;
+  font-size: 1.6rem;
 
-  .jp-job-header{
+  .title{
     color: $jobTitle;
     font-weight: bold;
+    font-size: 2.0rem;
   }
 }
