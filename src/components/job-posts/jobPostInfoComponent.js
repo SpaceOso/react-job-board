@@ -6,13 +6,15 @@ class JobPostComponent extends React.Component{
     constructor(props){
         super(props);
 
+        console.log("JobPostcomponent props:", this.props.job);
+        
     }
+    
     render(){
-    console.log("inside the job post component:", this.props);
+    console.log("inside the job post component:", this.props.job);
         return (
             <div className="job-post">
-                Need to create a container to make an API call to get this job info
-                {/*I'm a job post component viewing job {this.props.job.jobId}*/}
+               <h1>You are viweing job {this.props.job !== null ? this.props.job.jobTitle : ''}</h1>
             </div>
         )
     }

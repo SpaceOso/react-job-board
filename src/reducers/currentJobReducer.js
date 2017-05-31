@@ -1,7 +1,7 @@
 import {FIND_JOB_BY_ID} from '../actions/jobActions';
 
 
-function currentJobReducer(state = null, action){
+function currentJobReducer(state = {employer: null, job: null}, action){
     console.log("inside the currentJobReducer");
     switch(action.type){
 
@@ -9,7 +9,12 @@ function currentJobReducer(state = null, action){
             console.log("we are trying to find a job by id");
             console.log("state:", state);
             console.log("action:", action);
-            return state;
+	
+	         return {
+		        ...state,
+		        employer: {...action.payload.data.employer},
+		        job: {...action.payload.data.job},
+	        };
 
         default:
             return state;
