@@ -1,0 +1,46 @@
+@import "../../styles/variables";
+
+.job-post-container {
+  display: flex;
+  padding: 30px 0 0 0;
+  background-color: $white;
+  justify-content: space-around;
+
+  .job-post {
+    width: 60%;
+    max-width: 620px;
+    border-right: 3px solid $jobTitle;
+    font-size: 1.8rem;
+    color: $carbon;
+    text-align: left;
+    padding: 20px;
+
+    .jp-job-header {
+      color: $jobTitle;
+      font-weight: bold;
+      margin: 0 0 15px 0;
+    }
+
+  }
+
+  .jp-employer-aside {
+    padding: 20px;
+    width: 40%;
+    max-width: 320px;
+    //padding: 20px;
+    color: $carbon;
+    text-align: left;
+    font-size: 1.6rem;
+
+    .title {
+      color: $jobTitle;
+      font-weight: bold;
+      font-size: 2.0rem;
+    }
+
+    .other-job-ul{
+      list-style-type: none;
+      padding: 0;
+    }
+  }
+}
