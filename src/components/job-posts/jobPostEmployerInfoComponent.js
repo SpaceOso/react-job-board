@@ -1,11 +1,16 @@
 import React from 'react';
 
+import {Link, Redirect} from 'react-router-dom'
+
+
 import "./jobPostEmployerInfo.scss";
 
 class JobPostEmployerInfoComponent extends React.Component{
 	constructor(props){
 		super(props);
 		console.log("JobPostEmployer:", this.props);
+		
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	createJobList(){
@@ -14,8 +19,17 @@ class JobPostEmployerInfoComponent extends React.Component{
 		* They should not include the job you're currently on.
 		* Need to figure out if we need another component for this section or not*/
 		let employer = this.props.employer;
-
-		return employer.jobs.map(job => <li key={`${job.jobTitle}${new Date()}`}>{job.jobTitle}</li>)
+		
+		return employer.jobs.map(job =>
+			<Link  to={`/jobposts/${job._id}`} key={`${job.jobTitle}${new Date()}`} onClick={() => {this.handleClick(job._id)}}>
+				<li >{job.jobTitle}</li>
+			</Link>
+		)
+	}
+	
+	handleClick(jobId){
+		console.log("we've been clicked..", jobId);
+		this.props.loadJob(jobId);
 	}
 
 	render(){
@@ -28,7 +42,7 @@ class JobPostEmployerInfoComponent extends React.Component{
 				<div>Social media icons go here</div>
 				<div>
 					<h1 className="title">Other jobs by {employer.name}</h1>
-					<ul>
+					<ul className="other-job-ul">
 						{this.createJobList()}
 					</ul>
 				</div>

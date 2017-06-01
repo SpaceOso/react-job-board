@@ -2,7 +2,7 @@
 @import "../components/header/header";
 
 body{
-  background-color: $carbon;
+  background-color: $siteBackground;
   color: #ffffff;
   margin: 0;
 }
@@ -10,6 +10,11 @@ body{
 
 html {
   font-size: 62.5%; /* font-size 1em = 10px on default browser settings */
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body{
@@ -120,7 +125,7 @@ hr.style1 {
 /*=======================================*/
 
 .app-container{
-  width: 80%;
+  //width: 80%;
   max-width: 940px;
   margin: auto;
 }

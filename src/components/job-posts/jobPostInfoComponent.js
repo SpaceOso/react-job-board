@@ -1,6 +1,5 @@
 import React from 'react';
 
-import jobPostComponent from './jobPostComponent.scss';
 
 class JobPostComponent extends React.Component{
     constructor(props){
