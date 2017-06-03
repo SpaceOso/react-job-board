@@ -30,11 +30,23 @@ class UserRegisterComponent extends React.Component {
         super(props);
 
         this.state = {
-            fName: '',
-            lName: '',
-            email: '',
-            password: '',
-            passwordVerify: ''
+            user: {
+                fName: '',
+                lName: '',
+                email: '',
+                emailVerify: '',
+                password: '',
+                passwordVerify: '',
+            },
+            errors: {
+                fName: false,
+                lName: false,
+                email: false,
+                verifyEmail: false,
+                password: false,
+                passwordVerify: false
+
+            }
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,13 +55,17 @@ class UserRegisterComponent extends React.Component {
 
     handleSubmit() {
         console.log("Form submitted!");
+        console.log("submitting user with:", this.state.user);
     }
 
-    handleChange(key, event){
-        let keyObject = {};
+    handleChange(key, event) {
+        let keyObject = {...this.state.user};
 
         keyObject[key] = event;
-        this.setState(keyObject);
+
+        console.log(keyObject);
+
+        this.setState({user: keyObject});
     }
 
 
@@ -64,8 +80,8 @@ class UserRegisterComponent extends React.Component {
                             id="user-f-name"
                             type="text"
                             placeholder="First Name"
-                            value={this.state.fName}
-                            onChange={(event) =>this.handleChange('fName', event.target.value)}
+                            value={this.state.user.fName}
+                            onChange={(event) => this.handleChange('fName', event.target.value)}
                             required/>
                     </div>
                     <div className="jb-form-group">
@@ -74,7 +90,7 @@ class UserRegisterComponent extends React.Component {
                             id="user-l-name"
                             type="text"
                             placeholder="Last Name"
-                            value={this.state.lName}
+                            value={this.state.user.lName}
                             onChange={(event) => this.handleChange('lName', event.target.value)}
                             required/>
                     </div>
@@ -85,8 +101,19 @@ class UserRegisterComponent extends React.Component {
                             type="text"
                             placeholder="Company Email"
                             onChange={(event) => this.handleChange('email', event.target.value)}
-                            value={this.state.email}
+                            value={this.state.user.email}
                             required/>
+                    </div>
+                    <div className="jb-form-group">
+                        <label htmlFor="user-email-verify">Verify email:</label>
+                        <input
+                            id="employer-email"
+                            type="text"
+                            placeholder="Verify email"
+                            onChange={(event) => this.handleChange('emailVerify', event.target.value)}
+                            value={this.state.user.emailVerify}
+                            required
+                        />
                     </div>
                     <div className="jb-form-group">
                         <label htmlFor="employer-password">Password:</label>
@@ -95,7 +122,7 @@ class UserRegisterComponent extends React.Component {
                             type="password"
                             placeholder="Enter your password"
                             onChange={(event) => this.handleChange('password', event.target.value)}
-                            value={this.state.password}
+                            value={this.state.user.password}
                             required/>
 
                     </div>
@@ -106,7 +133,7 @@ class UserRegisterComponent extends React.Component {
                             type="password"
                             placeholder="Verify your password"
                             onChange={(event) => this.handleChange('passwordVerify', event.target.value)}
-                            value={this.state.passwordVerify}
+                            value={this.state.user.passwordVerify}
                             required/>
                     </div>
 
