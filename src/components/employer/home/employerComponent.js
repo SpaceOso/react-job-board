@@ -13,7 +13,7 @@ class EmployerComponent extends React.Component {
             <div className="employer-component">
                 I'm the employerComponent I'm probably going to be a smart component
                 <button>
-                    <Link to="/employer/register">
+                    <Link to="/register">
                         Click here to sign up
                     </Link>
                 </button>

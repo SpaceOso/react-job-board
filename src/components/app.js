@@ -4,7 +4,7 @@ import React from 'react';
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
 import EmployerComponent from './employer/home/employerComponent';
-import EmployerRegisterComponent from './employer/register/employerRegisterComponent';
+import UserRegisterComponent from './register/userRegisterComponent';
 import LayoutComponent from './layoutComponent';
 import {UserComponent} from './applicant/userComponent';
 import JobListContainer from './job-list/home/jobListContainer';
@@ -22,7 +22,7 @@ class App extends React.Component {
                         <Route exact path="/" component={JobListContainer}/>
                         <Switch>
                             <Route exact path="/employer" component={EmployerComponent}/>
-                            <Route exact path="/employer/register" component={EmployerRegisterComponent}/>
+                            <Route exact path="/register" component={UserRegisterComponent}/>
                             <Route path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route path="/user" component={UserComponent}/>
                         </Switch>

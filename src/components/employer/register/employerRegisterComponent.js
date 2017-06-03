@@ -3,26 +3,7 @@ import React from 'react';
 //styles
 import "./styles/employerRegister.scss";
 
-/*
- *   "_id": "58b2e7b26581e1150868c70e",
- "email": "01@email.com",
- "password": "sha1$73eed769$1$43f85344f8a0ac83b8f90dd88c5f6daab722d720",
- "name": "Rico Dev",
- "logoImg": "",
- "__v": 2,
- "applicants": [],
- "jobs": [
- {
- "_id": "58b2ea5caec1b50e44fd211b",
- "updatedAt": "2017-02-26T14:46:52.571Z",
- "createdAt": "2017-02-26T14:46:52.571Z",
- "jobTitle": "Back End Developer",
- "jobDescription": "<p>Second job post on the new laptop! This one is for a back end developer.</p>\n<p>&nbsp;</p>\n<p>Requirements for this job are to know a lot of languages.</p>\n<p>Probably some java becuase I see it a lot. Definetly need to know SQL or Mongo you know..database stuffs.</p>",
- "employerName": "Rico Dev",
- "employer": "58b2e7b26581e1150868c70e",
- "employerLogo": "",
- "__v": 0,
- "applicants": []*/
+
 
 
 class EmployerRegisterComponent extends React.Component {
