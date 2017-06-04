@@ -49,6 +49,12 @@ input{
   -moz-border-radius:.2rem;
   border-radius:.2rem;
   padding: .5rem;
+  color: $inputText;
+}
+
+input[type='text']::placeholder,
+input[type='passowrd']::placeholder{
+  color: $inputText;
 }
 /*=======================================*/
 /*- HELPER CLASSES*/
