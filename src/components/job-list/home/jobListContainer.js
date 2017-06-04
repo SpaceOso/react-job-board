@@ -41,8 +41,7 @@ class JobListContainer extends React.Component {
             </div>
         )
     }
-}
-;
+};
 
 function mapPropsToState(state) {
     return {jobs: state.jobs};

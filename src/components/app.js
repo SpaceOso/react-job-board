@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
 import EmployerComponent from './employer/home/employerComponent';
