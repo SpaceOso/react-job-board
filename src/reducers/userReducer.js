@@ -4,7 +4,8 @@ function userReducer(state = {}, action) {
 	switch (action.type) {
 		case REGISTER_USER:
 			console.log("inside the register user reducer");
-			return state;
+			console.log(action.payload.data.user._id);
+			return action.payload.data.user._id;
 		default:
 			return state
 		

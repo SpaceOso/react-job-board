@@ -3,6 +3,7 @@ import React from 'react';
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
 import EmployerComponent from './employer/home/employerComponent';
+import EmployerDashboardContainer from './employer/dashboard/employerDashboardContainer';
 import UserRegisterComponent from './register/userRegisterComponent';
 import LayoutComponent from './layoutComponent';
 import {UserComponent} from './applicant/userComponent';
@@ -24,6 +25,7 @@ class App extends React.Component {
                             <Route exact path="/register" component={UserRegisterComponent}/>
                             <Route path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route path="/user" component={UserComponent}/>
+                            <Route path="/employer/dashboard/:id" component={EmployerDashboardContainer} />
                         </Switch>
                     </div>
                 </LayoutComponent>

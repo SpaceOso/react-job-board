@@ -20,15 +20,12 @@ router.post('/', function (req, res, next) {
 	    lastName: req.body.lName,
 	    email: req.body.email,
 	    password: req.body.password,
-	    employer: '33',
-	    accountType: 'fe'
+	    employer: 'ddd',
+	    accountType: req.body.accountType
     });
-
-	
-	console.log(user);
 	
 	user.save(function (err, result) {
-		
+		console.log("Trying to save a user");
 		if (err) {
 			console.log('found an error...');
 			console.log(err);
@@ -41,7 +38,7 @@ router.post('/', function (req, res, next) {
 		console.log("a result:", result);
 		res.status(201).json({
 			message: 'Saved user',
-			obj: result
+			user: result
 		});
 		
 	})
