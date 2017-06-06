@@ -1,5 +1,6 @@
 let express = require('express');
 let router = express.Router();
+let jwt = require('jasonwebtoken');
 let passwordHash = require('password-hash');
 
 let User = require('../models/user');
@@ -34,11 +35,14 @@ router.post('/', function (req, res, next) {
 				error: err
 			});
 		};
+
+		let token = jwt.sign(user, "SECRETKEY", {expiresIn: 600});
 		
 		console.log("a result:", result);
 		res.status(201).json({
 			message: 'Saved user',
-			user: result
+			user: result,
+			token: token
 		});
 		
 	})
