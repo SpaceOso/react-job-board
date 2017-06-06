@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let jwt = require('jasonwebtoken');
+let jwt = require('jsonwebtoken');
 let passwordHash = require('password-hash');
 
 let User = require('../models/user');

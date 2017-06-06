@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
+import thunk from 'redux-thunk';
 
 
 //styles;
@@ -17,6 +18,8 @@ import App from './components/app';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
+const store = createStore(rootReducer,applyMiddleware(thunk, ReduxPromise));
+
 class JobBoard extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +30,7 @@ class JobBoard extends React.Component {
         console.log('render', this.state);
 
         return (
-            <Provider store={createStoreWithMiddleware(rootReducer)}>
+            <Provider store={store}>
                 <App />
             </Provider>
         )
