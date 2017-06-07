@@ -18,29 +18,25 @@ class JobListContainer extends React.Component {
         // this.getJobs = this.getJobs.bind(this);
     }
 
-    returnJobList(job) {
-        let currentJob = this.props.jobs[job];
+    returnJobList() {
         return (
-            <JobListItem key={currentJob._id} job={currentJob}/>
+            Object.keys(this.props.jobs).map((job) => {
+	            let currentJob = this.props.jobs[job];
+                return <JobListItem key={currentJob._id} job={currentJob}/>
+            })
         )
     }
 
     componentDidMount() {
         this.props.getJobs();
     }
-
-    getdJobs() {
-        this.props.getJobs();
-    }
-
+    
 
     render() {
-        console.log("joblist container state:", this.props.jobs);
         return (
             <div className="job-list-container">
                 <h1 id="job-post-header">Recent Job Posts</h1>
-                {this.props.jobs.isFetching ? <SpinnerComponent/> : ""}
-                {Object.keys(this.props.jobs).map(job => this.returnJobList(job))}
+                {this.props.jobs.isFetching ? <SpinnerComponent/> : this.returnJobList()}
             </div>
         )
     }

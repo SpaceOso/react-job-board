@@ -5,11 +5,9 @@ import './styles/spinnerComponent.scss';
 class SpinnerComponent extends React.Component {
     render() {
         return (
-            <div>
                 <div className="loader">
                     Loading your data...
                 </div>
-            </div>
         )
     }
 }

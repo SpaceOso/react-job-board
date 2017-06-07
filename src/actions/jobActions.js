@@ -27,7 +27,6 @@ export function fetchingJobs() {
 }
 
 export function getJobs() {
-    console.log("dang it");
 
      return dispatch => {
 
