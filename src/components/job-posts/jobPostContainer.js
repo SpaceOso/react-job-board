@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getJobById} from '../../actions/jobActions';
+import {getJobById, resetCurrentJob} from '../../actions/jobActions';
 
 import JobPostInfoComponent from './jobPostInfoComponent';
 import JobPostEmployerInfoComponent from "./jobPostEmployerInfoComponent";
 import SpinnerComponent from '../spinners/spinnerComponent';
 
-import './jobPostContainer.scss';
+import './styles/jobPostContainer.scss';
 
 class JobPostContainer extends React.Component{
     constructor(props){
@@ -19,9 +19,13 @@ class JobPostContainer extends React.Component{
     componentDidMount(){
 		this.props.getJobById(this.props.match.params.jobId);
     }
-
+	
+	componentWillUnmount(){
+		this.props.resetCurrentJob();
+    }
 
     loadNewJob(jobId){
+        // this.props.resetCurrentJob();
         this.props.getJobById(jobId);
     }
     
@@ -38,7 +42,7 @@ class JobPostContainer extends React.Component{
         } else {
             componentToRender = (
                 <div className="job-post-container">
-                    <JobPostInfoComponent job={this.props.currentJob.job}/>
+                    <JobPostInfoComponent job={this.props.currentJob.job} isFetching={this.props.currentJob.isFetching}/>
                     <JobPostEmployerInfoComponent employer={this.props.currentJob.employer} loadJob={this.loadNewJob} />
                 </div>
             )
@@ -53,7 +57,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({getJobById}, dispatch);
+    return bindActionCreators({getJobById, resetCurrentJob }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobPostContainer);

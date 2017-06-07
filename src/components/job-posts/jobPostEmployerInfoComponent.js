@@ -3,7 +3,7 @@ import React from 'react';
 import {Link, Redirect} from 'react-router-dom'
 
 
-import "./jobPostEmployerInfo.scss";
+import "./styles/jobPostEmployerInfo.scss";
 
 class JobPostEmployerInfoComponent extends React.Component{
 	constructor(props){
