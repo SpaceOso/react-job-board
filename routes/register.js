@@ -20,8 +20,8 @@ router.post('/', function (req, res, next) {
 	    firstName: req.body.fName,
 	    lastName: req.body.lName,
 	    email: req.body.email,
-	    password: req.body.password,
-	    employer: 'ddd',
+	    password: req.body.password, //TODO need to hash this
+	    employer: '',
 	    accountType: req.body.accountType
     });
 	
