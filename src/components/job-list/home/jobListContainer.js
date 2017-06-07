@@ -8,6 +8,7 @@ import jobListStyles from './joblistContainer.scss';
 
 //component
 import JobListItem from './jobListItemComponent';
+import SpinnerComponent from "../../spinners/spinnerComponent";
 
 class JobListContainer extends React.Component {
     constructor(props) {
@@ -34,9 +35,11 @@ class JobListContainer extends React.Component {
 
 
     render() {
+        console.log("joblist container state:", this.props.jobs);
         return (
             <div className="job-list-container">
                 <h1 id="job-post-header">Recent Job Posts</h1>
+                {this.props.jobs.isFetching ? <SpinnerComponent/> : ""}
                 {Object.keys(this.props.jobs).map(job => this.returnJobList(job))}
             </div>
         )

@@ -11,7 +11,6 @@ import JobListContainer from './job-list/home/jobListContainer';
 import {JumboTron} from './home/jumboTron';
 import JobPostContainer from './job-posts/jobPostContainer';
 
-
 class App extends React.Component {
     render() {
         return (

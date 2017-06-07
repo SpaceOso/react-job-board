@@ -1,10 +1,14 @@
 import React from 'react';
 
-class SpinnerComponent extends React.Component{
-    render(){
-        return(
+import './styles/spinnerComponent.scss';
+
+class SpinnerComponent extends React.Component {
+    render() {
+        return (
             <div>
-                Loading your data...
+                <div className="loader">
+                    Loading your data...
+                </div>
             </div>
         )
     }
