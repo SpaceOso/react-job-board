@@ -16,6 +16,7 @@ var jobPosts = require('./routes/jobposts');
 var uploads = require('./routes/upload');
 var userRoutes = require('./routes/user');
 var registerRoute = require('./routes/register');
+var loginRoute = require('./routes/login');
 
 
 var app = express();
@@ -52,6 +53,7 @@ app.use(function(req, res, next) {
 app.use('/uploads', uploads);
 app.use('/jobposts', jobPosts);
 app.use('/register', registerRoute);
+app.use('/login', loginRoute);
 app.use('/user', userRoutes);
 app.use('/employer', employerRoutes);
 app.use('/', appRoutes);

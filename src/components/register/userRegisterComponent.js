@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
 //actions
-import {registerUser} from '../../actions/registerActions';
+import {registerUser} from '../../actions/authActions';
 
 //styles
 import "./styles/userRegister.scss";

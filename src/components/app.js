@@ -10,6 +10,7 @@ import {UserComponent} from './applicant/userComponent';
 import JobListContainer from './job-list/home/jobListContainer';
 import {JumboTron} from './home/jumboTron';
 import JobPostContainer from './job-posts/jobPostContainer';
+import LogInComponent from './log-in/logInComponent';
 
 class App extends React.Component {
     render() {
@@ -24,6 +25,7 @@ class App extends React.Component {
                             <Route exact path="/register" component={UserRegisterComponent}/>
                             <Route path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route path="/user" component={UserComponent}/>
+                            <Route path="/login" component={LogInComponent}/>
                             <Route path="/employer/dashboard/:id" component={EmployerDashboardContainer} />
                         </Switch>
                     </div>

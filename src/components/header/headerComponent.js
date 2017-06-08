@@ -23,7 +23,11 @@ export const HeaderComponent = (props) => {
 					Employers
 				</div>
 			</Link>
-			
+			<Link to={"/login"}>
+				<div className="nav-item">
+					Log In
+				</div>
+			</Link>
 		</div>
 	)
 };
