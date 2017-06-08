@@ -52,15 +52,19 @@ export function registerUser(userData) {
 
 };
 
-export function logInUserSuccess(user) {
-    console.log("inside loginUserSucces with:", user);
+export function logInUserSuccess(data) {
+    console.log("inside loginUserSucces with:", data);
 
     return{
         type: LOGIN_USER_SUCCESS,
-        payload: user,
+        payload: data,
         // token: us,
     }
 
+}
+
+export function logInUserError(error){
+    console.log("inside the loginUser error page with:", error);
 }
 
 export function logInUser(user) {

@@ -15,7 +15,7 @@ function userReducer(state = {}, action) {
 		case LOGIN_USER_SUCCESS:
 			console.log("we have succesfully logged in! and the user was:");
 			console.log(action);
-			return state;
+			return {...state, user: action.payload.user, token: action.payload.token};
 		case FETCHING_USER:
 			return {...state, isFetching: true};
 		default:
