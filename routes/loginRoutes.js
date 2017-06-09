@@ -12,6 +12,7 @@ var Applicants = require('../models/applicants');
 router.post('/', function (req, res, next) {
     console.log("inside the root login path with req:");
     console.log(req.body);
+    
    User.findOne({email: req.body.email}, function (err, userDoc) {
        if(err){
            console.log("there was an error finding the user");
@@ -22,7 +23,7 @@ router.post('/', function (req, res, next) {
        }
        if (!userDoc) {
            console.log('there was no user found with those credentials');
-           return res.status(404).json({
+           return res.status(401).json({
                title: 'No user found',
                error: {message: 'User could not be found'}
            })
@@ -45,8 +46,7 @@ router.post('/', function (req, res, next) {
 
 
                let token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
-
-
+               
                res.status(200).json({
                    message: 'Success',
                    token,

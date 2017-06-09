@@ -8,7 +8,7 @@ import user from './userReducer';
 const rootReducer = combineReducers({
 	jobs,
 	currentJob,
-	user
+	user,
 });
 
 export default rootReducer;

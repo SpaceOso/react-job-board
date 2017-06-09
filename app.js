@@ -10,13 +10,13 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 // ROUTES
-var appRoutes = require('./routes/app');
-var employerRoutes = require('./routes/employer');
-var jobPosts = require('./routes/jobposts');
-var uploads = require('./routes/upload');
-var userRoutes = require('./routes/user');
-var registerRoute = require('./routes/register');
-var loginRoute = require('./routes/login');
+var appRoutes = require('./routes/appRoutes');
+var employerRoutes = require('./routes/employerRoutes');
+var jobPosts = require('./routes/jobpostsRoutes');
+var uploads = require('./routes/uploadRoutes');
+var userRoutes = require('./routes/userRoutes');
+var registerRoute = require('./routes/registerRoutes');
+var loginRoute = require('./routes/loginRoutes');
 
 
 var app = express();

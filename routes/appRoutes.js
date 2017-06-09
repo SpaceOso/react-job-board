@@ -80,7 +80,7 @@ router.get('/home', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-    // console.log('inside / of app.js');
+    // console.log('inside / of appRoutes.js');
     // res.render('index');
 	res.send('Hello World!');
 	// next();

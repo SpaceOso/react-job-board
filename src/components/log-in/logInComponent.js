@@ -3,8 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-//actions
-import {logInUser} from '../../actions/authActions';
+
 
 import './styles/loginComponent.scss';
 
@@ -17,10 +16,10 @@ class LogInComponent extends React.Component {
             userPassword: '',
             redirect: '',
             isFetching: false,
-            errors: []
+            errors: {}
         };
 
-        this.onSubmit = this.onSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -31,8 +30,8 @@ class LogInComponent extends React.Component {
 
         this.setState(keyObject);
     }
-
-    onSubmit(){
+	
+	handleSubmit(){
         console.log("submitting user!");
         let user = {
             email: this.state.userEmail,
@@ -46,7 +45,8 @@ class LogInComponent extends React.Component {
         return (
             <div className="employer-register-Component">
                 <h1>Enter the following information to log in</h1>
-                <form action="" onSubmit={() => this.onSubmit()}>
+                <h3>{this.props.errorMessage}</h3>
+                <form action="" onSubmit={() => this.handleSubmit()}>
                     <div className="jb-form-group">
                         <label htmlFor="user-email">Enter Email:</label>
                         <input id="user-email"
@@ -71,8 +71,4 @@ class LogInComponent extends React.Component {
     }
 }
 
-function mapDsipatchToProps(dispatch) {
-    return bindActionCreators({logInUser}, dispatch);
-}
-
-export default connect(null, mapDsipatchToProps)(LogInComponent);
+export default LogInComponent;
