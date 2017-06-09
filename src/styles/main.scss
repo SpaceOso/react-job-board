@@ -3,7 +3,7 @@
 
 body{
   background-color: $siteBackground;
-  color: #ffffff;
+  color: $carbon;
   margin: 0;
 }
 
@@ -22,6 +22,7 @@ body{
   //background-color: #EFEFEF;
   box-sizing: border-box;
   font-family: 'Ubuntu', sans-serif;
+  font-size: 1.6rem;
 }
 
 a {
@@ -109,6 +110,11 @@ hr.style1 {
 
 }
 
+.floating-spinner{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
 /*=======================================*/
 /*- EMPLOYER PAGE*/
 /*=======================================*/

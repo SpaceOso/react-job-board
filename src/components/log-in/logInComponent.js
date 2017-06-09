@@ -1,14 +1,11 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
-
 
 
 import './styles/loginComponent.scss';
+import SpinnerComponent from "../spinners/spinnerComponent";
 
 class LogInComponent extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -30,8 +27,8 @@ class LogInComponent extends React.Component {
 
         this.setState(keyObject);
     }
-	
-	handleSubmit(){
+
+    handleSubmit() {
         console.log("submitting user!");
         let user = {
             email: this.state.userEmail,
@@ -46,6 +43,9 @@ class LogInComponent extends React.Component {
             <div className="employer-register-Component">
                 <h1>Enter the following information to log in</h1>
                 <h3>{this.props.errorMessage}</h3>
+                <div>
+                    {this.props.isFetching === true ? <SpinnerComponent/> : null}
+                </div>
                 <form action="" onSubmit={() => this.handleSubmit()}>
                     <div className="jb-form-group">
                         <label htmlFor="user-email">Enter Email:</label>

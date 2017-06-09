@@ -56,12 +56,9 @@ export function registerUser(userData) {
 };
 
 export function logInUserSuccess(data) {
-    console.log("inside loginUserSucces with:", data);
-
     return{
         type: LOGIN_USER_SUCCESS,
         payload: data,
-        // token: us,
     }
 
 }
@@ -79,7 +76,9 @@ export function logInUserError(error){
 export function logInUser(user) {
 
     return dispatch => {
+
         dispatch(fetchingUser());
+
         axios.post(`${ROOT_URL}login`, user)
             .then((response) => {
             

@@ -1,5 +1,6 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
+import {Redirect} from 'react-router-dom';
 
 import {connect} from 'react-redux'
 
@@ -27,7 +28,11 @@ class LoginContainer extends React.Component{
 		return(
 			<div>
 				I'm the loginContainer
-				<LoginComponent logInUser={this.sendLogInInfo} errorMessage={this.props.user.error}/>
+				<LoginComponent
+					isFetching={this.props.user.isFetching}
+					logInUser={this.sendLogInInfo}
+					errorMessage={this.props.user.error}/>
+				{this.props.user.auth === true ? <Redirect to={`${'/employer/dashboard/'}${this.props.user.id}`}/> : null}
 			</div>
 		)
 	}
