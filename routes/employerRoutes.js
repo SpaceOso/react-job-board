@@ -188,7 +188,7 @@ router.param('jobId', function (req, res, next, jobId) {
 	});
 });
 
-router.delete('/employerDashboard/:id/employerHome', function (req, res, next) {
+router.delete('/employerdashboard/:id/employerhome', function (req, res, next) {
 	//I was using Job.find() but it wasn't returning the job in the call back
 	//switching it to Job.findById() fixed this.
 	Job.findById({_id: req.query.jobId}, function (err, job) {
@@ -221,8 +221,9 @@ router.delete('/employerDashboard/:id/employerHome', function (req, res, next) {
 	})
 });
 
-router.get('/employerDashboard/:id/employerHome', function (req, res, next) {
+router.get('/employerdashboard/:id/employerhome', function (req, res, next) {
 
+	console.log('inside the employer dashboard');
 
 	//grabs all the jobs form an employer
 	Job.find({employer: req.employer._id}, function (err, doc) {

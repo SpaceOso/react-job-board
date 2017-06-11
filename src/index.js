@@ -29,7 +29,6 @@ class JobBoard extends React.Component {
 
 
     render() {
-        console.log('render', this.state);
 
         return (
             <Provider store={store}>

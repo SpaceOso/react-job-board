@@ -8,7 +8,6 @@ import {
 } from '../actions/authActions';
 
 function userReducer(state = {}, action) {
-	//TODO need to figure out what data we're sending here
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:
 			return {

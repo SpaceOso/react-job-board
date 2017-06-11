@@ -1,6 +1,6 @@
 import React from 'react';
 
-class EmployerDashboardComponent extends React.Component{
+class UserDashboardComponent extends React.Component{
 	render(){
 		return(
 			<div>
@@ -10,4 +10,4 @@ class EmployerDashboardComponent extends React.Component{
 	}
 }
 
-export default EmployerDashboardComponent;
+export default UserDashboardComponent;

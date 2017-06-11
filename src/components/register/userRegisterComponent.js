@@ -51,7 +51,7 @@ class UserRegisterComponent extends React.Component {
 		console.log("redirecting..");
 		console.log()
 		return (
-			<Redirect to={`/employer/dashboard/${this.props.user}`} push/>
+			<Redirect to={`/employer/dashboard/${this.props.user}/employerhome`} push/>
 		)
 	}
 	
