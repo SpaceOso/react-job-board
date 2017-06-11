@@ -5,6 +5,7 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
 import thunk from 'redux-thunk';
 
+import setAuth from './utils/utils';
 
 //styles;
 import styles from './styles/main.scss';
@@ -18,6 +19,8 @@ import App from './components/app';
 
 
 const store = createStore(rootReducer,applyMiddleware(thunk, ReduxPromise));
+
+setAuth(localStorage.getItem('tkn'));
 
 class JobBoard extends React.Component {
     constructor(props) {

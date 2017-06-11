@@ -22,8 +22,8 @@ function userReducer(state = {}, action) {
 			console.log('LOGIN_USER_SUCCESS action:', action);
 			return {
 				...state,
-				...action.payload.data.user,
-				token: action.payload.data.token,
+				...action.payload.user,
+				token: action.payload.token,
 				error: null,
 				auth: true,
 				isFetching: false

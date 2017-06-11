@@ -18,5 +18,9 @@ module.exports = env => ({
 				loaders: ["style-loader", "css-loader", "sass-loader"]
 			}
 		]
+	},
+	node: {
+		dns: 'empty',
+		net: 'empty'
 	}
 });
