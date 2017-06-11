@@ -21,7 +21,7 @@ router.post('/', function (req, res, next) {
 	    lastName: req.body.lName,
 	    email: req.body.email,
 	    password: req.body.password, //TODO need to hash this
-	    employer: '',
+	    employer: null,
 	    accountType: req.body.accountType
     });
 	

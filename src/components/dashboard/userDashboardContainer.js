@@ -3,6 +3,7 @@ import UserDashboardComponent from './userDashboardComponent';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getThisEmployerJobs} from '../../actions/employerDashboardActions';
+import CompRegisterComponent from "./compRegister/compRegisterComponent";
 
 
 /*What data are we going to need?
@@ -16,6 +17,8 @@ import {getThisEmployerJobs} from '../../actions/employerDashboardActions';
 * I think you should check that THEN do a get request to get employer info
 * if employer property is not inside then show create/submit job buttons*/
 
+
+/*need to show a company sign up form before proceeding*/
 class UserDashboardContainer extends React.Component{
 	constructor(props){
 		super(props);
@@ -25,15 +28,23 @@ class UserDashboardContainer extends React.Component{
 	render(){
 		return (
 			<div>
-				You're inside the user dashboard
+				{/*{JSON.stringify(this.props.user)}*/}
+				You're inside the user dashboard with email {this.props.user.email}
+				account type:{this.props.user.accountType}
+				--employer: {this.props.user.employer}
+				{(this.props.user.accountType !== "employer" && this.props.user.employer === "null") ? <CompRegisterComponent/> : "seems like you're an employer"}
 				<UserDashboardComponent/>
+				<button onClick={() => localStorage.clear()}>Reset cookies</button>
 			</div>
 		)
 	}
 };
 
 function mapStateToProps(state) {
-    return {employer: state.employer}
+    return {
+    	user: state.user,
+    	employer: state.employer
+    }
 }
 
 function mapDsipatchToProps(dispatch) {
