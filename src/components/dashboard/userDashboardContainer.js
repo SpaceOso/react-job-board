@@ -1,9 +1,9 @@
 import React from 'react';
-import UserDashboardComponent from './userDashboardComponent';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getThisEmployerJobs} from '../../actions/employerDashboardActions';
+import {getThisEmployerInfo} from '../../actions/employerDashboardActions';
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
+import ApplicantListComponent from "./applicant-list/applicantListComponent";
 
 
 /*What data are we going to need?
@@ -17,23 +17,38 @@ import CompRegisterComponent from "./compRegister/compRegisterComponent";
 * I think you should check that THEN do a get request to get employer info
 * if employer property is not inside then show create/submit job buttons*/
 
+/*What components are you going to need for the dashboard?
+* list of the latest applicants
+* possibly list of job posts with info like when it was posted, total applicant count
+* an applicant at a glance component
+* a component to view the applicants resume on click*/
+
 
 /*need to show a company sign up form before proceeding*/
 class UserDashboardContainer extends React.Component{
 	constructor(props){
 		super(props);
 
+		this.fetchEmployerInfo = this.fetchEmployerInfo.bind(this);
+	}
+
+	componentDidMount(){
+		this.fetchEmployerInfo();
+	}
+
+	fetchEmployerInfo(){
+		console.log("user logged in. Fetching employer info...");
 	}
 
 	render(){
 		return (
 			<div>
-				{/*{JSON.stringify(this.props.user)}*/}
+				{console.log(JSON.stringify(this.props.user))}
 				You're inside the user dashboard with email {this.props.user.email}
 				account type:{this.props.user.accountType}
 				--employer: {this.props.user.employer}
 				{(this.props.user.accountType !== "employer" && this.props.user.employer === "null") ? <CompRegisterComponent/> : "seems like you're an employer"}
-				<UserDashboardComponent/>
+				<ApplicantListComponent/>
 				<button onClick={() => localStorage.clear()}>Reset cookies</button>
 			</div>
 		)
@@ -48,7 +63,7 @@ function mapStateToProps(state) {
 }
 
 function mapDsipatchToProps(dispatch) {
-    return bindActionCreators({getThisEmployerJobs}, dispatch);
+    return bindActionCreators({getThisEmployerInfo}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDsipatchToProps)(UserDashboardContainer);

@@ -32,7 +32,9 @@ export function getThisEmployerJobsSuccess(jobs) {
     }
 }
 
-export function getThisEmployerJobs(userId, employerId) {
+
+//This will be called when the user logs in and goes into the dashboard IF the account is an employer account
+export function getThisEmployerInfo(userId, employerId) {
 
     return dispatch => {
         dispatch(fetchingJobs);

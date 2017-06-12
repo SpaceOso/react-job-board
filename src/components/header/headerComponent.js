@@ -7,8 +7,15 @@ class HeaderComponent extends React.Component {
 		super(props);
 		
 		this.logStatus = this.logStatus.bind(this);
+		this.clearStorage = this.clearStorage.bind(this);
 	}
-	
+
+	clearStorage(){
+		// TODO need to set up an action to also remove the user from the store, the header doesn't know it was removed
+		console.log("localstorage has been cleared:");
+		localStorage.clear();
+	}
+
 	logStatus() {
 		let logIn = (
 			<Link to={"/login"}>
@@ -19,7 +26,7 @@ class HeaderComponent extends React.Component {
 		);
 		
 		let logOut = (
-			<Link to={"/"}>
+			<Link to={"/"} onClick={() => this.clearStorage()}>
 				<div className="nav-item">
 					Log Out
 				</div>

@@ -59,6 +59,18 @@ export function registerUser(userData) {
 };
 
 // =============================
+// CLEAR
+// =============================
+
+export function logOutUser(){
+	return{
+		type: LOG_OUT_USER,
+		payload: "user being logged out..."
+	}
+}
+
+
+// =============================
 // LOGIN
 // =============================
 

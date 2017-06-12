@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'react-redux';
 
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
@@ -22,7 +23,7 @@ class App extends React.Component {
                     <Route exact path="/" component={JumboTron}/>
                     <div className="app-container">
                         <Switch>
-                        <Route exact path="/" component={JobListContainer}/>
+                            <Route exact path="/" component={JobListContainer}/>
                             <Route exact path="/employer" component={EmployerComponent}/>
                             <Route exact path="/register" component={UserRegisterComponent}/>
                             <Route path="/jobposts/:jobId" component={JobPostContainer}/>
@@ -45,6 +46,8 @@ function mapStateToProps(state){
     }
 }
 
-
+function mapDsipatchToProps(dispatch) {
+    return bindActionCreators()
+}
 
 export default connect(mapStateToProps, null)(App);
