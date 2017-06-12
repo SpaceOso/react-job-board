@@ -1,19 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
+//actions
+import {logOutUser} from '../../actions/authActions';
 
 class HeaderComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		
 		this.logStatus = this.logStatus.bind(this);
-		this.clearStorage = this.clearStorage.bind(this);
+		this.logOut = this.logOut.bind(this);
 	}
 
-	clearStorage(){
-		// TODO need to set up an action to also remove the user from the store, the header doesn't know it was removed
-		console.log("localstorage has been cleared:");
-		localStorage.clear();
+	logOut(){
+		this.props.logOutUser();
 	}
 
 	logStatus() {
@@ -26,7 +28,7 @@ class HeaderComponent extends React.Component {
 		);
 		
 		let logOut = (
-			<Link to={"/"} onClick={() => this.clearStorage()}>
+			<Link to={"/"} onClick={() => this.logOut()}>
 				<div className="nav-item">
 					Log Out
 				</div>
@@ -58,13 +60,13 @@ class HeaderComponent extends React.Component {
 				</Link>
 				
 				{this.logStatus()}
-			
-			
-			</div>
-		)
-		
-	}
-}
-;
 
-export default HeaderComponent;
+			</div>
+		)}
+};
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({logOutUser}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(HeaderComponent);

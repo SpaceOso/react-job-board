@@ -12,6 +12,8 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
+export const LOG_OUT_USER = 'LOG_OUT_USER';
+
 
 export function registerUserSuccess(user) {
 	console.log('inside the registeredUserSuccess with the following user:');
@@ -61,14 +63,12 @@ export function registerUser(userData) {
 // =============================
 // CLEAR
 // =============================
-
 export function logOutUser(){
 	return{
 		type: LOG_OUT_USER,
 		payload: "user being logged out..."
 	}
 }
-
 
 // =============================
 // LOGIN
