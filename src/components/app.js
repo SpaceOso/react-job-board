@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
@@ -17,7 +18,7 @@ class App extends React.Component {
     render() {
         return (
             <HashRouter>
-                <LayoutComponent >
+                <LayoutComponent user={this.props.user}>
                     <Route exact path="/" component={JumboTron}/>
                     <div className="app-container">
                         <Switch>
@@ -37,4 +38,13 @@ class App extends React.Component {
     }
 }
 
-export default App;
+function mapStateToProps(state){
+    return{
+        user: state.user,
+        employer: state.employer
+    }
+}
+
+
+
+export default connect(mapStateToProps, null)(App);
