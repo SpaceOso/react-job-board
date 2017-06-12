@@ -94,6 +94,24 @@ export function logInUserSuccess(data) {
 	
 }
 
+export function logInOnLoad(token){
+
+	console.log("trying to decode", jwt.decode(token));
+	let decodedToken = jwt.decode(token);
+
+	let user = {...decodedToken.user};
+
+	// todo need to send this to a different path than logInUser
+	//todo because we don't send passwords we can't log in that way, we need to verify the token
+	return dispatch => {
+		dispatch(logInUser(user));
+	}
+	// return{
+	// 	type: 'tet',
+	// 	payload: 'test'
+	// }
+}
+
 export function logInUser(user) {
 	
 	return dispatch => {

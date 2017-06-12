@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
@@ -15,7 +15,16 @@ import JobPostContainer from './job-posts/jobPostContainer';
 import LoginContainer from './log-in/loginContainer';
 import NotFoundComponent from './not-found/notFoundComponent';
 
+//actions
+import {logInOnLoad} from '../actions/authActions';
+
 class App extends React.Component {
+
+    componentDidMount(){
+        console.log("APP is now loaded!");
+        this.props.logInOnLoad(localStorage.getItem('tkn'));
+    }
+
     render() {
         return (
             <HashRouter>
@@ -47,7 +56,7 @@ function mapStateToProps(state){
 }
 
 function mapDsipatchToProps(dispatch) {
-    return bindActionCreators()
+    return bindActionCreators({logInOnLoad}, dispatch);
 }
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, mapDsipatchToProps)(App);
