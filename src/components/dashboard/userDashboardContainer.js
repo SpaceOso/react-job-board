@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getThisEmployerInfo} from '../../actions/employerDashboardActions';
+import {fetchThisUserInfo} from '../../actions/authActions';
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
 import ApplicantListComponent from "./applicant-list/applicantListComponent";
 
@@ -36,18 +36,20 @@ class UserDashboardContainer extends React.Component{
 		this.fetchEmployerInfo();
 	}
 
+	//this will fire when we first load into the dashboard
 	fetchEmployerInfo(){
-		console.log("user logged in. Fetching employer info...");
+		//get the userId from the URL params and send it to the action creator
+		let userId = this.props.match.params.userId;
+		this.props.fetchThisUserInfo(userId);
 	}
 
 	render(){
 		return (
 			<div>
-				{console.log(JSON.stringify(this.props.user))}
 				You're inside the user dashboard with email {this.props.user.email}
-				account type:{this.props.user.accountType}
-				--employer: {this.props.user.employer}
-				{(this.props.user.accountType !== "employer" && this.props.user.employer === "null") ? <CompRegisterComponent/> : "seems like you're an employer"}
+				account type:{this.props.user.accountType}<br/>
+				employer: {this.props.user.employer}<br/>
+				{(this.props.user.accountType !== "employer" && this.props.user.employer === null) ? <CompRegisterComponent/> : "seems like you're an employer"}
 				<ApplicantListComponent/>
 				<button onClick={() => localStorage.clear()}>Reset cookies</button>
 			</div>
@@ -63,7 +65,7 @@ function mapStateToProps(state) {
 }
 
 function mapDsipatchToProps(dispatch) {
-    return bindActionCreators({getThisEmployerInfo}, dispatch);
+    return bindActionCreators({fetchThisUserInfo}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDsipatchToProps)(UserDashboardContainer);

@@ -6,29 +6,31 @@ import setAuth from '../utils/utils';
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const FETCHING_USER = 'FETCHING_USER';
+
 export const REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
+export const SET_USER = 'SET_USER';
+
+
 export const LOG_OUT_USER = 'LOG_OUT_USER';
 
-
+//this get's called after the server registers a new user
 export function registerUserSuccess(user) {
-	console.log('inside the registeredUserSuccess with the following user:');
-	console.log(user);
 	return {
 		type: REGISTER_USER_SUCCESS,
 		payload: user
 	}
 }
 
-export function registerUserError() {
+export function registerUserError(error) {
 	console.log("there was an error and we're inside the register user error function");
 	return {
 		type: REGISTER_USER_ERROR,
-		payload: {isFetching: false}
+		payload: {isFetching: false, error}
 	}
 }
 
@@ -39,20 +41,18 @@ export function fetchingUser() {
 	}
 }
 
-export function registerUser(userData) {
+export function registerUser(userObject) {
 	
 	return dispatch => {
 		
 		dispatch(fetchingUser());
 		
-		axios.post(`${ROOT_URL}register`, userData)
+		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
-				
 				dispatch(registerUserSuccess(response.data.user));
 				
 			})
 			.catch((error) => {
-				
 				dispatch(registerUserError(error));
 				
 			});
@@ -75,6 +75,44 @@ export function logOutUser(){
 }
 
 // =============================
+// SETTING USER
+// =============================
+export function setUser(user){
+	return {
+		type: SET_USER,
+		payload: user
+	}
+}
+
+// =============================
+// FETCHING INFO
+// =============================
+
+export function fetchThisUserInfo(userId){
+	
+	// return {
+	// 	type: 'FETCHING_THIS_USER_INFO',
+	// 	payload: "fetching on load"
+	// }
+
+	return dispatch => {
+		dispatch(fetchingUser());
+		
+		console.log("going to call with:", userId);
+		axios.post(`${ROOT_URL}login/dashboardinit`, {userId})
+			.then((response)=>{
+				console.log(response);
+				
+				dispatch(setUser(response.data.user));
+			})
+			.catch((error)=>{
+			console.log("the error in fetchThisUserInfo():", error);
+			})
+
+	}
+}
+
+// =============================
 // LOGIN
 // =============================
 
@@ -87,7 +125,6 @@ export function logInUserError(error) {
 		}
 	}
 }
-
 
 //requires a user and token property
 export function logInUserSuccess(data) {

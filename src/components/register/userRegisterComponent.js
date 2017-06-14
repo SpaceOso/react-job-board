@@ -23,7 +23,7 @@ class UserRegisterComponent extends React.Component {
 				password: '',
 				passwordVerify: '',
 				accountType: 'user',
-				employer: ''
+				employer: null
 			},
 			errors: {
 				fName: false,
@@ -44,14 +44,11 @@ class UserRegisterComponent extends React.Component {
 	handleSubmit() {
 		event.preventDefault();
 		this.props.registerUser(this.state.user);
-		// TODO this is where you send user to the dashboard
 	}
 	
 	redirectToDashboard() {
-		console.log("redirecting..");
-		console.log()
 		return (
-			<Redirect to={`/employer/dashboard/${this.props.user}/employerhome`} push/>
+			<Redirect to={`/user/dashboard/${this.props.user.userId}/userhome`} push/>
 		)
 	}
 	
@@ -141,7 +138,8 @@ class UserRegisterComponent extends React.Component {
 					</div>
 					<button>Submit Form</button>
 				</form>
-				{this.props.user.length > 0 ? this.redirectToDashboard() : ""}
+				{/*This will display once we register our user*/}
+				{this.props.user.userRegistered === true ? this.redirectToDashboard() : null}
 			</div>
 		)
 	}

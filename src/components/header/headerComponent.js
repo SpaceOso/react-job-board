@@ -33,7 +33,6 @@ class HeaderComponent extends React.Component {
 	
 	
 	render() {
-		console.log("header location:", this.props.location);
 		return (
 			<div className="header-component">
 				<Link to="/">

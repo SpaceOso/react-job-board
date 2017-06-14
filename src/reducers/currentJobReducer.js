@@ -2,7 +2,6 @@ import {FIND_JOB_BY_ID, RESET_CURRENT_JOB, FETCHING_JOBS, SINGLE_JOB_SUCCESS} fr
 
 
 function currentJobReducer(state = {employer: null, job: null}, action){
-    console.log("inside the currentJobReducer");
     switch(action.type){
 
         case FIND_JOB_BY_ID:

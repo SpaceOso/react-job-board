@@ -45,7 +45,7 @@ class App extends React.Component {
                             <Route path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route exact path="/user" component={UserComponent}/>
                             <Route path="/login" component={LoginContainer}/>
-                            <Route exact path="/user/dashboard/:id/userhome" component={UserDashboardContainer} />
+                            <Route exact path="/user/dashboard/:userId/userhome" component={UserDashboardContainer} />
                             <Route component={NotFoundComponent}/>
                         </Switch>
                     </div>
