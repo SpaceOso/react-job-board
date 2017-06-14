@@ -65,7 +65,24 @@ router.post('/', function (req, res, next) {
 
 router.post('/logcheck', function (req, res, next) {
     console.log("you must've just refreshed to be here..");
-    console.log(req.token);
-})
+    // console.log(req.body.token);
+    
+    let token = req.body.token;
+    
+    jwt.verify(token, process.env.secretkey, function (err, decoded) {
+        
+        if(err){
+            res.status(401).json({
+                message: "invalid credentials"
+            })
+        }
+       
+        res.status(200).json({
+            message: "token is valid",
+            user: decoded
+        })
+        
+    });
+});
 
 module.exports = router;

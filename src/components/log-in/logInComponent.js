@@ -32,7 +32,7 @@ class LogInComponent extends React.Component {
         console.log("submitting user!");
         let user = {
             email: this.state.userEmail,
-            password: this.state.userPassword
+            password: this.state.userPassword //todo need to hash this so I'm not sending plain password
         };
 
         this.props.logInUser(user);

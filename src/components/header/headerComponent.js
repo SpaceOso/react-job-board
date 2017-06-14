@@ -10,23 +10,16 @@ class HeaderComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		
-		this.logStatus = this.logStatus.bind(this);
 		this.logOut = this.logOut.bind(this);
+		this.showLogOut = this.showLogOut.bind(this);
 	}
 
 	logOut(){
+		
 		this.props.logOutUser();
 	}
-
-	logStatus() {
-		let logIn = (
-			<Link to={"/login"}>
-				<div className="nav-item">
-					Log In
-				</div>
-			</Link>
-		);
-		
+	
+	showLogOut(){
 		let logOut = (
 			<Link to={"/"} onClick={() => this.logOut()}>
 				<div className="nav-item">
@@ -34,11 +27,13 @@ class HeaderComponent extends React.Component {
 				</div>
 			</Link>
 		);
-	
-		return this.props.user.auth === undefined || this.props.user.auth === false ? logIn : logOut;
+		
+		return this.props.user.auth === undefined || this.props.user.auth === false ? "" : logOut;
 	}
 	
+	
 	render() {
+		console.log("header location:", this.props.location);
 		return (
 			<div className="header-component">
 				<Link to="/">
@@ -59,7 +54,13 @@ class HeaderComponent extends React.Component {
 					</div>
 				</Link>
 				
-				{this.logStatus()}
+				<Link to={"/login"}>
+					<div className="nav-item">
+						{this.props.user.auth === undefined || this.props.user.auth === false ? "Log In" : "Dashboard"}
+					</div>
+				</Link>
+				
+				{this.showLogOut()}
 
 			</div>
 		)}

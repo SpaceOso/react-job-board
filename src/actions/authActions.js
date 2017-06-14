@@ -64,6 +64,10 @@ export function registerUser(userData) {
 // CLEAR
 // =============================
 export function logOutUser(){
+	
+	//clear the local storaage
+	localStorage.clear();
+	
 	return{
 		type: LOG_OUT_USER,
 		payload: "user being logged out..."
@@ -84,8 +88,9 @@ export function logInUserError(error) {
 	}
 }
 
+
+//requires a user and token property
 export function logInUserSuccess(data) {
-	
 	
 	return {
 		type: LOGIN_USER_SUCCESS,
@@ -95,25 +100,30 @@ export function logInUserSuccess(data) {
 }
 
 export function logInOnLoad(token){
-
-	console.log("trying to decode", jwt.decode(token));
-	let decodedToken = jwt.decode(token);
-
-	let user = {...decodedToken.user};
-
-	// todo need to send this to a different path than logInUser
-	//todo because we don't send passwords we can't log in that way, we need to verify the token
+	
 	return dispatch => {
-		dispatch(logInUser(user));
+		dispatch(fetchingUser());
 
-		// axios.post(`${ROOT_URL}logcheck`, token)
+		axios.post(`${ROOT_URL}login/logcheck`, {token})
+			.then((response)=>{
+				//response contains uer, which is our decoded token
+				
+				//set token as part of our request headers
+				setAuth(token);
+				
+				let userVerified = {user: response.user, token};
+				
+				//send user information to be stored in the store
+				dispatch(logInUserSuccess(userVerified));
+				
+			})
+			.catch((error)=>{
+				dispatch(logInUserError(error.response.status));
+			})
 	}
-	// return{
-	// 	type: 'tet',
-	// 	payload: 'test'
-	// }
 }
 
+//this will dispatch the users email and password to server for verification
 export function logInUser(user) {
 	
 	return dispatch => {
@@ -124,13 +134,12 @@ export function logInUser(user) {
 			.then((response) => {
 				//save token to local storage
 				const token = response.data.token;
-				
 				localStorage.setItem('tkn', token);
 				
+				//set the token as part of our request header
 				setAuth(token);
 				
-				console.log('decoded', jwt.decode(token));
-				
+				//data contains message, user, token
 				dispatch(logInUserSuccess(response.data))
 				
 			})

@@ -22,7 +22,14 @@ class App extends React.Component {
 
     componentDidMount(){
         console.log("APP is now loaded!");
-        this.props.logInOnLoad(localStorage.getItem('tkn'));
+        let token = localStorage.getItem('tkn');
+        
+        console.log("the token that we found on load:", token);
+        if(token){
+            console.log("does it work out as true....");
+	        this.props.logInOnLoad(localStorage.getItem('tkn'));
+        }
+        
     }
 
     render() {
