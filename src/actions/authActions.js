@@ -105,6 +105,8 @@ export function logInOnLoad(token){
 	//todo because we don't send passwords we can't log in that way, we need to verify the token
 	return dispatch => {
 		dispatch(logInUser(user));
+
+		// axios.post(`${ROOT_URL}logcheck`, token)
 	}
 	// return{
 	// 	type: 'tet',

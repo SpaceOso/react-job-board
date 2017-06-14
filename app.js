@@ -75,6 +75,8 @@ app.use('/user', userRoutes);
 app.use('/employer', employerRoutes);
 app.use('/', appRoutes);
 
+//todo need to remove this before shipping
+// console.log(process.env.secretkey);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -45,7 +45,7 @@ router.post('/', function (req, res, next) {
                };
 
 
-               let token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
+               let token = jwt.sign({user: user}, process.env.secretkey, {expiresIn: 7200});
                
                res.status(200).json({
                    message: 'Success',
@@ -62,5 +62,10 @@ router.post('/', function (req, res, next) {
    });
 
 });
+
+router.post('/logcheck', function (req, res, next) {
+    console.log("you must've just refreshed to be here..");
+    console.log(req.token);
+})
 
 module.exports = router;
