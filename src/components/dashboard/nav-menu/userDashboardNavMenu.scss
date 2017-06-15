@@ -1,0 +1,18 @@
+@import "../../../styles/variables";
+
+.user-dashboard-nav {
+  background-color: $adminBackground;
+  width: 30%;
+  color: $white;
+
+  .user-dashboard-btn {
+    border-bottom: 2px solid $white;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    .btn-text {
+      margin: auto;
+    }
+  }
+}

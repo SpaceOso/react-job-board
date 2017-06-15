@@ -20,7 +20,7 @@ import App from './components/app';
 
 const store = createStore(rootReducer,applyMiddleware(thunk, ReduxPromise));
 
-setAuth(localStorage.getItem('tkn'));
+// setAuth(localStorage.getItem('tkn'));
 
 class JobBoard extends React.Component {
     constructor(props) {

@@ -26,7 +26,7 @@ class LoginContainer extends React.Component{
 	render(){
 		console.log("logincontainer props", this.props);
 		return(
-			<div>
+			<div className="app-container">
 				I'm the loginContainer
 				<LoginComponent
 					isFetching={this.props.user.isFetching}

@@ -20,6 +20,15 @@ export const LOG_OUT_USER = 'LOG_OUT_USER';
 
 //this get's called after the server registers a new user
 export function registerUserSuccess(user) {
+	console.log("REGISTER_USER_SUCCESS:", user);
+	
+	/*user: accountType:"user"
+	 email:"111"
+	 employer:null
+	 firstName: "Miguel"
+	 id	 :	 "5943152cdff9511e5c8cb226"
+	 lastName:"Rico"
+	* */
 	return {
 		type: REGISTER_USER_SUCCESS,
 		payload: user
@@ -49,6 +58,7 @@ export function registerUser(userObject) {
 		
 		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
+				localStorage.setItem('tkn', response.data.token);
 				dispatch(registerUserSuccess(response.data.user));
 				
 			})
@@ -136,6 +146,7 @@ export function logInUserSuccess(data) {
 	
 }
 
+//gets the token passed from localStorage
 export function logInOnLoad(token){
 	
 	return dispatch => {
@@ -148,6 +159,7 @@ export function logInOnLoad(token){
 				//set token as part of our request headers
 				setAuth(token);
 				
+				console.log("response.user", response.user);
 				let userVerified = {user: response.user, token};
 				
 				//send user information to be stored in the store

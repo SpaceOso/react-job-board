@@ -5,12 +5,12 @@ let passwordHash = require('password-hash');
 
 let User = require('../models/user');
 
-router.get('/',function (req, res) {
-    console.log("inside the register path");
-    res.status(200).json({
-        message: "you made it here safely"
-    })
-});
+// router.get('/',function (req, res) {
+//     console.log("inside the register path");
+//     res.status(200).json({
+//         message: "you made it here safely"
+//     })
+// });
 
 router.post('/', function (req, res, next) {
     console.log("you're in the post section with the following request");
@@ -36,12 +36,34 @@ router.post('/', function (req, res, next) {
 			});
 		};
 
-		let token = jwt.sign(user, "SECRETKEY", {expiresIn: 600});
+		
 		
 		console.log("a result:", result);
+		/*result: { __v: 0,
+		 firstName: '***',
+		 lastName: '**',
+		 email: '**',
+		 password: '**',
+		 employer: null,
+		 accountType: 'user',
+		 _id: **** }
+		 */
+		
+		let userSignature = {
+			firstName: result.firstName,
+			lastName: result.lastName,
+			email: result.email,
+			employer: result.employer,
+			accountType: result.accountType,
+			id: result._id
+		};
+		
+		//TODO need to set up proper secret key
+		let token = jwt.sign(userSignature, "SECRETKEY", {expiresIn: 600});
+		
+		
 		res.status(201).json({
-			message: 'Saved user',
-			user: result,
+			user: userSignature,
 			token: token
 		});
 		

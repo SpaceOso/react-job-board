@@ -16,10 +16,10 @@ class JobListItem extends React.Component {
         return (
             <div className="job-list-item">
                 <div className="job-list-logo">
-                    <img className="job-list-logo"
-                         src={ job.employerLogo ?
-                             job.employerLogo : "../assets/images/no-icon.svg"}
-                    />
+                    {/*<img className="job-list-logo"*/}
+                         {/*src={ job.employerLogo ?*/}
+                             {/*job.employerLogo : "../assets/images/no-icon.svg"}*/}
+                    {/*/>*/}
                 </div>
                 <div className="job-list-info">
                     <Link to={`/jobposts/${job._id}`}>

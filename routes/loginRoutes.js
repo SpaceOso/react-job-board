@@ -63,12 +63,13 @@ router.post('/', function (req, res, next) {
 
 });
 
-router.post('/logcheck', function (req, res, next) {
+router.post('/logcheck', function (req, res) {
     console.log("you must've just refreshed to be here..");
     // console.log(req.body.token);
     
     let token = req.body.token;
     
+    console.log("token..", token);
     jwt.verify(token, process.env.secretkey, function (err, decoded) {
         
         if(err){
@@ -76,16 +77,19 @@ router.post('/logcheck', function (req, res, next) {
                 message: "invalid credentials"
             })
         }
-       
-        res.status(200).json({
-            message: "token is valid",
-            user: decoded
-        })
         
+        console.log("no errors..");
+       if(decoded){
+       	console.log('decoded', decoded.user);
+	       res.status(200).json({
+		       message: "token is valid",
+		       user: decoded.user
+	       })
+       }
     });
 });
 
-router.post('/dashboardinit', function (req, res, next) {
+router.post('/dashboardinit', function (req, res) {
     console.log('inside the dashboardinit call with:', req.body.userId);
 	
 	User.findById(req.body.userId, function (err, userDoc) {

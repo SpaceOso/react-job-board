@@ -6,6 +6,9 @@ import CompRegisterComponent from "./compRegister/compRegisterComponent";
 import ApplicantListComponent from "./applicant-list/applicantListComponent";
 
 
+import './userDashboardContainer.scss';
+import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
+
 /*What data are we going to need?
  * jobs
  * applicants
@@ -40,18 +43,19 @@ class UserDashboardContainer extends React.Component{
 	fetchEmployerInfo(){
 		//get the userId from the URL params and send it to the action creator
 		let userId = this.props.match.params.userId;
+		console.log("why does this not work", this.props.match);
 		this.props.fetchThisUserInfo(userId);
 	}
 
 	render(){
 		return (
-			<div>
+			<div className="jb-dashboard">
+				{/*<UserDashboardNavMenu/>*/}
 				You're inside the user dashboard with email {this.props.user.email}
 				account type:{this.props.user.accountType}<br/>
 				employer: {this.props.user.employer}<br/>
 				{(this.props.user.accountType !== "employer" && this.props.user.employer === null) ? <CompRegisterComponent/> : "seems like you're an employer"}
-				<ApplicantListComponent/>
-				<button onClick={() => localStorage.clear()}>Reset cookies</button>
+				{/*<ApplicantListComponent/>*/}
 			</div>
 		)
 	}

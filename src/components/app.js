@@ -37,7 +37,6 @@ class App extends React.Component {
             <HashRouter>
                 <LayoutComponent user={this.props.user}>
                     <Route exact path="/" component={JumboTron}/>
-                    <div className="app-container">
                         <Switch>
                             <Route exact path="/" component={JobListContainer}/>
                             <Route exact path="/employer" component={EmployerComponent}/>
@@ -48,7 +47,6 @@ class App extends React.Component {
                             <Route exact path="/user/dashboard/:userId/userhome" component={UserDashboardContainer} />
                             <Route component={NotFoundComponent}/>
                         </Switch>
-                    </div>
                 </LayoutComponent>
             </HashRouter>
         )

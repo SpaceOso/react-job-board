@@ -14,7 +14,7 @@ function userReducer(state = {}, action) {
 		case REGISTER_USER_SUCCESS:
 			return {
 				...state,
-				userId: action.payload._id,
+				userId: action.payload.id,
 				error: null,
 				isFetching: false,
 				userRegistered: true
