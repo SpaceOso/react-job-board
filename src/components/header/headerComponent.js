@@ -41,7 +41,7 @@ class HeaderComponent extends React.Component {
 					</div>
 				</Link>
 				
-				<Link to={"/user"}>
+				<Link to={"/jobseeker"}>
 					<div className="nav-item">
 						Job Seeker
 					</div>

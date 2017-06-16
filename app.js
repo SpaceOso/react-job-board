@@ -18,6 +18,9 @@ var userRoutes = require('./routes/userRoutes');
 var registerRoute = require('./routes/registerRoutes');
 var loginRoute = require('./routes/loginRoutes');
 
+//AUTHCHECK
+let authCheck = require('./routes/authCheck');
+
 
 var app = express();
 mongoose.connect('localhost:27017/JobBoard');
@@ -70,7 +73,7 @@ app.use(function(req, res, next) {
 app.use('/uploads', uploads);
 app.use('/jobposts', jobPosts);
 app.use('/register', registerRoute);
-app.use('/login', loginRoute);
+app.use('/login', authCheck, loginRoute);
 app.use('/user', userRoutes);
 app.use('/employer', employerRoutes);
 app.use('/', appRoutes);
