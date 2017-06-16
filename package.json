@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "node bin/www",
-    "ricodev": "set secretkey='Ifjefgke#fs@'&&nodemon bin/www",
+    "ricodev": "set secretkey='Ifjefgke#fs@'&&nodemon bin/www --env.dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "webpack --env.dev",
     "dev": "webpack-dev-server --env.dev --port 3000 --hot --host 0.0.0.0"

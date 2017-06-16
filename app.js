@@ -73,7 +73,7 @@ app.use(function(req, res, next) {
 app.use('/uploads', uploads);
 app.use('/jobposts', jobPosts);
 app.use('/register', registerRoute);
-app.use('/login', authCheck, loginRoute);
+app.use('/login', loginRoute);
 app.use('/user', userRoutes);
 app.use('/employer', employerRoutes);
 app.use('/', appRoutes);
@@ -93,6 +93,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+	console.log("we're running in dev mode!!");
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 		res.json({

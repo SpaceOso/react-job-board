@@ -100,16 +100,11 @@ export function setUser(user){
 
 export function fetchThisUserInfo(userId){
 	
-	// return {
-	// 	type: 'FETCHING_THIS_USER_INFO',
-	// 	payload: "fetching on load"
-	// }
-
 	return dispatch => {
 		dispatch(fetchingUser());
 		
 		console.log("going to call with:", userId);
-		axios.post(`${ROOT_URL}login/dashboardinit`, {userId})
+		axios.post(`${ROOT_URL}user/dashboardinit`, {userId})
 			.then((response)=>{
 				console.log(response);
 				

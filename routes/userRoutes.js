@@ -10,7 +10,41 @@ var jwt = require('jsonwebtoken');
 var Jobs = require('../models/jobs');
 var User = require('../models/user');
 
-
+// =============================
+router.get('/', function (req, res, next) {
+	
+	User.findById(req.query.userID, function (err, docs) {
+		if (err) {
+			return res.status(404).json({
+				title: 'An Error ocurred',
+				error: err
+			});
+		}
+		
+		//create array to store jobApplied ids
+		// var appliedJobID = docs.jobsApplied;
+		
+		
+		// //search for the jobs this user has applied to
+		// Jobs.find({
+		//     '_id': {$in: appliedJobID}
+		// }, function (err, jobs) {
+		//
+		//     res.status(200).json({
+		//         message: 'Success',
+		//         appliedJobs: jobs,
+		//         obj: docs
+		//     });
+		// });
+		
+		res.status(200).json({
+			message: 'Succes',
+			userName: "rico",
+			obj: "what is this"
+		})
+		
+	});
+});
 // =============================
 router.get('/userRegister', function (req, res, next) {
     console.log("userRegister");
@@ -67,41 +101,6 @@ router.get('/userLogin', function (req, res, next) {
         });
 });
 // =============================
-router.get('/', function (req, res, next) {
-
-    User.findById(req.query.userID, function (err, docs) {
-        if (err) {
-            return res.status(404).json({
-                title: 'An Error ocurred',
-                error: err
-            });
-        }
-
-        //create array to store jobApplied ids
-        // var appliedJobID = docs.jobsApplied;
-
-
-        // //search for the jobs this user has applied to
-        // Jobs.find({
-        //     '_id': {$in: appliedJobID}
-        // }, function (err, jobs) {
-        //
-        //     res.status(200).json({
-        //         message: 'Success',
-        //         appliedJobs: jobs,
-        //         obj: docs
-        //     });
-        // });
-
-        res.status(200).json({
-            message: 'Succes',
-            userName: "rico",
-            obj: "what is this"
-        })
-
-    });
-});
-// =============================
 router.post('/userRegister', function (req, res, next) {
 
     var user = new User({
@@ -138,6 +137,47 @@ router.post('/userRegister', function (req, res, next) {
         });
     });
 
+});
+// =============================
+router.post('/dashboardinit', function (req, res) {
+	console.log('inside the dashboardinit call with:', req.body.userId);
+	
+	User.findById(req.body.userId, function (err, userDoc) {
+		if(err){
+			console.log("there was an error finding the user");
+			return res.status(404).json({
+				title: 'An error occurred',
+				error: err
+			})
+		}
+		if (!userDoc) {
+			console.log('there was no user found with those credentials');
+			return res.status(401).json({
+				title: 'No user found',
+				error: {message: 'User could not be found'}
+			})
+		}
+		
+		if(userDoc){
+			
+			let user ={
+				id: userDoc._id,
+				firstName: userDoc.firstName,
+				lastName: userDoc.lastName,
+				email: userDoc.email,
+				accountType: userDoc.accountType,
+				employer: userDoc.employer
+			};
+			
+			let token = jwt.sign({user: user}, process.env.secretkey, {expiresIn: 7200});
+			
+			res.status(200).json({
+				message: 'Success',
+				token,
+				user
+			})
+		}
+	});
 });
 
 module.exports = router;
