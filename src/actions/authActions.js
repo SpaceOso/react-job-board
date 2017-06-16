@@ -2,7 +2,7 @@ import axios from 'axios';
 import {ROOT_URL} from './index';
 import jwt from 'jsonwebtoken';
 
-import setAuth from '../utils/utils';
+import {setAuth, removeAuth} from '../utils/utils';
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const FETCHING_USER = 'FETCHING_USER';
@@ -77,6 +77,7 @@ export function logOutUser(){
 	
 	//clear the local storaage
 	localStorage.clear();
+	removeAuth();
 	
 	return{
 		type: LOG_OUT_USER,

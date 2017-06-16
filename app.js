@@ -74,7 +74,7 @@ app.use('/uploads', uploads);
 app.use('/jobposts', jobPosts);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
-app.use('/user', userRoutes);
+app.use('/user', authCheck, userRoutes);
 app.use('/employer', employerRoutes);
 app.use('/', appRoutes);
 
