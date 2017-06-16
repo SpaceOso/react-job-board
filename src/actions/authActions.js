@@ -6,6 +6,7 @@ import {setAuth, removeAuth} from '../utils/utils';
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const FETCHING_USER = 'FETCHING_USER';
+export const FETCHING_THIS_USER_ERROR = 'FETCHING_THIS_USER_ERROR';
 
 export const REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
@@ -14,7 +15,6 @@ export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 export const SET_USER = 'SET_USER';
-
 
 export const LOG_OUT_USER = 'LOG_OUT_USER';
 
@@ -96,6 +96,18 @@ export function setUser(user){
 }
 
 // =============================
+// FETCHING ERROR
+// =============================
+//this will handle the case when the user goes to a dashboard link without being logged in first
+export function fetchingThisUserError(payloadData){
+	return{
+		type: FETCHING_THIS_USER_ERROR,
+		payload: payloadData
+	}
+}
+
+
+// =============================
 // FETCHING INFO
 // =============================
 
@@ -108,11 +120,11 @@ export function fetchThisUserInfo(userId){
 		axios.post(`${ROOT_URL}user/dashboardinit`, {userId})
 			.then((response)=>{
 				console.log(response);
-				
 				dispatch(setUser(response.data.user));
 			})
 			.catch((error)=>{
-			console.log("the error in fetchThisUserInfo():", error);
+				console.log("the error in fetchThisUserInfo():", error);
+				dispatch(fetchingThisUserError("Error: You must log-in before continuing!"))
 			})
 
 	}

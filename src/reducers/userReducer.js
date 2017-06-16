@@ -6,7 +6,8 @@ import {
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_ERROR,
 	LOG_OUT_USER,
-	SET_USER
+	SET_USER,
+	FETCHING_THIS_USER_ERROR
 } from '../actions/authActions';
 
 function userReducer(state = {}, action) {
@@ -15,29 +16,43 @@ function userReducer(state = {}, action) {
 			return {
 				...state,
 				userId: action.payload.id,
-				error: null,
+				unAuthorized: false,
 				isFetching: false,
-				userRegistered: true
+				userRegistered: true,
 			};
 		
 		case LOGIN_USER_SUCCESS:
 			return {
 				...state,
 				...action.payload.user,
-				error: null,
+				unAuthorized: false,
 				auth: true,
-				isFetching: false
+				isFetching: false,
+				
 			};
 		case LOG_OUT_USER:
 			return {};
+			
 		case FETCHING_USER:
-			return {...state, isFetching: true};
+			return {...state,
+				isFetching: true,
+				unAuthorized: false,
+			};
+			
 		case SET_USER:
 			console.log('SETTING_USER', action.payload);
 			return {
 				...state,
 				isFetching: false,
-				...action.payload
+				...action.payload,
+				unAuthorized: false,
+			};
+		case FETCHING_THIS_USER_ERROR:
+			console.log("you need to login!. case: FETCHING_THIS_USER_ERROR");
+			return {
+				...state,
+				isFetching: false,
+				unAuthorized: true,
 			};
 		case LOGIN_USER_ERROR:
 			return {
@@ -45,11 +60,13 @@ function userReducer(state = {}, action) {
 				error: action.errorMessage,
 				isFetching: false
 			};
+			
 		case REGISTER_USER_ERROR:
 			// todo need to properly handle this case
 			return{
 				...state,
-			}
+			};
+			
 		default:
 			return state
 		
