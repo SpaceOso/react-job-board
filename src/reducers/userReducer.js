@@ -24,7 +24,6 @@ function userReducer(state = {}, action) {
 			return {
 				...state,
 				...action.payload.user,
-				token: action.payload.token,
 				error: null,
 				auth: true,
 				isFetching: false

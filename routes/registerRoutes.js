@@ -59,7 +59,7 @@ router.post('/', function (req, res, next) {
 		};
 		
 		//TODO need to set up proper secret key
-		let token = jwt.sign(userSignature, "SECRETKEY", {expiresIn: 600});
+		let token = jwt.sign(userSignature, process.env.secretkey, {expiresIn: "1 day"});
 		
 		
 		res.status(201).json({

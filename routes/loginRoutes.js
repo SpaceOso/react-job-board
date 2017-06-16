@@ -79,11 +79,12 @@ router.post('/logcheck', function (req, res) {
         }
         
         console.log("no errors..");
+        console.log(decoded);
        if(decoded){
-       	console.log('decoded', decoded.user);
+       	console.log('decoded', decoded);
 	       res.status(200).json({
 		       message: "token is valid",
-		       user: decoded.user
+		       user: decoded
 	       })
        }
     });

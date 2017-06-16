@@ -158,9 +158,10 @@ export function logInOnLoad(token){
 				
 				//set token as part of our request headers
 				setAuth(token);
+				console.log("should be getting a response soon...");
 				
-				console.log("response.user", response.user);
-				let userVerified = {user: response.user, token};
+				console.log("response.user", response);
+				let userVerified = {user: response.data.user};
 				
 				//send user information to be stored in the store
 				dispatch(logInUserSuccess(userVerified));

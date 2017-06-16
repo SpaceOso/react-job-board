@@ -10,7 +10,6 @@ export const RESET_CURRENT_JOB = 'RESET_CURRENT_JOB';
 export const SINGLE_JOB_SUCCESS = 'SINGLE_JOB_SUCCESS';
 
 export function getJobsSuccess(jobs) {
-	console.log('inside get jobs success with:', jobs);
 	return {
 		type: GET_JOBS_SUCCESS,
 		payload: jobs
@@ -35,7 +34,6 @@ export function getJobs() {
 		dispatch(fetchingJobs());
 		axios.get(`${ROOT_URL}${'jobposts'}`)
 			.then((response) => {
-				console.log(response);
 				dispatch(getJobsSuccess(response))
 			})
 			.catch((error) => {
@@ -59,8 +57,6 @@ export function singleJobSuccess(job) {
 }
 
 export function getJobById(id) {
-	console.log("in the action for getting a job by id");
-	// const request = axios.get(`${ROOT_URL}${'jobposts/'}${id}`);
 	return dispatch => {
 		dispatch(fetchingJobs());
 		axios.get(`${ROOT_URL}${'jobposts/'}${id}`)
