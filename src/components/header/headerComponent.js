@@ -28,7 +28,7 @@ class HeaderComponent extends React.Component {
 			</Link>
 		);
 		
-		return this.props.user.auth === undefined || this.props.user.auth === false ? "" : logOut;
+		return this.props.user.authorized === undefined || this.props.user.authorized === false ? "" : logOut;
 	}
 	
 	
@@ -55,7 +55,7 @@ class HeaderComponent extends React.Component {
 				
 				<Link to={"/login"}>
 					<div className="nav-item">
-						{this.props.user.auth === undefined || this.props.user.auth === false ? "Log In" : "Dashboard"}
+						{this.props.user.authorized === undefined || this.props.user.authorized === false ? "Log In" : "Dashboard"}
 					</div>
 				</Link>
 				

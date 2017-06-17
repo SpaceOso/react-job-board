@@ -58,7 +58,9 @@ export function registerUser(userObject) {
 		
 		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
+			console.log("the response after saving user:", response);
 				localStorage.setItem('tkn', response.data.token);
+				setAuth(response.data.token);
 				dispatch(registerUserSuccess(response.data.user));
 				
 			})
@@ -183,7 +185,10 @@ export function logInOnLoad(token){
 
 //this will dispatch the users email and password to server for verification
 export function logInUser(user) {
-	
+	/*user = {
+    	email
+        password
+	};*/
 	return dispatch => {
 		
 		dispatch(fetchingUser());
@@ -197,7 +202,7 @@ export function logInUser(user) {
 				//set the token as part of our request header
 				setAuth(token);
 				
-				//data contains message, user, token
+				//data contains user, token
 				dispatch(logInUserSuccess(response.data))
 				
 			})

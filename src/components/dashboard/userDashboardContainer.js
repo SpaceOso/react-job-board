@@ -51,7 +51,7 @@ class UserDashboardContainer extends React.Component {
 	checkForLogInErrors() {
 		console.log('checking for errors:');
 		//TODO probably need to reroute to the login page with an error message displayed
-		return this.props.user.unAuthorized === true ? "YOU NEED TO LOG IN BEFORE CONTINUING" : null;
+		return this.props.user.authorized === false ? "YOU NEED TO LOG IN BEFORE CONTINUING" : null;
 		
 	}
 	

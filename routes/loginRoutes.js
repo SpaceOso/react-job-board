@@ -45,10 +45,9 @@ router.post('/', function (req, res, next) {
                };
 
 
-               let token = jwt.sign({user: user}, process.env.secretkey, {expiresIn: 7200});
+               let token = jwt.sign({user: user}, process.env.secretkey, {expiresIn: "2 days"});
                
                res.status(200).json({
-                   message: 'Success',
                    token,
                    user
                })

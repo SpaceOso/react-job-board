@@ -16,7 +16,7 @@ function userReducer(state = {}, action) {
 			return {
 				...state,
 				userId: action.payload.id,
-				unAuthorized: false,
+                authorized: true,
 				isFetching: false,
 				userRegistered: true,
 			};
@@ -25,8 +25,7 @@ function userReducer(state = {}, action) {
 			return {
 				...state,
 				...action.payload.user,
-				unAuthorized: false,
-				auth: true,
+                authorized: true,
 				isFetching: false,
 				
 			};
@@ -36,7 +35,7 @@ function userReducer(state = {}, action) {
 		case FETCHING_USER:
 			return {...state,
 				isFetching: true,
-				unAuthorized: false,
+                authorized: false,
 			};
 			
 		case SET_USER:
@@ -45,14 +44,14 @@ function userReducer(state = {}, action) {
 				...state,
 				isFetching: false,
 				...action.payload,
-				unAuthorized: false,
+                authorized: true,
 			};
 		case FETCHING_THIS_USER_ERROR:
 			console.log("you need to login!. case: FETCHING_THIS_USER_ERROR");
 			return {
 				...state,
 				isFetching: false,
-				unAuthorized: true,
+                authorized: false,
 			};
 		case LOGIN_USER_ERROR:
 			return {

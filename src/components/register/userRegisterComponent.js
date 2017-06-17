@@ -43,6 +43,7 @@ class UserRegisterComponent extends React.Component {
 	
 	handleSubmit() {
 		event.preventDefault();
+		console.log("saving a user");
 		this.props.registerUser(this.state.user);
 	}
 	
