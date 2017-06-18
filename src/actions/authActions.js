@@ -58,9 +58,12 @@ export function registerUser(userObject) {
 		
 		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
-			console.log("the response after saving user:", response);
+				console.log("the response after saving user:", response);
+
 				localStorage.setItem('tkn', response.data.token);
+
 				setAuth(response.data.token);
+
 				dispatch(registerUserSuccess(response.data.user));
 				
 			})
@@ -148,7 +151,7 @@ export function logInUserError(error) {
 
 //requires a user and token property
 export function logInUserSuccess(data) {
-	
+	console.log("inside loginUsersuccess reducer with:", data);
 	return {
 		type: LOGIN_USER_SUCCESS,
 		payload: data
@@ -195,6 +198,7 @@ export function logInUser(user) {
 		
 		axios.post(`${ROOT_URL}login`, user)
 			.then((response) => {
+			console.log("trying to log in user with:", response);
 				//save token to local storage
 				const token = response.data.token;
 				localStorage.setItem('tkn', token);

@@ -19,6 +19,7 @@ class LoginContainer extends React.Component{
 	}
 	
 	sendLogInInfo(user){
+		console.log("sendLogInfo:", user);
 		this.props.logInUser(user);
 	}
 	

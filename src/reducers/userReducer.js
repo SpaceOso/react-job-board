@@ -13,8 +13,10 @@ import {
 function userReducer(state = {}, action) {
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:
+			console.log("inside register_user_success with:", action);
 			return {
 				...state,
+				...action.payload,
 				userId: action.payload.id,
                 authorized: true,
 				isFetching: false,
