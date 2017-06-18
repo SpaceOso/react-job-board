@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchThisUserInfo} from '../../actions/authActions';
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
-import ApplicantListComponent from "./applicant-list/applicantListComponent";
+import {Redirect} from 'react-router-dom';
 
 
 import './userDashboardContainer.scss';
@@ -49,19 +49,18 @@ class UserDashboardContainer extends React.Component {
 	
 	checkForLogInErrors() {
 		//TODO probably need to reroute to the login page with an error message displayed
-		return this.props.user.authorized === false ? "YOU NEED TO LOG IN BEFORE CONTINUING" : null;
+		return this.props.user.authorized === false ? <Redirect to={`${'/login'}`}/> : null;
 		
 	}
 	
 	render() {
 		return (
 			<div className="jb-dashboard">
-				{/*<UserDashboardNavMenu/>*/}
+				{this.checkForLogInErrors()}
 				<h1>Welcome back {this.props.user.firstName}!!</h1>
 				You're inside the user dashboard with email {this.props.user.email}
 				account type:{this.props.user.accountType}<br/>
 				employer: {this.props.user.employer}<br/>
-				{this.checkForLogInErrors()}
 				{(this.props.user.accountType !== "employer" && this.props.user.employer === null) ?
 					<CompRegisterComponent/> : "seems like you're an employer"}
 				{/*<ApplicantListComponent/>*/}
