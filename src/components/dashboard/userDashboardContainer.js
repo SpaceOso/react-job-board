@@ -43,8 +43,9 @@ class UserDashboardContainer extends React.Component {
 	//this will fire when we first load into the dashboard
 	fetchEmployerInfo() {
 		//get the userId from the URL params and send it to the action creator
-		let userId = this.props.match.params.userId;
-		console.log("why does this not work", this.props.match);
+		let userId = this.props.user.userId;
+		console.log("fetchEmployerInfo: ", userId);
+		console.log("fetching employer info with: ", this.props.user.userId);
 		this.props.fetchThisUserInfo(userId);
 	}
 	
@@ -59,6 +60,7 @@ class UserDashboardContainer extends React.Component {
 		return (
 			<div className="jb-dashboard">
 				{/*<UserDashboardNavMenu/>*/}
+				<h1>Welcome back {this.props.user.firstName}!!</h1>
 				You're inside the user dashboard with email {this.props.user.email}
 				account type:{this.props.user.accountType}<br/>
 				employer: {this.props.user.employer}<br/>

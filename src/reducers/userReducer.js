@@ -10,23 +10,35 @@ import {
 	FETCHING_THIS_USER_ERROR
 } from '../actions/authActions';
 
-function userReducer(state = {}, action) {
+const initialState = {
+	userId: "",
+	accountType: "user",
+	authorized: false,
+	email: "",
+	employer: "",
+	firstName: "",
+	lastName: "",
+	isFetching: false
+};
+
+
+function userReducer(state = initialState, action) {
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:
 			console.log("inside register_user_success with:", action);
 			return {
 				...state,
 				...action.payload,
-				userId: action.payload.id,
                 authorized: true,
 				isFetching: false,
 				userRegistered: true,
 			};
 		
 		case LOGIN_USER_SUCCESS:
+			console.log("inside the Login_user_success with:", action);
 			return {
 				...state,
-				...action.payload.user,
+				...action.payload,
                 authorized: true,
 				isFetching: false,
 				
@@ -35,9 +47,9 @@ function userReducer(state = {}, action) {
 			return {};
 			
 		case FETCHING_USER:
-			return {...state,
+			return {
+				...state,
 				isFetching: true,
-                authorized: false,
 			};
 			
 		case SET_USER:

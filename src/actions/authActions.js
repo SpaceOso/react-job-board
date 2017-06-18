@@ -22,11 +22,11 @@ export const LOG_OUT_USER = 'LOG_OUT_USER';
 export function registerUserSuccess(user) {
 	console.log("REGISTER_USER_SUCCESS:", user);
 	
-	/*user: accountType:"user"
+	/*accountType:"user"
 	 email:"111"
 	 employer:null
 	 firstName: "Miguel"
-	 id	 :	 "5943152cdff9511e5c8cb226"
+	 userId	 :	 "5943152cdff9511e5c8cb226"
 	 lastName:"Rico"
 	* */
 	return {
@@ -51,13 +51,25 @@ export function fetchingUser() {
 }
 
 export function registerUser(userObject) {
+	/*{
+	 fName: '',
+	 lName: '',
+	 email: '',
+	 emailVerify: '',
+	 password: '',
+	 passwordVerify: '',
+	 accountType: 'user',
+	 employer: null
+	 },*/
 	
+	console.log("inside the register function with userObject:", userObject);
 	return dispatch => {
 		
 		dispatch(fetchingUser());
 		
 		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
+				/*response: {user, token}*/
 				console.log("the response after saving user:", response);
 
 				localStorage.setItem('tkn', response.data.token);
@@ -174,10 +186,9 @@ export function logInOnLoad(token){
 				console.log("should be getting a response soon...");
 				
 				console.log("response.user", response);
-				let userVerified = {user: response.data.user};
 				
 				//send user information to be stored in the store
-				dispatch(logInUserSuccess(userVerified));
+				dispatch(logInUserSuccess(response.data.user));
 				
 			})
 			.catch((error)=>{
@@ -207,7 +218,7 @@ export function logInUser(user) {
 				setAuth(token);
 				
 				//data contains user, token
-				dispatch(logInUserSuccess(response.data))
+				dispatch(logInUserSuccess(response.data.user))
 				
 			})
 			.catch((error) => {

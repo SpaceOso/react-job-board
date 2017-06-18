@@ -24,9 +24,7 @@ class App extends React.Component {
         console.log("APP is now loaded!");
         let token = localStorage.getItem('tkn');
         
-        console.log("the token that we found on load:", token);
         if(token){
-            console.log("does it work out as true....");
 	        this.props.logInOnLoad(token);
         }
         

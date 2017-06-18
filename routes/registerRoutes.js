@@ -48,7 +48,7 @@ router.post('/', function (req, res, next) {
 			email: result.email,
 			employer: result.employer,
 			accountType: result.accountType,
-			id: result._id
+			userId: result._id
 		};
 		
 		//TODO need to set up proper secret key

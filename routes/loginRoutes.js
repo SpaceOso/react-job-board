@@ -36,7 +36,7 @@ router.post('/', function (req, res, next) {
                console.log(userDoc);
 
                let user ={
-                   id: userDoc._id,
+                   userId: userDoc._id,
                    firstName: userDoc.firstName,
                    lastName: userDoc.lastName,
                    email: userDoc.email,
@@ -80,7 +80,7 @@ router.post('/logcheck', function (req, res) {
         console.log("no errors..");
         console.log(decoded);
        if(decoded){
-       	console.log('decoded', decoded);
+       	console.log('decoded', decoded.user);
 	       res.status(200).json({
 		       message: "token is valid",
 		       user: decoded.user

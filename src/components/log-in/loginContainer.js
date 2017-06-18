@@ -33,7 +33,7 @@ class LoginContainer extends React.Component{
 					isFetching={this.props.user.isFetching}
 					logInUser={this.sendLogInInfo}
 					errorMessage={this.props.user.error}/>
-				{this.props.user.auth === true ? <Redirect to={`${'/user/dashboard/'}${this.props.user.id}/userhome`}/> : null}
+				{this.props.user.authorized === true ? <Redirect to={`${'/user/dashboard/'}${this.props.user.userId}/userhome`}/> : null}
 			</div>
 		)
 	}
