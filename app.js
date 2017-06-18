@@ -79,7 +79,6 @@ app.use('/employer', employerRoutes);
 app.use('/', appRoutes);
 
 //todo need to remove this before shipping
-// console.log(process.env.secretkey);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -93,7 +92,6 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-	console.log("we're running in dev mode!!");
 	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 		res.json({

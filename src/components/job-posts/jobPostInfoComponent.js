@@ -12,7 +12,6 @@ class JobPostComponent extends React.Component{
 	dataReady = () => this.props.isFetching !== true;
     
     render(){
-        console.log("So we are here now with..", this.props.isFetching);
         if(this.props.isFetching){
             return <SpinnerComponent/>
         } else {

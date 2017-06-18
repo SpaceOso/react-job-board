@@ -11,12 +11,9 @@ var Applicants = require('../models/applicants');
 // =============================
 router.param('jobId', function (req, res, next, jobId) {
     // TODO: decipher why the hell we need this for
-    console.log("inside router.param jobId");
-    console.log("looking for:", req.params.jobId);
 
     Jobs.findById(req.params.jobId, function (err, doc) {
         if (err) {
-            console.log('if err');
             res.status(404).json({
                 title: 'An error occurred finding first job',
                 error: err
@@ -24,7 +21,6 @@ router.param('jobId', function (req, res, next, jobId) {
         }
 
         if (!doc) {
-            console.log("if no doc");
             res.status(404).json({
                 title: 'No user found',
                 error: {message: 'User could not be found'}
@@ -32,7 +28,6 @@ router.param('jobId', function (req, res, next, jobId) {
         }
 
         if (doc) {
-            console.log("we found a job!");
             //we found a job, now we need to add the employer to it.
             //this will make it easier when we need to display job
             // and employer info in the job post pages
@@ -70,9 +65,6 @@ router.param('jobId', function (req, res, next, jobId) {
 });
 
 router.get('/:jobId', function (req, res, next) {
-    console.log('inside the jobId');
-    // console.log(req.params);
-    // Jobs.find();
     res.status(200).json({
         message: 'Success',
         job: req.jobId,
@@ -82,7 +74,6 @@ router.get('/:jobId', function (req, res, next) {
 
 // =============================
 router.get('/', function (req, res,next) {
-    console.log("looking for jobs");
 	Jobs.find({}, function(err, jobs) {
 		// var jobMap = [];
 		//
@@ -163,7 +154,6 @@ router.patch('/:jobId', function (req, res, next) {
 
             Employer.findById(job.employer, function (err, employerDOC) {
                 if (err) {
-                    console.log(err);
                     return res.status(404).json({
                         title: 'An Error Occured on Employer Find',
                         error: err
@@ -216,7 +206,6 @@ router.patch('/:jobId', function (req, res, next) {
 
                 job.save(function (err, result) {
                     if (err) {
-                        console.log(err);
                         return res.status(404).json({
                             title: 'An Error ocurred no job save',
                             error: err

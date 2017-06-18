@@ -25,7 +25,6 @@ const initialState = {
 function userReducer(state = initialState, action) {
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:
-			console.log("inside register_user_success with:", action);
 			return {
 				...state,
 				...action.payload,
@@ -35,7 +34,6 @@ function userReducer(state = initialState, action) {
 			};
 		
 		case LOGIN_USER_SUCCESS:
-			console.log("inside the Login_user_success with:", action);
 			return {
 				...state,
 				...action.payload,
@@ -53,7 +51,6 @@ function userReducer(state = initialState, action) {
 			};
 			
 		case SET_USER:
-			console.log('SETTING_USER', action.payload);
 			return {
 				...state,
 				isFetching: false,
@@ -61,7 +58,6 @@ function userReducer(state = initialState, action) {
                 authorized: true,
 			};
 		case FETCHING_THIS_USER_ERROR:
-			console.log("you need to login!. case: FETCHING_THIS_USER_ERROR");
 			return {
 				...state,
 				isFetching: false,

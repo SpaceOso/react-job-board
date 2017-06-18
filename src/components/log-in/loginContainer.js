@@ -19,13 +19,11 @@ class LoginContainer extends React.Component{
 	}
 	
 	sendLogInInfo(user){
-		console.log("sendLogInfo:", user);
 		this.props.logInUser(user);
 	}
 	
 	
 	render(){
-		console.log("logincontainer props", this.props);
 		return(
 			<div className="app-container">
 				I'm the loginContainer

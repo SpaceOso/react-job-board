@@ -15,12 +15,10 @@ function JobReducer(state = {}, action) {
 
             return newJobs;
         case GET_JOBS_ERROR:
-            console.log("inside the reducer and we have an error!!", action.payload);
 
             return state;
         case FETCHING_JOBS:
 
-            console.log("currently fetching jobs!!");
 
             return {...state, isFetching: true};
         default:

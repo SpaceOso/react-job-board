@@ -31,7 +31,6 @@ const upload = multer({storage: storage});
 
 
 router.post('/', upload.any(), (req, res) => {
-    console.log('in the upload stage for the image');
     res.json(req.files.map(file => {
         let ext = path.extname(file.originalname);
         return {

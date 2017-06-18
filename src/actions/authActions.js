@@ -20,7 +20,6 @@ export const LOG_OUT_USER = 'LOG_OUT_USER';
 
 //this get's called after the server registers a new user
 export function registerUserSuccess(user) {
-	console.log("REGISTER_USER_SUCCESS:", user);
 	
 	/*accountType:"user"
 	 email:"111"
@@ -36,7 +35,6 @@ export function registerUserSuccess(user) {
 }
 
 export function registerUserError(error) {
-	console.log("there was an error and we're inside the register user error function");
 	return {
 		type: REGISTER_USER_ERROR,
 		payload: {isFetching: false, error}
@@ -62,7 +60,6 @@ export function registerUser(userObject) {
 	 employer: null
 	 },*/
 	
-	console.log("inside the register function with userObject:", userObject);
 	return dispatch => {
 		
 		dispatch(fetchingUser());
@@ -70,7 +67,6 @@ export function registerUser(userObject) {
 		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
 				/*response: {user, token}*/
-				console.log("the response after saving user:", response);
 
 				localStorage.setItem('tkn', response.data.token);
 
@@ -133,14 +129,11 @@ export function fetchThisUserInfo(userId){
 	return dispatch => {
 		dispatch(fetchingUser());
 		
-		console.log("going to call with:", userId);
 		axios.post(`${ROOT_URL}user/dashboardinit`, {userId})
 			.then((response)=>{
-				console.log(response);
 				dispatch(setUser(response.data.user));
 			})
 			.catch((error)=>{
-				console.log("the error in fetchThisUserInfo():", error);
 				dispatch(fetchingThisUserError("Error: You must log-in before continuing!"))
 			})
 
@@ -152,7 +145,6 @@ export function fetchThisUserInfo(userId){
 // =============================
 
 export function logInUserError(error) {
-	console.log("inside the loginUser error page with:", error);
 	if (error === 401) {
 		return {
 			type: LOGIN_USER_ERROR,
@@ -163,7 +155,6 @@ export function logInUserError(error) {
 
 //requires a user and token property
 export function logInUserSuccess(data) {
-	console.log("inside loginUsersuccess reducer with:", data);
 	return {
 		type: LOGIN_USER_SUCCESS,
 		payload: data
@@ -183,9 +174,7 @@ export function logInOnLoad(token){
 				
 				//set token as part of our request headers
 				setAuth(token);
-				console.log("should be getting a response soon...");
 				
-				console.log("response.user", response);
 				
 				//send user information to be stored in the store
 				dispatch(logInUserSuccess(response.data.user));
@@ -209,7 +198,6 @@ export function logInUser(user) {
 		
 		axios.post(`${ROOT_URL}login`, user)
 			.then((response) => {
-			console.log("trying to log in user with:", response);
 				//save token to local storage
 				const token = response.data.token;
 				localStorage.setItem('tkn', token);

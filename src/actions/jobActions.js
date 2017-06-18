@@ -37,7 +37,6 @@ export function getJobs() {
 				dispatch(getJobsSuccess(response))
 			})
 			.catch((error) => {
-				console.log(error);
 			});
 	}
 }
@@ -64,7 +63,6 @@ export function getJobById(id) {
 				dispatch(singleJobSuccess(response));
 			})
 			.catch((error) => {
-				console.log(error);
 			})
 	};
 }

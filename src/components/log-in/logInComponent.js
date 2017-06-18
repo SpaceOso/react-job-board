@@ -29,7 +29,6 @@ class LogInComponent extends React.Component {
     }
 
     handleSubmit() {
-        console.log("submitting user!");
         let user = {
             email: this.state.userEmail,
             password: this.state.userPassword //todo need to hash this so I'm not sending plain password

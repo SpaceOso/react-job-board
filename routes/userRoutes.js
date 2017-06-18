@@ -9,18 +9,15 @@ var User = require('../models/user');
 
 // =============================
 router.post('/dashboardinit', function (req, res) {
-	console.log('inside the dashboardinit call with:', req.body.userId);
 	
 	User.findById(req.body.userId, function (err, userDoc) {
 		if(err){
-			console.log("there was an error finding the user");
 			return res.status(404).json({
 				title: 'An error occurred',
 				error: err
 			})
 		}
 		if (!userDoc) {
-			console.log('there was no user found with those credentials');
 			return res.status(401).json({
 				title: 'No user found',
 				error: {message: 'User could not be found'}

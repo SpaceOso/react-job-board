@@ -21,7 +21,6 @@ import {logInOnLoad} from '../actions/authActions';
 class App extends React.Component {
 
     componentDidMount(){
-        console.log("APP is now loaded!");
         let token = localStorage.getItem('tkn');
         
         if(token){

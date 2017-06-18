@@ -6,8 +6,6 @@ let passwordHash = require('password-hash');
 let User = require('../models/user');
 
 router.post('/', function (req, res, next) {
-    console.log("you're in the post section with the following request");
-    console.log(req.body);
 	
     let user = new User({
 	    firstName: req.body.fName,
@@ -19,10 +17,7 @@ router.post('/', function (req, res, next) {
     });
 	
 	user.save(function (err, result) {
-		console.log("Trying to save a user");
 		if (err) {
-			console.log('found an error...');
-			console.log(err);
 			return res.status(404).json({
 				title: 'An Error ocurred',
 				error: err
@@ -31,7 +26,6 @@ router.post('/', function (req, res, next) {
 
 		
 		
-		console.log("a result:", result);
 		/*result: { __v: 0,
 		 firstName: '***',
 		 lastName: '**',

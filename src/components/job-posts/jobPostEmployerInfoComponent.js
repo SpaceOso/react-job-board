@@ -8,7 +8,6 @@ import "./styles/jobPostEmployerInfo.scss";
 class JobPostEmployerInfoComponent extends React.Component{
 	constructor(props){
 		super(props);
-		console.log("JobPostEmployer:", this.props);
 		
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -28,7 +27,6 @@ class JobPostEmployerInfoComponent extends React.Component{
 	}
 	
 	handleClick(jobId){
-		console.log("we've been clicked..", jobId);
 		this.props.loadJob(jobId);
 	}
 

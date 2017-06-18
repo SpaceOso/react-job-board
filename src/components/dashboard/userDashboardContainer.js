@@ -44,13 +44,10 @@ class UserDashboardContainer extends React.Component {
 	fetchEmployerInfo() {
 		//get the userId from the URL params and send it to the action creator
 		let userId = this.props.user.userId;
-		console.log("fetchEmployerInfo: ", userId);
-		console.log("fetching employer info with: ", this.props.user.userId);
 		this.props.fetchThisUserInfo(userId);
 	}
 	
 	checkForLogInErrors() {
-		console.log('checking for errors:');
 		//TODO probably need to reroute to the login page with an error message displayed
 		return this.props.user.authorized === false ? "YOU NEED TO LOG IN BEFORE CONTINUING" : null;
 		

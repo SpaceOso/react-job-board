@@ -43,7 +43,6 @@ export function getThisEmployerInfo(userId, employerId) {
                 dispatch(getThisEmployerJobsSuccess(response));
             })
             .catch((error) => {
-                console.log("there was an error trying to get all the jobs from the employer!!");
             })
 
     }

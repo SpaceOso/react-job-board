@@ -125,7 +125,6 @@ router.param('id', function (req, res, next, id) {
 			if (err) {
 				next(err);
 			} else if (docs) {
-				console.log("WE FOUND AN EMPLOYER!!");
 				req.employer = docs;
 				next();
 			} else {
@@ -151,7 +150,6 @@ router.get('/employerDashboard/:id/applicants', function(req, res, next){
 		.populate('jobID', 'jobTitle')
 		.exec(function (err, applicant ) {
             if(err){
-                console.log(err);
             }
 
             if(applicant) {
@@ -223,7 +221,6 @@ router.delete('/employerdashboard/:id/employerhome', function (req, res, next) {
 
 router.get('/employerdashboard/:id/employerhome', function (req, res, next) {
 
-	console.log('inside the employer dashboard');
 
 	//grabs all the jobs form an employer
 	Job.find({employer: req.employer._id}, function (err, doc) {
@@ -303,7 +300,6 @@ router.post('/employerDashboard/:id/jobsubmit', function (req, res, next) {
 router.get('/employerDashboard/:id/employerHome/jobEdit/:id', function (req, res, next) {
 	Job.find({_id: req.query.jobId}, function (err, doc) {
 		if (err) {
-			console.log("error in job search");
 			return res.status(404).json({
 				title: 'An error occurred',
 				error: err
@@ -329,7 +325,6 @@ router.get('/employerDashboard/:id/employerHome/jobEdit/:id', function (req, res
 
 // When the employer updates their profile
 router.patch('/updateProfile', function (req, res, next) {
-	console.log("You've made to the right request on the server");
 	// console.log(req.body);
 
 	Employer.findById(req.body.id, function (err, employer) {
@@ -341,8 +336,6 @@ router.patch('/updateProfile', function (req, res, next) {
 		};
 
 		if(employer){
-			console.log("We found an employer and here they are..");
-			console.log(employer);
 		}
     });
 

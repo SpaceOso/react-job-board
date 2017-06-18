@@ -7,7 +7,6 @@ var Employer = require('../models/employer');
 var Jobs = require('../models/jobs');
 // var User = require('../models/user');
 
-console.log("in the root app");
 
 router.get('/homeload', function (req, res, next) {
 
