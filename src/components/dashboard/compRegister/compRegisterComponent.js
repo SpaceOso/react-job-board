@@ -4,67 +4,145 @@ import React from "react";
 import "./styles/compRegisterComponent.scss";
 
 class CompRegisterComponent extends React.Component {
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			companyName: "",
+			address: "",
+			city: "",
+			state: "",
+			zip: "",
+			logoImg: "",
+			website: "",
+			facebook: "",
+			linkedIn: "",
+			twitter: ""
+		}
+		
+		this.handleChange = this.handleChange.bind(this);
+	}
+	
+	handleChange(key, event) {
+		let keyObject = {...this.state};
+		
+		keyObject[key] = event;
+		
+		this.setState(keyObject);
+	}
+	
 	render() {
 		return (
-			<div className="comp-register" >
+			<div className="comp-register">
 				<h1>We need to set up your employer before we can start!</h1>
-				<form action="">
-					
-					<div id="company-name-group">
-						<label htmlFor="company-name">Company Name:</label>
-						<input type="text" id="company-name" placeholder="enter company name"/>
-					</div>
-					
-					<div id="location-group">
-						<div>
-							<label htmlFor="company-address">address:</label>
-							<input type="text" id="company-address" placeholder="enter company address"/>
+				<div className="form-container">
+					<form action="">
+						{/*name and logo*/}
+						<div id="name-logo-group">
+							<div id="company-name-container">
+								<label htmlFor="company-name">Company Name:</label>
+								<input type="text"
+								       id="company-name"
+								       placeholder="enter company name"
+								       value={this.state.companyName}
+								       onChange={(event) => this.handleChange('companyName', event.target.value)}
+								/>
+							</div>
+							
+							<div id="company-logo-container">
+								<label htmlFor="company-logo">logo image:</label>
+								<input type="text"
+								       id="company-logo"
+								       placeholder="enter company name"
+								       value={this.state.logoImg}
+								       onChange={(event) => this.handleChange('logoImg', event.target.value)}
+								/>
+							</div>
+						
 						</div>
-						<div>
-							<label htmlFor="company-city">city:</label>
-							<input type="text" id="company-city" placeholder="enter company city"/>
+						
+						<div id="location-group">
+							<h3>Location</h3>
+							<div>
+								{/*<label htmlFor="company-address">address:</label>*/}
+								<input type="text"
+								       id="company-address"
+								       placeholder="address"
+								       value={this.state.address}
+								       onChange={(event) => this.handleChange('address', event.target.value)}
+								/>
+							</div>
+							<div>
+								{/*<label htmlFor="company-city">city:</label>*/}
+								<input type="text"
+								       id="company-city"
+								       placeholder="city"
+								       value={this.state.city}
+								       onChange={(event) => this.handleChange('city', event.target.value)}
+								/>
+							</div>
+							<div>
+								{/*<label htmlFor="company-state">state:</label>*/}
+								<input type="text"
+								       id="company-state"
+								       placeholder="state"
+								       value={this.state.state}
+								       onChange={(event) => this.handleChange('state', event.target.value)}
+								/>
+							</div>
+							<div>
+								{/*<label htmlFor="company-zip">zip</label>*/}
+								<input type="text"
+								       id="company-zip"
+								       placeholder="zip"
+								       value={this.state.zip}
+								       onChange={(event) => this.handleChange('zip', event.target.value)}
+								/>
+							</div>
 						</div>
-						<div>
-							<label htmlFor="company-state">state:</label>
-							<input type="text" id="company-state" placeholder="enter company sate"/>
+						
+						
+						<div id="social-media">
+							<h3>Social Media</h3>
+							<div>
+								{/*<label htmlFor="company-website">Company Website:</label>*/}
+								<input type="text"
+								       id="company-website"
+								       placeholder="website"
+								       value={this.state.website}
+								       onChange={(event) => this.handleChange('website', event.target.value)}
+								/>
+							</div>
+							<div>
+								{/*<label htmlFor="company-twitter">Company Twitter:</label>*/}
+								<input type="text"
+								       id="company-twitter"
+								       placeholder="twitter"
+								       value={this.state.twitter}
+								       onChange={(event) => this.handleChange('twitter', event.target.value)}
+								/>
+							</div>
+							<div>
+								{/*<label htmlFor="company-facebook">Company Facebook:</label>*/}
+								<input type="text"
+								       id="company-facebook"
+								       placeholder="facebook"
+								       value={this.state.facebook}
+								       onChange={(event) => this.handleChange('facebook', event.target.value)}
+								/>
+							</div>
+							<div>
+								{/*<label htmlFor="company-linkedin">Company linkedin:</label>*/}
+								<input type="text"
+								       id="company-linkedin"
+								       placeholder="linkeIn"
+								       value={this.state.linkedIn}
+								       onChange={(event) => this.handleChange('linkedIn', event.target.value)}
+								/>
+							</div>
 						</div>
-						<div>
-							<label htmlFor="company-zip">zip</label>
-							<input type="text" id="company-zip" placeholder="enter company zip"/>
-						</div>
-					</div>
-					
-					<div id="company-logo-group">
-						<div>
-							<label htmlFor="company-logo">logo image:</label>
-							<input type="text" id="company-logo" placeholder="enter company name"/>
-						</div>
-					</div>
-					
-					<div id="social-media">
-						<div>
-							<label htmlFor="company-website">Company Website:</label>
-							<input type="text" id="company-website" placeholder="enter company website"/>
-						</div>
-						<div>
-							<label htmlFor="company-blog">Company blog:</label>
-							<input type="text" id="company-blog" placeholder="enter company blog"/>
-						</div>
-						<div>
-							<label htmlFor="company-twitter">Company Twitter:</label>
-							<input type="text" id="company-twitter" placeholder="enter company twitter"/>
-						</div>
-						<div>
-							<label htmlFor="company-facebook">Company Facebook:</label>
-							<input type="text" id="company-facebook" placeholder="enter company facebook"/>
-						</div>
-						<div>
-							<label htmlFor="company-linkedin">Company linkedin:</label>
-							<input type="text" id="company-linkedin" placeholder="enter company linkedin"/>
-						</div>
-					</div>
-					
-				</form>
+					</form>
+				</div>
 			</div>
 		)
 	}

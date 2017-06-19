@@ -3,4 +3,30 @@
 .comp-register{
   width: 80%;
   background-color: $white;
+
+  .form-container{
+    display: flex;
+    flex-direction: column;
+
+    #name-logo-group > div,
+    #location-group,
+    #social-media{
+      display: inline-block;
+    }
+
+
+    #location-group,
+    #social-media{
+      text-align: left;
+      padding: 10px;
+      margin: 15px 0;
+    }
+
+    #location-group > div,
+    #social-media > div{
+      margin: 20px 0;
+    }
+
+  }
+
 }
