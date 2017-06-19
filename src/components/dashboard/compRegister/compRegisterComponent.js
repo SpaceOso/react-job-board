@@ -18,11 +18,17 @@ class CompRegisterComponent extends React.Component {
 			facebook: "",
 			linkedIn: "",
 			twitter: ""
-		}
+		};
 		
 		this.handleChange = this.handleChange.bind(this);
+		this.handleEmployerSubmit = this.handleEmployerSubmit.bind(this);
 	}
-	
+
+	handleEmployerSubmit(){
+		//this will call an action that will send employer info to server
+		this.props.submitData(this.state);
+	}
+
 	handleChange(key, event) {
 		let keyObject = {...this.state};
 		
@@ -36,7 +42,7 @@ class CompRegisterComponent extends React.Component {
 			<div className="comp-register">
 				<h1>We need to set up your employer before we can start!</h1>
 				<div className="form-container">
-					<form action="">
+					<form action="" onSubmit={() => this.handleEmployerSubmit()}>
 						{/*name and logo*/}
 						<div id="name-logo-group">
 							<div id="company-name-container">
@@ -141,6 +147,7 @@ class CompRegisterComponent extends React.Component {
 								/>
 							</div>
 						</div>
+						<button>Submit Company</button>
 					</form>
 				</div>
 			</div>

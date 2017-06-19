@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchThisUserInfo} from '../../actions/authActions';
+import {submitEmployerRegistration} from '../../actions/employerDashboardActions';
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
 import {Redirect} from 'react-router-dom';
 
@@ -34,6 +35,7 @@ class UserDashboardContainer extends React.Component {
 		
 		this.fetchEmployerInfo = this.fetchEmployerInfo.bind(this);
 		this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
+		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 	}
 	
 	componentDidMount() {
@@ -50,8 +52,11 @@ class UserDashboardContainer extends React.Component {
 	checkForLogInErrors() {
 		//TODO probably need to reroute to the login page with an error message displayed
 		return this.props.user.authorized === false ? <Redirect to={`${'/login'}`}/> : null;
-		
 	}
+
+	handleEmployerRegistration(employerData){
+		console.log("inside the userDashboardContainer with", employerData);
+	};
 	
 	render() {
 		return (
@@ -62,13 +67,12 @@ class UserDashboardContainer extends React.Component {
 				account type:{this.props.user.accountType}<br/>
 				employer: {this.props.user.employer}<br/>
 				{(this.props.user.accountType !== "employer" && this.props.user.employer === null) ?
-					<CompRegisterComponent/> : "seems like you're an employer"}
+					<CompRegisterComponent submitData={this.handleEmployerRegistration}/> : "seems like you're an employer"}
 				{/*<ApplicantListComponent/>*/}
 			</div>
 		)
 	}
-}
-;
+};
 
 function mapStateToProps(state) {
 	return {
@@ -77,8 +81,8 @@ function mapStateToProps(state) {
 	}
 }
 
-function mapDsipatchToProps(dispatch) {
-	return bindActionCreators({fetchThisUserInfo}, dispatch);
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({ fetchThisUserInfo, submitEmployerRegistration }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDsipatchToProps)(UserDashboardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardContainer);

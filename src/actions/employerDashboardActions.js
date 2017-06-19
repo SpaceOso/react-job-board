@@ -32,6 +32,9 @@ export function getThisEmployerJobsSuccess(jobs) {
     }
 }
 
+export function submitEmployerRegistration(employerInfo){
+    console.log("will be making a post request with the following info.", employerInfo);
+}
 
 //This will be called when the user logs in and goes into the dashboard IF the account is an employer account
 export function getThisEmployerInfo(userId, employerId) {
