@@ -61,11 +61,12 @@ router.get('/employerLogin', function (req, res, next) {
 	})
 });
 
-router.post('/employerRegister', function (req, res, next) {
+//requires an object with employerData and userId properties
+router.post('/register', function (req, res, next) {
+	console.log("in the root register route with:", req.body);
+
 	//using the employer model
-	let employer = new Employer({
-		email: req.body.email,
-		password: passwordHash.generate(req.body.password),
+	/*let employer = new Employer({
 		name: req.body.name,
 		logoImg: req.body.logoImg,
 		location: {
@@ -76,28 +77,27 @@ router.post('/employerRegister', function (req, res, next) {
 		},
 		socialMedia:{
 			website: req.body.socialMedia.website,
-			blog: req.body.socialMedia.blog,
 			twitter: req.body.socialMedia.twitter,
 			facebook: req.body.socialMedia.facebook,
 			linkedin: req.body.socialMedia.linkedin
 		}
-	});
+	});*/
 
-	employer.save(function (err, result) {
+	/*employer.save(function (err, result) {
 		if (err) {
 			return res.status(404).json({
 				title: 'An Error ocurred',
 				error: err
 			});
 		}
-		let token = jwt.sign({employer: employer}, 'secret', {expiresIn: 7200});
+		let token = jwt.sign({employer: employer}, process.env.secretkey, {expiresIn: 7200});
 
 		return res.status(201).json({
 			message: 'Saved employer',
 			token: token,
 			obj: result
 		});
-	})
+	})*/
 });
 
 

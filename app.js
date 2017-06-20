@@ -75,7 +75,7 @@ app.use('/jobposts', jobPosts);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/user', authCheck, userRoutes);
-app.use('/employer', employerRoutes);
+app.use('/employer', authCheck, employerRoutes);
 app.use('/', appRoutes);
 
 //todo need to remove this before shipping

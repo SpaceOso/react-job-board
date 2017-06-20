@@ -18,7 +18,7 @@ export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
  * view applicants per job
  * view applicant details*/
 
-export function fetchingThisEmployerJobs() {
+export function fetchingThisEmployerInfo() {
     return {
         type: FETCHING_THIS_EMPLOYER_JOBS,
         payload: "fetching jobs"
@@ -34,6 +34,16 @@ export function getThisEmployerJobsSuccess(jobs) {
 
 export function submitEmployerRegistration(employerInfo){
     console.log("will be making a post request with the following info.", employerInfo);
+
+    return dispatch =>{
+        dispatch(fetchingThisEmployerInfo());
+        let userData = {...employerInfo}
+        axios.post(`${ROOT_URL}employer/register`, employerInfo)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error)=> console.log(error))
+    }
 }
 
 //This will be called when the user logs in and goes into the dashboard IF the account is an employer account

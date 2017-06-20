@@ -1,10 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var mongooseUniqueValidator = require('mongoose-unique-validator');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const mongooseUniqueValidator = require('mongoose-unique-validator');
 
-var schema = new Schema({
-	email: {type: String, required: true, unique: true},
-	password: {type: String, required: true},
+let schema = new Schema({
 	name: String,
 	location: {
 		address: {type: String, required: true},
@@ -15,7 +13,6 @@ var schema = new Schema({
 	logoImg: String,
 	socialMedia: {
 		website: {type: String},
-		blog: {type: String},
 		twitter: {type: String},
 		facebook: {type: String},
 		linkedin: {type: String}

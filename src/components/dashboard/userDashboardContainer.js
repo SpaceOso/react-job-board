@@ -56,6 +56,8 @@ class UserDashboardContainer extends React.Component {
 
 	handleEmployerRegistration(employerData){
 		console.log("inside the userDashboardContainer with", employerData);
+		let userData = {employerData, userId: this.props.user.userId};
+		this.props.submitEmployerRegistration(userData);
 	};
 	
 	render() {
