@@ -48,6 +48,7 @@ class CompRegisterComponent extends React.Component {
 							<div id="company-name-container">
 								<label htmlFor="company-name">Company Name:</label>
 								<input type="text"
+									   required
 								       id="company-name"
 								       placeholder="enter company name"
 								       value={this.state.companyName}
@@ -59,7 +60,7 @@ class CompRegisterComponent extends React.Component {
 								<label htmlFor="company-logo">logo image:</label>
 								<input type="text"
 								       id="company-logo"
-								       placeholder="enter company name"
+								       placeholder="upload logo"
 								       value={this.state.logoImg}
 								       onChange={(event) => this.handleChange('logoImg', event.target.value)}
 								/>
@@ -72,6 +73,7 @@ class CompRegisterComponent extends React.Component {
 							<div>
 								{/*<label htmlFor="company-address">address:</label>*/}
 								<input type="text"
+									   required
 								       id="company-address"
 								       placeholder="address"
 								       value={this.state.address}
@@ -81,6 +83,7 @@ class CompRegisterComponent extends React.Component {
 							<div>
 								{/*<label htmlFor="company-city">city:</label>*/}
 								<input type="text"
+									   required
 								       id="company-city"
 								       placeholder="city"
 								       value={this.state.city}
@@ -90,6 +93,7 @@ class CompRegisterComponent extends React.Component {
 							<div>
 								{/*<label htmlFor="company-state">state:</label>*/}
 								<input type="text"
+									   required
 								       id="company-state"
 								       placeholder="state"
 								       value={this.state.state}
@@ -99,6 +103,7 @@ class CompRegisterComponent extends React.Component {
 							<div>
 								{/*<label htmlFor="company-zip">zip</label>*/}
 								<input type="text"
+									   required
 								       id="company-zip"
 								       placeholder="zip"
 								       value={this.state.zip}
@@ -113,6 +118,7 @@ class CompRegisterComponent extends React.Component {
 							<div>
 								{/*<label htmlFor="company-website">Company Website:</label>*/}
 								<input type="text"
+									   required
 								       id="company-website"
 								       placeholder="website"
 								       value={this.state.website}

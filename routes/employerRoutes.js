@@ -66,22 +66,26 @@ router.post('/register', function (req, res, next) {
 	console.log("in the root register route with:", req.body);
 
 	//using the employer model
-	/*let employer = new Employer({
-		name: req.body.name,
-		logoImg: req.body.logoImg,
+	let employer = new Employer({
+		companyName: req.body.employerData.companyName,
+		logoImg: req.body.employerData.logoImg,
 		location: {
-			address: req.body.location.address,
-			city: req.body.location.city,
-			state: req.body.location.state,
-			zip: req.body.location.zip
+			address: req.body.employerData.address,
+			city: req.body.employerData.city,
+			state: req.body.employerData.state,
+			zip: req.body.employerData.zip
 		},
 		socialMedia:{
-			website: req.body.socialMedia.website,
-			twitter: req.body.socialMedia.twitter,
-			facebook: req.body.socialMedia.facebook,
-			linkedin: req.body.socialMedia.linkedin
+			website: req.body.employerData.website,
+			twitter: req.body.employerData.twitter,
+			facebook: req.body.employerData.facebook,
+			linkedin: req.body.employerData.linkedin
 		}
-	});*/
+	});
+	
+	user.findById(req.body.userId, function (error, user) {
+		
+    })
 
 	/*employer.save(function (err, result) {
 		if (err) {
@@ -93,9 +97,8 @@ router.post('/register', function (req, res, next) {
 		let token = jwt.sign({employer: employer}, process.env.secretkey, {expiresIn: 7200});
 
 		return res.status(201).json({
-			message: 'Saved employer',
 			token: token,
-			obj: result
+			employer: result
 		});
 	})*/
 });

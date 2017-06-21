@@ -8,6 +8,7 @@ export const GET_ALL_JOBS = "GET_ALL_JOBS";
 export const GET_JOB_BY_ID = "GET_JOB_BY_ID";
 export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
 export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
+export const REGISTER_EMPLOYER_SUCCESS = "REGISTER_EMPLOYER_SUCCESS";
 
 /*What are some of the actions you expect the dashboard to require?
  * Get all jobs
@@ -25,6 +26,13 @@ export function fetchingThisEmployerInfo() {
     }
 }
 
+export function registerEmployerSuccess(){
+    return{
+        type: REGISTER_EMPLOYER_SUCCESS,
+        payload: "employer registered"
+    }
+}
+
 export function getThisEmployerJobsSuccess(jobs) {
     return {
         type: GET_THIS_EMPLOYER_JOBS_SUCCESS,
@@ -35,11 +43,11 @@ export function getThisEmployerJobsSuccess(jobs) {
 export function submitEmployerRegistration(employerInfo){
     console.log("will be making a post request with the following info.", employerInfo);
 
-    return dispatch =>{
+    return dispatch => {
         dispatch(fetchingThisEmployerInfo());
-        let userData = {...employerInfo}
         axios.post(`${ROOT_URL}employer/register`, employerInfo)
             .then((response) => {
+            /*recieving {token, employer}*/
                 console.log(response);
             })
             .catch((error)=> console.log(error))
