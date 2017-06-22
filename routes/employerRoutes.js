@@ -9,7 +9,93 @@
  let Employer = require('../models/employer');
  let Job = require('../models/jobs');
  let Applicants = require('../models/applicants');
+ let User = require('../models/user');
  let jwt = require('jsonwebtoken');
+
+
+console.log("in the employer routes..");
+//requires an object with employerData and userId properties
+router.post('/register', function (req, res, next) {
+	console.log("in the root register route with:", req.body);
+	
+	console.log("user id should be...", req.body.userId);
+	User.findById(req.body.userId, function (error, user) {
+		if(error){
+			console.log("there was an error trying to find a user");
+			console.log(error);
+		}
+		console.log("no error!");
+		if(!user){
+			console.log("there was no  user with that id!", req.body.userId);
+		}
+		
+		console.log("We found the user!!");
+		if(user){
+			//we found a user, now create an employer and save it and save it's id
+			// to the users employer property
+			//using the employer model
+			
+			console.log("now we're creating an employer object");
+			let employer = new Employer({
+				companyName: req.body.employerData.companyName,
+				logoImg: req.body.employerData.logoImg,
+				location: {
+					address: req.body.employerData.address,
+					city: req.body.employerData.city,
+					state: req.body.employerData.state,
+					zip: req.body.employerData.zip
+				},
+				socialMedia:{
+					website: req.body.employerData.website,
+					twitter: req.body.employerData.twitter,
+					facebook: req.body.employerData.facebook,
+					linkedin: req.body.employerData.linkedin
+				}
+			});
+			
+			employer.save(function(err, employer){
+				console.log("we are saving the employer now..");
+				if(err){
+					console.log("there was an error saving the employer");
+				}
+				
+				console.log("no error saving employuer!!");
+				if(employer){
+					user.employer = employer._id;
+					
+					console.log("now we're updating the user with the employerID");
+					user.save(function(error, user){
+						if(error){
+							console.log("something went wrong saving employer")
+						}
+						
+						//TODO need to create a local user object, right now we're sending passwords again
+						console.log("and we're done!");
+						res.status(201).json({
+							employer: employer,
+							user: user
+						})
+					})
+				}
+			})
+		}
+    })
+
+	/*employer.save(function (err, result) {
+		if (err) {
+			return res.status(404).json({
+				title: 'An Error ocurred',
+				error: err
+			});
+		}
+		let token = jwt.sign({employer: employer}, process.env.secretkey, {expiresIn: 7200});
+
+		return res.status(201).json({
+			token: token,
+			employer: result
+		});
+	})*/
+});
 
 //TODO: There has to be a way that we can get only one item from this
 router.get('/employerRegister', function (req, res, next) {
@@ -29,7 +115,7 @@ router.get('/employerRegister', function (req, res, next) {
 
 
 router.get('/employerLogin', function (req, res, next) {
-
+	
 	Employer.findOne({email: req.query.email}, function (err, doc) {
 		if (err) {
 			return res.status(404).json({
@@ -37,21 +123,21 @@ router.get('/employerLogin', function (req, res, next) {
 				error: err
 			})
 		}
-
+		
 		if (!doc) {
 			return res.status(404).json({
 				title: 'No user found',
 				error: {message: 'User could not be found'}
 			})
 		}
-
+		
 		if (!passwordHash.verify(req.query.password, doc.password)) {
 			return res.status(404).json({
 				title: 'An error occurred',
 				error: err
 			});
 		}
-
+		
 		var token = jwt.sign({employer: doc}, 'secret', {expiresIn: 7200});
 		res.status(200).json({
 			message: 'Success',
@@ -60,49 +146,6 @@ router.get('/employerLogin', function (req, res, next) {
 		})
 	})
 });
-
-//requires an object with employerData and userId properties
-router.post('/register', function (req, res, next) {
-	console.log("in the root register route with:", req.body);
-
-	//using the employer model
-	let employer = new Employer({
-		companyName: req.body.employerData.companyName,
-		logoImg: req.body.employerData.logoImg,
-		location: {
-			address: req.body.employerData.address,
-			city: req.body.employerData.city,
-			state: req.body.employerData.state,
-			zip: req.body.employerData.zip
-		},
-		socialMedia:{
-			website: req.body.employerData.website,
-			twitter: req.body.employerData.twitter,
-			facebook: req.body.employerData.facebook,
-			linkedin: req.body.employerData.linkedin
-		}
-	});
-	
-	user.findById(req.body.userId, function (error, user) {
-		
-    })
-
-	/*employer.save(function (err, result) {
-		if (err) {
-			return res.status(404).json({
-				title: 'An Error ocurred',
-				error: err
-			});
-		}
-		let token = jwt.sign({employer: employer}, process.env.secretkey, {expiresIn: 7200});
-
-		return res.status(201).json({
-			token: token,
-			employer: result
-		});
-	})*/
-});
-
 
 router.param('id', function (req, res, next, id) {
 	//TODO: decipher why the hell we need this for
