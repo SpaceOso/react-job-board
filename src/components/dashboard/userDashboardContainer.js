@@ -1,14 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
+// import { Switch, Route } from 'react-router'
 import {bindActionCreators} from 'redux';
+import {Redirect, Switch, Route} from 'react-router-dom';
+
 import {fetchThisUserInfo} from '../../actions/authActions';
 import {submitEmployerRegistration} from '../../actions/employerDashboardActions';
-import CompRegisterComponent from "./compRegister/compRegisterComponent";
-import {Redirect} from 'react-router-dom';
 
-
+//styles
 import './userDashboardContainer.scss';
+
+//components
 import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
+import CompRegisterComponent from "./compRegister/compRegisterComponent";
+
+//layouts
+import MainLayout from './main-layout/mainLayout';
+
 
 /*What data are we going to need?
  * jobs
@@ -36,6 +44,7 @@ class UserDashboardContainer extends React.Component {
 		this.fetchEmployerInfo = this.fetchEmployerInfo.bind(this);
 		this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
+		this.checkForEmployer = this.checkForEmployer.bind(this);
 	}
 	
 	componentDidMount() {
@@ -60,17 +69,42 @@ class UserDashboardContainer extends React.Component {
 		this.props.submitEmployerRegistration(userData);
 	};
 	
+	/*This will check to see if the user property has an employer listed.
+	* If it does not we will display the employer registration component.
+	* Otherwise we weill load up the main layout*/
+	
+	//todo...now I don't know if it makes more sense to use a switch route or do this..
+	checkForEmployer(){
+		
+		
+		return this.props.user.employer === null ? <Redirect to={`${this.props.match.url}/:register`}/> : <Redirect to={`${this.props.match.url}/:home`}/>;
+		
+		
+		// return this.props.user.employer === null ?
+		// 	{/*<CompRegisterComponent submitData={this.handleEmployerRegistration}/> : <MainLayout user={this.props.user}/>*/}
+	}
+	
 	render() {
+		// return(
+		// 	<div className="jb-dashboard">
+		// 		<MainLayout>
+		// 			<Route path={thi}>
+		//
+		// 			</Route>
+		// 		</MainLayout>
+		// 	</div>
+		// )
+		//
+		
 		return (
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
-				<h1>Welcome back {this.props.user.firstName}!!</h1>
-				You're inside the user dashboard with email {this.props.user.email}
-				account type:{this.props.user.accountType}<br/>
-				employer: {this.props.user.employer}<br/>
-				{(this.props.user.accountType !== "employer" && this.props.user.employer === null) ?
-					<CompRegisterComponent submitData={this.handleEmployerRegistration}/> : "seems like you're an employer"}
-				{/*<ApplicantListComponent/>*/}
+				<UserDashboardNavMenu/>
+				{this.checkForEmployer()}
+				{console.log(`${this.props.match.url}/register`)}
+				<Route path={`${this.props.match.url}/:register`} component={CompRegisterComponent}/>
+				<Route path={`${this.props.match.url}/:home`} component={MainLayout}/>
+				
 			</div>
 		)
 	}
