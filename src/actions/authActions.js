@@ -15,6 +15,7 @@ export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 export const SET_USER = 'SET_USER';
+export const SET_EMPLOYER = 'SET_EMPLOYER';
 
 export const LOG_OUT_USER = 'LOG_OUT_USER';
 
@@ -97,6 +98,15 @@ export function logOutUser(){
 		payload: "user being logged out..."
 	}
 }
+// =============================
+// SETTING EMPLOYER
+// =============================
+export function setEmployer(employer){
+	return{
+		type: SET_EMPLOYER,
+		payload: employer
+	}
+}
 
 // =============================
 // SETTING USER
@@ -124,6 +134,7 @@ export function fetchingThisUserError(payloadData){
 // FETCHING INFO
 // =============================
 
+//gets called on dashboardInit
 export function fetchThisUserInfo(userId){
 	
 	return dispatch => {
@@ -133,6 +144,7 @@ export function fetchThisUserInfo(userId){
 			.then((response)=>{
 				console.log("inside the fetchThisUserInfo with response:", response);
 				dispatch(setUser(response.data.user));
+				dispatch(setEmployer(response.data.employer));
 			})
 			.catch((error)=>{
 				dispatch(fetchingThisUserError("Error: You must log-in before continuing!"))

@@ -22,7 +22,7 @@ class MainLayout extends React.Component {
 				<UserDashboardNavMenu/>
 				<div className="layout-container">
 					<h1>Welcome back {this.props.user.firstName}!!</h1>
-					<h1>Click to view info on applicants of {this.props.user.employer}</h1>
+					<h1>Click to view info on applicants of {this.props.employer.name}</h1>
 					<ApplicantListComponent employer={this.props.employer}/>
 				</div>
 			</div>

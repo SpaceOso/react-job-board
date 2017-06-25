@@ -4,6 +4,10 @@ import {
     REGISTER_EMPLOYER_SUCCESS
 } from '../actions/employerDashboardActions';
 
+import{
+    SET_EMPLOYER
+} from '../actions/authActions';
+
 
 // this deals with with the employer property of the state
 function employerReducer(state={}, action){
@@ -16,6 +20,12 @@ function employerReducer(state={}, action){
         case REGISTER_EMPLOYER_SUCCESS:
             //will set employer after we register in the compRegisterComponent
             return state;
+        case SET_EMPLOYER:
+            console.log("setting employer from..", action.payload);
+            return {
+                ...state,
+                ...action.payload
+            };
         default:
             return state;
     }

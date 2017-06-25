@@ -73,7 +73,6 @@ class UserDashboardContainer extends React.Component {
 	* If it does not we will display the employer registration component.
 	* Otherwise we weill load up the main layout*/
 	
-	//todo...now I don't know if it makes more sense to use a switch route or do this..
 	checkForEmployer(){
 		return this.props.user.employer === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
 	}
@@ -84,7 +83,9 @@ class UserDashboardContainer extends React.Component {
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
 				{this.checkForEmployer()}
-				<Route path={`${this.props.match.url}/register`} component={CompRegisterComponent}/>
+				{console.log("inside dashboard container..employer..", this.props.employer)}
+				{/*<Route path={`${this.props.match.url}/register`} component={CompRegisterComponent}/>*/}
+				<Route path={`${this.props.match.url}/register`} render={() => {return <CompRegisterComponent submitData={this.handleEmployerRegistration} />}}/>
 				<Route path={`${this.props.match.url}/home`} render={() => {return <MainLayout user={this.props.user} employer={this.props.employer}/>}}/>
 			</div>
 		)

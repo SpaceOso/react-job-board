@@ -47,6 +47,7 @@ export function submitEmployerRegistration(employerInfo){
         dispatch(fetchingThisEmployerInfo());
         axios.post(`${ROOT_URL}employer/register`, employerInfo)
             .then((response) => {
+            /*TODO need to dispatch the response to set the state with the employer info and user info*/
             /*recieving {token, employer}*/
                 console.log(response);
             })

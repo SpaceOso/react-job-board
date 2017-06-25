@@ -20,11 +20,14 @@ router.post('/register', function (req, res, next) {
 	
 	console.log("user id should be...", req.body.userId);
 	User.findById(req.body.userId, function (error, user) {
+		
 		if(error){
 			console.log("there was an error trying to find a user");
 			console.log(error);
 		}
+		
 		console.log("no error!");
+		
 		if(!user){
 			console.log("there was no  user with that id!", req.body.userId);
 		}
@@ -57,6 +60,7 @@ router.post('/register', function (req, res, next) {
 				console.log("we are saving the employer now..");
 				if(err){
 					console.log("there was an error saving the employer");
+					console.log(err);
 				}
 				
 				console.log("no error saving employuer!!");
