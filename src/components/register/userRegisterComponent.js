@@ -48,7 +48,7 @@ class UserRegisterComponent extends React.Component {
 	
 	redirectToDashboard() {
 		return (
-			<Redirect to={`/user/dashboard/${this.props.user.userId}/userhome`} push/>
+			<Redirect to={`/user/dashboard/${this.props.user.userId}`} push/>
 		)
 	}
 	

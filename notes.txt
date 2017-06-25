@@ -1,0 +1,7 @@
+current issues:
+
+When login in we're not setting up the user in the store
+
+when we are in dashboard/register and then copy and paste dashboard/home it lets us go there, need to create a check
+to bounce us back
+

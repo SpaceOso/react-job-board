@@ -35,6 +35,13 @@ router.post('/dashboardinit', function (req, res) {
 				employer: userDoc.employer
 			};
 			
+			/*TODO if the user has an employer id pull the employer out and send it along with the user object*/
+			if(user.employer !== null){
+				console.log("we have a registered employer for this user...");
+			} else {
+				console.log("there IS NO employer registered for this user...");
+			}
+			
 			let token = jwt.sign({user: user}, process.env.secretkey, {expiresIn: 7200});
 			
 			res.status(200).json({

@@ -131,6 +131,7 @@ export function fetchThisUserInfo(userId){
 		
 		axios.post(`${ROOT_URL}user/dashboardinit`, {userId})
 			.then((response)=>{
+				console.log("inside the fetchThisUserInfo with response:", response);
 				dispatch(setUser(response.data.user));
 			})
 			.catch((error)=>{

@@ -75,36 +75,17 @@ class UserDashboardContainer extends React.Component {
 	
 	//todo...now I don't know if it makes more sense to use a switch route or do this..
 	checkForEmployer(){
-		
-		
-		return this.props.user.employer === null ? <Redirect to={`${this.props.match.url}/:register`}/> : <Redirect to={`${this.props.match.url}/:home`}/>;
-		
-		
-		// return this.props.user.employer === null ?
-		// 	{/*<CompRegisterComponent submitData={this.handleEmployerRegistration}/> : <MainLayout user={this.props.user}/>*/}
+		return this.props.user.employer === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
 	}
 	
 	render() {
-		// return(
-		// 	<div className="jb-dashboard">
-		// 		<MainLayout>
-		// 			<Route path={thi}>
-		//
-		// 			</Route>
-		// 		</MainLayout>
-		// 	</div>
-		// )
-		//
-		
+
 		return (
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
-				<UserDashboardNavMenu/>
 				{this.checkForEmployer()}
-				{console.log(`${this.props.match.url}/register`)}
-				<Route path={`${this.props.match.url}/:register`} component={CompRegisterComponent}/>
-				<Route path={`${this.props.match.url}/:home`} component={MainLayout}/>
-				
+				<Route path={`${this.props.match.url}/register`} component={CompRegisterComponent}/>
+				<Route path={`${this.props.match.url}/home`} render={() => {return <MainLayout user={this.props.user} employer={this.props.employer}/>}}/>
 			</div>
 		)
 	}

@@ -1,0 +1,8 @@
+@import "../../../../styles/variables";
+
+.dashboard-main-layout{
+  display: flex;
+  .layout-container{
+    background-color: $white;
+  }
+}
