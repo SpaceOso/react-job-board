@@ -13,6 +13,7 @@ import './userDashboardContainer.scss';
 //components
 import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
+import CreateJobComponent from './jobs/createJob/createJobComponent';
 
 //layouts
 import MainLayout from './main-layout/mainLayout';
@@ -83,10 +84,8 @@ class UserDashboardContainer extends React.Component {
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
 				{this.checkForEmployer()}
-				{console.log("inside dashboard container..employer..", this.props.employer)}
-				{/*<Route path={`${this.props.match.url}/register`} component={CompRegisterComponent}/>*/}
-				<Route path={`${this.props.match.url}/register`} render={() => {return <CompRegisterComponent submitData={this.handleEmployerRegistration} />}}/>
-				<Route path={`${this.props.match.url}/home`} render={() => {return <MainLayout user={this.props.user} employer={this.props.employer}/>}}/>
+				<Route path={`${this.props.match.path}/register`} render={() => {return <CompRegisterComponent submitData={this.handleEmployerRegistration} />}}/>
+				<Route path={`${this.props.match.path}/home`} render={props =>  (<MainLayout user={this.props.user} employer={this.props.employer} {...props}/>)}/>
 			</div>
 		)
 	}
