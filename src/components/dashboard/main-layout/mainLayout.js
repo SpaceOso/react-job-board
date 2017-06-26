@@ -23,11 +23,10 @@ class MainLayout extends React.Component {
 				{console.log("mainlayout props", this.props)}
 				{console.log("Double checking..", this.props.match.params)}
 				<div className="layout-container">
-
-					<Route path={`${this.props.match.path}/createjob`} render={props => (<CreateJobComponent userId={this.props.user.userId} employer={this.props.employer} {...props}/>)}/>
-					<h1>Welcome back {this.props.user.firstName}!!</h1>
-					<h1>Click to view info on applicants of {this.props.employer.name}</h1>
-					<ApplicantListComponent employer={this.props.employer}/>
+					<Switch>
+						<Route path={`${this.props.match.path}/createjob`} render={props => (<CreateJobComponent userId={this.props.user.userId} employer={this.props.employer} {...props}/>)}/>
+						<Route path={`${this.props.match.path}`} render={props => (<ApplicantListComponent user={this.props.user} employer={this.props.employer}/>)}/>
+					</Switch>
 				</div>
 			</div>
 		)

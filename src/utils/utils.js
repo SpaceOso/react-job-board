@@ -12,3 +12,11 @@ export function setAuth(token){
 export function removeAuth(){
 	delete axios.defaults.headers.common['Authorization'];
 }
+
+export function setFormState(state, key, event){
+	let keyObject = {...state};
+	
+	keyObject[key] = event;
+	
+	return keyObject;
+}
