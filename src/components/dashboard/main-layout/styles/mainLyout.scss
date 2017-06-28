@@ -1,8 +1,7 @@
 @import "../../../../styles/variables";
 
-.dashboard-main-layout{
+.layout-container{
   display: flex;
-  .layout-container{
+  flex-direction: row;
     background-color: $white;
-  }
 }

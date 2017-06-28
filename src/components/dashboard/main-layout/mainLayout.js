@@ -20,8 +20,7 @@ class MainLayout extends React.Component {
 		return (
 			<div className="dashboard-main-layout">
 				<UserDashboardNavMenu match={this.props.match}/>
-				{console.log("mainlayout props", this.props)}
-				{console.log("Double checking..", this.props.match.params)}
+				
 				<div className="layout-container">
 					<Switch>
 						<Route path={`${this.props.match.path}/createjob`} render={props => (<CreateJobComponent userId={this.props.user.userId} employer={this.props.employer} {...props}/>)}/>

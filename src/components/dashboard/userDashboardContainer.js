@@ -14,6 +14,7 @@ import './userDashboardContainer.scss';
 import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
 import CreateJobComponent from './jobs/createJob/createJobComponent';
+import ApplicantListComponent from './applicant-list/applicantListComponent';
 
 //layouts
 import MainLayout from './main-layout/mainLayout';
@@ -75,7 +76,8 @@ class UserDashboardContainer extends React.Component {
 	* Otherwise we weill load up the main layout*/
 	
 	checkForEmployer(){
-		return this.props.user.employer === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
+		return this.props.user.employer === null ? <Redirect to={`${this.props.match.url}/register`}/>
+			: <Redirect to={`${this.props.match.url}/home`}/>;
 	}
 	
 	render() {
@@ -84,8 +86,20 @@ class UserDashboardContainer extends React.Component {
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
 				{this.checkForEmployer()}
-				<Route path={`${this.props.match.path}/register`} render={() => {return <CompRegisterComponent submitData={this.handleEmployerRegistration} />}}/>
-				<Route path={`${this.props.match.path}/home`} render={props =>  (<MainLayout user={this.props.user} employer={this.props.employer} {...props}/>)}/>
+					<Route path={`${this.props.match.path}`}
+					       render={props => (<UserDashboardNavMenu match={this.props.match}/>) }  />
+				<div className="layout-container">
+					<Switch>
+						<Route path={`${this.props.match.path}/register`}
+						       render={() => {return <CompRegisterComponent submitData={this.handleEmployerRegistration} />}}/>
+						<Route path={`${this.props.match.path}/createjob`}
+						       render={props => (<CreateJobComponent userId={this.props.user.userId} employer={this.props.employer} {...props}/>)}/>
+						<Route path={`${this.props.match.path}/home`}
+						       render={props => (<ApplicantListComponent user={this.props.user} employer={this.props.employer}/>)}/>
+					</Switch>
+				</div>
+				{/*<Route path={`${this.props.match.path}/home`} */}
+				       {/*render={props =>  (<MainLayout user={this.props.user} employer={this.props.employer} {...props}/>)}/>*/}
 			</div>
 		)
 	}
