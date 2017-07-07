@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Redirect, Switch, Route} from 'react-router-dom';
 
+//actions
 import {fetchThisUserInfo} from '../../actions/authActions';
-import {submitEmployerRegistration} from '../../actions/employerDashboardActions';
+import {submitEmployerRegistration, saveJobPost} from '../../actions/employerDashboardActions';
 
 //styles
 import './userDashboardContainer.scss';
@@ -47,6 +48,7 @@ class UserDashboardContainer extends React.Component {
 		this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.checkForEmployer = this.checkForEmployer.bind(this);
+		this.submitJobPost = this.submitJobPost.bind(this);
 	}
 	
 	componentDidMount() {
@@ -76,8 +78,15 @@ class UserDashboardContainer extends React.Component {
 	* Otherwise we weill load up the main layout*/
 	
 	checkForEmployer(){
+		/*Currently only save employer id in this.props.user.employer*/
 		return this.props.user.employer === null ? <Redirect to={`${this.props.match.url}/register`}/>
 			: <Redirect to={`${this.props.match.url}/home`}/>;
+	}
+
+	/* This will handle sending the job post information to the back end.*/
+	submitJobPost(jobPost){
+		this.props.saveJobPost(jobPost);
+		console.log("we are saving a job with this info:", jobPost);
 	}
 	
 	render() {
@@ -86,14 +95,21 @@ class UserDashboardContainer extends React.Component {
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
 				{this.checkForEmployer()}
-					<Route path={`${this.props.match.path}`}
-					       render={props => (<UserDashboardNavMenu match={this.props.match}/>) }  />
+				{/*nav menu*/}
+				<Route path={`${this.props.match.path}`}
+					   render={props => (<UserDashboardNavMenu match={this.props.match}/>) }  />
 				<div className="layout-container">
 					<Switch>
 						<Route path={`${this.props.match.path}/register`}
 						       render={() => {return <CompRegisterComponent submitData={this.handleEmployerRegistration} />}}/>
 						<Route path={`${this.props.match.path}/createjob`}
-						       render={props => (<CreateJobComponent userId={this.props.user.userId} employer={this.props.employer} {...props}/>)}/>
+						       render={props => (
+						       	<CreateJobComponent
+								   userId={this.props.user.userId}
+								   employer={this.props.user.employer}
+								   submitJobPost={this.submitJobPost}
+								   {...props}
+							   />)}/>
 						<Route path={`${this.props.match.path}/home`}
 						       render={props => (<ApplicantListComponent user={this.props.user} employer={this.props.employer}/>)}/>
 					</Switch>
@@ -113,7 +129,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ fetchThisUserInfo, submitEmployerRegistration }, dispatch);
+	return bindActionCreators({
+		fetchThisUserInfo,
+		submitEmployerRegistration,
+		saveJobPost
+	}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardContainer);

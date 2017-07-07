@@ -8,7 +8,7 @@ var User = require('../models/user');
 
 // =============================
 router.post('/dashboardinit', function (req, res) {
-	
+
 	User.findById(req.body.userId, function (err, userDoc) {
 		if (err) {
 			return res.status(404).json({
@@ -78,6 +78,25 @@ router.post('/dashboardinit', function (req, res) {
 		}
 		
 	});
+});
+
+// =============================
+/*This will handle the user creating a job.
+* req.body = {
+* 	employerId,
+* 	jobTitle,		//required string
+* 	jobDescription,	//required string
+* 	keywords 		//optional array, currently
+* 	}
+* 	*/
+router.post('/dashboard/:id/createjob', function (req, res) {
+	console.log("inside the create job back end...");
+	console.log("you have the following job..");
+	console.log(req.body);
+
+	/*Need to find the user with the userId, to then populate the employer
+	* property. Then save this job under the employers job array*/
+
 });
 
 module.exports = router;

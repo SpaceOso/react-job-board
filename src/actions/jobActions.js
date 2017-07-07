@@ -9,6 +9,10 @@ export const FETCHING_JOBS = 'FETCHING_JOBS';
 export const RESET_CURRENT_JOB = 'RESET_CURRENT_JOB';
 export const SINGLE_JOB_SUCCESS = 'SINGLE_JOB_SUCCESS';
 
+
+/*These are actions for the main page and job post page. Actions requiring CRUD job operations will be handled in the
+* employerDashboardAction file.*/
+
 export function getJobsSuccess(jobs) {
 	return {
 		type: GET_JOBS_SUCCESS,

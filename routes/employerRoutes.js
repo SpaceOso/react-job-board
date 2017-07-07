@@ -13,7 +13,6 @@
  let jwt = require('jsonwebtoken');
 
 
-console.log("in the employer routes..");
 //requires an object with employerData and userId properties
 router.post('/register', function (req, res, next) {
 	console.log("in the root register route with:", req.body);
@@ -315,7 +314,7 @@ router.post('/employerDashboard/:id/jobsubmit', function (req, res, next) {
 			});
 		}
 
-		var job = new Job({
+		let job = new Job({
 			jobTitle: req.body.job.jobTitle,
 			jobDescription: req.body.job.jobDescription,
 			employerName: req.body.job.employerName,

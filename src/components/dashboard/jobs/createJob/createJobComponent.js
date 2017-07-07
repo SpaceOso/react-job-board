@@ -10,7 +10,7 @@ class createJobComponent extends React.Component{
         this.state = {
             jobTitle: "",
             jobDescription: "",
-            keywords: ""
+            keywords: []
         };
         
         this.handleJobSubmit = this.handleJobSubmit.bind(this);
@@ -18,17 +18,16 @@ class createJobComponent extends React.Component{
     }
     
     handleJobSubmit(){
-        console.log("jobData submitted:", this.state);
+        this.props.submitJobPost({...this.state, employerId: this.props.employer});
     }
     
 
     handleChange(state, key, event){
-        
         this.setState(setFormState(state,key, event));
-        
     }
     
     render(){
+        console.log("the employer for this job post is:", this.props.employer);
         return (
             <div>
                <h1>Create a new job post</h1>

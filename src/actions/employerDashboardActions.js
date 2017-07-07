@@ -9,6 +9,8 @@ export const GET_JOB_BY_ID = "GET_JOB_BY_ID";
 export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
 export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
 export const REGISTER_EMPLOYER_SUCCESS = "REGISTER_EMPLOYER_SUCCESS";
+export const EDITING_JOB_POST = "EDITING_JOB_POST";
+export const EDITING_JOB_POST_SUCCESS = "EDITING_JOB_POST_SUCCESS";
 
 /*What are some of the actions you expect the dashboard to require?
  * Get all jobs
@@ -39,6 +41,40 @@ export function getThisEmployerJobsSuccess(jobs) {
         payload: jobs
     }
 }
+
+export function editingJobPost(){
+    return{
+        type: EDITING_JOB_POST,
+        payload: 'editing job post'
+    }
+}
+
+export function editingJobPostSuccess(jobPost){
+    return{
+        type: EDITING_JOB_POST_SUCCESS,
+        payload: jobPost
+    }
+}
+
+export function saveJobPost(jobPostInfo) {
+
+    return dispatch => {
+
+        dispatch(editingJobPost());
+
+        axios.post(`${ROOT_URL}user/dashboard/:id/createjob`, jobPostInfo)
+            .then((response) => {
+
+                dispatch(editingJobPostSuccess(response.data.jobPost));
+
+            })
+            .catch((error) => {
+                dispatch(registerUserError(error));
+
+            });
+    }
+
+};
 
 export function submitEmployerRegistration(employerInfo){
     console.log("will be making a post request with the following info.", employerInfo);
