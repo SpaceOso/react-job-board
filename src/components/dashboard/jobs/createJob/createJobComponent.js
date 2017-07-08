@@ -20,7 +20,6 @@ class createJobComponent extends React.Component{
     handleJobSubmit(){
         this.props.submitJobPost({...this.state, employerId: this.props.employer});
     }
-    
 
     handleChange(state, key, event){
         this.setState(setFormState(state,key, event));

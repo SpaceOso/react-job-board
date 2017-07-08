@@ -3,7 +3,7 @@ var router = express.Router();
 var passwordHash = require('password-hash');
 var Employer = require('../models/employer');
 var jwt = require('jsonwebtoken');
-var Jobs = require('../models/jobs');
+var Job = require('../models/jobs');
 var User = require('../models/user');
 
 // =============================
@@ -94,8 +94,52 @@ router.post('/dashboard/:id/createjob', function (req, res) {
 	console.log("you have the following job..");
 	console.log(req.body);
 
-	/*Need to find the user with the userId, to then populate the employer
-	* property. Then save this job under the employers job array*/
+	/*Need to use req.body.employerId to find the employer, create a job and add it to the job array.*/
+
+    Employer.findById(req.body.employerId, function (err, employer) {
+
+        if (err) {
+            return res.status(404).json({
+                title: 'An Error Occured, could not find employer.',
+                error: err
+            });
+        }
+
+        console.log("the employer object:", employer);
+
+        let job = new Job({
+            jobTitle: req.body.jobTitle,
+            jobDescription: req.body.jobDescription,
+            employerName: employer.name,
+            employer: employer._id,
+            employerLogo: employer.emmployerLogo,
+        });
+
+
+        job.save(function (err, result) {
+
+        	console.log("saving the job now");
+
+            if (err) {
+                console.log("the error is..", err);
+                return res.status(404).json({
+                    title: 'An Error ocurred',
+                    error: err
+                });
+            }
+
+            employer.jobs.push(job);
+            employer.save();
+
+            console.log("job is saved...", result);
+
+            return res.status(201).json({
+                message: 'Saved job',
+                obj: result
+            });
+        })
+
+    });
 
 });
 

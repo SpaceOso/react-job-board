@@ -56,21 +56,21 @@ export function editingJobPostSuccess(jobPost){
     }
 }
 
-export function saveJobPost(jobPostInfo) {
+export function saveJobPost(jobPostInfo, userId) {
 
     return dispatch => {
 
         dispatch(editingJobPost());
 
-        axios.post(`${ROOT_URL}user/dashboard/:id/createjob`, jobPostInfo)
+        axios.post(`${ROOT_URL}user/dashboard/${userId}/createjob`, jobPostInfo)
             .then((response) => {
 
                 dispatch(editingJobPostSuccess(response.data.jobPost));
 
             })
             .catch((error) => {
-                dispatch(registerUserError(error));
-
+                // dispatch(registerUserError(error));
+                console.log("there was an error trying to save the job..", error);
             });
     }
 
