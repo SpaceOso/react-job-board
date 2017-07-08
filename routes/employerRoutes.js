@@ -39,7 +39,7 @@ router.post('/register', function (req, res, next) {
 			
 			console.log("now we're creating an employer object");
 			let employer = new Employer({
-				companyName: req.body.employerData.companyName,
+				name: req.body.employerData.name,
 				logoImg: req.body.employerData.logoImg,
 				location: {
 					address: req.body.employerData.address,

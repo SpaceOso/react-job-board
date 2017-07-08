@@ -8,7 +8,7 @@ class CompRegisterComponent extends React.Component {
 		super(props);
 		
 		this.state = {
-			companyName: "",
+			name: "",
 			address: "",
 			city: "",
 			state: "",
@@ -51,8 +51,8 @@ class CompRegisterComponent extends React.Component {
 									   required
 								       id="company-name"
 								       placeholder="enter company name"
-								       value={this.state.companyName}
-								       onChange={(event) => this.handleChange('companyName', event.target.value)}
+								       value={this.state.name}
+								       onChange={(event) => this.handleChange('name', event.target.value)}
 								/>
 							</div>
 							

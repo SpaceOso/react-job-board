@@ -28,8 +28,8 @@ export function fetchingThisEmployerInfo() {
     }
 }
 
-export function registerEmployerSuccess(){
-    return{
+export function registerEmployerSuccess() {
+    return {
         type: REGISTER_EMPLOYER_SUCCESS,
         payload: "employer registered"
     }
@@ -42,31 +42,30 @@ export function getThisEmployerJobsSuccess(jobs) {
     }
 }
 
-export function editingJobPost(){
-    return{
+export function editingJobPost() {
+    return {
         type: EDITING_JOB_POST,
         payload: 'editing job post'
     }
 }
 
-export function editingJobPostSuccess(jobPost){
-    return{
+export function editingJobPostSuccess(jobPost) {
+    return {
         type: EDITING_JOB_POST_SUCCESS,
         payload: jobPost
     }
 }
 
 export function saveJobPost(jobPostInfo, userId) {
-
+    console.log("we are about to send post to save job..");
     return dispatch => {
 
         dispatch(editingJobPost());
 
         axios.post(`${ROOT_URL}user/dashboard/${userId}/createjob`, jobPostInfo)
             .then((response) => {
-
+                console.log("we have posted a job and the response was...", response);
                 dispatch(editingJobPostSuccess(response.data.jobPost));
-
             })
             .catch((error) => {
                 // dispatch(registerUserError(error));
@@ -76,18 +75,18 @@ export function saveJobPost(jobPostInfo, userId) {
 
 };
 
-export function submitEmployerRegistration(employerInfo){
+export function submitEmployerRegistration(employerInfo) {
     console.log("will be making a post request with the following info.", employerInfo);
 
     return dispatch => {
         dispatch(fetchingThisEmployerInfo());
         axios.post(`${ROOT_URL}employer/register`, employerInfo)
             .then((response) => {
-            /*TODO need to dispatch the response to set the state with the employer info and user info*/
-            /*recieving {token, employer}*/
+                /*TODO need to dispatch the response to set the state with the employer info and user info*/
+                /*recieving {token, employer}*/
                 console.log(response);
             })
-            .catch((error)=> console.log(error))
+            .catch((error) => console.log(error))
     }
 }
 
