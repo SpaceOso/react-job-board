@@ -74,15 +74,14 @@ router.get('/:jobId', function (req, res, next) {
 
 // =============================
 router.get('/', function (req, res) {
-    Jobs.find({}, function (err, jobs) {
-        if (err) {
-            res.status(404).json({
-                title: "No jobs found",
-                error: err,
-            })
-        }
-        res.send(jobs);
-    });
+
+    /*sorted by date created for the home page.*/
+    Jobs.find({})
+        .sort('-createdAt')
+        .exec(function(err, jobs){
+            res.send(jobs);
+        });
+
 });
 // =============================
 router.patch('/:jobId', function (req, res, next) {
