@@ -30,8 +30,7 @@ class JobListContainer extends React.Component {
 	componentDidMount() {
 		this.props.getJobs();
 	}
-	
-	
+
 	render() {
 		return (
 			<div className="app-container">
@@ -42,8 +41,7 @@ class JobListContainer extends React.Component {
 			</div>
 		)
 	}
-}
-;
+};
 
 function mapPropsToState(state) {
 	return {jobs: state.jobs};

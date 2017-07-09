@@ -42,6 +42,7 @@ class JobPostContainer extends React.Component{
         } else {
             componentToRender = (
                 <div className="job-post-container">
+                    <h1>Inside the job post container</h1>
                     <JobPostInfoComponent job={this.props.currentJob.job} isFetching={this.props.currentJob.isFetching}/>
                     <JobPostEmployerInfoComponent employer={this.props.currentJob.employer} loadJob={this.loadNewJob} />
                 </div>

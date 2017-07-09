@@ -1,17 +1,15 @@
 /**
  * Created by Rico on 12/4/2016.
  */
-var express = require('express');
-var router = express.Router();
-var Employer = require('../models/employer');
-var User = require('../models/user');
-var Jobs = require('../models/jobs');
-var Applicants = require('../models/applicants');
+const express = require('express');
+const router = express.Router();
+const Employer = require('../models/employer');
+const User = require('../models/user');
+const Jobs = require('../models/jobs');
+const Applicants = require('../models/applicants');
 
 // =============================
 router.param('jobId', function (req, res, next, jobId) {
-    // TODO: decipher why the hell we need this for
-
     Jobs.findById(req.params.jobId, function (err, doc) {
         if (err) {
             res.status(404).json({
@@ -33,10 +31,10 @@ router.param('jobId', function (req, res, next, jobId) {
             // and employer info in the job post pages
 
 
-            Employer.findById(doc.employer, function (err, employer) {
+            Employer.findById(doc.employerId, function (err, employer) {
                 if (err) {
                     res.status(404).json({
-                        title: "An error occured",
+                        title: "Could not find an employer.",
                         error: err,
                     })
                 }
@@ -48,15 +46,15 @@ router.param('jobId', function (req, res, next, jobId) {
                     })
                 }
 
-            })
-                .populate({
+            }).populate({
                     path: "jobs",
                     options: {sort: {createdAt: -1}}
                 })
                 .exec(function (error, employer) {
                     if (err) return handleError(err);
+
                     req.employerModel = employer;
-                    req.jobId = doc;
+                    req.job = doc;
                     next();
                 })
 
@@ -64,34 +62,34 @@ router.param('jobId', function (req, res, next, jobId) {
     });
 });
 
+
+// =============================
 router.get('/:jobId', function (req, res, next) {
     res.status(200).json({
         message: 'Success',
-        job: req.jobId,
+        job: req.job,
         employer: req.employerModel
-    })
+    });
 });
 
 // =============================
-router.get('/', function (req, res,next) {
-	Jobs.find({}, function(err, jobs) {
-		// var jobMap = [];
-		//
-		// jobs.forEach(function(job) {
-		// 	jobMap[job._id] = job;
-		// });
-        // console.log('found them');
-        // console.log(jobs);
-		res.send(jobs);
-	});
+router.get('/', function (req, res) {
+    Jobs.find({}, function (err, jobs) {
+        if (err) {
+            res.status(404).json({
+                title: "No jobs found",
+                error: err,
+            })
+        }
+        res.send(jobs);
+    });
 });
 // =============================
-
 router.patch('/:jobId', function (req, res, next) {
 
 
     //where we are going to store the user retrieved from the db
-    var userApplying;
+    let userApplying;
     // var alreadyApplied = false;
     let userID = '';
     let employer;
@@ -213,7 +211,7 @@ router.patch('/:jobId', function (req, res, next) {
                     }
 
                     //if we have a registered user
-                    if(userApplying){
+                    if (userApplying) {
                         userApplying.jobsApplied.push(job);
 
                         userApplying.save(function (err, result) {

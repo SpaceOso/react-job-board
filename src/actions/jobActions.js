@@ -34,11 +34,14 @@ export function fetchingJobs() {
 export function getJobs() {
 	
 	return dispatch => {
-		
+
 		dispatch(fetchingJobs());
+
 		axios.get(`${ROOT_URL}${'jobposts'}`)
 			.then((response) => {
+
 				dispatch(getJobsSuccess(response))
+
 			})
 			.catch((error) => {
 			});
@@ -64,6 +67,7 @@ export function getJobById(id) {
 		dispatch(fetchingJobs());
 		axios.get(`${ROOT_URL}${'jobposts/'}${id}`)
 			.then((response) => {
+			console.log("getting a single job by id resposne:", response);
 				dispatch(singleJobSuccess(response));
 			})
 			.catch((error) => {

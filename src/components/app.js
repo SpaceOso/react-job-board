@@ -38,7 +38,7 @@ class App extends React.Component {
                             <Route exact path="/" component={JobListContainer}/>
                             <Route exact path="/employer" component={EmployerComponent}/>
                             <Route exact path="/register" component={UserRegisterComponent}/>
-                            <Route path="/jobposts/:jobId" component={JobPostContainer}/>
+                            <Route exact path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route exact path="/jobseeker" component={UserComponent}/>
                             <Route path="/login" component={LoginContainer}/>
                             <Route path="/user/dashboard/:userId" component={UserDashboardContainer} />
