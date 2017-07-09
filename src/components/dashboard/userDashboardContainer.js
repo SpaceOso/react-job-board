@@ -20,6 +20,7 @@ import ApplicantListComponent from './applicant-list/applicantListComponent';
 //layouts
 import MainLayout from './main-layout/mainLayout';
 import EditJobsContainer from "./jobs/editJob/editJobsContainer";
+import SpinnerComponent from "../spinners/spinnerComponent";
 
 
 /*What data are we going to need?
@@ -50,6 +51,9 @@ class UserDashboardContainer extends React.Component {
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.checkForEmployer = this.checkForEmployer.bind(this);
 		this.submitJobPost = this.submitJobPost.bind(this);
+		this.waitForLoad = this.waitForLoad.bind(this);
+
+		// this.fetchEmployerInfo();
 	}
 	
 	componentDidMount() {
@@ -94,7 +98,59 @@ class UserDashboardContainer extends React.Component {
 		this.props.saveJobPost(jobPost, this.props.user.userId);
 		console.log("we are saving a job with this info:", jobPost);
 	}
-	
+
+	/*Will show spinner as we gather the user information for the dashboard*/
+	waitForLoad(){
+		console.log("waitForLoad userId", typeof this.props.user);
+		if(this.props.user === null || this.props.user === undefined){
+			console.log("should be showing spinner...");
+			return <SpinnerComponent/>
+		} else {
+			console.log("should be showing the switch..");
+			return (
+				<Switch>
+					{/*REGISTER COMPONENT*/}
+					<Route path={`${this.props.match.path}/register`}
+						   render={() => {
+							   return <CompRegisterComponent
+								   submitData={this.handleEmployerRegistration}
+							   />}
+						   }
+					/>
+					{/*CREATE JOB COMPONENT*/}
+					<Route path={`${this.props.match.path}/createjob`}
+						   render={props => (
+							   <CreateJobComponent
+								   userId={this.props.user.userId}
+								   employer={this.props.user.employer}
+								   submitJobPost={this.submitJobPost}
+								   {...props}
+							   />
+						   )}
+					/>
+					{/*EDIT POSTINGS COMPONENT*/}
+					<Route path={`${this.props.match.path}/editpostings`}
+						   render={props =>(
+							   <EditJobsContainer
+								   employer={this.props.employer}
+								   jobs={this.props.employer.jobs}
+							   />
+						   )}
+					/>
+					{/*APPLICANT LIST COMPONENT*/}
+					<Route path={`${this.props.match.path}/home`}
+						   render={props => (
+							   <ApplicantListComponent
+								   user={this.props.user}
+								   employer={this.props.employer}
+							   />
+						   )}
+					/>
+				</Switch>
+			)
+		}
+	}
+
 	render() {
 
 		return (
@@ -111,45 +167,8 @@ class UserDashboardContainer extends React.Component {
 					   }
 				/>
 				<div className="layout-container">
-					<Switch>
-						{/*REGISTER COMPONENT*/}
-						<Route path={`${this.props.match.path}/register`}
-						       render={() => {
-						       	return <CompRegisterComponent
-									submitData={this.handleEmployerRegistration}
-								/>}
-						       }
-						/>
-						{/*CREATE JOB COMPONENT*/}
-						<Route path={`${this.props.match.path}/createjob`}
-						       render={props => (
-						       		<CreateJobComponent
-									   userId={this.props.user.userId}
-									   employer={this.props.user.employer}
-									   submitJobPost={this.submitJobPost}
-									   {...props}
-									/>
-							   )}
-						/>
-						{/*EDIT POSTINGS COMPONENT*/}
-						<Route path={`${this.props.match.path}/editpostings`}
-								render={props =>(
-									<EditJobsContainer
-										employer={this.props.employer}
-										jobs={this.props.employer.jobs}
-									/>
-								)}
-						/>
-						{/*APPLICANT LIST COMPONENT*/}
-						<Route path={`${this.props.match.path}/home`}
-						       render={props => (
-						       		<ApplicantListComponent
-										user={this.props.user}
-										employer={this.props.employer}
-									/>
-							   )}
-						/>
-					</Switch>
+					{/*Removed switch component form here*/}
+					{this.waitForLoad()}
 				</div>
 			</div>
 		)

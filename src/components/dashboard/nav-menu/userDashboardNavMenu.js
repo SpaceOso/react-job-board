@@ -9,7 +9,7 @@ class UserDashboardNavMenu extends React.Component{
 		return(
 			<div className="user-dashboard-nav">
 				<div className="user-dashboard-btn">
-					{console.log("the props...")}
+					{/*{console.log("the props...")}*/}
 					<Link to={`/user/dashboard/${this.props.match.params.userId}/createjob`}>
 					<p className="btn-text">Post A Job</p>
 					</Link>

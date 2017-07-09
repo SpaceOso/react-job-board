@@ -19,16 +19,22 @@ import NotFoundComponent from './not-found/notFoundComponent';
 import {logInOnLoad} from '../actions/authActions';
 
 class App extends React.Component {
+    constructor(props){
+        super(props);
 
-    componentDidMount(){
-        console.log("inside app did mount..");
+        this.checkReload = this.checkReload.bind(this);
+
+        this.checkReload();
+    }
+
+    checkReload(){
+        console.log("inside checkreload....");
         let token = localStorage.getItem('tkn');
-        
+
         if(token){
             console.log('we found token, loginOnload');
-	        this.props.logInOnLoad(token);
+            this.props.logInOnLoad(token);
         }
-        
     }
 
     render() {
