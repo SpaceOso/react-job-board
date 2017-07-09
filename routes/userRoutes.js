@@ -1,12 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var passwordHash = require('password-hash');
-var Employer = require('../models/employer');
-var jwt = require('jsonwebtoken');
-var Job = require('../models/jobs');
-var User = require('../models/user');
+const express = require('express');
+const router = express.Router();
+const passwordHash = require('password-hash');
+const Employer = require('../models/employer');
+const jwt = require('jsonwebtoken');
+const Job = require('../models/jobs');
+const User = require('../models/user');
 
 // =============================
+/*This gets called when we first arrive at the user dashboard*/
+/*TODO need to populate the job posts for the employer*/
 router.post('/dashboardinit', function (req, res) {
 
 	User.findById(req.body.userId, function (err, userDoc) {
@@ -25,8 +27,7 @@ router.post('/dashboardinit', function (req, res) {
 		}
 		
 		if (userDoc) {
-			
-			
+
 			let user = {
 				id: userDoc._id,
 				firstName: userDoc.firstName,
@@ -36,7 +37,6 @@ router.post('/dashboardinit', function (req, res) {
 				employer: userDoc.employer
 			};
 			
-			/*TODO if the user has an employer id pull the employer out and send it along with the user object*/
 			if (user.employer !== null) {
 				console.log("we have a registered employer for this user...");
 				console.log("id..", userDoc.employer);
@@ -47,21 +47,45 @@ router.post('/dashboardinit', function (req, res) {
 					}
 					
 					if (doc) {
-						console.log('we found the employer...', doc);
+						console.log('we found the employer doc...', doc);
 						
 						let token = jwt.sign({user: user}, process.env.secretkey, {expiresIn: 7200});
 						
 						let employer = doc.employer;
-						
-						console.log("The user right before we send it...", user);
-						res.status(200).json({
-							message: 'User has registered employer',
-							token,
-							user,
-							employer
-						})
+
+						/*TODO this needs to check if the employer has jobs*/
+						if(employer.jobs.length > 0){
+							console.log('THE EMPLOYER DID HAVE JOB POSTS SO WE ARE POPULATING THEM');
+                            employer.populate('jobs', function (err, jobs) {
+
+                                if(err){
+                                    console.log("there was an error populating the jobs");
+                                }
+
+                                if(jobs){
+                                    console.log("The user right before we send it...", user);
+                                    console.log("The employer right before we send it...", employer);
+                                    res.status(200).json({
+                                        message: 'User has registered employer',
+                                        token,
+                                        user,
+                                        employer
+                                    })
+                                }
+                            })
+						} else {
+							/*This will run if the employer did not have any jobs*/
+							console.log("the employer did not have any jobs so we are not going to bother populating them");
+                            console.log("The user right before we send it...", user);
+                            console.log("The employer right before we send it...", employer);
+                            res.status(200).json({
+                                message: 'User has registered employer',
+                                token,
+                                user,
+                                employer
+                            })
+                        }
 					}
-					
 				});
 				
 			} else {

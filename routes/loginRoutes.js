@@ -57,7 +57,7 @@ router.post('/', function (req, res, next) {
 router.post('/logcheck', function (req, res) {
     
     let token = req.body.token;
-    
+
     jwt.verify(token, process.env.secretkey, function (err, decoded) {
         
         if(err){
@@ -67,6 +67,7 @@ router.post('/logcheck', function (req, res) {
         }
         
        if(decoded){
+            console.log("token has been verified and the user is:", decoded);
 	       res.status(200).json({
 		       message: "token is valid",
 		       user: decoded

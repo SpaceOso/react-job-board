@@ -19,6 +19,7 @@ import ApplicantListComponent from './applicant-list/applicantListComponent';
 
 //layouts
 import MainLayout from './main-layout/mainLayout';
+import EditJobsContainer from "./jobs/editJob/editJobsContainer";
 
 
 /*What data are we going to need?
@@ -59,6 +60,11 @@ class UserDashboardContainer extends React.Component {
 	fetchEmployerInfo() {
 		//get the userId from the URL params and send it to the action creator
 		let userId = this.props.user.userId;
+
+		/*TODO I think there is a bug here when you refresh while you are already inside the dashboard*/
+
+		console.log("we are going to call fetchThisUserInfo with userId:", userId);
+
 		this.props.fetchThisUserInfo(userId);
 	}
 	
@@ -126,11 +132,14 @@ class UserDashboardContainer extends React.Component {
 							   )}
 						/>
 						{/*EDIT POSTINGS COMPONENT*/}
-						{/*<<Route path={`${this.props.match.path}/editpostings`}*/}
-								{/*render={props =>(*/}
-
-								{/*)}*/}
-						{/*/>*/}
+						<Route path={`${this.props.match.path}/editpostings`}
+								render={props =>(
+									<EditJobsContainer
+										employer={this.props.employer}
+										jobs={this.props.employer.jobs}
+									/>
+								)}
+						/>
 						{/*APPLICANT LIST COMPONENT*/}
 						<Route path={`${this.props.match.path}/home`}
 						       render={props => (
@@ -142,8 +151,6 @@ class UserDashboardContainer extends React.Component {
 						/>
 					</Switch>
 				</div>
-				{/*<Route path={`${this.props.match.path}/home`} */}
-				       {/*render={props =>  (<MainLayout user={this.props.user} employer={this.props.employer} {...props}/>)}/>*/}
 			</div>
 		)
 	}

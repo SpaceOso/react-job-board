@@ -190,6 +190,7 @@ export function logInOnLoad(token){
 				
 				
 				//send user information to be stored in the store
+				console.log("logInOnLoad", response.data.user);
 				dispatch(logInUserSuccess(response.data.user));
 				
 			})

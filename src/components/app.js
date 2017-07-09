@@ -21,9 +21,11 @@ import {logInOnLoad} from '../actions/authActions';
 class App extends React.Component {
 
     componentDidMount(){
+        console.log("inside app did mount..");
         let token = localStorage.getItem('tkn');
         
         if(token){
+            console.log('we found token, loginOnload');
 	        this.props.logInOnLoad(token);
         }
         
