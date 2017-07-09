@@ -95,23 +95,51 @@ class UserDashboardContainer extends React.Component {
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
 				{this.checkForEmployer()}
-				{/*nav menu*/}
+
+				{/*NAV MENU*/}
 				<Route path={`${this.props.match.path}`}
-					   render={props => (<UserDashboardNavMenu match={this.props.match}/>) }  />
+					   render={props => (
+					   		<UserDashboardNavMenu
+								match={this.props.match}
+							/>)
+					   }
+				/>
 				<div className="layout-container">
 					<Switch>
+						{/*REGISTER COMPONENT*/}
 						<Route path={`${this.props.match.path}/register`}
-						       render={() => {return <CompRegisterComponent submitData={this.handleEmployerRegistration} />}}/>
+						       render={() => {
+						       	return <CompRegisterComponent
+									submitData={this.handleEmployerRegistration}
+								/>}
+						       }
+						/>
+						{/*CREATE JOB COMPONENT*/}
 						<Route path={`${this.props.match.path}/createjob`}
 						       render={props => (
-						       	<CreateJobComponent
-								   userId={this.props.user.userId}
-								   employer={this.props.user.employer}
-								   submitJobPost={this.submitJobPost}
-								   {...props}
-							   />)}/>
+						       		<CreateJobComponent
+									   userId={this.props.user.userId}
+									   employer={this.props.user.employer}
+									   submitJobPost={this.submitJobPost}
+									   {...props}
+									/>
+							   )}
+						/>
+						{/*EDIT POSTINGS COMPONENT*/}
+						{/*<<Route path={`${this.props.match.path}/editpostings`}*/}
+								{/*render={props =>(*/}
+
+								{/*)}*/}
+						{/*/>*/}
+						{/*APPLICANT LIST COMPONENT*/}
 						<Route path={`${this.props.match.path}/home`}
-						       render={props => (<ApplicantListComponent user={this.props.user} employer={this.props.employer}/>)}/>
+						       render={props => (
+						       		<ApplicantListComponent
+										user={this.props.user}
+										employer={this.props.employer}
+									/>
+							   )}
+						/>
 					</Switch>
 				</div>
 				{/*<Route path={`${this.props.match.path}/home`} */}

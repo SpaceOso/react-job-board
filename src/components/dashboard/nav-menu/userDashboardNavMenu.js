@@ -18,7 +18,9 @@ class UserDashboardNavMenu extends React.Component{
 					<p className="btn-text">Applicants</p>
 				</div>
 				<div className="user-dashboard-btn">
-					<p className="btn-text">Edit Postings</p>
+					<Link to={`/user/dashboard/${this.props.match.params.userId}/editpostings`}>
+						<p className="btn-text">Edit Postings</p>
+					</Link>
 				</div>
 				<div className="user-dashboard-btn">
 					<p className="btn-text">Profile/Edit</p>
