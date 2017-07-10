@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Link } from 'react-router-dom'
 //styles
-import jobListItemStyles from './jobListItem.scss';
+import './jobListItem.scss';
 
 class JobListItem extends React.Component {
     constructor(props) {

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getJobs} from '../../../actions/jobActions';
 
 //style
-import jobListStyles from './joblistContainer.scss';
+import './joblistContainer.scss';
 
 //component
 import JobListItem from './jobListItemComponent';

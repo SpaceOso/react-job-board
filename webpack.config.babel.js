@@ -9,10 +9,14 @@ module.exports = env => ({
 		publicPath: 'public/',
 		pathinfo: !env.prod,
 	},
-	devtool: env.prod ?  "source-map" : 'eval',
-	module: {
+    // Enable sourcemaps for debugging webpack's output.
+    devtool: "source-map",
+    module: {
 		loaders: [
-			{ test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader'] },
+			// { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader'] },
+            { test: /\.(t|j)sx?$/, use: { loader: 'awesome-typescript-loader' } },
+            // addition - add source-map support
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
 			{
 				test: /\.scss$/,
 				loaders: ["style-loader", "css-loader", "sass-loader"]

@@ -9,6 +9,7 @@ import {logInUser} from '../../actions/authActions';
 
 //components
 import LoginComponent from './logInComponent';
+//styles
 import './styles/loginComponent.scss';
 
 class LoginContainer extends React.Component{

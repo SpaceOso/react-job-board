@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import setAuth from './utils/utils';
 
 //styles;
-import styles from './styles/main.scss';
+import './styles/main.scss';
 
 
 //reducers

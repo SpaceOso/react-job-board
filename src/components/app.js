@@ -10,7 +10,7 @@ import UserRegisterComponent from './register/userRegisterComponent';
 import LayoutComponent from './layoutComponent';
 import {UserComponent} from './applicant/userComponent';
 import JobListContainer from './job-list/home/jobListContainer';
-import {JumboTron} from './home/jumboTron';
+import {JumboTron} from './home/jumboTron.tsx';
 import JobPostContainer from './job-posts/jobPostContainer';
 import LoginContainer from './log-in/loginContainer';
 import NotFoundComponent from './not-found/notFoundComponent';

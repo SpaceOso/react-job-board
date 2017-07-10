@@ -7,7 +7,7 @@ import {Redirect} from 'react-router-dom';
 import {registerUser} from '../../actions/authActions';
 
 //styles
-import "./styles/userRegister.scss";
+import './styles/userRegister.scss';
 
 class UserRegisterComponent extends React.Component {
 	constructor(props) {
