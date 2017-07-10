@@ -2,7 +2,7 @@
   "name": "job-board",
   "version": "1.0.0",
   "description": "A job board app made with React",
-  "main": "./src/index.js",
+  "main": "./src/index",
   "scripts": {
     "start": "node bin/www",
     "ricodev": "set secretkey='Ifjefgke#fs@'&&nodemon bin/www --env.dev",
@@ -28,6 +28,8 @@
   "dependencies": {
     "@types/react": "^15.0.35",
     "@types/react-dom": "^15.5.1",
+    "@types/react-redux": "^4.4.45",
+    "@types/react-router-dom": "^4.0.6",
     "axios": "^0.16.1",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
@@ -45,7 +47,7 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0",
+    "redux": "^3.7.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0"
   },

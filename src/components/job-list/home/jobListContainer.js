@@ -7,7 +7,7 @@ import {getJobs} from '../../../actions/jobActions';
 import './joblistContainer.scss';
 
 //component
-import JobListItem from './jobListItemComponent';
+import JobListItem from './jobListItemComponent.tsx';
 import SpinnerComponent from "../../spinners/spinnerComponent";
 
 class JobListContainer extends React.Component {
