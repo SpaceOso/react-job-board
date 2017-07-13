@@ -1,10 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 
 import HeaderComponent from './header/headerComponent';
-import {JumboTron} from './home/jumboTron';
 import {FooterComponent} from './footer/footerComponent';
+import {User} from "../types/index";
 
-class LayoutComponent extends React.Component {
+interface Props{
+    user: User,
+}
+
+class LayoutComponent extends React.Component<Props> {
     constructor(props){
         super(props);
     }

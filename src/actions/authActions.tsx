@@ -176,7 +176,8 @@ export function logInUserSuccess(data) {
 }
 
 //gets the token passed from localStorage
-export function logInOnLoad(token){
+export function logInOnLoad(token):Object{
+	console.log("so do we really call this?");
 	console.log("inside logInOnLoad..");
 	return dispatch => {
 		dispatch(fetchingUser());
@@ -199,6 +200,7 @@ export function logInOnLoad(token){
 			})
 	}
 }
+
 
 //this will dispatch the users email and password to server for verification
 export function logInUser(user) {

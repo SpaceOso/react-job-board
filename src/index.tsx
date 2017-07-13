@@ -1,41 +1,37 @@
-import React from 'react';
+import * as React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import ReduxPromise from 'redux-promise';
+import * as ReduxPromise from 'redux-promise';
 import thunk from 'redux-thunk';
-
-import setAuth from './utils/utils';
 
 //styles;
 import './styles/main.scss';
 
-
 //reducers
-import rootReducer from './reducers/index';
+import rootReducer from './reducers/index.jsx';
 
 //components
-import App from './components/app';
+import AppContainer from './components/appContainer';
 
+// import {StoreState} from './types/index';
 
 const store = createStore(rootReducer,applyMiddleware(thunk, ReduxPromise));
 
 // setAuth(localStorage.getItem('tkn'));
 
 class JobBoard extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
+	render() {
 
-    render() {
-
-        return (
-            <Provider store={store}>
-                <App />
-            </Provider>
-        )
-    }
+		return (
+			<Provider store={store}>
+				<div>
+					<AppContainer />
+				</div>
+			</Provider>
+		)
+	}
 }
 
 render(<JobBoard/>, document.getElementById('root'));

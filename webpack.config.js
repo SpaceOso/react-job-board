@@ -1,21 +1,21 @@
 const {resolve} = require('path');
-
 module.exports = env => ({
 	context: resolve('src'),
-	entry: "./index.js",
+	entry: "./index.tsx",
 	output: {
 		path: resolve('public'),
 		filename: "bundle.js",
 		publicPath: 'public/',
 		pathinfo: !env.prod,
 	},
-    // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
+    resolve: {
+        // changed from extensions: [".js", ".jsx"]
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
+    },
     module: {
 		loaders: [
-			// { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader'] },
-            { test: /\.(t|j)sx?$/, use: { loader: 'awesome-typescript-loader' } },
-            // addition - add source-map support
+            { test: /\.([tj])sx?$/, exclude: /node_modules/, use: { loader: 'awesome-typescript-loader' } },
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
 			{
 				test: /\.scss$/,

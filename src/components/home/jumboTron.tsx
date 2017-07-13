@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 // 'JumboTronProps' describes the shape of props.
-export interface JumboTronProps {title: string, subTitle: string};
+export interface JumboTronProps {title: string, subTitle: string}
 
-export const JumboTron = (props : JumboTronProps) => {
+export const JumboTron = () => {
 	return(
 		<div className="jumboTron">
 			<h1 id="site-title">test</h1>

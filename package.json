@@ -30,6 +30,8 @@
     "@types/react-dom": "^15.5.1",
     "@types/react-redux": "^4.4.45",
     "@types/react-router-dom": "^4.0.6",
+    "@types/redux-promise": "^0.5.24",
+    "@types/redux-thunk": "^2.1.0",
     "axios": "^0.16.1",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",

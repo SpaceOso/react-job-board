@@ -1,13 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
-export class NotFoundComponent extends React.Component{
-    render(){
+const NotFoundComponent = () =>{
         return(
             <div className="not-found">
                 Sorry the link you typed is not a valid link
             </div>
         )
-    }
-}
+};
 
 export default NotFoundComponent;
