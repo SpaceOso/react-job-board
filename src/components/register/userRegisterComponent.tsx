@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
@@ -8,11 +8,28 @@ import {registerUser} from '../../actions/authActions';
 
 //styles
 import './styles/userRegister.scss';
+import {User} from "../../types/index";
 
-class UserRegisterComponent extends React.Component {
+export interface registerComponent{
+	event: Event,
+	redirect: false
+	registerUser: (arg) => any,
+	user: User,
+	errors: {
+		fName: boolean,
+		lName: boolean,
+		email: boolean,
+		verifyEmail: boolean,
+		password: boolean,
+		passwordVerify: boolean
+	}
+}
+
+
+class UserRegisterComponent extends React.Component<registerComponent, any> {
 	constructor(props) {
 		super(props);
-		
+
 		this.state = {
 			redirect: false,
 			user: {
@@ -32,7 +49,7 @@ class UserRegisterComponent extends React.Component {
 				verifyEmail: false,
 				password: false,
 				passwordVerify: false
-				
+
 			}
 		};
 		
@@ -42,18 +59,18 @@ class UserRegisterComponent extends React.Component {
 	}
 	
 	handleSubmit() {
-		event.preventDefault();
+		// event.preventDefault();
 		this.props.registerUser(this.state.user);
 	}
 	
 	redirectToDashboard() {
 		return (
-			<Redirect to={`/user/dashboard/${this.props.user.userId}`} push/>
+			<Redirect to={`/user/dashboard/${this.props.user._id}`} push/>
 		)
 	}
 	
 	handleChange(key, event) {
-		let keyObject = {...this.state.user};
+		let keyObject = {...this.props.user};
 		
 		keyObject[key] = event;
 		
@@ -139,17 +156,10 @@ class UserRegisterComponent extends React.Component {
 					<button>Submit Form</button>
 				</form>
 				{/*This will display once we register our user*/}
-				{this.props.user.userRegistered === true ? this.redirectToDashboard() : null}
+				{this.props.user.employerId !== null ? this.redirectToDashboard() : null}
 			</div>
 		)
 	}
 }
 
-function mapStateToProps(state) {
-	return {user: state.user}
-}
-
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({registerUser}, dispatch);
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UserRegisterComponent);
+export default UserRegisterComponent;

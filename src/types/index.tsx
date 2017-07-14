@@ -11,11 +11,13 @@ export interface Job{
 }
 
 export interface User{
+	_id: string,
 	firstName: string,
 	lastName: string,
 	email: string,
 	password: string,
-	employerId?: string
+	employerId?: string,
+	userRegistered: boolean
 }
 
 export interface Employer{
@@ -38,7 +40,7 @@ export interface Employer{
 }
 
 export interface StoreState {
-	jobs: Job[];
-	user: User,
-	employer: Employer
+	jobs?: Job[];
+	user?: User,
+	employer?: Employer
 }

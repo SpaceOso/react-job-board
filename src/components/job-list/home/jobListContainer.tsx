@@ -3,9 +3,6 @@ import {bindActionCreators} from 'redux';
 import {connect, Dispatch} from 'react-redux';
 import {getJobs} from '../../../actions/jobActions';
 
-//constants
-// import constants from '../../../actions/index';
-
 //style
 import './joblistContainer.scss';
 

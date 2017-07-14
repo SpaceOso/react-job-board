@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 import EmployerComponent from './employer/home/employerComponent';
 import UserDashboardContainer from './dashboard/userDashboardContainer';
 import UserRegisterComponent from './register/userRegisterComponent';
+import UserRegisterContainer from './register/userRegisterContainer';
 import LayoutComponent from './layoutComponent';
 import {UserComponent} from './applicant/userComponent';
 import JobListContainer from './job-list/home/jobListContainer';
@@ -48,14 +49,16 @@ class App extends React.Component<Props>{
     }
 
     render() {
+
+        console.log(typeof UserRegisterComponent);
         return (
             <HashRouter>
                 <LayoutComponent user={this.props.user}>
                     <Route exact path="/" component={JumboTron}/>
                         <Switch>
                             <Route exact path="/" component={JobListContainer as any}/>
-                            {/*<Route exact path="/employer" component={EmployerComponent}/>*/}
-                            <Route exact path="/register" component={UserRegisterComponent}/>
+                            <Route exact path="/employer" component={EmployerComponent}/>
+                            <Route exact path="/register" component={UserRegisterContainer as any}/>
                             <Route exact path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route exact path="/jobseeker" component={UserComponent}/>
                             <Route path="/login" component={LoginContainer}/>

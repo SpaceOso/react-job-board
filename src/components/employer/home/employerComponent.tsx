@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 //styles
 import "./styles/employerComponent.scss";
 
-class EmployerComponent extends React.Component<Object> {
+class EmployerComponent extends React.Component<any>{
     render() {
         return (
             <div className="employer-component">

@@ -10,7 +10,6 @@ module.exports = env => ({
 	},
     devtool: "source-map",
     resolve: {
-        // changed from extensions: [".js", ".jsx"]
         extensions: [".ts", ".tsx", ".js", ".jsx"]
     },
     module: {
