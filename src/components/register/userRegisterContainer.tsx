@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 //component
 import UserRegisterComponent from './userRegisterComponent';
@@ -20,6 +18,6 @@ function mapStateToProps({user}): StoreState{
 }
 
 const mapDispatchToProps = (dispatch) =>({
-	registerUser: (dispatch, user) => dispatch(registerUser(user))
+	registerUser: (user) => dispatch(registerUser(user))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(UserRegisterComponent);

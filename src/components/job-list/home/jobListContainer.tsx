@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {bindActionCreators} from 'redux';
-import {connect, Dispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {getJobs} from '../../../actions/jobActions';
 
 //style

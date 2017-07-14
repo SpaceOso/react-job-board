@@ -25,8 +25,31 @@ export interface registerComponent{
 	}
 }
 
+type registerComponentState = {
+	redirect: false,
+	user: {
+		fName: string,
+		lName: string,
+		email: string,
+		emailVerify: string,
+		password: string,
+		passwordVerify: string,
+		accountType: string,
+		employer: string
+	},
+	errors: {
+		fName: boolean,
+		lName: boolean,
+		email: boolean,
+		verifyEmail: boolean,
+		password: boolean,
+		passwordVerify: boolean
 
-class UserRegisterComponent extends React.Component<registerComponent, any> {
+	}
+}
+
+
+class UserRegisterComponent extends React.Component<registerComponent, registerComponentState> {
 	constructor(props) {
 		super(props);
 
@@ -40,7 +63,7 @@ class UserRegisterComponent extends React.Component<registerComponent, any> {
 				password: '',
 				passwordVerify: '',
 				accountType: 'user',
-				employer: null
+				employer: ''
 			},
 			errors: {
 				fName: false,
@@ -52,7 +75,7 @@ class UserRegisterComponent extends React.Component<registerComponent, any> {
 
 			}
 		};
-		
+
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.redirectToDashboard = this.redirectToDashboard.bind(this);
@@ -70,7 +93,7 @@ class UserRegisterComponent extends React.Component<registerComponent, any> {
 	}
 	
 	handleChange(key, event) {
-		let keyObject = {...this.props.user};
+		let keyObject = {...this.state.user};
 		
 		keyObject[key] = event;
 		
@@ -147,7 +170,7 @@ class UserRegisterComponent extends React.Component<registerComponent, any> {
 					</div>
 					<div className="jb-form-group">
 						<label htmlFor="user-accounttype">Select account type</label>
-						<select value={this.state.accountType}
+						<select value={this.state.user.accountType}
 						        onChange={(event) => this.handleChange('accountType', event.target.value)}>
 							<option value="user">User</option>
 							<option value="employer">Employer</option>
@@ -156,7 +179,7 @@ class UserRegisterComponent extends React.Component<registerComponent, any> {
 					<button>Submit Form</button>
 				</form>
 				{/*This will display once we register our user*/}
-				{this.props.user.employerId !== null ? this.redirectToDashboard() : null}
+				{this.props.user.employerId !== undefined ? this.redirectToDashboard() : null}
 			</div>
 		)
 	}

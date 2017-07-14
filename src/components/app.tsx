@@ -49,8 +49,6 @@ class App extends React.Component<Props>{
     }
 
     render() {
-
-        console.log(typeof UserRegisterComponent);
         return (
             <HashRouter>
                 <LayoutComponent user={this.props.user}>
