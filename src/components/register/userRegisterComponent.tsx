@@ -82,7 +82,7 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 	}
 	
 	handleSubmit() {
-		// event.preventDefault();
+		(event as Event).preventDefault();
 		this.props.registerUser(this.state.user);
 	}
 	
