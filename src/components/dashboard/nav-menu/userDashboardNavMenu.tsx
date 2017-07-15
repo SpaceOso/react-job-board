@@ -1,10 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import {Link} from "react-router-dom";
 
 //styles
 import "./userDashboardNavMenu.scss";
+import {RouteComponentProps} from "react-router";
 
-class UserDashboardNavMenu extends React.Component{
+interface MyProps {
+	match
+}
+
+class UserDashboardNavMenu extends React.Component<MyProps>{
 	render(){
 		return(
 			<div className="user-dashboard-nav">

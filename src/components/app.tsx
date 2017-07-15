@@ -1,13 +1,10 @@
 import * as React from 'react';
 
-import {Component, connect, Dispatch} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
-import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
+import {Route, Switch, HashRouter} from 'react-router-dom';
 
 import EmployerComponent from './employer/home/employerComponent';
 import UserDashboardContainer from './dashboard/userDashboardContainer';
-import UserRegisterComponent from './register/userRegisterComponent';
 import UserRegisterContainer from './register/userRegisterContainer';
 import LayoutComponent from './layoutComponent';
 import {UserComponent} from './applicant/userComponent';
@@ -18,9 +15,8 @@ import LoginContainer from './log-in/loginContainer';
 import NotFoundComponent from './not-found/notFoundComponent';
 
 //actions
-import {Employer, StoreState, User} from "../types/index";
+import {Employer, User} from "../types/index";
 import {logInOnLoad} from "../actions/authActions";
-import {RouteProps, RouterProps} from "react-router";
 
 interface Props{
     logInOnLoad: (token)=>{},
@@ -60,7 +56,7 @@ class App extends React.Component<Props>{
                             <Route exact path="/jobposts/:jobId" component={JobPostContainer}/>
                             <Route exact path="/jobseeker" component={UserComponent}/>
                             <Route path="/login" component={LoginContainer}/>
-                            <Route path="/user/dashboard/:userId" component={UserDashboardContainer} />
+                            <Route path="/user/dashboard/:userId" component={UserDashboardContainer as any} />
                             <Route component={NotFoundComponent}/>
                         </Switch>
                 </LayoutComponent>

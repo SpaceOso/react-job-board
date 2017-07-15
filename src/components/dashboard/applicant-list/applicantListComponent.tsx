@@ -1,6 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
-class ApplicantListComponent extends React.Component{
+interface MyProps{
+	user,
+	employer
+}
+
+class ApplicantListComponent extends React.Component<MyProps>{
 	render(){
 		return(
 			<div>

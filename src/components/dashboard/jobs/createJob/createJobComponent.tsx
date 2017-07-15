@@ -1,9 +1,22 @@
-import React from 'react';
+import * as React from 'react';
 
 //utils
 import {setFormState} from "../../../../utils/utils";
 
-class createJobComponent extends React.Component{
+
+interface MyProps{
+    submitJobPost,
+    employer,
+    userId
+}
+
+interface MyState{
+    jobTitle: string,
+    jobDescription: string,
+    keywords: string[]
+}
+
+class CreateJobComponent extends React.Component<MyProps, MyState>{
     constructor(props){
         super(props);
         
@@ -66,4 +79,4 @@ class createJobComponent extends React.Component{
     }
 }
 
-export default createJobComponent;
+export default CreateJobComponent;

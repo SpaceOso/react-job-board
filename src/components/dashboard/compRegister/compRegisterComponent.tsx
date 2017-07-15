@@ -1,9 +1,28 @@
-import React from "react";
+import * as React from "react";
 
 //styles
 import "./styles/compRegisterComponent.scss";
 
-class CompRegisterComponent extends React.Component {
+
+interface compRegisterProps{
+	submitData,
+
+}
+
+interface MyState{
+	name: string,
+	address: string,
+	city: string,
+	state: string,
+	zip: string,
+	logoImg: string,
+	website: string,
+	facebook: string,
+	linkedIn: string,
+	twitter: string
+}
+
+class CompRegisterComponent extends React.Component<compRegisterProps, MyState> {
 	constructor(props) {
 		super(props);
 		

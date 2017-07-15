@@ -1,7 +1,7 @@
 /**
  * Created by Rico on 7/8/2017.
  */
-import React from 'react';
+import * as React from 'react';
 /*This will be the item that makes up the list of editable job items in the dashboard.
 * This will have options to edit jobs such as..
 * modify title, description and keywords.
