@@ -18,7 +18,8 @@ export interface User{
 	password: string,
 	employerId?: string,
 	userRegistered: boolean,
-	isAuth: boolean
+	isAuth: boolean,
+	isFetching: boolean
 }
 
 export interface Employer{

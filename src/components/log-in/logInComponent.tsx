@@ -1,10 +1,27 @@
-import React from 'react';
+import * as React from 'react';
 
 
 import './styles/loginComponent.scss';
 import SpinnerComponent from "../spinners/spinnerComponent";
+import {Redirect} from "react-router";
 
-class LogInComponent extends React.Component {
+interface MyProps{
+    user,
+    logInUser,
+    isFetching,
+    errorMessage
+}
+
+interface MyState{
+    userEmail: string,
+    userPassword: string,
+    redirect: string
+    isFetching: boolean,
+    errors: object,
+}
+
+
+class LogInComponent extends React.Component<MyProps, MyState> {
     constructor(props) {
         super(props);
 
@@ -28,6 +45,10 @@ class LogInComponent extends React.Component {
         this.setState(keyObject);
     }
 
+    sendLogInInfo(user){
+        this.props.logInUser(user);
+    }
+
     handleSubmit() {
         let user = {
             email: this.state.userEmail,
@@ -40,6 +61,7 @@ class LogInComponent extends React.Component {
     render() {
         return (
             <div className="employer-register-Component">
+                {this.props.user.authorized === true ? <Redirect to={`${'/user/dashboard/'}${this.props.user.userId}`}/> : null}
                 <h1>Enter the following information to log in</h1>
                 <h3>{this.props.errorMessage}</h3>
                 <div>
