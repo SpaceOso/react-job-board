@@ -36,11 +36,14 @@ class JobPostLayout extends React.Component<jobPostProps, any > {
 		this.props.getJobById(jobId);
 	}
 
-	dataReady = () => this.props.currentJob !== null;
+	dataReady = () => {
+		console.log(this.props.currentJob);
+		return this.props.currentJob === null;
+	};
 
 
 	render() {
-		if (!this.dataReady()) {
+		if (this.dataReady()) {
 			console.log("job post data is ready!");
 			return <SpinnerComponent/>
 		} else {

@@ -9,12 +9,10 @@ import {registerUser} from '../../actions/authActions';
 
 //styles
 import './styles/userRegister.scss';
-import {StoreState} from "../../types/index";
+import {StoreState, User} from "../../types/index";
 
-function mapStateToProps({user}): StoreState{
-	return {
-		user
-	}
+function mapStateToProps({user}: StoreState){
+	return {user}
 }
 
 const mapDispatchToProps = (dispatch) =>({
