@@ -44,5 +44,6 @@ export interface Employer{
 export interface StoreState {
 	jobs?: Job[];
 	user?: User,
-	employer?: Employer
+	employer?: Employer,
+	currentJob?: Job
 }

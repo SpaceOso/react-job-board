@@ -53,7 +53,7 @@ class App extends React.Component<Props>{
                             <Route exact path="/" component={JobListContainer as any}/>
                             <Route exact path="/employer" component={EmployerComponent}/>
                             <Route exact path="/register" component={UserRegisterContainer as any}/>
-                            <Route exact path="/jobposts/:jobId" component={JobPostContainer}/>
+                            <Route exact path="/jobposts/:jobId" component={JobPostContainer as any}/>
                             <Route exact path="/jobseeker" component={UserComponent}/>
                             <Route path="/login" component={LoginContainer as any}/>
                             <Route path="/user/dashboard/:userId" component={UserDashboardContainer as any} />

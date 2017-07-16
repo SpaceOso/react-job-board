@@ -1,11 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 import "./styles/jobPostEmployerInfo.scss";
 
-class JobPostEmployerInfoComponent extends React.Component{
+interface MyProps{
+	employer,
+	loadJob
+}
+
+class JobPostEmployerInfoComponent extends React.Component<MyProps>{
 	constructor(props){
 		super(props);
 		

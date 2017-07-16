@@ -1,9 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 
 //components
 import SpinnerComponent from '../spinners/spinnerComponent';
+import {Job} from "../../types/index";
 
-class JobPostComponent extends React.Component{
+interface jobPostInfoProps{
+    isFetching: boolean,
+    job: Job
+}
+
+
+class JobPostInfoComponent extends React.Component<jobPostInfoProps>{
     constructor(props){
         super(props);
         this.dataReady = this.dataReady.bind(this);
@@ -27,4 +34,4 @@ class JobPostComponent extends React.Component{
     }
 }
 
-export default JobPostComponent;
+export default JobPostInfoComponent;

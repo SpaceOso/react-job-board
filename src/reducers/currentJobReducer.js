@@ -20,7 +20,7 @@ function currentJobReducer(state = {employer: null, job: null}, action){
 	    	return {
 			    ...state,
 			    employer: {...action.payload.data.employer},
-			    job: {...action.payload.data.job},
+			    currentJob: {...action.payload.data.job},
 			    isFetching: false
 		    };
         default:
