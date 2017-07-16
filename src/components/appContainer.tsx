@@ -1,12 +1,9 @@
 import * as React from 'react';
 
 import {connect, Dispatch} from 'react-redux';
-import {bindActionCreators} from 'redux';
-
-import {BrowserRouter, Route, Link, Switch, HashRouter} from 'react-router-dom';
 
 import {UserComponent} from './applicant/userComponent';
-import {Employer, StoreState, User} from "../types/index";
+import {StoreState} from "../types/index";
 import {logInOnLoad} from "../actions/authActions";
 
 import App from './app';

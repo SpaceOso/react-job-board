@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-
 import {Route, Switch, HashRouter} from 'react-router-dom';
 
 import EmployerComponent from './employer/home/employerComponent';

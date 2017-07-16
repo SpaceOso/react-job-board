@@ -9,6 +9,7 @@ import {
 	SET_USER,
 	FETCHING_THIS_USER_ERROR
 } from '../actions/authActions';
+import {StoreState} from "../types/index";
 
 const initialState = {
 	userId: "",
@@ -22,7 +23,7 @@ const initialState = {
 };
 
 
-function userReducer(state = initialState, action) {
+function userReducer(state: StoreState, action) {
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:
 			return {
@@ -77,7 +78,9 @@ function userReducer(state = initialState, action) {
 			};
 			
 		default:
-			return state
+			return {
+				...state
+			}
 		
 	}
 }

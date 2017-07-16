@@ -7,10 +7,11 @@ import {
 import{
     SET_EMPLOYER
 } from '../actions/authActions';
+import {StoreState} from "../types/index";
 
 
 // this deals with with the employer property of the state
-function employerReducer(state={}, action){
+function employerReducer(state:StoreState, action){
 
     switch (action.type){
         case FETCHING_THIS_EMPLOYER_JOBS:
@@ -27,7 +28,9 @@ function employerReducer(state={}, action){
                 ...action.payload
             };
         default:
-            return state;
+            return {
+                ...state
+            };
     }
 }
 

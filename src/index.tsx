@@ -9,14 +9,21 @@ import thunk from 'redux-thunk';
 import './styles/main.scss';
 
 //reducers
-import rootReducer from './reducers/index.jsx';
+import rootReducer from './reducers/index';
 
 //components
 import AppContainer from './components/appContainer';
+import {composeWithDevTools} from "redux-devtools-extension";
 
-// import {StoreState} from './types/index';
+import {StoreState} from './types/index';
 
-const store = createStore(rootReducer,applyMiddleware(thunk, ReduxPromise));
+const store = createStore<StoreState>(rootReducer, composeWithDevTools(
+	applyMiddleware(thunk, ReduxPromise))
+);
+
+// const store = createStore(rootReducer, composeWithDevTools(
+// 	applyMiddleware(thunk, ReduxPromise))
+// );
 
 // setAuth(localStorage.getItem('tkn'));
 

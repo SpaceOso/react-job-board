@@ -9,8 +9,8 @@ import {StoreState} from "../../types/index";
 
 function mapStateToProps({currentJob, employer}:StoreState) {
     return {
-        currentJob: currentJob,
-        employer: employer
+        currentJob,
+        employer
     }
 }
 

@@ -12,7 +12,7 @@ interface jobPostProps extends RouteComponentProps<any>{
 	getJobById: (arg)=>{},
 	loadJob: () => {},
 	resetCurrentJob: ()=>{},
-	currentJob
+	currentJob: Job
 }
 
 class JobPostLayout extends React.Component<jobPostProps, any > {

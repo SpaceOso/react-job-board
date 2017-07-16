@@ -55,10 +55,10 @@ export function resetCurrentJob() {
 	}
 }
 
-export function singleJobSuccess(job) {
+export function singleJobSuccess(data) {
 	return {
 		type: SINGLE_JOB_SUCCESS,
-		payload: job
+		payload: data
 	}
 }
 

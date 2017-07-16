@@ -1,8 +1,9 @@
 //action types
 import { GET_JOBS_ERROR, GET_JOBS_SUCCESS, FETCHING_JOBS} from "../actions/jobActions";
+import {StoreState} from "../types/index";
 
 /*reducers are just functions that get passed the action. We then set up switch statements to handle the action.type*/
-function JobReducer(state = {}, action) {
+function JobReducer(state: StoreState, action) {
     switch (action.type) {
         case GET_JOBS_SUCCESS:
 
@@ -22,7 +23,9 @@ function JobReducer(state = {}, action) {
 
             return {...state, isFetching: true};
         default:
-            return state;
+            return {
+                ...state
+            };
     }
 }
 

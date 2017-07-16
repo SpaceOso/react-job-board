@@ -45,5 +45,6 @@ export interface StoreState {
 	jobs?: Job[];
 	user?: User,
 	employer?: Employer,
-	currentJob?: Job
+	currentJob?: Job,
+	isFetching?: boolean
 }

@@ -1,7 +1,8 @@
 import {FIND_JOB_BY_ID, RESET_CURRENT_JOB, FETCHING_JOBS, SINGLE_JOB_SUCCESS} from '../actions/jobActions';
+import {StoreState} from "../types/index";
 
 
-function currentJobReducer(state = {employer: null, job: null}, action){
+function currentJobReducer(state: StoreState, action): StoreState{
     switch(action.type){
 
         case FIND_JOB_BY_ID:
@@ -9,14 +10,22 @@ function currentJobReducer(state = {employer: null, job: null}, action){
 	         return {
 		        ...state,
 		        employer: {...action.payload.data.employer},
-		        job: {...action.payload.data.job},
+		        currentJob: {...action.payload.data.job}
 	        };
 
 	    case RESET_CURRENT_JOB:
-	    	return {...state, job: null, employer:null};
+	    	return {
+	    		...state,
+			    currentJob: undefined,
+			    employer:undefined
+	    	};
 	    case FETCHING_JOBS:
-	    	return {...state, isFetching: true};
+	    	return {
+	    		...state,
+			    isFetching: true
+	    	};
 	    case SINGLE_JOB_SUCCESS:
+	    	console.log("inside SINGLE_JOB_SUCCESS..", action.payload.data.job)
 	    	return {
 			    ...state,
 			    employer: {...action.payload.data.employer},
@@ -24,7 +33,10 @@ function currentJobReducer(state = {employer: null, job: null}, action){
 			    isFetching: false
 		    };
         default:
-            return state;
+            return {
+	            ...state,
+
+            };
     }
 }
 
