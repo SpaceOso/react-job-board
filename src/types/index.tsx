@@ -1,13 +1,21 @@
 // src/types/index.tsx
 
+import currentJobReducer from "../reducers/currentJobReducer";
 export interface Job{
 	_id?: string,
 	jobTitle: string,
 	jobDescription: string,
-	applicants: string[]
 	employerName: string,
 	employerId?: string,
 	employerLogo?: string
+}
+
+export interface privateJobView extends Job{
+	applicants: string[]
+}
+
+export interface isFetching{
+	isFetching: boolean
 }
 
 export interface User{
@@ -38,6 +46,11 @@ export interface Employer{
 		linkedin: string
 	},
 	jobs: Job[],
+}
+
+export interface CurrentJobPost extends Job , Employer{}
+
+export interface privateEmployerView extends Employer{
 	applicants: User[]
 }
 
@@ -45,6 +58,6 @@ export interface StoreState {
 	jobs?: Job[],
 	user?: User,
 	employer?: Employer,
-	currentJob?: Job,
+	currentJobPost?: CurrentJobPost,
 	isFetching?: boolean
 }

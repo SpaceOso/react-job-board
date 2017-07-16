@@ -177,8 +177,6 @@ export function logInUserSuccess(data) {
 
 //gets the token passed from localStorage
 export function logInOnLoad(token):Object{
-	console.log("so do we really call this?");
-	console.log("inside logInOnLoad..");
 	return dispatch => {
 		dispatch(fetchingUser());
 
@@ -191,7 +189,6 @@ export function logInOnLoad(token):Object{
 				
 				
 				//send user information to be stored in the store
-				console.log("logInOnLoad", response.data.user);
 				dispatch(logInUserSuccess(response.data.user));
 				
 			})

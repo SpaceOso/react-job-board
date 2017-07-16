@@ -26,18 +26,18 @@ class App extends React.Component<Props>{
     constructor(props){
         super(props);
 
-        console.log("inside the app component, need to check that I do have the right props", this.props);
+        // console.log("inside the app component, need to check that I do have the right props", this.props);
         this.checkReload = this.checkReload.bind(this);
 
         this.checkReload();
     }
 
     checkReload(){
-        console.log("inside checkreload....");
+        // console.log("inside checkreload....");
         let token = localStorage.getItem('tkn');
 
         if(token){
-            console.log('we found token, loginOnload');
+            // console.log('we found token, loginOnload');
             logInOnLoad(token);
         }
     }

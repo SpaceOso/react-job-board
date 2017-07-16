@@ -1,23 +1,40 @@
 import * as React from 'react';
-import {Employer, Job} from "../../types/index";
+import {CurrentJobPost, Employer, Job} from "../../types/index";
 import JobPostInfoComponent from "./jobPostInfoComponent";
 import JobPostEmployerInfoComponent from "./jobPostEmployerInfoComponent";
 import SpinnerComponent from "../spinners/spinnerComponent";
 import {RouteComponentProps} from "react-router";
 
-interface jobPostProps extends RouteComponentProps<any>{
+interface jobPostProps extends RouteComponentProps<any> {
 	isFetching: boolean,
-	job: Job
+	// job: Job
 	employer: Employer,
-	getJobById: (arg)=>{},
+	getJobById: (arg) => {},
 	loadJob: () => {},
-	resetCurrentJob: ()=>{},
-	currentJob: Job
+	resetCurrentJob: () => {},
+	currentJobPost: CurrentJobPost
 }
 
-class JobPostLayout extends React.Component<jobPostProps, any > {
+interface MyState {
+	jobPostEmployerInfo: {
+		employerName: string,
+		employerLogo: string,
+		employerId: string,
+	}
+}
+
+
+class JobPostLayout extends React.Component<jobPostProps, MyState> {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			jobPostEmployerInfo: {
+				employerLogo: '',
+				employerId: '',
+				employerName: ''
+			}
+		};
 
 		this.dataReady = this.dataReady.bind(this);
 		this.loadNewJob = this.loadNewJob.bind(this);
@@ -37,21 +54,33 @@ class JobPostLayout extends React.Component<jobPostProps, any > {
 	}
 
 	dataReady = () => {
-		console.log(this.props.currentJob);
-		return this.props.currentJob === null;
+
+		// this.setState((prevState, props) => {
+		// 	return {jobPostEmployerInfo: {
+		// 		employerLogo: this.props.job.employerLogo,
+		// 		employerId: this.props.job.employerId,
+		// 		employerName: this.props.job.employerName
+		// 	}}
+		// });
+		return this.props.isFetching === true;
 	};
 
 
 	render() {
+
+		let employerInfo: any = {
+			employerLogo: this.props.currentJobPost.employerLogo,
+			employerId: this.props.currentJobPost.employerId,
+			employerName: this.props.currentJobPost.employerName
+		};
+
 		if (this.dataReady()) {
-			console.log("job post data is ready!");
 			return <SpinnerComponent/>
 		} else {
-			console.log("job post data isn't ready yet1");
 			return (
 				<div>
-					<JobPostInfoComponent job={this.props.currentJob} isFetching={this.props.isFetching}/>
-					{/*<JobPostEmployerInfoComponent employer={this.props.employer} loadJob={this.props.loadJob}/>*/}
+					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.isFetching}/>
+					<JobPostEmployerInfoComponent employer={employerInfo} loadJob={this.props.loadJob}/>
 				</div>
 			)
 		}

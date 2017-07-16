@@ -4,16 +4,18 @@ import {Link} from 'react-router-dom'
 
 
 import "./styles/jobPostEmployerInfo.scss";
+import {Employer} from "../../types/index";
 
 interface MyProps{
 	employer,
 	loadJob
 }
 
-class JobPostEmployerInfoComponent extends React.Component<MyProps>{
+class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 	constructor(props){
 		super(props);
-		
+
+		console.log("job post employer:", this.props);
 		this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -36,7 +38,9 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps>{
 	}
 
 	render(){
-		let employer = this.props.employer;
+		console.log("jobPostEmployer", this.props.employer);
+		let employer:Employer = this.props.employer;
+		console.log("inside jobpost employer info:", employer);
 		return (
 			<aside className="jp-employer-aside">
 				<img src={employer.logoImg} alt={`${employer.name} logo`}/>

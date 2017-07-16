@@ -13,6 +13,7 @@ interface jobPostInfoProps{
 class JobPostInfoComponent extends React.Component<jobPostInfoProps>{
     constructor(props){
         super(props);
+
         this.dataReady = this.dataReady.bind(this);
     }
 	

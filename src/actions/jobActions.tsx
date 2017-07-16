@@ -63,12 +63,10 @@ export function singleJobSuccess(data) {
 }
 
 export function getJobById(id) {
-	console.log("getting the jobId...", id);
 	return dispatch => {
 		dispatch(fetchingJobs());
 		axios.get(`${ROOT_URL}${'jobposts/'}${id}`)
 			.then((response) => {
-				console.log("getting a single job by id resposne:", response);
 				dispatch(singleJobSuccess(response));
 			})
 			.catch((error) => {
