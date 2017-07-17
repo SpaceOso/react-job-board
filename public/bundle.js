@@ -1912,12 +1912,12 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /* no static exports found */
 /* all exports used */
 /*!***************************************!*\
-  !*** ./components/headerComponent.js ***!
+  !*** ./components/headerComponent.tsx ***!
   \***************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.HeaderComponent = undefined;\n\nvar _react = __webpack_require__(/*! react */ 6);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar HeaderComponent = exports.HeaderComponent = function HeaderComponent(props) {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'h1',\n            null,\n            'I\\'m the header component'\n        )\n    );\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./components/headerComponent.js\n// module id = 100\n// module chunks = 0\n\n//# sourceURL=webpack:///./components/headerComponent.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.HeaderComponent = undefined;\n\nvar _react = __webpack_require__(/*! react */ 6);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar HeaderComponent = exports.HeaderComponent = function HeaderComponent(props) {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'h1',\n            null,\n            'I\\'m the header component'\n        )\n    );\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./components/headerComponent.tsx\n// module id = 100\n// module chunks = 0\n\n//# sourceURL=webpack:///./components/headerComponent.tsx?");
 
 /***/ }),
 /* 101 */

@@ -6,6 +6,7 @@ import {User} from "../types/index";
 
 interface Props{
     user: User,
+    logOutUser
 }
 
 class LayoutComponent extends React.Component<Props> {
@@ -16,7 +17,7 @@ class LayoutComponent extends React.Component<Props> {
     render() {
         return (
             <div>
-                <HeaderComponent user={this.props.user}/>
+                <HeaderComponent user={this.props.user} logOutUser={this.props.logOutUser}/>
                 {this.props.children}
                 <FooterComponent/>
             </div>

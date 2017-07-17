@@ -18,6 +18,7 @@ import {logInOnLoad} from "../actions/authActions";
 
 interface Props{
     logInOnLoad: (token)=>{},
+    logOutUser: ()=>{},
     user: User,
     employer: Employer,
 }
@@ -45,7 +46,7 @@ class App extends React.Component<Props>{
     render() {
         return (
             <HashRouter>
-                <LayoutComponent user={this.props.user}>
+                <LayoutComponent user={this.props.user} logOutUser={this.props.logOutUser}>
                     <Route exact path="/" component={JumboTron}/>
                         <Switch>
                             <Route exact path="/" component={JobListContainer as any}/>

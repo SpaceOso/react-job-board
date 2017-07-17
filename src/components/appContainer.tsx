@@ -4,7 +4,7 @@ import {connect, Dispatch} from 'react-redux';
 
 import {UserComponent} from './applicant/userComponent';
 import {StoreState} from "../types/index";
-import {logInOnLoad} from "../actions/authActions";
+import {logInOnLoad, logOutUser} from "../actions/authActions";
 
 import App from './app';
 
@@ -20,7 +20,8 @@ import App from './app';
 // }
 
 const mapDispatchToProps = (dispatch) =>({
-	logInOnLoad: (token) => dispatch(logInOnLoad(token))
+	logInOnLoad: (token) => dispatch(logInOnLoad(token)),
+	logOutUser: ()=> dispatch(logOutUser())
 });
 
 

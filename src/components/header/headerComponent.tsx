@@ -1,12 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 //actions
 import {logOutUser} from '../../actions/authActions';
+import {User} from "../../types/index";
 
-class HeaderComponent extends React.Component {
+
+interface MyProps{
+	user: User,
+	logOutUser: ()=>{}
+}
+
+class HeaderComponent extends React.Component<MyProps, any> {
 	constructor(props) {
 		super(props);
 		
@@ -15,7 +22,6 @@ class HeaderComponent extends React.Component {
 	}
 
 	logOut(){
-		
 		this.props.logOutUser();
 	}
 	
@@ -28,7 +34,7 @@ class HeaderComponent extends React.Component {
 			</Link>
 		);
 		
-		return this.props.user.authorized === undefined || this.props.user.authorized === false ? "" : logOut;
+		return this.props.user.isAuth === undefined || this.props.user.isAuth === false ? "" : logOut;
 	}
 	
 	
@@ -55,7 +61,7 @@ class HeaderComponent extends React.Component {
 				
 				<Link to={"/login"}>
 					<div className="nav-item">
-						{this.props.user.authorized === undefined || this.props.user.authorized === false ? "Log In" : "Dashboard"}
+						{this.props.user.isAuth === undefined || this.props.user.isAuth === false ? "Log In" : "Dashboard"}
 					</div>
 				</Link>
 				
@@ -65,8 +71,4 @@ class HeaderComponent extends React.Component {
 		)}
 };
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({logOutUser}, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(HeaderComponent);
+export default HeaderComponent;
