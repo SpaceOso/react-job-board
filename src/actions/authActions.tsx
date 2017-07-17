@@ -217,13 +217,14 @@ export function logInUser(user) {
 				
 				//set the token as part of our request header
 				setAuth(token);
-				
+				console.log("The response from loggin in:", response);
 				//data contains user, token
 				dispatch(logInUserSuccess(response.data.user))
-				
+
 			})
 			.catch((error) => {
-				
+
+				console.log("The response from error in login in:", error);
 				dispatch(logInUserError(error.response.status));
 				
 			})

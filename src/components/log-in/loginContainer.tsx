@@ -7,6 +7,7 @@ import LoginComponent from './logInComponent';
 //styles
 import './styles/loginComponent.scss';
 import {StoreState} from "../../types/index";
+import {logInUser} from "../../actions/authActions";
 
 
 function mapStateToProps({user}:StoreState) {
@@ -16,7 +17,7 @@ function mapStateToProps({user}:StoreState) {
 }
 
 const mapDispatchToProps = (dispatch) =>({
-	logInUser: () =>{}
+	logInUser: (userInfo) =>{dispatch(logInUser(userInfo))}
 });
 
 

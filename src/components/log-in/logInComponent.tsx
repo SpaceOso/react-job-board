@@ -4,12 +4,12 @@ import * as React from 'react';
 import './styles/loginComponent.scss';
 import SpinnerComponent from "../spinners/spinnerComponent";
 import {Redirect} from "react-router";
+import {User} from "../../types/index";
 
 interface MyProps{
-    user,
-    logInUser,
+    user: User,
+    logInUser:(userINfo)=>{},
     isFetching,
-    errorMessage
 }
 
 interface MyState{
@@ -45,10 +45,6 @@ class LogInComponent extends React.Component<MyProps, MyState> {
         this.setState(keyObject);
     }
 
-    sendLogInInfo(user){
-        this.props.logInUser(user);
-    }
-
     handleSubmit() {
         let user = {
             email: this.state.userEmail,
@@ -61,9 +57,9 @@ class LogInComponent extends React.Component<MyProps, MyState> {
     render() {
         return (
             <div className="employer-register-Component">
-                {this.props.user.authorized === true ? <Redirect to={`${'/user/dashboard/'}${this.props.user.userId}`}/> : null}
+                {this.props.user.isAuth === true ? <Redirect to={`${'/user/dashboard/'}${this.props.user._id}`}/> : null}
                 <h1>Enter the following information to log in</h1>
-                <h3>{this.props.errorMessage}</h3>
+                <h3>{this.props.user.error}</h3>
                 <div>
                     {this.props.isFetching === true ? <SpinnerComponent/> : null}
                 </div>

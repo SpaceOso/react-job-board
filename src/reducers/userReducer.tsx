@@ -9,21 +9,9 @@ import {
 	SET_USER,
 	FETCHING_THIS_USER_ERROR
 } from '../actions/authActions';
-import {StoreState} from "../types/index";
+import {StoreState, User} from "../types/index";
 
-const initialState = {
-	userId: "",
-	accountType: "user",
-	authorized: false,
-	email: "",
-	employer: "",
-	firstName: "",
-	lastName: "",
-	isFetching: false
-};
-
-
-function userReducer(state: StoreState, action) {
+function userReducer(state: User, action):User {
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:
 			return {
@@ -38,12 +26,17 @@ function userReducer(state: StoreState, action) {
 			return {
 				...state,
 				...action.payload,
-                authorized: true,
+                isAuth: true,
 				isFetching: false,
 				
 			};
 		case LOG_OUT_USER:
-			return {};
+			return {
+				...state,
+				isAuth: false,
+				userRegistered: false
+
+			};
 			
 		case FETCHING_USER:
 			return {
@@ -54,15 +47,15 @@ function userReducer(state: StoreState, action) {
 		case SET_USER:
 			return {
 				...state,
-				isFetching: false,
 				...action.payload,
-                authorized: true,
+				isFetching: false,
+                isAuth: true,
 			};
 		case FETCHING_THIS_USER_ERROR:
 			return {
 				...state,
 				isFetching: false,
-                authorized: false,
+                isAuth: false,
 			};
 		case LOGIN_USER_ERROR:
 			return {
