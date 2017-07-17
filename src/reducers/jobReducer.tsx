@@ -19,9 +19,9 @@ function JobReducer(state: StoreState, action) {
 
             return state;
         case FETCHING_JOBS:
-
-
-            return {...state, isFetching: true};
+            return {
+                ...state,
+                isFetching: true};
         default:
             return {
                 ...state

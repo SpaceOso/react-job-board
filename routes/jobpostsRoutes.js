@@ -65,10 +65,23 @@ router.param('jobId', function (req, res, next, jobId) {
 
 // =============================
 router.get('/:jobId', function (req, res, next) {
+
+    let jobPostEmployer = {
+        name: req.employerModel.name,
+        logoImg: req.employerModel.logoImg,
+        location: req.employerModel.location,
+        socialMedia: req.employerModel.socialMedia,
+        _id: req.employerModel._id,
+        jobs: req.employerModel.jobs
+    };
+
+    // console.log("request employer:", jobPostEmployer);
+
     res.status(200).json({
         message: 'Success',
         job: req.job,
-        employer: req.employerModel
+        employer: jobPostEmployer
+        // employer: req.employerModel
     });
 });
 

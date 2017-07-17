@@ -6,6 +6,7 @@ export const FIND_JOB_BY_ID = 'FIND_JOB_BY_ID';
 export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS';
 export const GET_JOBS_ERROR = 'GET_JOBS_ERROR';
 export const FETCHING_JOBS = 'FETCHING_JOBS';
+export const FETCHING_SINGLE_JOB = 'FETCHING_SINGLE_JOB';
 export const RESET_CURRENT_JOB = 'RESET_CURRENT_JOB';
 export const SINGLE_JOB_SUCCESS = 'SINGLE_JOB_SUCCESS';
 
@@ -62,11 +63,19 @@ export function singleJobSuccess(data) {
 	}
 }
 
+export function fetchSingleJob(){
+	return{
+		type: FETCHING_SINGLE_JOB,
+		payload: 'fetching single job'
+	}
+}
+
 export function getJobById(id) {
 	return dispatch => {
-		dispatch(fetchingJobs());
+		dispatch(fetchSingleJob());
 		axios.get(`${ROOT_URL}${'jobposts/'}${id}`)
 			.then((response) => {
+				console.log("the response that we get from GetJobBYId:", response);
 				dispatch(singleJobSuccess(response));
 			})
 			.catch((error) => {

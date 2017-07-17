@@ -48,7 +48,9 @@ export interface Employer{
 	jobs: Job[],
 }
 
-export interface CurrentJobPost extends Job , Employer{}
+export interface CurrentJobPost extends Job , Employer{
+	isFetching: boolean
+}
 
 export interface privateEmployerView extends Employer{
 	applicants: User[]

@@ -8,14 +8,14 @@ import {Employer} from "../../types/index";
 
 interface MyProps{
 	employer,
-	loadJob
+	loadJob: (arg:any) =>(any)
 }
 
 class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 	constructor(props){
 		super(props);
 
-		console.log("job post employer:", this.props);
+		console.log("job post employer:", this.props.employer);
 		this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -25,12 +25,12 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 		* They should not include the job you're currently on.
 		* Need to figure out if we need another component for this section or not*/
 		let employer = this.props.employer;
-		
+
 		return employer.jobs.map(job =>
 			<Link  to={`/jobposts/${job._id}`} key={`${job.jobTitle}${new Date()}`} onClick={() => {this.handleClick(job._id)}}>
-				<li >{job.jobTitle}</li>
-			</Link>
-		)
+		 		<li >{job.jobTitle}</li>
+		 	</Link>
+		 )
 	}
 	
 	handleClick(jobId){

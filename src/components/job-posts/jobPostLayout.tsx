@@ -6,7 +6,6 @@ import SpinnerComponent from "../spinners/spinnerComponent";
 import {RouteComponentProps} from "react-router";
 
 interface jobPostProps extends RouteComponentProps<any> {
-	isFetching: boolean,
 	// job: Job
 	employer: Employer,
 	getJobById: (arg) => {},
@@ -36,7 +35,6 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 			}
 		};
 
-		this.dataReady = this.dataReady.bind(this);
 		this.loadNewJob = this.loadNewJob.bind(this);
 	}
 
@@ -53,20 +51,8 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 		this.props.getJobById(jobId);
 	}
 
-	dataReady = () => {
-
-		// this.setState((prevState, props) => {
-		// 	return {jobPostEmployerInfo: {
-		// 		employerLogo: this.props.job.employerLogo,
-		// 		employerId: this.props.job.employerId,
-		// 		employerName: this.props.job.employerName
-		// 	}}
-		// });
-		return this.props.isFetching === true;
-	};
-
-
 	render() {
+		console.log('EMPLOYERINFO:', this.props.currentJobPost);
 
 		let employerInfo: any = {
 			employerLogo: this.props.currentJobPost.employerLogo,
@@ -74,13 +60,15 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 			employerName: this.props.currentJobPost.employerName
 		};
 
-		if (this.dataReady()) {
+		if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
+			console.log('DISPLAYING THE SPINNER');
 			return <SpinnerComponent/>
 		} else {
+			console.log("DISPLAYING THE JOB POST INFO");
 			return (
 				<div>
-					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.isFetching}/>
-					<JobPostEmployerInfoComponent employer={employerInfo} loadJob={this.props.loadJob}/>
+					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.currentJobPost.isFetching}/>
+					<JobPostEmployerInfoComponent employer={this.props.currentJobPost} loadJob={this.loadNewJob}/>
 				</div>
 			)
 		}
