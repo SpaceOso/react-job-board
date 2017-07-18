@@ -25,7 +25,7 @@ export interface User{
 	email: string,
 	password: string,
 	employerId?: string,
-	userRegistered: boolean,
+	// userRegistered: boolean,
 	isAuth: boolean,
 	isFetching: boolean,
 	error: string

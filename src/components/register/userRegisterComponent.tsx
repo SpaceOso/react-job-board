@@ -178,6 +178,8 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 					</div>
 					<button>Submit Form</button>
 				</form>
+				{/*Once the user registers it should take them to the dashboard*/}
+				{this.props.user.isAuth === true ? this.redirectToDashboard() : null}
 				{/*This will display once we register our user*/}
 				{this.props.user.employerId !== undefined ? this.redirectToDashboard() : null}
 			</div>

@@ -69,6 +69,7 @@ export function registerUser(userObject) {
 			.then((response) => {
 				/*response: {user, token}*/
 
+				console.log("we are registering the user! Response:", response);
 				localStorage.setItem('tkn', response.data.token);
 
 				setAuth(response.data.token);

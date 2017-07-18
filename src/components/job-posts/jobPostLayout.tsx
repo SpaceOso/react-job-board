@@ -5,6 +5,9 @@ import JobPostEmployerInfoComponent from "./jobPostEmployerInfoComponent";
 import SpinnerComponent from "../spinners/spinnerComponent";
 import {RouteComponentProps} from "react-router";
 
+//styles
+import "./styles/jobPostContainer.scss";
+
 interface jobPostProps extends RouteComponentProps<any> {
 	// job: Job
 	employer: Employer,
@@ -54,19 +57,13 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 	render() {
 		console.log('EMPLOYERINFO:', this.props.currentJobPost);
 
-		let employerInfo: any = {
-			employerLogo: this.props.currentJobPost.employerLogo,
-			employerId: this.props.currentJobPost.employerId,
-			employerName: this.props.currentJobPost.employerName
-		};
-
 		if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
 			console.log('DISPLAYING THE SPINNER');
 			return <SpinnerComponent/>
 		} else {
 			console.log("DISPLAYING THE JOB POST INFO");
 			return (
-				<div>
+				<div className="job-post-container">
 					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.currentJobPost.isFetching}/>
 					<JobPostEmployerInfoComponent employer={this.props.currentJobPost} loadJob={this.loadNewJob}/>
 				</div>

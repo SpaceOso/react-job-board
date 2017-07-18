@@ -81,12 +81,9 @@ class UserDashboardComponent extends React.Component<Props> {
 
 	/*Will show spinner as we gather the user information for the dashboard*/
 	waitForLoad(){
-		console.log("waitForLoad userId", typeof this.props.user);
 		if(this.props.user === null || this.props.user === undefined){
-			console.log("should be showing spinner...");
 			return <SpinnerComponent/>
 		} else {
-			console.log("should be showing the switch..");
 			return (
 				<Switch>
 					{/*REGISTER COMPONENT*/}

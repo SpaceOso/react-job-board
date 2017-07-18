@@ -17,9 +17,8 @@ function userReducer(state: User, action):User {
 			return {
 				...state,
 				...action.payload,
-                authorized: true,
+                isAuth: true,
 				isFetching: false,
-				userRegistered: true,
 			};
 		
 		case LOGIN_USER_SUCCESS:
@@ -34,8 +33,6 @@ function userReducer(state: User, action):User {
 			return {
 				...state,
 				isAuth: false,
-				userRegistered: false
-
 			};
 			
 		case FETCHING_USER:
