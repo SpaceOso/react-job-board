@@ -11,7 +11,8 @@ import {
 } from '../actions/authActions';
 import {StoreState, User} from "../types/index";
 
-function userReducer(state: User, action):User {
+function userReducer(state: User, action):User{
+// function userReducer(state, action):User {
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:
 			return {
@@ -41,8 +42,8 @@ function userReducer(state: User, action):User {
 			return {
 				...state,
 				isAuth: false,
+				_id: null
 			};
-			
 		case FETCHING_USER:
 			return {
 				...state,

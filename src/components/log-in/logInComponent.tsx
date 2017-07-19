@@ -56,6 +56,10 @@ class LogInComponent extends React.Component<MyProps, MyState> {
 
     render() {
         return (
+            this.props.user.isFetching ?
+
+                <SpinnerComponent/> :
+
             <div className="employer-register-Component">
                 {console.log("This props ID:", this.props.user._id)}
                 {this.props.user.isAuth === true ? <Redirect to={`${'/user/dashboard/'}${this.props.user._id}`}/> : null}

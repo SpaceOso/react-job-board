@@ -34,7 +34,7 @@ class HeaderComponent extends React.Component<MyProps, any> {
 			</Link>
 		);
 		
-		return this.props.user.isAuth === undefined || this.props.user.isAuth === false ? "" : logOut;
+		return this.props.user.isAuth === false ? "" : logOut;
 	}
 	
 	

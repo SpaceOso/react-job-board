@@ -103,6 +103,7 @@ export function logOutUser(){
 // SETTING EMPLOYER
 // =============================
 export function setEmployer(employer){
+	console.log("SET_EMPLOYER:", employer);
 	return{
 		type: SET_EMPLOYER,
 		payload: employer
@@ -143,8 +144,8 @@ export function fetchThisUserInfo(userId){
 		axios.post(`${ROOT_URL}user/dashboardinit`, {userId})
 			.then((response)=>{
 				console.log("inside the fetchThisUserInfo with response:", response);
-				dispatch(setUser(response.data.user));
 				dispatch(setEmployer(response.data.employer));
+				dispatch(setUser(response.data.user));
 			})
 			.catch((error)=>{
 				dispatch(fetchingThisUserError("Error: You must log-in before continuing!"))
@@ -218,11 +219,9 @@ export function logInUser(user) {
 				//set the token as part of our request header
 				setAuth(token);
 
-				//TODO if the response contains an employerId dispatch an employer setter
-				console.log("the repsonse from login in:", response);
-
-				if(response.data.user.employer !== undefined || response.data.user.employer !== null){
-					console.log("this user has a registered employer and it's ID is:", response.data.user.employer);
+				console.log("the employer id response:", response.data.user.employerId);
+				if(response.data.user.employerId !== undefined || response.data.user.employerId !== null){
+					console.log("this user has a registered employer and it's ID is:", response.data.user.employerId);
 					dispatch(setEmployer(response.data.employer));
 					dispatch(logInUserSuccess(response.data.user));
 				} else {

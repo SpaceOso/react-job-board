@@ -34,14 +34,16 @@ class UserDashboardComponent extends React.Component<Props> {
 
 	componentDidMount() {
 		// this.fetchEmployerInfo();
-		this.checkForLogInErrors();
-		this.checkForEmployer();
+		// this.checkForLogInErrors();
+		// this.checkForEmployer();
 	}
 
-
 	checkForLogInErrors() {
-		console.log("checkForLogInErrors:", this.props.user.isAuth);
-		return this.props.user.isAuth === false ?  <Redirect to={`${'/login'}`} push={true}/> : null;
+		console.log("checkForLogInErrors:", this.props.user._id === undefined);
+		if(this.props.user._id === undefined){
+			console.log("we should be re-routing to the login page then...", this.props.match);
+		}
+		return this.props.user._id === undefined ?  <Redirect to={'/login'} /> : null;
 	}
 
 	handleEmployerRegistration(employerData){
@@ -55,9 +57,10 @@ class UserDashboardComponent extends React.Component<Props> {
 	 * Otherwise we weill load up the main layout*/
 
 	checkForEmployer(){
-		console.log("checkForEmployer:", this.props.user.employerId === null);
-		return this.props.user.employerId === null ? <Redirect to={`${this.props.match.params.userId}/register`}/>
-			: <Redirect to={`${this.props.match.params.userId}/home`}/>;
+		console.log("checkForEmployer:", this.props.user.employerId);
+		console.log("check path wth..", `${this.props.location.pathname}/home`);
+		return this.props.user.employerId === null ? <Redirect to={`${this.props.location.pathname}/register`}/>
+			: <Redirect to={`${this.props.location.pathname}/home`}/>;
 	}
 
 	/* This will handle sending the job post information to the back end.*/
@@ -68,14 +71,16 @@ class UserDashboardComponent extends React.Component<Props> {
 
 	/*Will show spinner as we gather the user information for the dashboard*/
 	waitForLoad(){
-		if(this.props.user === null || this.props.user === undefined){
+		// if(this.props.user === null || this.props.user === undefined){
+		if(this.props.user.isFetching){
 			return <SpinnerComponent/>
 		} else {
 			console.log("inside the dashboard component with route:", this.props.match.params);
 			return (
 				<Switch>
+
 					{/*REGISTER COMPONENT*/}
-					<Route path={`${this.props.match.params.userId}/register`}
+					<Route path={`${this.props.match.path}/register`}
 					       render={() => {
 						       return (<CompRegisterComponent
 							       submitData={this.handleEmployerRegistration}
@@ -117,12 +122,12 @@ class UserDashboardComponent extends React.Component<Props> {
 	}
 
 	render() {
+		console.log("DASHBOARD RENDER IS BEING CALLED");
 
 		return (
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
 				{this.checkForEmployer()}
-
 				{/*NAV MENU*/}
 				<Route path={`${this.props.match.path}`}
 				       render={props => (

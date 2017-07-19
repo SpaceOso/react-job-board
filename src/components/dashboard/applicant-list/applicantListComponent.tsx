@@ -1,8 +1,9 @@
 import * as React from 'react';
+import {Employer, User} from "../../../types/index";
 
 interface MyProps{
-	user,
-	employer
+	user: User,
+	employer: Employer
 }
 
 class ApplicantListComponent extends React.Component<MyProps>{
