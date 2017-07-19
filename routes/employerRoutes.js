@@ -64,7 +64,7 @@ router.post('/register', function (req, res, next) {
 				
 				console.log("no error saving employuer!!");
 				if(employer){
-					user.employer = employer._id;
+					user.employerId = employer._id;
 					
 					console.log("now we're updating the user with the employerID");
 					user.save(function(error, user){

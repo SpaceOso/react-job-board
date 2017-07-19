@@ -34,7 +34,7 @@ router.post('/', function (req, res, next) {
                    lastName: userDoc.lastName,
                    email: userDoc.email,
                    accountType: userDoc.accountType,
-                   employerId: userDoc.employer
+                   employerId: userDoc.employerId
                };
 
                if(user.employer === undefined || user.employer === null || user.employer === "null"){

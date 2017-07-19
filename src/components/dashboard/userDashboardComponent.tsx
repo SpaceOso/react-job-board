@@ -47,7 +47,7 @@ class UserDashboardComponent extends React.Component<Props> {
 	}
 
 	handleEmployerRegistration(employerData){
-		console.log("inside the userDashboardContainer with", employerData);
+		console.log("Trying to register employer with the following inof:", employerData);
 		let userData = {employerData, userId: this.props.user._id};
 		this.props.submitEmployerRegistration(userData);
 	};

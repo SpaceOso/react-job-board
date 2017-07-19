@@ -5,8 +5,7 @@ import "./styles/compRegisterComponent.scss";
 
 
 interface compRegisterProps{
-	submitData,
-
+	submitData
 }
 
 interface MyState{
