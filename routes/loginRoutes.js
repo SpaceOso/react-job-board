@@ -29,7 +29,7 @@ router.post('/', function (req, res, next) {
            if(userDoc.password === req.body.password){
 
                let user ={
-                   userId: userDoc._id,
+                   _id: userDoc._id,
                    firstName: userDoc.firstName,
                    lastName: userDoc.lastName,
                    email: userDoc.email,
@@ -37,13 +37,45 @@ router.post('/', function (req, res, next) {
                    employer: userDoc.employer
                };
 
+               if(user.employer === undefined || user.employer === null || user.employer === "null"){
+                   console.log("This user does NOT have a registered employer");
+                   let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
 
-               let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
-               
-               res.status(200).json({
-                   token,
-                   user
-               })
+                   res.status(200).json({
+                       token,
+                       user
+                   })
+
+               } else {
+                   Employer.findById(user.employer, function(err, employerDoc){
+                       if(err){
+                           console.log("there was an error retriveing the employer for this user")
+                       }
+
+                       if(employerDoc){
+
+                           let employer = {
+                               logoImg: employerDoc.logoImg,
+                               name: employerDoc.name,
+                               applicants: employerDoc.applicants,
+                               jobs: employerDoc.jobs,
+                               socialMedia: employerDoc.socialMedia,
+                               location: employerDoc.location,
+                               _id: employerDoc._id
+                           };
+
+                           let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
+                           console.log("employer we're going to send back:", employer);
+
+                           res.status(200).json({
+                               token,
+                               user,
+                               employer
+                           });
+
+                       }
+                   })
+               }
            } else {
                res.status(401).json({
                    message: "Invalid credentials"

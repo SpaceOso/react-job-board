@@ -34,7 +34,7 @@ router.post('/dashboardinit', function (req, res) {
 				lastName: userDoc.lastName,
 				email: userDoc.email,
 				accountType: userDoc.accountType,
-				employer: userDoc.employer
+				employerId: userDoc.employer
 			};
 			
 			if (user.employer !== null) {

@@ -1,30 +1,17 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-// import { Switch, Route } from 'react-router'
-import {bindActionCreators} from 'redux';
-import {Redirect, Switch, Route} from 'react-router-dom';
 
 //actions
-import {fetchThisUserInfo} from '../../actions/authActions';
 import {submitEmployerRegistration, saveJobPost} from '../../actions/employerDashboardActions';
 
 //styles
 import './userDashboardContainer.scss';
 
 //components
-import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
-import CompRegisterComponent from "./compRegister/compRegisterComponent";
-import CreateJobComponent from './jobs/createJob/createJobComponent';
-import ApplicantListComponent from './applicant-list/applicantListComponent';
 
-//layouts
-import MainLayout from './main-layout/mainLayout';
-import EditJobsContainer from "./jobs/editJob/editJobsContainer";
-import SpinnerComponent from "../spinners/spinnerComponent";
-// import UserDashboardComponent from "./userDashboardComponent";
 import {StoreState} from "../../types/index";
-import TestDashboard from "./nav-menu/testDashboard";
 import UserDashboardComponent from "./userDashboardComponent";
+import {fetchThisUserInfo} from "../../actions/authActions";
 
 
 /*What data are we going to need?
@@ -47,19 +34,20 @@ import UserDashboardComponent from "./userDashboardComponent";
 
 /*need to show a company sign up form before proceeding*/
 
-function mapStateToProps({user, employer}: StoreState, {...props} ) {
+// function mapStateToProps({user, employer}: StoreState, {...props} ) {
+function mapStateToProps({user, employer}: StoreState ) {
+	console.log("dashboard container:", user);
 	return {
 		user,
 		employer,
-		...props
+		// ...props
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchThisUserInfo: () =>{},
-	submitJobPost: () =>{},
-	submitEmployerRegistration: () =>{},
-	saveJobPost: () =>{}
+	fetchThisUserInfo: (userId) =>{dispatch(fetchThisUserInfo(userId))},
+	saveJobPost: (jobInfo, userId) =>{dispatch(saveJobPost(jobInfo, userId))},
+	submitEmployerRegistration: (userData) =>{dispatch(submitEmployerRegistration(userData))},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardComponent);

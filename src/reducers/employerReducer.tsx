@@ -7,11 +7,11 @@ import {
 import{
     SET_EMPLOYER
 } from '../actions/authActions';
-import {StoreState} from "../types/index";
+import {Employer} from "../types/index";
 
 
 // this deals with with the employer property of the state
-function employerReducer(state:StoreState, action){
+function employerReducer(state:Employer, action):Employer{
 
     switch (action.type){
         case FETCHING_THIS_EMPLOYER_JOBS:

@@ -130,7 +130,6 @@ export function fetchingThisUserError(payloadData){
 	}
 }
 
-
 // =============================
 // FETCHING INFO
 // =============================
@@ -183,12 +182,13 @@ export function logInOnLoad(token):Object{
 
 		axios.post(`${ROOT_URL}login/logcheck`, {token})
 			.then((response)=>{
-				//response contains uer, which is our decoded token
+
+
+			//response contains uer, which is our decoded token
 				
 				//set token as part of our request headers
 				setAuth(token);
-				
-				
+
 				//send user information to be stored in the store
 				dispatch(logInUserSuccess(response.data.user));
 				
@@ -198,7 +198,6 @@ export function logInOnLoad(token):Object{
 			})
 	}
 }
-
 
 //this will dispatch the users email and password to server for verification
 export function logInUser(user) {
@@ -218,9 +217,19 @@ export function logInUser(user) {
 				
 				//set the token as part of our request header
 				setAuth(token);
-				console.log("The response from loggin in:", response);
-				//data contains user, token
-				dispatch(logInUserSuccess(response.data.user))
+
+				//TODO if the response contains an employerId dispatch an employer setter
+				console.log("the repsonse from login in:", response);
+
+				if(response.data.user.employer !== undefined || response.data.user.employer !== null){
+					console.log("this user has a registered employer and it's ID is:", response.data.user.employer);
+					dispatch(setEmployer(response.data.employer));
+					dispatch(logInUserSuccess(response.data.user));
+				} else {
+					console.log("this user does not have a registered employer");
+					//data contains user, token
+					dispatch(logInUserSuccess(response.data.user))
+				}
 
 			})
 			.catch((error) => {
@@ -232,4 +241,3 @@ export function logInUser(user) {
 	}
 	
 }
-

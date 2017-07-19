@@ -22,12 +22,20 @@ function userReducer(state: User, action):User {
 			};
 		
 		case LOGIN_USER_SUCCESS:
+			let login_user: any = {
+				...state,
+				...action.payload,
+				isAuth: true,
+				isFetching: false,
+			};
+
+			console.log("login user version:", login_user);
+
 			return {
 				...state,
 				...action.payload,
                 isAuth: true,
 				isFetching: false,
-				
 			};
 		case LOG_OUT_USER:
 			return {
@@ -42,6 +50,13 @@ function userReducer(state: User, action):User {
 			};
 			
 		case SET_USER:
+			let set_user: any = {
+				...state,
+				...action.payload,
+				isFetching: false,
+				isAuth: true
+			};
+			console.log('SET_USER VERSION', set_user );
 			return {
 				...state,
 				...action.payload,

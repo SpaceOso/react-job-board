@@ -14,19 +14,15 @@ import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
 interface Props extends RouteComponentProps<any>{
 	user: User,
 	employer: Employer,
-	fetchThisUserInfo,
-	submitJobPost,
-	saveJobPost,
-	submitEmployerRegistration
+	fetchThisUserInfo: (userId)=>{}
+	saveJobPost: (jobInfo, userId)=>{}
+	submitEmployerRegistration:(userData)=>{}
 }
-
-
 
 class UserDashboardComponent extends React.Component<Props> {
 	constructor(props) {
 		super(props);
 
-		this.fetchEmployerInfo = this.fetchEmployerInfo.bind(this);
 		this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.checkForEmployer = this.checkForEmployer.bind(this);
@@ -37,24 +33,15 @@ class UserDashboardComponent extends React.Component<Props> {
 	}
 
 	componentDidMount() {
-		this.fetchEmployerInfo();
+		// this.fetchEmployerInfo();
+		this.checkForLogInErrors();
+		this.checkForEmployer();
 	}
 
-	//this will fire when we first load into the dashboard
-	fetchEmployerInfo() {
-		//get the userId from the URL params and send it to the action creator
-		let userId = this.props.user._id;
-
-		/*TODO I think there is a bug here when you refresh while you are already inside the dashboard*/
-
-		console.log("we are going to call fetchThisUserInfo with userId:", userId);
-
-		this.props.fetchThisUserInfo(userId);
-	}
 
 	checkForLogInErrors() {
-		//TODO probably need to reroute to the login page with an error message displayed
-		return this.props.user.isAuth === false ? <Redirect to={`${'/login'}`}/> : null;
+		console.log("checkForLogInErrors:", this.props.user.isAuth);
+		return this.props.user.isAuth === false ?  <Redirect to={`${'/login'}`} push={true}/> : null;
 	}
 
 	handleEmployerRegistration(employerData){
@@ -68,9 +55,9 @@ class UserDashboardComponent extends React.Component<Props> {
 	 * Otherwise we weill load up the main layout*/
 
 	checkForEmployer(){
-		/*Currently only save employer id in this.props.user.employer*/
-		return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/>
-			: <Redirect to={`${this.props.match.url}/home`}/>;
+		console.log("checkForEmployer:", this.props.user.employerId === null);
+		return this.props.user.employerId === null ? <Redirect to={`${this.props.match.params.userId}/register`}/>
+			: <Redirect to={`${this.props.match.params.userId}/home`}/>;
 	}
 
 	/* This will handle sending the job post information to the back end.*/
@@ -84,14 +71,15 @@ class UserDashboardComponent extends React.Component<Props> {
 		if(this.props.user === null || this.props.user === undefined){
 			return <SpinnerComponent/>
 		} else {
+			console.log("inside the dashboard component with route:", this.props.match.params);
 			return (
 				<Switch>
 					{/*REGISTER COMPONENT*/}
-					<Route path={`${this.props.match.path}/register`}
+					<Route path={`${this.props.match.params.userId}/register`}
 					       render={() => {
-						       return <CompRegisterComponent
+						       return (<CompRegisterComponent
 							       submitData={this.handleEmployerRegistration}
-						       />}
+						       />)}
 					       }
 					/>
 					{/*CREATE JOB COMPONENT*/}
