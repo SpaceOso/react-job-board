@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ROOT_URL} from './index';
+import {ROOT_URL, SITE_IDLE, SITE_IS_FETCHING} from './index';
 import jwt from 'jsonwebtoken';
 
 import {setAuth, removeAuth} from '../utils/utils';
@@ -49,6 +49,20 @@ export function fetchingUser() {
 	}
 }
 
+export function setSiteIdle(){
+	return{
+		type: SITE_IDLE,
+		payload: {isFetching: false}
+	}
+}
+
+export function siteFetch(){
+	return{
+		type: SITE_IS_FETCHING,
+		payload: true,
+	}
+}
+
 export function registerUser(userObject) {
 	/*{
 	 fName: '',
@@ -63,7 +77,7 @@ export function registerUser(userObject) {
 	
 	return dispatch => {
 		
-		dispatch(fetchingUser());
+		dispatch(siteFetch());
 		
 		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
@@ -75,7 +89,8 @@ export function registerUser(userObject) {
 				setAuth(response.data.token);
 
 				dispatch(registerUserSuccess(response.data.user));
-				
+				dispatch(setSiteIdle());
+
 			})
 			.catch((error) => {
 				dispatch(registerUserError(error));

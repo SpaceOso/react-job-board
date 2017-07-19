@@ -1,5 +1,12 @@
 export const ROOT_URL = 'http://localhost:4200/';
+// =====================================
+// 	SITE ACTIONS
+// =====================================
+export const SITE_IS_FETCHING = 'SITE_IS_FETCHING';
+export type SITE_IS_FETCHING =  typeof SITE_IS_FETCHING;
 
+export const SITE_IDLE = 'SITE_IDLE';
+export type SITE_IDLE = typeof  SITE_IDLE;
 // =====================================
 // 	JOB ACTIONS
 // =====================================

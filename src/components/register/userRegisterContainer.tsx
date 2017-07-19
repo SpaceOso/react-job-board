@@ -9,15 +9,16 @@ import {registerUser} from '../../actions/authActions';
 
 //styles
 import './styles/userRegister.scss';
-import {StoreState} from "../../types/index";
+import {StoreState, User} from "../../types/index";
 
-function mapStateToProps({user}: StoreState){
+function mapStateToProps({user, siteFetching}: StoreState){
 	return {
-		user
+		user,
+		siteFetching
 	}
 }
 
 const mapDispatchToProps = (dispatch) =>({
-	registerUser: (user) => dispatch(registerUser(user))
+	registerUser: (user:User) => dispatch(registerUser(user))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(UserRegisterComponent);

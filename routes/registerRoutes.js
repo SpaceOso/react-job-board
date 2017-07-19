@@ -42,13 +42,12 @@ router.post('/', function (req, res, next) {
 			email: result.email,
 			employer: result.employer,
 			accountType: result.accountType,
-			userId: result._id
+			_id: result._id
 		};
 		
 		//TODO need to set up proper secret key
 		let token = jwt.sign(userSignature, process.env.secretkey, {expiresIn: "1 day"});
-		
-		
+
 		res.status(201).json({
 			user: userSignature,
 			token: token
