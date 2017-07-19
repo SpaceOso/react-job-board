@@ -59,7 +59,7 @@ class UserDashboardComponent extends React.Component<Props> {
 	checkForEmployer(){
 		console.log("checkForEmployer:", this.props.user.employerId);
 		console.log("check path wth..", `${this.props.location.pathname}/home`);
-		return this.props.user.employerId === null ? <Redirect to={`${this.props.location.pathname}/register`}/>
+		return this.props.user.employerId === undefined ? <Redirect to={`${this.props.location.pathname}/register`}/>
 			: <Redirect to={`${this.props.location.pathname}/home`}/>;
 	}
 
