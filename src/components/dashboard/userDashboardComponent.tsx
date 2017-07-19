@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Employer, User} from "../../types/index";
+import {Employer, SiteFetching, User} from "../../types/index";
 import {Redirect, Route, RouteComponentProps, Switch} from "react-router";
 import SpinnerComponent from "../spinners/spinnerComponent";
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
@@ -14,6 +14,7 @@ import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
 interface Props extends RouteComponentProps<any>{
 	user: User,
 	employer: Employer,
+	siteFetching: SiteFetching,
 	fetchThisUserInfo: (userId)=>{}
 	saveJobPost: (jobInfo, userId)=>{}
 	submitEmployerRegistration:(userData)=>{}

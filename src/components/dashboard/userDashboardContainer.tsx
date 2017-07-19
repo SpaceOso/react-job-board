@@ -35,12 +35,12 @@ import {fetchThisUserInfo} from "../../actions/authActions";
 /*need to show a company sign up form before proceeding*/
 
 // function mapStateToProps({user, employer}: StoreState, {...props} ) {
-function mapStateToProps({user, employer}: StoreState ) {
+function mapStateToProps({user, employer, siteFetching}: StoreState ) {
 	console.log("dashboard container:", user);
 	return {
 		user,
 		employer,
-		// ...props
+		siteFetching
 	}
 }
 
