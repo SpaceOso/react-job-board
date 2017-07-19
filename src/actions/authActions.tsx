@@ -236,7 +236,7 @@ export function logInUser(user) {
 
 				console.log("the employer id response:", response.data.user.employerId);
 				if(response.data.user.employerId !== undefined || response.data.user.employerId !== null){
-					console.log("this user has a registered employer and it's ID is:", response.data.user.employerId);
+					console.log("this user has a registered employer and its:", response.data.employer);
 					dispatch(setEmployer(response.data.employer));
 					dispatch(logInUserSuccess(response.data.user));
 				} else {
