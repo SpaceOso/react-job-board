@@ -23,7 +23,7 @@ export interface User{
 	firstName: string | null,
 	lastName: string | null,
 	email: string | null,
-	password: string | null,
+	password?: string | null,
 	employerId?: string | null,
 	// userRegistered: boolean,
 	isAuth: boolean | null,

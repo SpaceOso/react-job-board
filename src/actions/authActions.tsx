@@ -3,6 +3,7 @@ import {ROOT_URL, SITE_IDLE, SITE_IS_FETCHING} from './index';
 import jwt from 'jsonwebtoken';
 
 import {setAuth, removeAuth} from '../utils/utils';
+import {Employer, User} from "../types/index";
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const FETCHING_USER = 'FETCHING_USER';
@@ -135,7 +136,7 @@ export function logOutUser(){
 // =============================
 // SETTING EMPLOYER
 // =============================
-export function setEmployer(employer){
+export function setEmployer(employer: Employer){
 	console.log("SET_EMPLOYER:", employer);
 	return{
 		type: SET_EMPLOYER,
@@ -146,7 +147,7 @@ export function setEmployer(employer){
 // =============================
 // SETTING USER
 // =============================
-export function setUser(user){
+export function setUser(user: User){
 	return {
 		type: SET_USER,
 		payload: user
@@ -272,4 +273,12 @@ export function logInUser(user) {
 			})
 	}
 	
+}
+
+export function registerCompLogin(response){
+	return dispatch => {
+		dispatch(fetchingUser());
+		dispatch(setEmployer(response.data.employer));
+		dispatch(logInUserSuccess(response.data.user));
+	}
 }

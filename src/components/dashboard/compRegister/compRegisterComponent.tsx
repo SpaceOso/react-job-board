@@ -56,6 +56,7 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 	}
 	
 	render() {
+		//TODO NEED TO CHECK THAT ONCE WE REGISTER COMPANY WE REDIRECT TO THE DASHBOARD HOME
 		return (
 			<div className="comp-register">
 				<h1>We need to set up your employer before we can start!</h1>

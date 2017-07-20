@@ -56,7 +56,7 @@ class LogInComponent extends React.Component<MyProps, MyState> {
 
     render() {
         return (
-            this.props.user.isFetching ?
+            this.props.user === null || this.props.user.isFetching === true ?
 
                 <SpinnerComponent/> :
 

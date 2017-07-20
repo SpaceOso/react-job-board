@@ -73,10 +73,31 @@ router.post('/register', function (req, res, next) {
 						}
 						
 						//TODO need to create a local user object, right now we're sending passwords again
+						console.log("this will be the source for the local employer..", employer);
 						console.log("and we're done!");
+
+						let localUser = {
+							employerId: user.employerId,
+							firstName: user.firstName,
+							lastName: user.lastName,
+							email: user.email,
+							_id: user._id
+						};
+
+						let localEmployer = {
+							name: employer.name,
+							logoImg: employer.logoImg,
+							_id: employer._id,
+							applicants: employer.applicants,
+							jobs: employer.jobs,
+							socialMedia: employer.socialMedia,
+							location: employer.location,
+						};
+
+						// TODO NEED TO CREATE A TOKEN SINCE WE ARE GOING TO BE LOGGIN IN AT THIS POINT
 						res.status(201).json({
-							employer: employer,
-							user: user
+							employer: localEmployer,
+							user: localUser
 						})
 					})
 				}
