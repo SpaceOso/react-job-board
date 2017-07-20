@@ -11,6 +11,7 @@ export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
 export const REGISTER_EMPLOYER_SUCCESS = "REGISTER_EMPLOYER_SUCCESS";
 export const EDITING_JOB_POST = "EDITING_JOB_POST";
 export const EDITING_JOB_POST_SUCCESS = "EDITING_JOB_POST_SUCCESS";
+export const REMOVING_EMPLOYER = "REMOVING_EMPLOYER";
 
 /*What are some of the actions you expect the dashboard to require?
  * Get all jobs

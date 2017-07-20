@@ -60,7 +60,7 @@ export interface privateEmployerView extends Employer{
 export interface StoreState {
 	jobs?: Job[],
 	user?: User | null,
-	employer?: Employer,
+	employer?: Employer | null,
 	currentJobPost?: CurrentJobPost,
 	siteFetching?: SiteFetching
 }

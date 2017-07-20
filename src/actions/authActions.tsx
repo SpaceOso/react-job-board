@@ -16,6 +16,7 @@ export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 export const SET_USER = 'SET_USER';
 export const SET_EMPLOYER = 'SET_EMPLOYER';
+export const LOG_OUT_EMPLOYER = 'LOG_OUT_EMPLOYER';
 
 export const LOG_OUT_USER = 'LOG_OUT_USER';
 
@@ -63,6 +64,8 @@ export function siteFetch(){
 	}
 }
 
+
+
 export function registerUser(userObject) {
 	/*{
 	 fName: '',
@@ -103,17 +106,32 @@ export function registerUser(userObject) {
 // =============================
 // CLEAR
 // =============================
-export function logOutUser(){
-	
-	//clear the local storaage
-	localStorage.clear();
-	removeAuth();
-	
+export function clearEmployer(){
+	return{
+		type: LOG_OUT_EMPLOYER,
+		payload: "log out employer"
+	}
+}
+
+export function clearUser(){
 	return{
 		type: LOG_OUT_USER,
 		payload: "user being logged out..."
 	}
 }
+
+export function logOutUser(){
+	
+	//clear the local storage
+	localStorage.clear();
+	removeAuth();
+
+	return dispatch =>{
+		dispatch(clearEmployer());
+		dispatch(clearUser());
+	}
+}
+
 // =============================
 // SETTING EMPLOYER
 // =============================
