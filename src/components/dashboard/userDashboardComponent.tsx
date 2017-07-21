@@ -82,9 +82,11 @@ class UserDashboardComponent extends React.Component<Props> {
 
 					{/*REGISTER COMPONENT*/}
 					<Route path={`${this.props.match.path}/register`}
-					       render={() => {
+					       render={(props) => {
 						       return (<CompRegisterComponent
 							       submitData={this.handleEmployerRegistration}
+							       user={this.props.user}
+							       {...props}
 						       />)}
 					       }
 					/>
@@ -125,6 +127,8 @@ class UserDashboardComponent extends React.Component<Props> {
 	render() {
 		console.log("DASHBOARD RENDER IS BEING CALLED");
 
+
+
 		return (
 			<div className="jb-dashboard">
 				{this.checkForLogInErrors()}
@@ -144,6 +148,6 @@ class UserDashboardComponent extends React.Component<Props> {
 			</div>
 		)
 	}
-};
+}
 
 export default UserDashboardComponent;
