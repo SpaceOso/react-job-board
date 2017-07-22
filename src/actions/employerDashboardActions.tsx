@@ -2,10 +2,11 @@ import axios from 'axios';
 import {ROOT_URL} from './index';
 import jwt from 'jsonwebtoken';
 
-import setAuth from '../utils/utils';
+import {setAuth} from '../utils/utils';
+import {fetchingJobs} from "./jobActions";
+import {Employer} from "../types/index";
+import {registerCompLogin, setEmployer, setUser} from "./authActions";
 
-export const GET_ALL_JOBS = "GET_ALL_JOBS";
-export const GET_JOB_BY_ID = "GET_JOB_BY_ID";
 export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
 export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
 export const REGISTER_EMPLOYER_SUCCESS = "REGISTER_EMPLOYER_SUCCESS";
@@ -75,16 +76,20 @@ export function saveJobPost(jobPostInfo, userId) {
 
 };
 
-export function submitEmployerRegistration(employerInfo) {
+export function submitEmployerRegistration(employerInfo: Employer) {
     console.log("will be making a post request with the following info.", employerInfo);
 
     return dispatch => {
         dispatch(fetchingThisEmployerInfo());
         axios.post(`${ROOT_URL}employer/register`, employerInfo)
             .then((response) => {
-                /*TODO need to dispatch the response to set the state with the employer info and user info*/
+
                 /*recieving {token, employer}*/
-                console.log(response);
+                console.log("this is the response once we register a company:", response);
+                /*TODO need to dispatch the response to set the state with the employer info and user info*/
+                // dispatch(setEmployer(response.data.employer));
+                // dispatch(setUser(response.data.user));
+                dispatch(registerCompLogin(response));
             })
             .catch((error) => console.log(error))
     }

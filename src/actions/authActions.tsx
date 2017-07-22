@@ -1,8 +1,9 @@
 import axios from 'axios';
-import {ROOT_URL} from './index';
+import {ROOT_URL, SITE_IDLE, SITE_IS_FETCHING} from './index';
 import jwt from 'jsonwebtoken';
 
 import {setAuth, removeAuth} from '../utils/utils';
+import {Employer, User} from "../types/index";
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const FETCHING_USER = 'FETCHING_USER';
@@ -16,6 +17,7 @@ export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 export const SET_USER = 'SET_USER';
 export const SET_EMPLOYER = 'SET_EMPLOYER';
+export const LOG_OUT_EMPLOYER = 'LOG_OUT_EMPLOYER';
 
 export const LOG_OUT_USER = 'LOG_OUT_USER';
 
@@ -49,6 +51,22 @@ export function fetchingUser() {
 	}
 }
 
+export function setSiteIdle(){
+	return{
+		type: SITE_IDLE,
+		payload: {isFetching: false}
+	}
+}
+
+export function siteFetch(){
+	return{
+		type: SITE_IS_FETCHING,
+		payload: true,
+	}
+}
+
+
+
 export function registerUser(userObject) {
 	/*{
 	 fName: '',
@@ -63,7 +81,7 @@ export function registerUser(userObject) {
 	
 	return dispatch => {
 		
-		dispatch(fetchingUser());
+		dispatch(siteFetch());
 		
 		axios.post(`${ROOT_URL}register`, userObject)
 			.then((response) => {
@@ -75,7 +93,8 @@ export function registerUser(userObject) {
 				setAuth(response.data.token);
 
 				dispatch(registerUserSuccess(response.data.user));
-				
+				dispatch(setSiteIdle());
+
 			})
 			.catch((error) => {
 				dispatch(registerUserError(error));
@@ -88,21 +107,36 @@ export function registerUser(userObject) {
 // =============================
 // CLEAR
 // =============================
-export function logOutUser(){
-	
-	//clear the local storaage
-	localStorage.clear();
-	removeAuth();
-	
+export function clearEmployer(){
+	return{
+		type: LOG_OUT_EMPLOYER,
+		payload: "log out employer"
+	}
+}
+
+export function clearUser(){
 	return{
 		type: LOG_OUT_USER,
 		payload: "user being logged out..."
 	}
 }
+
+export function logOutUser(){
+	
+	//clear the local storage
+	localStorage.clear();
+	removeAuth();
+
+	return dispatch =>{
+		dispatch(clearEmployer());
+		dispatch(clearUser());
+	}
+}
+
 // =============================
 // SETTING EMPLOYER
 // =============================
-export function setEmployer(employer){
+export function setEmployer(employer: Employer){
 	console.log("SET_EMPLOYER:", employer);
 	return{
 		type: SET_EMPLOYER,
@@ -113,7 +147,7 @@ export function setEmployer(employer){
 // =============================
 // SETTING USER
 // =============================
-export function setUser(user){
+export function setUser(user: User){
 	return {
 		type: SET_USER,
 		payload: user
@@ -221,7 +255,7 @@ export function logInUser(user) {
 
 				console.log("the employer id response:", response.data.user.employerId);
 				if(response.data.user.employerId !== undefined || response.data.user.employerId !== null){
-					console.log("this user has a registered employer and it's ID is:", response.data.user.employerId);
+					console.log("this user has a registered employer and its:", response.data.employer);
 					dispatch(setEmployer(response.data.employer));
 					dispatch(logInUserSuccess(response.data.user));
 				} else {
@@ -239,4 +273,12 @@ export function logInUser(user) {
 			})
 	}
 	
+}
+
+export function registerCompLogin(response){
+	return dispatch => {
+		dispatch(fetchingUser());
+		dispatch(setEmployer(response.data.employer));
+		dispatch(logInUserSuccess(response.data.user));
+	}
 }

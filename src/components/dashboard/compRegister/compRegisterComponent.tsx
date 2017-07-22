@@ -2,10 +2,14 @@ import * as React from "react";
 
 //styles
 import "./styles/compRegisterComponent.scss";
+import {User} from "../../../types/index";
+import SpinnerComponent from "../../spinners/spinnerComponent";
+import {Redirect, RouteComponentProps} from "react-router";
 
 
-interface compRegisterProps{
+interface compRegisterProps extends RouteComponentProps<any>{
 	submitData
+	user
 }
 
 interface MyState{
@@ -40,6 +44,7 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 		
 		this.handleChange = this.handleChange.bind(this);
 		this.handleEmployerSubmit = this.handleEmployerSubmit.bind(this);
+		this.renderRegisterForm = this.renderRegisterForm.bind(this);
 	}
 
 	handleEmployerSubmit(){
@@ -54,8 +59,8 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 		
 		this.setState(keyObject);
 	}
-	
-	render() {
+
+	renderRegisterForm(){
 		return (
 			<div className="comp-register">
 				<h1>We need to set up your employer before we can start!</h1>
@@ -66,14 +71,14 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 							<div id="company-name-container">
 								<label htmlFor="company-name">Company Name:</label>
 								<input type="text"
-									   required
+								       required
 								       id="company-name"
 								       placeholder="enter company name"
 								       value={this.state.name}
 								       onChange={(event) => this.handleChange('name', event.target.value)}
 								/>
 							</div>
-							
+
 							<div id="company-logo-container">
 								<label htmlFor="company-logo">logo image:</label>
 								<input type="text"
@@ -83,15 +88,15 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 								       onChange={(event) => this.handleChange('logoImg', event.target.value)}
 								/>
 							</div>
-						
+
 						</div>
-						
+
 						<div id="location-group">
 							<h3>Location</h3>
 							<div>
 								{/*<label htmlFor="company-address">address:</label>*/}
 								<input type="text"
-									   required
+								       required
 								       id="company-address"
 								       placeholder="address"
 								       value={this.state.address}
@@ -101,7 +106,7 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 							<div>
 								{/*<label htmlFor="company-city">city:</label>*/}
 								<input type="text"
-									   required
+								       required
 								       id="company-city"
 								       placeholder="city"
 								       value={this.state.city}
@@ -111,7 +116,7 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 							<div>
 								{/*<label htmlFor="company-state">state:</label>*/}
 								<input type="text"
-									   required
+								       required
 								       id="company-state"
 								       placeholder="state"
 								       value={this.state.state}
@@ -121,7 +126,7 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 							<div>
 								{/*<label htmlFor="company-zip">zip</label>*/}
 								<input type="text"
-									   required
+								       required
 								       id="company-zip"
 								       placeholder="zip"
 								       value={this.state.zip}
@@ -129,14 +134,14 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 								/>
 							</div>
 						</div>
-						
-						
+
+
 						<div id="social-media">
 							<h3>Social Media</h3>
 							<div>
 								{/*<label htmlFor="company-website">Company Website:</label>*/}
 								<input type="text"
-									   required
+								       required
 								       id="company-website"
 								       placeholder="website"
 								       value={this.state.website}
@@ -176,6 +181,19 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 				</div>
 			</div>
 		)
+	}
+
+	render() {
+		//TODO NEED TO CHECK THAT ONCE WE REGISTER COMPANY WE REDIRECT TO THE DASHBOARD HOME
+		if(this.props.user.isFetching){
+			return <SpinnerComponent />;
+		}
+
+		if(this.props.user.employerId !== undefined || this.props.user.employerId !== null){
+			return <Redirect to={`${'/user/dashboard/'}${this.props.user._id}`} />
+		}
+
+		return this.renderRegisterForm();
 	}
 }
 

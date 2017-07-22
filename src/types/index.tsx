@@ -14,7 +14,7 @@ export interface privateJobView extends Job{
 	applicants: string[]
 }
 
-export interface isFetching{
+export interface SiteFetching{
 	isFetching: boolean
 }
 
@@ -23,7 +23,7 @@ export interface User{
 	firstName: string | null,
 	lastName: string | null,
 	email: string | null,
-	password: string | null,
+	password?: string | null,
 	employerId?: string | null,
 	// userRegistered: boolean,
 	isAuth: boolean | null,
@@ -60,7 +60,7 @@ export interface privateEmployerView extends Employer{
 export interface StoreState {
 	jobs?: Job[],
 	user?: User | null,
-	employer?: Employer,
+	employer?: Employer | null,
 	currentJobPost?: CurrentJobPost,
-	isFetching?: boolean
+	siteFetching?: SiteFetching
 }

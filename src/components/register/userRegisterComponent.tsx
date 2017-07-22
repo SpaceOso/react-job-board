@@ -8,13 +8,15 @@ import {registerUser} from '../../actions/authActions';
 
 //styles
 import './styles/userRegister.scss';
-import {User} from "../../types/index";
+import {SiteFetching, User} from "../../types/index";
+import SpinnerComponent from "../spinners/spinnerComponent";
 
-export interface registerComponent{
+export interface registerComponent {
 	event: Event,
 	redirect: false
-	registerUser: (arg) => any,
+	registerUser: (user) => any,
 	user: User,
+	siteFetching: SiteFetching,
 	errors: {
 		fName: boolean,
 		lName: boolean,
@@ -76,32 +78,32 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 			}
 		};
 
+		this.returnRegisterForm = this.returnRegisterForm.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.redirectToDashboard = this.redirectToDashboard.bind(this);
 	}
-	
+
 	handleSubmit() {
 		(event as Event).preventDefault();
 		this.props.registerUser(this.state.user);
 	}
-	
+
 	redirectToDashboard() {
 		return (
 			<Redirect to={`/user/dashboard/${this.props.user._id}`} push/>
 		)
 	}
-	
+
 	handleChange(key, event) {
 		let keyObject = {...this.state.user};
-		
+
 		keyObject[key] = event;
-		
+
 		this.setState({user: keyObject});
 	}
-	
-	
-	render() {
+
+	returnRegisterForm() {
 		return (
 			<div className="employer-register-Component">
 				Please fill out this form to create your FREE account with us!
@@ -156,7 +158,7 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 							onChange={(event) => this.handleChange('password', event.target.value)}
 							value={this.state.user.password}
 							required/>
-					
+
 					</div>
 					<div className="jb-form-group">
 						<label htmlFor="employer-password-verify">Verify password:</label>
@@ -184,6 +186,15 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 				{this.props.user.employerId !== undefined ? this.redirectToDashboard() : null}
 			</div>
 		)
+	}
+
+	render() {
+
+		if(this.props.siteFetching.isFetching === true){
+			return <SpinnerComponent />
+		} else {
+			return this.returnRegisterForm();
+		}
 	}
 }
 

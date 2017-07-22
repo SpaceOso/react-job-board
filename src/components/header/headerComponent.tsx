@@ -1,10 +1,7 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 //actions
-import {logOutUser} from '../../actions/authActions';
 import {User} from "../../types/index";
 
 
@@ -34,7 +31,7 @@ class HeaderComponent extends React.Component<MyProps, any> {
 			</Link>
 		);
 		
-		return this.props.user.isAuth === false ? "" : logOut;
+		return this.props.user.isAuth === undefined || this.props.user.isAuth === false ? "": logOut;
 	}
 	
 	
@@ -61,11 +58,11 @@ class HeaderComponent extends React.Component<MyProps, any> {
 				
 				<Link to={"/login"}>
 					<div className="nav-item">
-						{this.props.user.isAuth === undefined || this.props.user.isAuth === false ? "Log In" : "Dashboard"}
+						{this.props.user === null || this.props.user.isAuth === false || this.props.user.isAuth === undefined ? "Log In" : "Dashboard"}
 					</div>
 				</Link>
 				
-				{this.showLogOut()}
+				{ this.props.user !== null ? this.showLogOut() : null}
 
 			</div>
 		)}

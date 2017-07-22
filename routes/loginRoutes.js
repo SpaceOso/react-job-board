@@ -37,7 +37,7 @@ router.post('/', function (req, res, next) {
                    employerId: userDoc.employerId
                };
 
-               if(user.employer === undefined || user.employer === null || user.employer === "null"){
+               if(user.employerId === undefined || user.employerId === null || user.employerId === "null"){
                    console.log("This user does NOT have a registered employer");
                    let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
 
@@ -47,7 +47,7 @@ router.post('/', function (req, res, next) {
                    })
 
                } else {
-                   Employer.findById(user.employer, function(err, employerDoc){
+                   Employer.findById(user.employerId, function(err, employerDoc){
                        if(err){
                            console.log("there was an error retriveing the employer for this user")
                        }

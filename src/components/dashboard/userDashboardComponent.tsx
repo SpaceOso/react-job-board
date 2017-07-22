@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Employer, User} from "../../types/index";
+import {Employer, SiteFetching, User} from "../../types/index";
 import {Redirect, Route, RouteComponentProps, Switch} from "react-router";
 import SpinnerComponent from "../spinners/spinnerComponent";
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
@@ -14,9 +14,16 @@ import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
 interface Props extends RouteComponentProps<any> {
 	user: User,
 	employer: Employer,
+<<<<<<< HEAD
 	fetchThisUserInfo: (userId) => {}
 	saveJobPost: (jobInfo, userId) => {}
 	submitEmployerRegistration: (userData) => {}
+=======
+	siteFetching: SiteFetching,
+	fetchThisUserInfo: (userId)=>{}
+	saveJobPost: (jobInfo, userId)=>{}
+	submitEmployerRegistration:(userData)=>{}
+>>>>>>> efae7047a50d8efb9ef584d7f4ff1c1dca6ea39a
 }
 
 /*What is the purpose of this component?
@@ -63,7 +70,7 @@ class UserDashboardComponent extends React.Component<Props> {
 	checkForEmployer() {
 		console.log("checkForEmployer:", this.props.user.employerId);
 		console.log("check path wth..", `${this.props.location.pathname}/home`);
-		return this.props.user.employerId === null ? <Redirect to={`${this.props.location.pathname}/register`}/>
+		return this.props.user.employerId === undefined ? <Redirect to={`${this.props.location.pathname}/register`}/>
 			: <Redirect to={`${this.props.location.pathname}/home`}/>;
 	}
 
@@ -73,7 +80,69 @@ class UserDashboardComponent extends React.Component<Props> {
 		console.log("we are saving a job with this info:", jobPost);
 	}
 
+<<<<<<< HEAD
 	createSwitchRoutes() {
+=======
+	/*Will show spinner as we gather the user information for the dashboard*/
+	waitForLoad(){
+		// if(this.props.user === null || this.props.user === undefined){
+		if(this.props.user.isFetching){
+			return <SpinnerComponent/>
+		} else {
+			console.log("inside the dashboard component with route:", this.props.match.params);
+			return (
+				<Switch>
+
+					{/*REGISTER COMPONENT*/}
+					<Route path={`${this.props.match.path}/register`}
+					       render={(props) => {
+						       return (<CompRegisterComponent
+							       submitData={this.handleEmployerRegistration}
+							       user={this.props.user}
+							       {...props}
+						       />)}
+					       }
+					/>
+					{/*CREATE JOB COMPONENT*/}
+					<Route path={`${this.props.match.path}/createjob`}
+					       render={props => (
+						       <CreateJobComponent
+							       userId={this.props.user._id}
+							       employer={this.props.user.employerId}
+							       submitJobPost={this.submitJobPost}
+							       {...props}
+						       />
+					       )}
+					/>
+					{/*EDIT POSTINGS COMPONENT*/}
+					<Route path={`${this.props.match.path}/editpostings`}
+					       render={props =>(
+						       <EditJobsComponent
+							       employer={this.props.employer}
+							       jobs={this.props.employer.jobs}
+						       />
+					       )}
+					/>
+					{/*APPLICANT LIST COMPONENT*/}
+					<Route path={`${this.props.match.path}/home`}
+					       render={props => (
+						       <ApplicantListComponent
+							       user={this.props.user}
+							       employer={this.props.employer}
+						       />
+					       )}
+					/>
+				</Switch>
+			)
+		}
+	}
+
+	render() {
+		console.log("DASHBOARD RENDER IS BEING CALLED");
+
+
+
+>>>>>>> efae7047a50d8efb9ef584d7f4ff1c1dca6ea39a
 		return (
 			<div className="jb-dashboard">
 				{/*NAV MENU*/}
@@ -129,6 +198,7 @@ class UserDashboardComponent extends React.Component<Props> {
 			</div>
 		)
 	}
+<<<<<<< HEAD
 
 	render() {
 
@@ -144,5 +214,8 @@ class UserDashboardComponent extends React.Component<Props> {
 		return this.createSwitchRoutes();
 	}
 };
+=======
+}
+>>>>>>> efae7047a50d8efb9ef584d7f4ff1c1dca6ea39a
 
 export default UserDashboardComponent;
