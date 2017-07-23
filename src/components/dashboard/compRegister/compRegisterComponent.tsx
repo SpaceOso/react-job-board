@@ -9,7 +9,7 @@ import {Redirect, RouteComponentProps} from "react-router";
 
 interface compRegisterProps extends RouteComponentProps<any>{
 	submitData
-	user
+	user: User
 }
 
 interface MyState{
@@ -184,13 +184,12 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 	}
 
 	render() {
-		//TODO NEED TO CHECK THAT ONCE WE REGISTER COMPANY WE REDIRECT TO THE DASHBOARD HOME
 		if(this.props.user.isFetching){
 			return <SpinnerComponent />;
 		}
 
-		if(this.props.user.employerId !== undefined || this.props.user.employerId !== null){
-			return <Redirect to={`${'/user/dashboard/'}${this.props.user._id}`} />
+		if(this.props.user.employerId !== null){
+			return <Redirect to={`${'/user/dashboard/'}${this.props.user._id} `} />
 		}
 
 		return this.renderRegisterForm();

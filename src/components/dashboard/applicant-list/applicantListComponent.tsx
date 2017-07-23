@@ -11,6 +11,7 @@ class ApplicantListComponent extends React.Component<MyProps>{
 		return(
 			<div>
 				<h1>Welcome {this.props.user.firstName}!!</h1>
+				<h3>This should be displayed in the home page of the dashboard</h3>
 				<h1>Click to view info on applicants of {this.props.employer.name}</h1>
 			</div>
 		)

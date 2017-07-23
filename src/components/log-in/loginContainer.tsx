@@ -6,13 +6,14 @@ import {connect} from 'react-redux'
 import LoginComponent from './logInComponent';
 //styles
 import './styles/loginComponent.scss';
-import {StoreState} from "../../types/index";
+import {StoreState, User} from "../../types/index";
 import {logInUser} from "../../actions/authActions";
 
 
-function mapStateToProps({user}:StoreState) {
+function mapStateToProps({user, siteFetching}:StoreState) {
 	return {
-		user
+		user,
+		siteFetching
 	}
 }
 

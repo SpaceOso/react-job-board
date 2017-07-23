@@ -23,15 +23,6 @@ function userReducer(state: User, action): any{
 			};
 		
 		case LOGIN_USER_SUCCESS:
-			let login_user: any = {
-				...state,
-				...action.payload,
-				isAuth: true,
-				isFetching: false,
-			};
-
-			console.log("login user version:", login_user);
-
 			return {
 				...state,
 				...action.payload,

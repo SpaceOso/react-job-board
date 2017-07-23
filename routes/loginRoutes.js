@@ -33,9 +33,10 @@ router.post('/', function (req, res, next) {
                    firstName: userDoc.firstName,
                    lastName: userDoc.lastName,
                    email: userDoc.email,
-                   accountType: userDoc.accountType,
-                   employerId: userDoc.employerId
+                   employerId: userDoc.employerId === undefined ? null : userDoc.employerId
                };
+
+               console.log("and now the user is:", user);
 
                if(user.employerId === undefined || user.employerId === null || user.employerId === "null"){
                    console.log("This user does NOT have a registered employer");

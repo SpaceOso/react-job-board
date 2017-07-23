@@ -4,12 +4,12 @@ import * as React from 'react';
 import './styles/loginComponent.scss';
 import SpinnerComponent from "../spinners/spinnerComponent";
 import {Redirect} from "react-router";
-import {User} from "../../types/index";
+import {SiteFetching, User} from "../../types/index";
 
 interface MyProps{
     user: User,
     logInUser:(userINfo)=>{},
-    isFetching,
+    siteFetching: SiteFetching,
 }
 
 interface MyState{
@@ -56,7 +56,7 @@ class LogInComponent extends React.Component<MyProps, MyState> {
 
     render() {
         return (
-            this.props.user === null || this.props.user.isFetching === true ?
+            this.props.siteFetching.isFetching === true ?
 
                 <SpinnerComponent/> :
 
@@ -66,7 +66,7 @@ class LogInComponent extends React.Component<MyProps, MyState> {
                 <h1>Enter the following information to log in</h1>
                 <h3>{this.props.user.error}</h3>
                 <div>
-                    {this.props.isFetching === true ? <SpinnerComponent/> : null}
+                    {this.props.siteFetching.isFetching ? <SpinnerComponent/> : null}
                 </div>
                 <form action="" onSubmit={() => this.handleSubmit()}>
                     <div className="jb-form-group">

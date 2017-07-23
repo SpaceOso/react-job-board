@@ -242,7 +242,7 @@ export function logInUser(user) {
 	};*/
 	return dispatch => {
 		
-		dispatch(fetchingUser());
+		dispatch(siteFetch());
 		
 		axios.post(`${ROOT_URL}login`, user)
 			.then((response) => {
@@ -254,10 +254,11 @@ export function logInUser(user) {
 				setAuth(token);
 
 				console.log("the employer id response:", response.data.user.employerId);
-				if(response.data.user.employerId !== undefined || response.data.user.employerId !== null){
-					console.log("this user has a registered employer and its:", response.data.employer);
+				if(response.data.user.employerId !== null){
+					console.log("this user has a registered employer and its:", response.data.employerId);
 					dispatch(setEmployer(response.data.employer));
 					dispatch(logInUserSuccess(response.data.user));
+					dispatch(setSiteIdle());
 				} else {
 					console.log("this user does not have a registered employer");
 					//data contains user, token

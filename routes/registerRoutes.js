@@ -12,8 +12,7 @@ router.post('/', function (req, res, next) {
 	    lastName: req.body.lName,
 	    email: req.body.email,
 	    password: req.body.password, //TODO need to hash this
-	    employer: null,
-	    accountType: req.body.accountType
+	    employerId: null
     });
 	
 	user.save(function (err, result) {
@@ -35,13 +34,14 @@ router.post('/', function (req, res, next) {
 		 accountType: 'user',
 		 _id: **** }
 		 */
-		
+
+		//TODO need to set the employer property so react knows it's not there
+		console.log("When registering new user the result after we save it is:", result);
 		let userSignature = {
 			firstName: result.firstName,
 			lastName: result.lastName,
 			email: result.email,
-			employer: result.employer,
-			accountType: result.accountType,
+			employerId: null,
 			_id: result._id
 		};
 		

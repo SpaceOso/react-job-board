@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Employer, User} from "../../types/index";
+import {Employer, SiteFetching, User} from "../../types/index";
 import {Redirect, Route, RouteComponentProps, Switch} from "react-router";
 import SpinnerComponent from "../spinners/spinnerComponent";
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
@@ -14,6 +14,7 @@ import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
 interface Props extends RouteComponentProps<any> {
 	user: User,
 	employer: Employer,
+	siteFetching: SiteFetching,
 	fetchThisUserInfo: (userId) => {}
 	saveJobPost: (jobInfo, userId) => {}
 	submitEmployerRegistration: (userData) => {}
@@ -29,7 +30,7 @@ interface Props extends RouteComponentProps<any> {
  *Why does it error out sometimes with null user?
  *   I think we need to redirect user out of here first then null out the user in the state.*/
 
-class UserDashboardComponent extends React.Component<Props> {
+class UserDashboardComponent extends React.Component<Props, any> {
 	constructor(props) {
 		super(props);
 
@@ -37,17 +38,13 @@ class UserDashboardComponent extends React.Component<Props> {
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.checkForEmployer = this.checkForEmployer.bind(this);
 		this.submitJobPost = this.submitJobPost.bind(this);
-		this.createSwitchRoutes = this.createSwitchRoutes.bind(this);
 
 		// this.fetchEmployerInfo();
 	}
 
+	/*If the user doesn't have an ID we need them to login again.*/
 	checkForLogInErrors() {
-		console.log("checkForLogInErrors:", this.props.user._id === undefined);
-		if (this.props.user._id === undefined) {
-			console.log("we should be re-routing to the login page then...", this.props.match);
-		}
-		return this.props.user._id === undefined ? <Redirect to={'/login'}/> : null;
+		return this.props.user._id === null || this.props.user._id === undefined || this.props.user === undefined ? <Redirect to={'/login'}/> : null;
 	}
 
 	handleEmployerRegistration(employerData) {
@@ -59,24 +56,30 @@ class UserDashboardComponent extends React.Component<Props> {
 	/*This will check to see if the user property has an employer listed.
 	 * If it does not we will display the employer registration component.
 	 * Otherwise we weill load up the main layout*/
-
 	checkForEmployer() {
-		console.log("checkForEmployer:", this.props.user.employerId);
-		console.log("check path wth..", `${this.props.location.pathname}/home`);
-		return this.props.user.employerId === null ? <Redirect to={`${this.props.location.pathname}/register`}/>
-			: <Redirect to={`${this.props.location.pathname}/home`}/>;
+		return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
 	}
 
 	/* This will handle sending the job post information to the back end.*/
 	submitJobPost(jobPost) {
 		this.props.saveJobPost(jobPost, this.props.user._id);
-		console.log("we are saving a job with this info:", jobPost);
 	}
 
-	createSwitchRoutes() {
+	render() {
+		let login: any = null;
+
+
+		if (this.props.siteFetching.isFetching === true) {
+			return <SpinnerComponent/>
+		}
+
+		if(this.props.user._id === undefined){
+			login = <Redirect to={'/login'}/>;
+		}
 		return (
 			<div className="jb-dashboard">
 				{/*NAV MENU*/}
+
 				<Route path={`${this.props.match.path}`}
 				       render={props => (
 					       <UserDashboardNavMenu
@@ -85,12 +88,15 @@ class UserDashboardComponent extends React.Component<Props> {
 				       }
 				/>
 				<div className="layout-container">
+
 					<Switch>
 						{/*REGISTER COMPONENT*/}
 						<Route path={`${this.props.match.path}/register`}
-						       render={() => {
+						       render={(props) => {
 							       return (<CompRegisterComponent
 								       submitData={this.handleEmployerRegistration}
+								       user={this.props.user}
+								       {...props}
 							       />)
 						       }
 						       }
@@ -125,22 +131,14 @@ class UserDashboardComponent extends React.Component<Props> {
 						       )}
 						/>
 					</Switch>
+					{console.log("towards the end with:", this.props.user._id)}
+
+					{this.checkForEmployer()}
 				</div>
+				{login}
 			</div>
 		)
 	}
-
-	render() {
-
-		if (this.props.user.isFetching) {
-			return <SpinnerComponent/>
-		}
-
-		this.checkForLogInErrors();
-		this.checkForEmployer();
-		this.createSwitchRoutes();
-	}
-}
-;
+};
 
 export default UserDashboardComponent;
