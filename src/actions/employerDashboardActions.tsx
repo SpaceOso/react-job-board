@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import {setAuth} from '../utils/utils';
 import {fetchingJobs} from "./jobActions";
 import {Employer} from "../types/index";
-import {registerCompLogin, setEmployer, setUser, siteFetch} from "./authActions";
+import {registerCompLogin, setEmployer, setEmployerAndUser, setUser, siteFetch} from "./authActions";
 
 export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
 export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
@@ -89,7 +89,9 @@ export function submitEmployerRegistration(employerInfo: Employer) {
                 /*TODO need to dispatch the response to set the state with the employer info and user info*/
                 // dispatch(setEmployer(response.data.employer));
                 // dispatch(setUser(response.data.user));
-                dispatch(registerCompLogin(response));
+                // dispatch(registerCompLogin(response));
+
+                dispatch(setEmployerAndUser(response));
             })
             .catch((error) => console.log(error))
     }

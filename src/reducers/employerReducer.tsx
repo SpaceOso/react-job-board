@@ -8,11 +8,29 @@ import{
     SET_EMPLOYER,
     LOG_OUT_EMPLOYER
 } from '../actions/authActions';
-import {Employer} from "../types/index";
+import {Employer, Job} from "../types/index";
 
+const defaultState: Employer = {
+    _id: null,
+	name: '',
+	location: {
+		address: '',
+		city: '',
+		state: '',
+		zip: 0
+	},
+	logoImg: '',
+	socialMedia: {
+		website: '',
+		twitter: '',
+		facebook: '',
+		linkedin: ''
+	},
+	jobs: null,
+};
 
 // this deals with with the employer property of the state
-function employerReducer(state:Employer, action):any{
+function employerReducer(state = defaultState, action):any{
 
     switch (action.type){
         case FETCHING_THIS_EMPLOYER_JOBS:

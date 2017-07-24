@@ -25,7 +25,6 @@ interface MyState {
 	}
 }
 
-
 class JobPostLayout extends React.Component<jobPostProps, MyState> {
 	constructor(props) {
 		super(props);
@@ -60,7 +59,9 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 		if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
 			console.log('DISPLAYING THE SPINNER');
 			return <SpinnerComponent/>
-		} else {
+		}
+
+		if(this.props.employer.name !== null)	{
 			console.log("DISPLAYING THE JOB POST INFO");
 			return (
 				<div className="job-post-container">
@@ -68,6 +69,8 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 					<JobPostEmployerInfoComponent employer={this.props.currentJobPost} loadJob={this.loadNewJob}/>
 				</div>
 			)
+		} else {
+			return null;
 		}
 	}
 }

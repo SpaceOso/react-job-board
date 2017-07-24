@@ -52,6 +52,7 @@ export function fetchingUser() {
 }
 
 export function setSiteIdle(){
+	console.log("setSiteIdle()");
 	return{
 		type: SITE_IDLE,
 		payload: {isFetching: false}
@@ -203,6 +204,7 @@ export function logInUserError(error) {
 
 //requires a user and token property
 export function logInUserSuccess(data) {
+	console.log("logInUserSuccess:", data);
 	return {
 		type: LOGIN_USER_SUCCESS,
 		payload: data
@@ -256,9 +258,10 @@ export function logInUser(user) {
 				console.log("the employer id response:", response.data.user.employerId);
 				if(response.data.user.employerId !== null){
 					console.log("this user has a registered employer and its:", response.data.employerId);
-					dispatch(setEmployer(response.data.employer));
-					dispatch(logInUserSuccess(response.data.user));
-					dispatch(setSiteIdle());
+					dispatch(setEmployerAndUser(response));
+					// dispatch(setEmployer(response.data.employer));
+					// dispatch(logInUserSuccess(response.data.user));
+					// dispatch(setSiteIdle());
 				} else {
 					console.log("this user does not have a registered employer");
 					//data contains user, token
@@ -273,7 +276,14 @@ export function logInUser(user) {
 				
 			})
 	}
-	
+}
+
+export function setEmployerAndUser(response){
+	return dispatch => {
+		dispatch(setEmployer(response.data.employer));
+		dispatch(logInUserSuccess(response.data.user));
+		dispatch(setSiteIdle());
+	}
 }
 
 export function registerCompLogin(response){

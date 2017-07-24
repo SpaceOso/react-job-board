@@ -37,9 +37,16 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 		this.props.loadJob(jobId);
 	}
 
+
+
 	render(){
-		console.log("jobPostEmployer", this.props.employer);
+
+		if(this.props.employer.name === null){
+			return null;
+		}
+
 		let employer:Employer = this.props.employer;
+		console.log("jobPostEmployer", this.props.employer);
 		console.log("inside jobpost employer info:", employer);
 		return (
 			<aside className="jp-employer-aside">

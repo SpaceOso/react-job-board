@@ -9,9 +9,21 @@ import {
 	SET_USER,
 	FETCHING_THIS_USER_ERROR
 } from '../actions/authActions';
-import {StoreState, User} from "../types/index";
+import {User} from "../types/index";
 
-function userReducer(state: User, action): any{
+const defaultState: User = {
+	_id: null,
+	firstName: null,
+	lastName: null,
+	email: null,
+	password: null,
+	employerId: null,
+	isAuth: false,
+	isFetching: false,
+	error: null
+};
+
+function userReducer(state = defaultState, action): any{
 // function userReducer(state, action):User {
 	switch (action.type) {
 		case REGISTER_USER_SUCCESS:

@@ -2,7 +2,7 @@
 
 import currentJobReducer from "../reducers/currentJobReducer";
 export interface Job{
-	_id?: string,
+	_id: string | null,
 	jobTitle: string,
 	jobDescription: string,
 	employerName: string,
@@ -25,13 +25,13 @@ export interface User{
 	email: string | null,
 	password?: string | null,
 	employerId?: string | null,
-	// userRegistered: boolean,
 	isAuth: boolean | null,
 	isFetching: boolean | null,
 	error: string | null
 }
 
 export interface Employer{
+	_id: string | null
 	name: string,
 	location: {
 		address: string,
@@ -45,8 +45,8 @@ export interface Employer{
 		twitter: string,
 		facebook: string,
 		linkedin: string
-	},
-	jobs: Job[],
+	} ,
+	jobs: Job[] | null,
 }
 
 export interface CurrentJobPost extends Job , Employer{
