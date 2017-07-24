@@ -280,5 +280,6 @@ export function registerCompLogin(response){
 	return dispatch => {
 		dispatch(setEmployer(response.data.employer));
 		dispatch(logInUserSuccess(response.data.user));
+		dispatch(setSiteIdle());
 	}
 }

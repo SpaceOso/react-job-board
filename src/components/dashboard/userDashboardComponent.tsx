@@ -57,7 +57,11 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	 * If it does not we will display the employer registration component.
 	 * Otherwise we weill load up the main layout*/
 	checkForEmployer() {
-		return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
+		console.log("checkingForEmployer", this.props.user.employerId);
+		if(this.props.siteFetching.isFetching === false){
+			return this.props.user.employerId === null || this.props.user.employerId === undefined ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
+
+		}
 	}
 
 	/* This will handle sending the job post information to the back end.*/
