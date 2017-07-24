@@ -278,7 +278,6 @@ export function logInUser(user) {
 
 export function registerCompLogin(response){
 	return dispatch => {
-		dispatch(fetchingUser());
 		dispatch(setEmployer(response.data.employer));
 		dispatch(logInUserSuccess(response.data.user));
 	}

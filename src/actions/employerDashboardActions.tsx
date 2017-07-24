@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import {setAuth} from '../utils/utils';
 import {fetchingJobs} from "./jobActions";
 import {Employer} from "../types/index";
-import {registerCompLogin, setEmployer, setUser} from "./authActions";
+import {registerCompLogin, setEmployer, setUser, siteFetch} from "./authActions";
 
 export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
 export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
@@ -80,7 +80,7 @@ export function submitEmployerRegistration(employerInfo: Employer) {
     console.log("will be making a post request with the following info.", employerInfo);
 
     return dispatch => {
-        dispatch(fetchingThisEmployerInfo());
+        dispatch(siteFetch());
         axios.post(`${ROOT_URL}employer/register`, employerInfo)
             .then((response) => {
 
