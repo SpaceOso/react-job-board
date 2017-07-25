@@ -43,12 +43,9 @@ function userReducer(state = defaultState, action): any{
 			};
 		case LOG_OUT_USER:
 
-			return null;
-			// return {
-			// 	...state,
-			// 	isAuth: false,
-			// 	_id: null
-			// };
+			return {
+				...defaultState
+			};
 		case FETCHING_USER:
 			return {
 				...state,

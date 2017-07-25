@@ -36,7 +36,8 @@ import {fetchThisUserInfo} from "../../actions/authActions";
 
 // function mapStateToProps({user, employer}: StoreState, {...props} ) {
 function mapStateToProps({user, employer, siteFetching}: StoreState ) {
-	// console.log("dashboard container:", user);
+	console.log("dashboard container user:", user);
+	console.log("dashboard container employer:", employer);
 	return {
 		user,
 		employer,

@@ -279,6 +279,7 @@ export function logInUser(user) {
 }
 
 export function setEmployerAndUser(response){
+	console.log('setEmployerAndUser:', response);
 	return dispatch => {
 		dispatch(setEmployer(response.data.employer));
 		dispatch(logInUserSuccess(response.data.user));

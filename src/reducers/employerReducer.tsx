@@ -41,7 +41,9 @@ function employerReducer(state = defaultState, action):any{
             //will set employer after we register in the compRegisterComponent
             return state;
         case LOG_OUT_EMPLOYER:
-            return null;
+            return {
+	            ...defaultState
+            };
         case SET_EMPLOYER:
             console.log("setting employer from..", action.payload);
             return {

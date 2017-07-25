@@ -59,8 +59,8 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	checkForEmployer() {
 		console.log("checkingForEmployer", this.props.user.employerId);
 		if(this.props.siteFetching.isFetching === false){
+			this.props.user.employerId === null || this.props.user.employerId === undefined ? console.log("going to register") : console.log("going home", this.props.match.url);
 			return this.props.user.employerId === null || this.props.user.employerId === undefined ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
-
 		}
 	}
 
@@ -136,7 +136,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 						/>
 					</Switch>
 					{console.log("towards the end with:", this.props.user._id)}
-
 					{this.checkForEmployer()}
 				</div>
 				{login}

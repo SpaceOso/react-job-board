@@ -1,11 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Redirect, Switch, Route} from 'react-router-dom';
-
-//actions
-import {fetchThisUserInfo} from '../../../actions/authActions';
-import {submitEmployerRegistration} from '../../../actions/employerDashboardActions';
+import { Switch, Route} from 'react-router-dom';
 
 //components
 import UserDashboardNavMenu from "../nav-menu/userDashboardNavMenu";

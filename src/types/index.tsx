@@ -23,8 +23,8 @@ export interface User{
 	firstName: string | null,
 	lastName: string | null,
 	email: string | null,
-	password?: string | null,
-	employerId?: string | null,
+	password: string | null,
+	employerId: string | null,
 	isAuth: boolean | null,
 	isFetching: boolean | null,
 	error: string | null
