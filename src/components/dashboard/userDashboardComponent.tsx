@@ -15,7 +15,6 @@ interface Props extends RouteComponentProps<any> {
 	user: User,
 	employer: Employer,
 	siteFetching: SiteFetching,
-	fetchThisUserInfo: (userId) => {}
 	saveJobPost: (jobInfo, userId) => {}
 	submitEmployerRegistration: (userData) => {}
 }
@@ -48,7 +47,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	}
 
 	handleEmployerRegistration(employerData) {
-		console.log("Trying to register employer with the following inof:", employerData);
+		// console.log("Trying to register employer with the following inof:", employerData);
 		let userData = {employerData, userId: this.props.user._id};
 		this.props.submitEmployerRegistration(userData);
 	};
@@ -59,8 +58,8 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	checkForEmployer() {
 		console.log("checkingForEmployer", this.props.user.employerId);
 		if(this.props.siteFetching.isFetching === false){
-			this.props.user.employerId === null || this.props.user.employerId === undefined ? console.log("going to register") : console.log("going home", this.props.match.url);
-			return this.props.user.employerId === null || this.props.user.employerId === undefined ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`}/>;
+			this.props.user.employerId === null ? console.log("going to register") : console.log("going home", `${this.props.match.url}/home`);
+			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.location.pathname}/home`} push/>;
 		}
 	}
 
@@ -72,14 +71,17 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	render() {
 		let login: any = null;
 
-
 		if (this.props.siteFetching.isFetching === true) {
 			return <SpinnerComponent/>
 		}
 
-		if(this.props.user._id === undefined){
+		if(this.props.user._id === null){
 			login = <Redirect to={'/login'}/>;
+		} else {
+			login = this.checkForEmployer();
+			console.log("login:", login);
 		}
+
 		return (
 			<div className="jb-dashboard">
 				{/*NAV MENU*/}
@@ -135,8 +137,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 						       )}
 						/>
 					</Switch>
-					{console.log("towards the end with:", this.props.user._id)}
-					{this.checkForEmployer()}
 				</div>
 				{login}
 			</div>

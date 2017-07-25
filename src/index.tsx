@@ -21,12 +21,6 @@ const store = createStore<StoreState>(rootReducer, composeWithDevTools(
 	applyMiddleware(thunk, ReduxPromise))
 );
 
-// const store = createStore(rootReducer, composeWithDevTools(
-// 	applyMiddleware(thunk, ReduxPromise))
-// );
-
-// setAuth(localStorage.getItem('tkn'));
-
 class JobBoard extends React.Component {
 
 	render() {

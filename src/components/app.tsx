@@ -34,11 +34,11 @@ class App extends React.Component<Props>{
     }
 
     checkReload(){
-        // console.log("inside checkreload....");
+        console.log("inside checkreload....");
         let token = localStorage.getItem('tkn');
 
         if(token){
-            // console.log('we found token, loginOnload');
+            console.log('we found token, loginOnload:', token);
             logInOnLoad(token);
         }
     }

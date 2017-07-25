@@ -54,6 +54,8 @@ router.post('/register', function (req, res, next) {
 					linkedin: req.body.employerData.linkedin
 				}
 			});
+
+			console.log("local created employer:", employer);
 			
 			employer.save(function(err, employer){
 				console.log("we are saving the employer now..");
@@ -95,10 +97,16 @@ router.post('/register', function (req, res, next) {
 						};
 
 						// TODO NEED TO CREATE A TOKEN SINCE WE ARE GOING TO BE LOGGIN IN AT THIS POINT
-						res.status(201).json({
-							employer: localEmployer,
-							user: localUser
-						})
+                        let token = jwt.sign(localUser, process.env.secretkey, {expiresIn: "2 days"});
+                        console.log("employer we're going to send back:", localEmployer);
+                        console.log("user we're going to send back:", localUser);
+                        console.log("token we're going to send back:", token);
+
+                        res.status(200).json({
+                            token,
+                            employer: localEmployer,
+                            user: localUser
+                        });
 					})
 				}
 			})

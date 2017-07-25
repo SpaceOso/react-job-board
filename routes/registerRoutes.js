@@ -50,7 +50,7 @@ router.post('/', function (req, res, next) {
 
 		res.status(201).json({
 			user: userSignature,
-			token: token
+			token
 		});
 		
 	})

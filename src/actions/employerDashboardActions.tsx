@@ -1,11 +1,9 @@
 import axios from 'axios';
 import {ROOT_URL} from './index';
-import jwt from 'jsonwebtoken';
-
-import {setAuth} from '../utils/utils';
 import {fetchingJobs} from "./jobActions";
 import {Employer} from "../types/index";
-import {registerCompLogin, setEmployer, setEmployerAndUser, setUser, siteFetch} from "./authActions";
+import {   setEmployerAndUser, siteFetch} from "./authActions";
+import {setAuth} from "../utils/utils";
 
 export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
 export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
@@ -86,29 +84,10 @@ export function submitEmployerRegistration(employerInfo: Employer) {
 
                 /*recieving {token, employer}*/
                 console.log("this is the response once we register a company:", response);
-                /*TODO need to dispatch the response to set the state with the employer info and user info*/
-                // dispatch(setEmployer(response.data.employer));
-                // dispatch(setUser(response.data.user));
-                // dispatch(registerCompLogin(response));
+                setAuth(response.data.token);
 
-                dispatch(setEmployerAndUser(response));
+                dispatch(setEmployerAndUser(response.data.employer, response.data.user));
             })
             .catch((error) => console.log(error))
     }
-}
-
-//This will be called when the user logs in and goes into the dashboard IF the account is an employer account
-export function getThisEmployerInfo(userId, employerId) {
-
-    return dispatch => {
-        dispatch(fetchingJobs);
-        axios.get(`${ROOT_URL}employer/dashboard/${employerId}/employerhome`)
-            .then((response) => {
-                dispatch(getThisEmployerJobsSuccess(response));
-            })
-            .catch((error) => {
-            })
-
-    }
-
 }

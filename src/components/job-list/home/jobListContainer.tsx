@@ -9,13 +9,15 @@ import './joblistContainer.scss';
 import JobListComponent from './jobListComponent';
 
 //interfaces
-import { StoreState} from "../../../types/index";
+import {StoreState} from "../../../types/index";
 
-function mapPropsToState(store: StoreState) {
-	return {jobs: store.jobs};
+function mapPropsToState({jobs}: StoreState) {
+	return {
+		jobs
+	};
 }
 
-const mapDispatchToProps = (dispatch) =>({
+const mapDispatchToProps = (dispatch) => ({
 	getJobs: () => dispatch(getJobs())
 });
 

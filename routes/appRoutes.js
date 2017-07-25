@@ -23,34 +23,6 @@ router.get('/homeload', function (req, res, next) {
         });
 
 
-
-
-    // Jobs.find(function (err, doc) {
-    //     if (err) {
-    //         res.status(404).json({
-    //             title: 'An error occurred',
-    //             error: err
-    //         })
-    //     }
-    //
-    //     if (!doc) {
-    //         res.status(404).json({
-    //             title: 'No user found',
-    //             error: {message: 'User could not be found'}
-    //         })
-    //     }
-    //
-    //     if (doc) {
-    //         console.log("doc size:", doc.length);
-    //         res.status(200).json({
-    //             message: 'Success',
-    //             jobs: doc
-    //         })
-    //     }
-    //
-    // })
-
-
 });
 
 router.get('/home', function (req, res, next) {

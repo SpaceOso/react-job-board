@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {ROOT_URL, SITE_IDLE, SITE_IS_FETCHING} from './index';
-import jwt from 'jsonwebtoken';
 
 import {setAuth, removeAuth} from '../utils/utils';
 import {Employer, User} from "../types/index";
@@ -41,13 +40,6 @@ export function registerUserError(error) {
 	return {
 		type: REGISTER_USER_ERROR,
 		payload: {isFetching: false, error}
-	}
-}
-
-export function fetchingUser() {
-	return {
-		type: FETCHING_USER,
-		payload: {isFetching: true}
 	}
 }
 
@@ -149,44 +141,10 @@ export function setEmployer(employer: Employer){
 // SETTING USER
 // =============================
 export function setUser(user: User){
-	return {
-		type: SET_USER,
-		payload: user
-	}
-}
-
-// =============================
-// FETCHING ERROR
-// =============================
-//this will handle the case when the user goes to a dashboard link without being logged in first
-export function fetchingThisUserError(payloadData){
-	return{
-		type: FETCHING_THIS_USER_ERROR,
-		payload: payloadData
-	}
-}
-
-// =============================
-// FETCHING INFO
-// =============================
-
-//gets called on dashboardInit
-export function fetchThisUserInfo(userId){
-	
-	return dispatch => {
-		dispatch(fetchingUser());
-		
-		axios.post(`${ROOT_URL}user/dashboardinit`, {userId})
-			.then((response)=>{
-				console.log("inside the fetchThisUserInfo with response:", response);
-				dispatch(setEmployer(response.data.employer));
-				dispatch(setUser(response.data.user));
-			})
-			.catch((error)=>{
-				dispatch(fetchingThisUserError("Error: You must log-in before continuing!"))
-			})
-
-	}
+	return (dispatch) => dispatch({
+			type: SET_USER,
+			payload: user
+	});
 }
 
 // =============================
@@ -215,7 +173,7 @@ export function logInUserSuccess(data) {
 //gets the token passed from localStorage
 export function logInOnLoad(token):Object{
 	return dispatch => {
-		dispatch(fetchingUser());
+		dispatch(siteFetch());
 
 		axios.post(`${ROOT_URL}login/logcheck`, {token})
 			.then((response)=>{
@@ -258,7 +216,7 @@ export function logInUser(user) {
 				console.log("the employer id response:", response.data.user.employerId);
 				if(response.data.user.employerId !== null){
 					console.log("this user has a registered employer and its:", response.data.employerId);
-					dispatch(setEmployerAndUser(response));
+					dispatch(setEmployerAndUser(response.data.employer, response.data.user));
 					// dispatch(setEmployer(response.data.employer));
 					// dispatch(logInUserSuccess(response.data.user));
 					// dispatch(setSiteIdle());
@@ -278,19 +236,12 @@ export function logInUser(user) {
 	}
 }
 
-export function setEmployerAndUser(response){
-	console.log('setEmployerAndUser:', response);
+export function setEmployerAndUser(employer, user){
+	console.log('setEmployerAndUser employer:', employer);
+	console.log('setEmployerAndUser user:', user);
 	return dispatch => {
-		dispatch(setEmployer(response.data.employer));
-		dispatch(logInUserSuccess(response.data.user));
-		dispatch(setSiteIdle());
-	}
-}
-
-export function registerCompLogin(response){
-	return dispatch => {
-		dispatch(setEmployer(response.data.employer));
-		dispatch(logInUserSuccess(response.data.user));
+		dispatch(setEmployer(employer));
+		dispatch(logInUserSuccess(user));
 		dispatch(setSiteIdle());
 	}
 }

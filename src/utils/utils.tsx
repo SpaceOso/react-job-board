@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export function setAuth(token){
 	if(token){
+
+		localStorage.setItem('tkn', token);
+
 		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 	} else {
 		delete axios.defaults.headers.common['Authorization'];

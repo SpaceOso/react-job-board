@@ -11,7 +11,6 @@ import './userDashboardContainer.scss';
 
 import {StoreState} from "../../types/index";
 import UserDashboardComponent from "./userDashboardComponent";
-import {fetchThisUserInfo} from "../../actions/authActions";
 
 
 /*What data are we going to need?
@@ -36,8 +35,6 @@ import {fetchThisUserInfo} from "../../actions/authActions";
 
 // function mapStateToProps({user, employer}: StoreState, {...props} ) {
 function mapStateToProps({user, employer, siteFetching}: StoreState ) {
-	console.log("dashboard container user:", user);
-	console.log("dashboard container employer:", employer);
 	return {
 		user,
 		employer,
@@ -46,7 +43,6 @@ function mapStateToProps({user, employer, siteFetching}: StoreState ) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchThisUserInfo: (userId) =>{dispatch(fetchThisUserInfo(userId))},
 	saveJobPost: (jobInfo, userId) =>{dispatch(saveJobPost(jobInfo, userId))},
 	submitEmployerRegistration: (userData) =>{dispatch(submitEmployerRegistration(userData))},
 });

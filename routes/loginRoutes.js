@@ -38,7 +38,7 @@ router.post('/', function (req, res, next) {
 
                console.log("and now the user is:", user);
 
-               if(user.employerId === undefined || user.employerId === null || user.employerId === "null"){
+               if(user.employerId === undefined || user.employerId === null){
                    console.log("This user does NOT have a registered employer");
                    let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
 
