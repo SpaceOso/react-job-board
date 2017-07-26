@@ -33,6 +33,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	constructor(props) {
 		super(props);
 
+		console.log("UserDashboardComponent loading...", this.props);
 		this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.checkForEmployer = this.checkForEmployer.bind(this);
@@ -41,6 +42,11 @@ class UserDashboardComponent extends React.Component<Props, any> {
 		// this.fetchEmployerInfo();
 	}
 
+	componentDidMount(){
+		console.log("did mount user:", this.props.user);
+		console.log("did mount employer:", this.props.employer);
+
+	}
 	/*If the user doesn't have an ID we need them to login again.*/
 	checkForLogInErrors() {
 		return this.props.user._id === null || this.props.user._id === undefined || this.props.user === undefined ? <Redirect to={'/login'}/> : null;
@@ -59,7 +65,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 		console.log("checkingForEmployer", this.props.user.employerId);
 		if(this.props.siteFetching.isFetching === false){
 			this.props.user.employerId === null ? console.log("going to register") : console.log("going home", `${this.props.match.url}/home`);
-			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.location.pathname}/home`} push/>;
+			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`} push/>;
 		}
 	}
 

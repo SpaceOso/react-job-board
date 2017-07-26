@@ -45,7 +45,7 @@ function employerReducer(state = defaultState, action):any{
 	            ...defaultState
             };
         case SET_EMPLOYER:
-            console.log("setting employer from..", action.payload);
+            // console.log("setting employer from..", action.payload);
             return {
                 ...state,
                 ...action.payload

@@ -1,7 +1,11 @@
 import {SiteFetching} from "../types/index";
 import {SITE_IDLE, SITE_IS_FETCHING} from "../actions/index";
 
-function SiteFetchingReducer(state: SiteFetching, action): SiteFetching{
+const defaultState: SiteFetching = {
+	isFetching: false,
+};
+
+function SiteFetchingReducer(state = defaultState, action): SiteFetching{
 	switch (action.type){
 		case SITE_IS_FETCHING:
 			return {
@@ -15,8 +19,8 @@ function SiteFetchingReducer(state: SiteFetching, action): SiteFetching{
 			};
 		default:
 			return {
-				isFetching: false
-			}
+				...state
+			};
 	}
 }
 export default SiteFetchingReducer;

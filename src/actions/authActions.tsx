@@ -209,7 +209,8 @@ export function logInUser(user) {
 				//save token to local storage
 				const token = response.data.token;
 				localStorage.setItem('tkn', token);
-				
+
+				console.log("logInUser token:", token);
 				//set the token as part of our request header
 				setAuth(token);
 

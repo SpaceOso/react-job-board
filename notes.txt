@@ -9,3 +9,16 @@ to bounce us back
 NOTES ABOUT REACT-ROUTER
 If you want to use router props, the interface for the component needs
 to extend RouteComponentProps<any> example can be seen in
+
+#loginContainer
+dispatch: loginUser => logInUser();
+    loginUser calls url/login
+    recieves a token
+    setsAuth with that token
+    calls setEmployerAndUser
+
+#userDashboardContainer
+dispatch: submitEmployerRegistration
+    calls url/employer/register
+    sets auth with response.data.token
+    dispatches setEmployerAndUser
