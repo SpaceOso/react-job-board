@@ -19,7 +19,6 @@ class EditJobsComponent extends React.Component<MyProps>{
 	}
 
 	render(){
-		console.log("the props in edit jobs container..", this.props);
 		return(
 			<div>
 				<h1>I'm the Edit Jobs Container</h1>

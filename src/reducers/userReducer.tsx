@@ -59,7 +59,6 @@ function userReducer(state = defaultState, action): any{
 				isFetching: false,
 				isAuth: true
 			};
-			console.log('SET_USER VERSION', set_user );
 			return {
 				...state,
 				...action.payload,

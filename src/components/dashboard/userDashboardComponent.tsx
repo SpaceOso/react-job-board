@@ -7,7 +7,6 @@ import CreateJobComponent from "./jobs/createJob/createJobComponent";
 import ApplicantListComponent from "./applicant-list/applicantListComponent";
 import EditJobsComponent from "./jobs/editJob/editJobsComponent";
 import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
-// import EditJobsContainer from './jobs/editJob/editJobsContainer';
 
 
 //redux
@@ -33,7 +32,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	constructor(props) {
 		super(props);
 
-		console.log("UserDashboardComponent loading...", this.props);
 		this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.checkForEmployer = this.checkForEmployer.bind(this);
@@ -42,18 +40,12 @@ class UserDashboardComponent extends React.Component<Props, any> {
 		// this.fetchEmployerInfo();
 	}
 
-	componentDidMount(){
-		console.log("did mount user:", this.props.user);
-		console.log("did mount employer:", this.props.employer);
-
-	}
 	/*If the user doesn't have an ID we need them to login again.*/
 	checkForLogInErrors() {
 		return this.props.user._id === null || this.props.user._id === undefined || this.props.user === undefined ? <Redirect to={'/login'}/> : null;
 	}
 
 	handleEmployerRegistration(employerData) {
-		// console.log("Trying to register employer with the following inof:", employerData);
 		let userData = {employerData, userId: this.props.user._id};
 		this.props.submitEmployerRegistration(userData);
 	};
@@ -62,9 +54,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	 * If it does not we will display the employer registration component.
 	 * Otherwise we weill load up the main layout*/
 	checkForEmployer() {
-		console.log("checkingForEmployer", this.props.user.employerId);
 		if(this.props.siteFetching.isFetching === false){
-			this.props.user.employerId === null ? console.log("going to register") : console.log("going home", `${this.props.match.url}/home`);
 			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`} push/>;
 		}
 	}
@@ -85,7 +75,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 			login = <Redirect to={'/login'}/>;
 		} else {
 			login = this.checkForEmployer();
-			console.log("login:", login);
 		}
 
 		return (

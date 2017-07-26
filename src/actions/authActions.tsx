@@ -44,7 +44,6 @@ export function registerUserError(error) {
 }
 
 export function setSiteIdle(){
-	console.log("setSiteIdle()");
 	return{
 		type: SITE_IDLE,
 		payload: {isFetching: false}
@@ -80,7 +79,6 @@ export function registerUser(userObject) {
 			.then((response) => {
 				/*response: {user, token}*/
 
-				console.log("we are registering the user! Response:", response);
 				localStorage.setItem('tkn', response.data.token);
 
 				setAuth(response.data.token);
@@ -130,7 +128,6 @@ export function logOutUser(){
 // SETTING EMPLOYER
 // =============================
 export function setEmployer(employer: Employer){
-	console.log("SET_EMPLOYER:", employer);
 	return{
 		type: SET_EMPLOYER,
 		payload: employer
@@ -162,7 +159,6 @@ export function logInUserError(error) {
 
 //requires a user and token property
 export function logInUserSuccess(data) {
-	console.log("logInUserSuccess:", data);
 	return {
 		type: LOGIN_USER_SUCCESS,
 		payload: data
@@ -210,27 +206,17 @@ export function logInUser(user) {
 				const token = response.data.token;
 				localStorage.setItem('tkn', token);
 
-				console.log("logInUser token:", token);
 				//set the token as part of our request header
 				setAuth(token);
 
-				console.log("the employer id response:", response.data.user.employerId);
 				if(response.data.user.employerId !== null){
-					console.log("this user has a registered employer and its:", response.data.employerId);
 					dispatch(setEmployerAndUser(response.data.employer, response.data.user));
-					// dispatch(setEmployer(response.data.employer));
-					// dispatch(logInUserSuccess(response.data.user));
-					// dispatch(setSiteIdle());
 				} else {
-					console.log("this user does not have a registered employer");
-					//data contains user, token
 					dispatch(logInUserSuccess(response.data.user))
 				}
 
 			})
 			.catch((error) => {
-
-				console.log("The response from error in login in:", error);
 				dispatch(logInUserError(error.response.status));
 				
 			})
@@ -238,8 +224,6 @@ export function logInUser(user) {
 }
 
 export function setEmployerAndUser(employer, user){
-	console.log('setEmployerAndUser employer:', employer);
-	console.log('setEmployerAndUser user:', user);
 	return dispatch => {
 		dispatch(setEmployer(employer));
 		dispatch(logInUserSuccess(user));

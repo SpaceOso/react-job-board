@@ -56,26 +56,22 @@ export function editingJobPostSuccess(jobPost) {
 }
 
 export function saveJobPost(jobPostInfo, userId) {
-    console.log("we are about to send post to save job..");
     return dispatch => {
 
         dispatch(editingJobPost());
 
         axios.post(`${ROOT_URL}user/dashboard/${userId}/createjob`, jobPostInfo)
             .then((response) => {
-                console.log("we have posted a job and the response was...", response);
                 dispatch(editingJobPostSuccess(response.data.jobPost));
             })
             .catch((error) => {
-                // dispatch(registerUserError(error));
-                console.log("there was an error trying to save the job..", error);
+            //TODO need to add an error handlers
             });
     }
 
 };
 
 export function submitEmployerRegistration(employerInfo: Employer) {
-    console.log("will be making a post request with the following info.", employerInfo);
 
     return dispatch => {
         dispatch(siteFetch());
@@ -83,7 +79,6 @@ export function submitEmployerRegistration(employerInfo: Employer) {
             .then((response) => {
 
                 /*recieving {token, employer}*/
-                console.log("this is the response once we register a company:", response);
                 setAuth(response.data.token);
 
                 dispatch(setEmployerAndUser(response.data.employer, response.data.user));

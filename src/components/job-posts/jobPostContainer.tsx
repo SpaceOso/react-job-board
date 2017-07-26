@@ -8,10 +8,6 @@ import {getJobById, resetCurrentJob} from "../../actions/jobActions";
 import {StoreState} from "../../types/index";
 
 function mapStateToProps({currentJobPost, employer}:StoreState) {
-// function mapStateToProps(store:StoreState) {
-
-    console.log("container map state to props currentjob", currentJobPost);
-    console.log("container map state to props employer", employer);
 
     return {
         currentJobPost,

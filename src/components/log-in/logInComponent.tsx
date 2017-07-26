@@ -61,7 +61,6 @@ class LogInComponent extends React.Component<MyProps, MyState> {
                 <SpinnerComponent/> :
 
             <div className="employer-register-Component">
-                {console.log("This props ID:", this.props.user._id)}
                 {this.props.user.isAuth === true ? <Redirect to={`${'/user/dashboard/'}${this.props.user._id}`}/> : null}
                 <h1>Enter the following information to log in</h1>
                 <h3>{this.props.user.error}</h3>

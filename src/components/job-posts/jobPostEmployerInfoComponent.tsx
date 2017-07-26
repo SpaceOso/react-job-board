@@ -15,7 +15,6 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 	constructor(props){
 		super(props);
 
-		console.log("job post employer:", this.props.employer);
 		this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -46,8 +45,6 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 		}
 
 		let employer:Employer = this.props.employer;
-		console.log("jobPostEmployer", this.props.employer);
-		console.log("inside jobpost employer info:", employer);
 		return (
 			<aside className="jp-employer-aside">
 				<img src={employer.logoImg} alt={`${employer.name} logo`}/>

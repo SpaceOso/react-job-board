@@ -15,9 +15,7 @@ class JobListComponent extends React.Component<Props> {
 	constructor(props) {
 		super(props);
 
-		console.log("The joblistcomponent has the following props..", this.props);
 		this.returnJobList = this.returnJobList.bind(this);
-		// this.getJobs = this.getJobs.bind(this);
 	}
 
 	returnJobList() {

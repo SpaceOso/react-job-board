@@ -39,7 +39,6 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
     }
     
     render(){
-        console.log("the employer for this job post is:", this.props.employer);
         return (
             <div>
                <h1>Create a new job post</h1>
