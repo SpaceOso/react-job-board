@@ -14,8 +14,6 @@ class TestDashboard extends React.Component<Props, any> {
 	constructor(props){
 		super(props);
 
-		console.log("inside the test dashboard with props...", this.props);
-		console.log("this.props.match...", this.props.match);
 	}
 	render() {
 		return (

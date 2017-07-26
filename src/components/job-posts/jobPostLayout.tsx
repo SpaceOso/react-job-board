@@ -54,15 +54,12 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 	}
 
 	render() {
-		console.log('EMPLOYERINFO:', this.props.currentJobPost);
 
 		if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
-			console.log('DISPLAYING THE SPINNER');
 			return <SpinnerComponent/>
 		}
 
 		if(this.props.employer.name !== null)	{
-			console.log("DISPLAYING THE JOB POST INFO");
 			return (
 				<div className="job-post-container">
 					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.currentJobPost.isFetching}/>

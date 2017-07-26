@@ -90,7 +90,6 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 	}
 
 	redirectToDashboard() {
-		console.log("redirectToDashboard()", this.props.user.employerId);
 		return (
 			<Redirect to={`/user/dashboard/${this.props.user._id}`} push/>
 		)

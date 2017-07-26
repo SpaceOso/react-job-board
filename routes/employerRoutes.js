@@ -15,29 +15,22 @@
 
 //requires an object with employerData and userId properties
 router.post('/register', function (req, res, next) {
-	console.log("in the root register route with:", req.body);
-	
-	console.log("user id should be...", req.body.userId);
 	User.findById(req.body.userId, function (error, user) {
 		
 		if(error){
-			console.log("there was an error trying to find a user");
 			console.log(error);
 		}
 		
-		console.log("no error!");
-		
+
 		if(!user){
 			console.log("there was no  user with that id!", req.body.userId);
 		}
 		
-		console.log("We found the user!!");
 		if(user){
 			//we found a user, now create an employer and save it and save it's id
 			// to the users employer property
 			//using the employer model
 			
-			console.log("now we're creating an employer object");
 			let employer = new Employer({
 				name: req.body.employerData.name,
 				logoImg: req.body.employerData.logoImg,
@@ -55,29 +48,20 @@ router.post('/register', function (req, res, next) {
 				}
 			});
 
-			console.log("local created employer:", employer);
-			
+
 			employer.save(function(err, employer){
-				console.log("we are saving the employer now..");
 				if(err){
-					console.log("there was an error saving the employer");
 					console.log(err);
 				}
 				
-				console.log("no error saving employuer!!");
 				if(employer){
 					user.employerId = employer._id;
 					
-					console.log("now we're updating the user with the employerID");
 					user.save(function(error, user){
 						if(error){
 							console.log("something went wrong saving employer")
 						}
 						
-						//TODO need to create a local user object, right now we're sending passwords again
-						console.log("this will be the source for the local employer..", employer);
-						console.log("and we're done!");
-
 						let localUser = {
 							employerId: user.employerId,
 							firstName: user.firstName,
@@ -96,11 +80,7 @@ router.post('/register', function (req, res, next) {
 							location: employer.location,
 						};
 
-						// TODO NEED TO CREATE A TOKEN SINCE WE ARE GOING TO BE LOGGIN IN AT THIS POINT
                         let token = jwt.sign(localUser, process.env.secretkey, {expiresIn: "2 days"});
-                        console.log("employer we're going to send back:", localEmployer);
-                        console.log("user we're going to send back:", localUser);
-                        console.log("token we're going to send back:", token);
 
                         res.status(200).json({
                             token,
@@ -113,20 +93,6 @@ router.post('/register', function (req, res, next) {
 		}
     })
 
-	/*employer.save(function (err, result) {
-		if (err) {
-			return res.status(404).json({
-				title: 'An Error ocurred',
-				error: err
-			});
-		}
-		let token = jwt.sign({employer: employer}, process.env.secretkey, {expiresIn: 7200});
-
-		return res.status(201).json({
-			token: token,
-			employer: result
-		});
-	})*/
 });
 
 //TODO: There has to be a way that we can get only one item from this
@@ -403,7 +369,6 @@ router.get('/employerDashboard/:id/employerHome/jobEdit/:id', function (req, res
 
 // When the employer updates their profile
 router.patch('/updateProfile', function (req, res, next) {
-	// console.log(req.body);
 
 	Employer.findById(req.body.id, function (err, employer) {
 		if(err){

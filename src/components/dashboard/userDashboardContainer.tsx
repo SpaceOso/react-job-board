@@ -35,8 +35,6 @@ import UserDashboardComponent from "./userDashboardComponent";
 
 // function mapStateToProps({user, employer}: StoreState, {...props} ) {
 function mapStateToProps({user, employer, siteFetching}: StoreState ) {
-	console.log("loading dashboardContainer user:", user);
-	console.log("loading dashboardContainer employer:", employer);
 	return {
 		user,
 		employer,

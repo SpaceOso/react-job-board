@@ -75,7 +75,6 @@ export function getJobById(id) {
 		dispatch(fetchSingleJob());
 		axios.get(`${ROOT_URL}${'jobposts/'}${id}`)
 			.then((response) => {
-				console.log("the response that we get from GetJobBYId:", response);
 				dispatch(singleJobSuccess(response));
 			})
 			.catch((error) => {
