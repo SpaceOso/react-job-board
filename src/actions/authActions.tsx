@@ -212,7 +212,8 @@ export function logInUser(user) {
 				if(response.data.user.employerId !== null){
 					dispatch(setEmployerAndUser(response.data.employer, response.data.user));
 				} else {
-					dispatch(logInUserSuccess(response.data.user))
+					dispatch(logInUserSuccess(response.data.user));
+					dispatch(setSiteIdle());
 				}
 
 			})
