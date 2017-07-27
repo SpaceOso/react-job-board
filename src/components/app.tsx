@@ -18,7 +18,7 @@ import {logInOnLoad} from "../actions/authActions";
 import ProtectedComponent from "./dashboard/protected/protectedComponent";
 
 interface Props{
-    logInOnLoad: (token)=>{},
+    logInOnLoad,
     logOutUser: ()=>{},
     user: User,
     employer: Employer,
@@ -35,9 +35,11 @@ class App extends React.Component<Props>{
 
     checkReload(){
         let token = localStorage.getItem('tkn');
+        console.log("checkReload() with token:", token);
 
-        if(token){
-            logInOnLoad(token);
+        if(token !== undefined){
+            console.log("checkReload() if token:", token);
+            this.props.logInOnLoad(token);
         }
     }
 

@@ -51,6 +51,7 @@ export function setSiteIdle(){
 }
 
 export function siteFetch(){
+	console.log("siteFetch()");
 	return{
 		type: SITE_IS_FETCHING,
 		payload: true,
@@ -167,25 +168,29 @@ export function logInUserSuccess(data) {
 }
 
 //gets the token passed from localStorage
-export function logInOnLoad(token):Object{
+export function logInOnLoad(token){
+	console.log("authAction logInOnLoad", token);
+	console.log(`${ROOT_URL}login/logcheck`);
 	return dispatch => {
+		console.log("logInOnLoad inside dispatch:");
 		dispatch(siteFetch());
-
+		console.log("logInOnLoad after dispatch function is called");
 		axios.post(`${ROOT_URL}login/logcheck`, {token})
 			.then((response)=>{
 
-
-			//response contains uer, which is our decoded token
-				
+				//response contains uer, which is our decoded token
+				console.log("the response from logInOnLoad:", response);
 				//set token as part of our request headers
 				setAuth(token);
 
 				//send user information to be stored in the store
 				dispatch(logInUserSuccess(response.data.user));
+				dispatch(setSiteIdle());
 				
 			})
 			.catch((error)=>{
 				dispatch(logInUserError(error.response.status));
+				dispatch(setSiteIdle());
 			})
 	}
 }
@@ -193,8 +198,8 @@ export function logInOnLoad(token):Object{
 //this will dispatch the users email and password to server for verification
 export function logInUser(user) {
 	/*user = {
-    	email
-        password
+		email
+		password
 	};*/
 	return dispatch => {
 		

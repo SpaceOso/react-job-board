@@ -11,7 +11,7 @@ function ProtectedComponent ({component: Component, isAuth, user, ...rest}) {
 			render={
 				(props) => isAuth === true && user._id === rest.computedMatch.params.userId
 				? <Component {...props} />
-				: <Redirect to={{pathname: '/login'}} />}
+				: <Redirect to={{pathname: '/'}} />}
 		/>
 	)
 };
