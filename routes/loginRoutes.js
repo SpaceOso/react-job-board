@@ -9,7 +9,8 @@ var Jobs = require('../models/jobs');
 var Applicants = require('../models/applicants');
 
 function findEmployerById(employerId){
-    Employer.findById(user.employerId, function (err, employerDoc) {
+    // let employer = {};
+    return Employer.findById(employerId, function (err, employerDoc) {
         if (err) {
             console.log("there was an error retriveing the employer for this user")
         }
@@ -17,7 +18,7 @@ function findEmployerById(employerId){
         console.log("this user does have an employer");
         if (employerDoc) {
 
-            let employer = {
+            employer = {
                 logoImg: employerDoc.logoImg,
                 name: employerDoc.name,
                 applicants: employerDoc.applicants,
@@ -27,17 +28,10 @@ function findEmployerById(employerId){
                 _id: employerDoc._id
             };
 
-            let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
-            console.log("random function sending this back...", employer);
-
-            return {
-                token,
-                user,
-                employer
-            };
-
+           return employer;
         }
-    })
+    });
+    // return employer;
 }
 
 function findUserById(decoded) {
@@ -58,7 +52,7 @@ function findUserById(decoded) {
                 employerId: userDoc.employerId === undefined ? null : userDoc.employerId
             };
 
-            console.log('func, we found a user:');
+            console.log('func, we found a user:', user);
             if (user.employerId === undefined || user.employerId === null) {
                 console.log("This user does NOT have a registered employer");
                 let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
@@ -69,35 +63,14 @@ function findUserById(decoded) {
                 }
 
             } else {
-                Employer.findById(user.employerId, function (err, employerDoc) {
-                    if (err) {
-                        console.log("there was an error retriveing the employer for this user")
-                    }
+                // let employer = findEmployerById(user.employerId);
 
-                    console.log("this user does have an employer");
-                    if (employerDoc) {
+                const emp = new Promise(function (resolve, reject) {
+                    resolve(findEmployerById(user.employerId));
+                });
 
-                        let employer = {
-                            logoImg: employerDoc.logoImg,
-                            name: employerDoc.name,
-                            applicants: employerDoc.applicants,
-                            jobs: employerDoc.jobs,
-                            socialMedia: employerDoc.socialMedia,
-                            location: employerDoc.location,
-                            _id: employerDoc._id
-                        };
-
-                        let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
-                        console.log("random function sending this back...", employer);
-
-                        return {
-                            token,
-                            user,
-                            employer
-                        };
-
-                    }
-                })
+                emp.then(data => { console.log('resolve rr', data)});
+                // console.log("we found an employer and it is:", employer);
             }
         } else {
             return {
@@ -187,7 +160,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.post('/logcheck', function (req, res) {
-    console.log("loginRoutes: /logcheck", req.body.token);
+    console.log("loginRoutes: /logcheck");
     let token = req.body.token;
 
     jwt.verify(token, process.env.secretkey, function (err, decoded) {
@@ -202,11 +175,7 @@ router.post('/logcheck', function (req, res) {
         if (decoded) {
             console.log("token has been verified and the user is:", decoded);
             // let logInInfo = findUserByEmailSetEmployer(decoded.email);
-            findUserById(decoded).then(function (response) {
-                console.log("logInInfo", response);
-            }, function (error) {
-                console.log(error);
-            })
+            findUserById(decoded);
             //TODO now need to create a user object, check if it has a register employer
             //TODO and if it does add it to the user object, we already have this function somehwere
 
