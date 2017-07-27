@@ -36,6 +36,12 @@ function findEmployerById(employerId){
 
 function findUserById(decoded) {
     console.log("findUserByID");
+    User.findById('fffk')
+        .exec()
+        .then(data => console.log("then step:", data))
+        .catch(error => console.log("error", error));
+
+    /*
     User.findById(decoded._id, function (err, userDoc) {
         if (err) {
             console.log(err);
@@ -79,6 +85,7 @@ function findUserById(decoded) {
         }
 
     })
+    */
 }
 
 router.post('/', function (req, res, next) {
