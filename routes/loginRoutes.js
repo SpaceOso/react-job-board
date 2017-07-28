@@ -14,13 +14,15 @@ var Applicants = require('../models/applicants');
  */
 function returnUserObject(userDoc){
     "use strict";
-    return user = {
+    let user = {
         _id: userDoc._id,
         firstName: userDoc.firstName,
         lastName: userDoc.lastName,
         email: userDoc.email,
         employerId: userDoc.employerId === undefined ? null : userDoc.employerId
     };
+
+    return user;
 }
 
 /**
@@ -30,7 +32,7 @@ function returnUserObject(userDoc){
  */
 function returnEmployerObject(employerDoc){
     "use strict";
-    return employer = {
+    let employer = {
         logoImg: employerDoc.logoImg,
         name: employerDoc.name,
         applicants: employerDoc.applicants,
@@ -39,6 +41,8 @@ function returnEmployerObject(employerDoc){
         location: employerDoc.location,
         _id: employerDoc._id
     };
+
+    return employer;
 }
 
 function findEmployerById(employerId){
@@ -67,6 +71,21 @@ function findEmployerById(employerId){
     // return employer;
 }
 
+function returnUserByEmail(userEmail){
+    return User.findOne({email: userEmail})
+        .exec()
+        .then(userDoc => {
+            // console.log("returnUserByEmail:",userDoc);
+            // let localUser = returnUserObject(userDoc)
+            return returnUserObject(userDoc);
+        })
+        .then(user => {
+            console.log("return by email promise:", user);
+            return user;
+        })
+        .catch(err => console.log(err));
+}
+
 /**
  *
  * @param {string} userId - The user._id to search user by.
@@ -77,13 +96,7 @@ function findUserById(userId) {
         .exec()
         .then(userDoc => {
 
-            let user = {
-                _id: userDoc._id,
-                firstName: userDoc.firstName,
-                lastName: userDoc.lastName,
-                email: userDoc.email,
-                employerId: userDoc.employerId === undefined ? null : userDoc.employerId
-            };
+            let user = returnUserObject(userDoc);
 
             if(userDoc.employerId === null){
 
@@ -105,6 +118,32 @@ function findUserById(userId) {
 
 router.post('/', function (req, res, next) {
     console.log("loginRoutes root /");
+
+    User.findOne({email: req.body.email})
+        .exec()
+        .then(userDoc =>{
+
+            if(!userDoc){
+                return Promise.reject( {error: "There was no user found."});
+            }
+
+            if(userDoc.password !== req.body.password){
+                return Promise.reject("Login credenttials don't match");
+            }
+
+            return returnUserObject(userDoc);
+        })
+        .then(userModel => {
+            console.log("The userModel returned from loging in:", userModel);
+        })
+        .catch(err => {
+            console.log(err);
+            //TODO could send status out when we finalize this function right now it crashes because we send headers
+            //again right below
+            // res.status(500).send(err);
+        });
+
+
     User.findOne({email: req.body.email}, function (err, userDoc) {
         if (err) {
             return res.status(404).json({
@@ -120,19 +159,14 @@ router.post('/', function (req, res, next) {
         }
 
         if (userDoc) {
+            //Todo need to hash passwords
             if (userDoc.password === req.body.password) {
 
-                let user = {
-                    _id: userDoc._id,
-                    firstName: userDoc.firstName,
-                    lastName: userDoc.lastName,
-                    email: userDoc.email,
-                    employerId: userDoc.employerId === undefined ? null : userDoc.employerId
-                };
+                let user = returnUserObject(userDoc);
 
                 console.log("and now the user is:", user);
 
-                if (user.employerId === undefined || user.employerId === null) {
+                if (user.employerId === null) {
                     console.log("This user does NOT have a registered employer");
                     let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
 
@@ -149,17 +183,10 @@ router.post('/', function (req, res, next) {
 
                         if (employerDoc) {
 
-                            let employer = {
-                                logoImg: employerDoc.logoImg,
-                                name: employerDoc.name,
-                                applicants: employerDoc.applicants,
-                                jobs: employerDoc.jobs,
-                                socialMedia: employerDoc.socialMedia,
-                                location: employerDoc.location,
-                                _id: employerDoc._id
-                            };
+                            let employer = returnEmployerObject(employerDoc);
 
                             let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
+
                             console.log("employer we're going to send back:", employer);
 
                             res.status(200).json({
@@ -194,14 +221,12 @@ router.post('/logcheck', function (req, res) {
         }
 
         if (decoded) {
-            let userPromise = findUserById(decoded._id);
 
-            userPromise
+            findUserById(decoded._id)
                 .then(
                     response => {
-
                         let token = jwt.sign(response.user, process.env.secretkey, {expiresIn: "2 days"});
-
+                        console.log("Logcheck for employer:", response.employer);
                         res.status(200).json({
                             user: response.user,
                             employer: response.employer,
