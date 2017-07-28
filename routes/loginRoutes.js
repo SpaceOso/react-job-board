@@ -7,6 +7,39 @@ var Employer = require('../models/employer');
 var User = require('../models/user');
 var Jobs = require('../models/jobs');
 var Applicants = require('../models/applicants');
+/**
+ * Returns all the info needed by the front end for the User model.
+ * @param {object} userDoc - The user model retrieved from the database.
+ * @return {object} userObject - The user model as required by the front end.
+ */
+function returnUserObject(userDoc){
+    "use strict";
+    return user = {
+        _id: userDoc._id,
+        firstName: userDoc.firstName,
+        lastName: userDoc.lastName,
+        email: userDoc.email,
+        employerId: userDoc.employerId === undefined ? null : userDoc.employerId
+    };
+}
+
+/**
+ *
+ * @param employerDoc {object} - The employer model retrieved from the database.
+ * @return {object} employerObject - The employer model as required by the front end.
+ */
+function returnEmployerObject(employerDoc){
+    "use strict";
+    return employer = {
+        logoImg: employerDoc.logoImg,
+        name: employerDoc.name,
+        applicants: employerDoc.applicants,
+        jobs: employerDoc.jobs,
+        socialMedia: employerDoc.socialMedia,
+        location: employerDoc.location,
+        _id: employerDoc._id
+    };
+}
 
 function findEmployerById(employerId){
     // let employer = {};
@@ -18,7 +51,7 @@ function findEmployerById(employerId){
         console.log("this user does have an employer");
         if (employerDoc) {
 
-            employer = {
+           let employer = {
                 logoImg: employerDoc.logoImg,
                 name: employerDoc.name,
                 applicants: employerDoc.applicants,
@@ -34,6 +67,11 @@ function findEmployerById(employerId){
     // return employer;
 }
 
+/**
+ *
+ * @param {string} userId - The user._id to search user by.
+ * @return {Promise|Promise.<T>}
+ */
 function findUserById(userId) {
     return User.findById(userId)
         .exec()
