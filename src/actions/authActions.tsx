@@ -183,9 +183,12 @@ export function logInOnLoad(token){
 				//set token as part of our request headers
 				setAuth(token);
 
-				//send user information to be stored in the store
-				dispatch(logInUserSuccess(response.data.user));
-				dispatch(setSiteIdle());
+				if(response.data.user.employerId !== null){
+					dispatch(setEmployerAndUser(response.data.employer, response.data.user));
+				} else {
+					dispatch(logInUserSuccess(response.data.user));
+					dispatch(setSiteIdle());
+				}
 				
 			})
 			.catch((error)=>{

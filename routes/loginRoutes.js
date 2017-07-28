@@ -34,58 +34,34 @@ function findEmployerById(employerId){
     // return employer;
 }
 
-function findUserById(decoded) {
+function findUserById(userId) {
     console.log("findUserByID");
-    User.findById('fffk')
+    return User.findById(userId)
         .exec()
-        .then(data => console.log("then step:", data))
-        .catch(error => console.log("error", error));
-
-    /*
-    User.findById(decoded._id, function (err, userDoc) {
-        if (err) {
-            console.log(err);
-        }
-
-        if (userDoc) {
-
-            console.log("found a userDoc");
-            let user = {
-                _id: userDoc._id,
-                firstName: userDoc.firstName,
-                lastName: userDoc.lastName,
-                email: userDoc.email,
-                employerId: userDoc.employerId === undefined ? null : userDoc.employerId
-            };
-
-            console.log('func, we found a user:', user);
-            if (user.employerId === undefined || user.employerId === null) {
-                console.log("This user does NOT have a registered employer");
-                let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
-
-                return {
-                    token,
-                    user
-                }
-
+        .then(userDoc => {
+            console.log("then step:", userDoc);
+            if(userDoc.employerId === null){
+                console.log("null for employerId in promises");
+                let user = {
+                    _id: userDoc._id,
+                    firstName: userDoc.firstName,
+                    lastName: userDoc.lastName,
+                    email: userDoc.email,
+                    employerId: userDoc.employerId === undefined ? null : userDoc.employerId
+                };
+                return {user};
             } else {
-                // let employer = findEmployerById(user.employerId);
-
-                const emp = new Promise(function (resolve, reject) {
-                    resolve(findEmployerById(user.employerId));
-                });
-
-                emp.then(data => { console.log('resolve rr', data)});
-                // console.log("we found an employer and it is:", employer);
+                return Employer.findById(user.employerId)
+                    .exec()
+                    .then(employerDoc => {
+                        "use strict";
+                        console.log("we did find an employer in promises employer:", employerDoc);
+                        return {user: userDoc, employer: employerDoc}
+                    })
+                    .catch(err => console.log("we couldn't find an employer for that user"))
             }
-        } else {
-            return {
-                message: "Invalid credentials"
-            }
-        }
-
-    })
-    */
+        })
+        .catch(error => console.log("error", error));
 }
 
 router.post('/', function (req, res, next) {
@@ -168,6 +144,7 @@ router.post('/', function (req, res, next) {
 
 router.post('/logcheck', function (req, res) {
     console.log("loginRoutes: /logcheck");
+
     let token = req.body.token;
 
     jwt.verify(token, process.env.secretkey, function (err, decoded) {
@@ -182,10 +159,23 @@ router.post('/logcheck', function (req, res) {
         if (decoded) {
             console.log("token has been verified and the user is:", decoded);
             // let logInInfo = findUserByEmailSetEmployer(decoded.email);
-            findUserById(decoded);
-            //TODO now need to create a user object, check if it has a register employer
-            //TODO and if it does add it to the user object, we already have this function somehwere
+            let userPromise = findUserById(decoded._id);
 
+            userPromise
+                .then(
+                    response => {
+                        console.log("userPromise response:", response);
+
+                        let token = jwt.sign(response.user, process.env.secretkey, {expiresIn: "2 days"});
+
+                        res.status(200).json({
+                            user: response.user,
+                            employer: response.employer,
+                            token: token
+                        });
+                    }
+                )
+                .catch(err => console.log("userPromise error:", err));
         }
     });
 });
