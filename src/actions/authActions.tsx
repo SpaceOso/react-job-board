@@ -169,12 +169,8 @@ export function logInUserSuccess(data) {
 
 //gets the token passed from localStorage
 export function logInOnLoad(token){
-	console.log("authAction logInOnLoad", token);
-	console.log(`${ROOT_URL}login/logcheck`);
 	return dispatch => {
-		console.log("logInOnLoad inside dispatch:");
 		dispatch(siteFetch());
-		console.log("logInOnLoad after dispatch function is called");
 		axios.post(`${ROOT_URL}login/logcheck`, {token})
 			.then((response)=>{
 

@@ -35,28 +35,29 @@ function findEmployerById(employerId){
 }
 
 function findUserById(userId) {
-    console.log("findUserByID");
     return User.findById(userId)
         .exec()
         .then(userDoc => {
-            console.log("then step:", userDoc);
+
+            let user = {
+                _id: userDoc._id,
+                firstName: userDoc.firstName,
+                lastName: userDoc.lastName,
+                email: userDoc.email,
+                employerId: userDoc.employerId === undefined ? null : userDoc.employerId
+            };
+
             if(userDoc.employerId === null){
-                console.log("null for employerId in promises");
-                let user = {
-                    _id: userDoc._id,
-                    firstName: userDoc.firstName,
-                    lastName: userDoc.lastName,
-                    email: userDoc.email,
-                    employerId: userDoc.employerId === undefined ? null : userDoc.employerId
-                };
+
                 return {user};
+
             } else {
+
                 return Employer.findById(user.employerId)
                     .exec()
                     .then(employerDoc => {
                         "use strict";
-                        console.log("we did find an employer in promises employer:", employerDoc);
-                        return {user: userDoc, employer: employerDoc}
+                        return {user: user, employer: employerDoc}
                     })
                     .catch(err => console.log("we couldn't find an employer for that user"))
             }
@@ -143,28 +144,23 @@ router.post('/', function (req, res, next) {
 });
 
 router.post('/logcheck', function (req, res) {
-    console.log("loginRoutes: /logcheck");
 
     let token = req.body.token;
 
     jwt.verify(token, process.env.secretkey, function (err, decoded) {
 
         if (err) {
-            console.log("error verifying token");
             res.status(401).json({
                 message: "invalid credentials"
             })
         }
 
         if (decoded) {
-            console.log("token has been verified and the user is:", decoded);
-            // let logInInfo = findUserByEmailSetEmployer(decoded.email);
             let userPromise = findUserById(decoded._id);
 
             userPromise
                 .then(
                     response => {
-                        console.log("userPromise response:", response);
 
                         let token = jwt.sign(response.user, process.env.secretkey, {expiresIn: "2 days"});
 
