@@ -46,29 +46,15 @@ function returnEmployerObject(employerDoc){
 }
 
 function findEmployerById(employerId){
-    // let employer = {};
-    return Employer.findById(employerId, function (err, employerDoc) {
-        if (err) {
-            console.log("there was an error retriveing the employer for this user")
-        }
-
-        console.log("this user does have an employer");
-        if (employerDoc) {
-
-           let employer = {
-                logoImg: employerDoc.logoImg,
-                name: employerDoc.name,
-                applicants: employerDoc.applicants,
-                jobs: employerDoc.jobs,
-                socialMedia: employerDoc.socialMedia,
-                location: employerDoc.location,
-                _id: employerDoc._id
-            };
-
-           return employer;
-        }
-    });
-    // return employer;
+    return Employer.findById(employerId)
+        .exec()
+        .then(employerDoc => {
+            if(!employerDoc){
+                return Promise.reject("There was no employer found with that ID");
+            }
+            return returnEmployerObject(employerDoc);
+        })
+        .then(employerModel => employerModel);
 }
 
 function returnUserByEmail(userEmail){
@@ -103,7 +89,6 @@ function findUserById(userId) {
                 return {user};
 
             } else {
-
                 return Employer.findById(user.employerId)
                     .exec()
                     .then(employerDoc => {
@@ -131,10 +116,35 @@ router.post('/', function (req, res, next) {
                 return Promise.reject("Login credenttials don't match");
             }
 
-            return returnUserObject(userDoc);
+            return  returnUserObject(userDoc);
+
         })
-        .then(userModel => {
-            console.log("The userModel returned from loging in:", userModel);
+        .then(user => {
+            console.log("The final promises from route post /", user);
+            let employer = {};
+
+            if(user.employerId === null){
+                let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
+
+               return res.status(200).json({
+                    token,
+                    user
+                })
+            } else {
+                return findEmployerById(user.employerId)
+                    .then(employer => {
+                        let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
+
+                        console.log("employer we're going to send back:", employer);
+
+                        return res.status(200).json({
+                            token,
+                            user,
+                            employer
+                        });
+                    })
+            }
+
         })
         .catch(err => {
             console.log(err);
@@ -143,6 +153,7 @@ router.post('/', function (req, res, next) {
             // res.status(500).send(err);
         });
 
+/*
 
     User.findOne({email: req.body.email}, function (err, userDoc) {
         if (err) {
@@ -205,6 +216,7 @@ router.post('/', function (req, res, next) {
             }
         }
     });
+*/
 
 });
 
