@@ -13,7 +13,7 @@ import LoginContainer from './log-in/loginContainer';
 import NotFoundComponent from './not-found/notFoundComponent';
 
 //actions
-import {Employer, User} from "../types/index";
+import {Employer, SiteErrors, User} from "../types/index";
 import {logInOnLoad} from "../actions/authActions";
 import ProtectedComponent from "./dashboard/protected/protectedComponent";
 
@@ -22,6 +22,7 @@ interface Props{
     logOutUser: ()=>{},
     user: User,
     employer: Employer,
+    siteErrors: SiteErrors
 }
 
 class App extends React.Component<Props>{

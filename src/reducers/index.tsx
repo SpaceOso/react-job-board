@@ -5,6 +5,7 @@ import currentJobPost from './currentJobReducer';
 import user from './userReducer';
 import employer from './employerReducer';
 import siteFetching from './siteFetchingReducer';
+import siteErrors from './siteErrorReducer';
 
 
 //these keys need to be named the same as the keys in the default state
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
 	currentJobPost,
 	user,
 	employer,
-	siteFetching
+	siteFetching,
+	siteErrors
 });
 
 export default rootReducer;

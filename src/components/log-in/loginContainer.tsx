@@ -10,10 +10,12 @@ import {StoreState, User} from "../../types/index";
 import {logInUser} from "../../actions/authActions";
 
 
-function mapStateToProps({user, siteFetching}:StoreState) {
+function mapStateToProps({user, siteFetching, siteErrors}:StoreState) {
 	return {
 		user,
-		siteFetching
+		siteFetching,
+		siteErrors
+
 	}
 }
 

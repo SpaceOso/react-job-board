@@ -15,10 +15,11 @@ const mapDispatchToProps = (dispatch) =>({
 
 
 // function mapStateToProps(state : StoreState){
-function mapStateToProps({user, employer} : StoreState){
+function mapStateToProps({user, employer, siteErrors} : StoreState){
 	return{
 		user,
-		employer
+		employer,
+		siteErrors
 	}
 }
 

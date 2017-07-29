@@ -7,6 +7,15 @@ export type SITE_IS_FETCHING =  typeof SITE_IS_FETCHING;
 
 export const SITE_IDLE = 'SITE_IDLE';
 export type SITE_IDLE = typeof  SITE_IDLE;
+
+export const ADD_LOGIN_ERROR ='ADD_LOGIN_ERROR';
+export type ADD_LOGIN_ERROR = typeof ADD_LOGIN_ERROR;
+
+export const REMOVE_LOGIN_ERROR ='REMOVE_LOGIN_ERROR';
+export type REMOVE_LOGIN_ERROR = typeof REMOVE_LOGIN_ERROR;
+
+export const CLEAR_ALL_ERRORS ='CLEAR_ALL_ERRORS';
+export type CLEAR_ALL_ERRORS = typeof CLEAR_ALL_ERRORS;
 // =====================================
 // 	JOB ACTIONS
 // =====================================

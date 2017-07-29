@@ -10,12 +10,25 @@ export interface Job{
 	employerLogo?: string
 }
 
+export interface SiteError{
+	typeOfError: string,
+	message: string,
+}
+
+
 export interface privateJobView extends Job{
 	applicants: string[]
 }
 
+export interface SiteErrors{
+		login: SiteError | null,
+		dashBoard: SiteError | null,
+		dataRequest: SiteError | null
+}
+
 export interface SiteFetching{
-	isFetching: boolean
+	isFetching: boolean,
+
 }
 
 export interface User{
@@ -62,5 +75,6 @@ export interface StoreState {
 	user?: User | null,
 	employer?: Employer | null,
 	currentJobPost?: CurrentJobPost,
-	siteFetching?: SiteFetching
+	siteFetching?: SiteFetching,
+	siteErrors?: SiteErrors
 }
