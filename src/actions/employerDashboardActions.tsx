@@ -2,7 +2,7 @@ import axios from 'axios';
 import {ROOT_URL} from './index';
 import {fetchingJobs} from "./jobActions";
 import {Employer} from "../types/index";
-import {   setEmployerAndUser, siteFetch} from "./authActions";
+import {setEmployerAndUser, setSiteIdle, siteFetch} from "./authActions";
 import {setAuth} from "../utils/utils";
 
 export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
@@ -55,17 +55,26 @@ export function editingJobPostSuccess(jobPost) {
     }
 }
 
+/**
+ *
+ * @param {Object}jobPostInfo - It's the form values from createJobComponent. It's set in the state.
+ * @param userId{string}
+ * @return {(dispatch) => any}
+ */
 export function saveJobPost(jobPostInfo, userId) {
     return dispatch => {
 
-        dispatch(editingJobPost());
+        // dispatch(editingJobPost());
+        dispatch(siteFetch());
 
         axios.post(`${ROOT_URL}user/dashboard/${userId}/createjob`, jobPostInfo)
             .then((response) => {
                 dispatch(editingJobPostSuccess(response.data.jobPost));
+                dispatch(setSiteIdle());
             })
             .catch((error) => {
             //TODO need to add an error handlers
+                dispatch(setSiteIdle());
             });
     }
 

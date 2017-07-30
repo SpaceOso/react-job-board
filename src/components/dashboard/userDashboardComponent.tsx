@@ -7,6 +7,8 @@ import CreateJobComponent from "./jobs/createJob/createJobComponent";
 import ApplicantListComponent from "./applicant-list/applicantListComponent";
 import EditJobsComponent from "./jobs/editJob/editJobsComponent";
 import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
+import NotFoundComponent from "../not-found/notFoundComponent";
+import MainLayout, {default as DashboardMainLayout} from "./main-layout/mainLayout";
 
 
 //redux
@@ -32,12 +34,11 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	constructor(props) {
 		super(props);
 
-		this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
+		// this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.checkForEmployer = this.checkForEmployer.bind(this);
 		this.submitJobPost = this.submitJobPost.bind(this);
 
-		// this.fetchEmployerInfo();
 	}
 
 	/*If the user doesn't have an ID we need them to login again.*/
@@ -81,13 +82,14 @@ class UserDashboardComponent extends React.Component<Props, any> {
 			<div className="jb-dashboard">
 				{/*NAV MENU*/}
 
-				<Route path={`${this.props.match.path}`}
+				{/*<Route path={`${this.props.match.path}`}
 				       render={props => (
 					       <UserDashboardNavMenu
 						       match={this.props.match}
 					       />)
 				       }
-				/>
+				/>*/}
+
 				<div className="layout-container">
 
 					<Switch>
@@ -107,6 +109,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 						       render={props => (
 							       <CreateJobComponent
 								       userId={this.props.user._id}
+								       siteFetching={this.props.siteFetching}
 								       employer={this.props.user.employerId}
 								       submitJobPost={this.submitJobPost}
 								       {...props}
@@ -122,15 +125,28 @@ class UserDashboardComponent extends React.Component<Props, any> {
 							       />
 						       )}
 						/>
-						{/*APPLICANT LIST COMPONENT*/}
+						{/*DASHBOARD MAIN LAYOUT*/}
 						<Route path={`${this.props.match.path}/home`}
+						       render={props => (
+							       <DashboardMainLayout
+								       user={this.props.user}
+								       employer={this.props.employer}
+								       siteFetching={this.props.siteFetching}
+								       saveJobPost={this.props.saveJobPost}
+								       {...props}
+							       />)
+						       }
+						/>
+						{/*APPLICANT LIST COMPONENT*/}
+						{/*<Route path={`${this.props.match.path}/home`}
 						       render={props => (
 							       <ApplicantListComponent
 								       user={this.props.user}
 								       employer={this.props.employer}
 							       />
 						       )}
-						/>
+						/>*/}
+						<NotFoundComponent/>
 					</Switch>
 				</div>
 				{login}

@@ -2,10 +2,12 @@ import * as React from 'react';
 
 //utils
 import {setFormState} from "../../../../utils/utils";
+import SpinnerComponent from "../../../spinners/spinnerComponent";
 
 
 interface MyProps{
     submitJobPost,
+	siteFetching,
     employer,
     userId
 }
@@ -31,6 +33,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
     }
     
     handleJobSubmit(){
+	    (event as Event).preventDefault();
         this.props.submitJobPost({...this.state, employerId: this.props.employer});
     }
 
@@ -39,7 +42,8 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
     }
     
     render(){
-        return (
+        // let spinner = (<SpinnerComponent/>);
+        let form = (
             <div>
                <h1>Create a new job post</h1>
                 <form onSubmit={() => this.handleJobSubmit()}>
@@ -73,6 +77,13 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                     </div>
                     <button>Submit Job</button>
                 </form>
+            </div>
+        );
+
+        return(
+            <div>
+                {/*{this.props.siteFetching.isFetching ? spinner : form}*/}
+                {form}
             </div>
         )
     }
