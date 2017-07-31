@@ -20,6 +20,12 @@ interface MyState{
     keywords: string[]
 }
 
+const initialState: MyState = {
+    jobTitle: '',
+    jobDescription: '',
+    keywords: []
+};
+
 class CreateJobComponent extends React.Component<MyProps, MyState>{
     constructor(props){
         super(props);
@@ -40,6 +46,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
 	    console.log("handleJobSubmit() after");
         this.props.submitJobPost({...this.state, employerId: this.props.employer});
 	    event.preventDefault();
+	    this.setState(initialState);
     }
 
     handleChange(state, key, event){
