@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ROOT_URL} from './index';
+import {EMPLOYER_FETCHING, EMPLOYER_IDLE, ROOT_URL} from './index';
 import {fetchingJobs} from "./jobActions";
 import {Employer} from "../types/index";
 import {setEmployerAndUser, setSiteIdle, siteFetch} from "./authActions";
@@ -55,6 +55,20 @@ export function editingJobPostSuccess(jobPost) {
     }
 }
 
+export function employerFetching(){
+    return{
+        type: EMPLOYER_FETCHING,
+        payload: "Employer Fetching"
+    }
+}
+
+export function employerIdle(){
+    return{
+        type: EMPLOYER_IDLE,
+        payload: "Employer Idle"
+    }
+}
+
 /**
  *
  * @param {Object}jobPostInfo - It's the form values from createJobComponent. It's set in the state.
@@ -64,13 +78,12 @@ export function editingJobPostSuccess(jobPost) {
 export function saveJobPost(jobPostInfo, userId) {
     return dispatch => {
 
-        // dispatch(editingJobPost());
-        dispatch(siteFetch());
+        dispatch(employerFetching());
 
         axios.post(`${ROOT_URL}user/dashboard/${userId}/createjob`, jobPostInfo)
             .then((response) => {
                 dispatch(editingJobPostSuccess(response.data.jobPost));
-                dispatch(setSiteIdle());
+                dispatch(employerIdle());
             })
             .catch((error) => {
             //TODO need to add an error handlers

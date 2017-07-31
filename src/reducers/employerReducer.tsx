@@ -8,7 +8,9 @@ import{
     SET_EMPLOYER,
     LOG_OUT_EMPLOYER
 } from '../actions/authActions';
+
 import {Employer, Job} from "../types/index";
+import {EMPLOYER_FETCHING, EMPLOYER_IDLE} from "../actions/index";
 
 const defaultState: Employer = {
     _id: null,
@@ -27,6 +29,7 @@ const defaultState: Employer = {
 		linkedin: ''
 	},
 	jobs: null,
+	isFetching: false,
 };
 
 // this deals with with the employer property of the state
@@ -37,6 +40,16 @@ function employerReducer(state = defaultState, action):any{
             return state;
         case GET_THIS_EMPLOYER_JOBS_SUCCESS:
             return state;
+	    case EMPLOYER_FETCHING:
+	    	return {
+			    ...state,
+			    isFetching: true,
+		    };
+	    case EMPLOYER_IDLE:
+	    	return {
+			    ...state,
+			    isFetching: false
+		    };
         case REGISTER_EMPLOYER_SUCCESS:
             //will set employer after we register in the compRegisterComponent
             return state;
