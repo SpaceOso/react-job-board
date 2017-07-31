@@ -40,13 +40,14 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         this.handleChange = this.handleChange.bind(this);
     }
     
-    handleJobSubmit(event): any{
+    handleJobSubmit(event:any): void{
         console.log("handleJobSubmit() before event what is this it:", event);
         (event as React.SyntheticEvent<Event>).preventDefault();
 	    console.log("handleJobSubmit() after");
         this.props.submitJobPost({...this.state, employerId: this.props.employer});
 	    event.preventDefault();
 	    this.setState(initialState);
+	    // event.preventDefault();
     }
 
     handleChange(state, key, event){
@@ -54,14 +55,12 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
     }
     
     render(){
-        // let spinner = (<SpinnerComponent/>);
+        let spinner = (<SpinnerComponent/>);
         let form = (
             <div>
                <h1>Create a new job post</h1>
-                <form onSubmit= {(event) => {
-                    this.handleJobSubmit(event);
-                }
-                }>
+                <form onSubmit={this.handleJobSubmit}
+                >
                     <div>
                         <label htmlFor="job-title">Job Title</label>
                         <input type="text"
@@ -97,8 +96,8 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
 
         return(
             <div>
-                {/*{this.props.siteFetching.isFetching ? spinner : form}*/}
-                {form}
+                {this.props.employer.isFetching ? spinner : form}
+                {/*{form}*/}
             </div>
         )
     }

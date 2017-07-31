@@ -60,6 +60,7 @@ export interface Employer{
 		linkedin: string
 	} ,
 	jobs: Job[] | null,
+	isFetching: boolean | null
 }
 
 export interface CurrentJobPost extends Job , Employer{
