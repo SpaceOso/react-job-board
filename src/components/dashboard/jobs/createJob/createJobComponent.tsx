@@ -3,11 +3,13 @@ import * as React from 'react';
 //utils
 import {setFormState} from "../../../../utils/utils";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
+import {SiteFetching} from "../../../../types/index";
+import {SyntheticEvent} from "react";
 
 
 interface MyProps{
     submitJobPost,
-	siteFetching,
+    siteFetching: SiteFetching,
     employer,
     userId
 }
@@ -32,9 +34,12 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         this.handleChange = this.handleChange.bind(this);
     }
     
-    handleJobSubmit(){
-	    (event as Event).preventDefault();
+    handleJobSubmit(event): any{
+        console.log("handleJobSubmit() before event what is this it:", event);
+        (event as React.SyntheticEvent<Event>).preventDefault();
+	    console.log("handleJobSubmit() after");
         this.props.submitJobPost({...this.state, employerId: this.props.employer});
+	    event.preventDefault();
     }
 
     handleChange(state, key, event){
@@ -46,7 +51,10 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         let form = (
             <div>
                <h1>Create a new job post</h1>
-                <form onSubmit={() => this.handleJobSubmit()}>
+                <form onSubmit= {(event) => {
+                    this.handleJobSubmit(event);
+                }
+                }>
                     <div>
                         <label htmlFor="job-title">Job Title</label>
                         <input type="text"

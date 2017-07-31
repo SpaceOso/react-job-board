@@ -14,7 +14,7 @@ class UserDashboardNavMenu extends React.Component<MyProps>{
 		return(
 			<div className="user-dashboard-nav">
 				<div className="user-dashboard-btn">
-					<Link to={`/user/dashboard/${this.props.match.params.userId}/createjob`}>
+					<Link to={`${this.props.match.url}/createjob`}>
 					<p className="btn-text">Post A Job</p>
 					</Link>
 				</div>
@@ -22,7 +22,7 @@ class UserDashboardNavMenu extends React.Component<MyProps>{
 					<p className="btn-text">Applicants</p>
 				</div>
 				<div className="user-dashboard-btn">
-					<Link to={`/user/dashboard/${this.props.match.params.userId}/editpostings`}>
+					<Link to={`${this.props.match.url}/editpostings`}>
 						<p className="btn-text">Edit Postings</p>
 					</Link>
 				</div>

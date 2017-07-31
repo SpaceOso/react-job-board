@@ -3,5 +3,8 @@
 .layout-container{
   display: flex;
   flex-direction: row;
-    background-color: $white;
+  background-color: $white;
+  .dashboard-content{
+    margin: 0 auto;
+  }
 }

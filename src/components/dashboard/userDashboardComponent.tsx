@@ -43,7 +43,8 @@ class UserDashboardComponent extends React.Component<Props, any> {
 
 	/*If the user doesn't have an ID we need them to login again.*/
 	checkForLogInErrors() {
-		return this.props.user._id === null || this.props.user._id === undefined || this.props.user === undefined ? <Redirect to={'/login'}/> : null;
+		return this.props.user._id === null || this.props.user._id === undefined || this.props.user === undefined ?
+			<Redirect to={'/login'}/> : null;
 	}
 
 	handleEmployerRegistration(employerData) {
@@ -55,8 +56,9 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	 * If it does not we will display the employer registration component.
 	 * Otherwise we weill load up the main layout*/
 	checkForEmployer() {
-		if(this.props.siteFetching.isFetching === false){
-			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> : <Redirect to={`${this.props.match.url}/home`} push/>;
+		if (this.props.siteFetching.isFetching === false) {
+			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> :
+				<Redirect to={`${this.props.match.url}/home`} push/>;
 		}
 	}
 
@@ -72,7 +74,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 			return <SpinnerComponent/>
 		}
 
-		if(this.props.user._id === null){
+		if (this.props.user._id === null) {
 			login = <Redirect to={'/login'}/>;
 		} else {
 			login = this.checkForEmployer();
@@ -80,79 +82,36 @@ class UserDashboardComponent extends React.Component<Props, any> {
 
 		return (
 			<div className="jb-dashboard">
-				{/*NAV MENU*/}
-
-				{/*<Route path={`${this.props.match.path}`}
-				       render={props => (
-					       <UserDashboardNavMenu
-						       match={this.props.match}
-					       />)
-				       }
-				/>*/}
-
-				<div className="layout-container">
-
-					<Switch>
-						{/*REGISTER COMPONENT*/}
-						<Route path={`${this.props.match.path}/register`}
-						       render={(props) => {
-							       return (<CompRegisterComponent
-								       submitData={this.handleEmployerRegistration}
-								       user={this.props.user}
-								       {...props}
-							       />)
-						       }
-						       }
-						/>
-						{/*CREATE JOB COMPONENT*/}
-						<Route path={`${this.props.match.path}/createjob`}
-						       render={props => (
-							       <CreateJobComponent
-								       userId={this.props.user._id}
-								       siteFetching={this.props.siteFetching}
-								       employer={this.props.user.employerId}
-								       submitJobPost={this.submitJobPost}
-								       {...props}
-							       />
-						       )}
-						/>
-						{/*EDIT POSTINGS COMPONENT*/}
-						<Route path={`${this.props.match.path}/editpostings`}
-						       render={props => (
-							       <EditJobsComponent
-								       employer={this.props.employer}
-								       jobs={this.props.employer.jobs}
-							       />
-						       )}
-						/>
-						{/*DASHBOARD MAIN LAYOUT*/}
-						<Route path={`${this.props.match.path}/home`}
-						       render={props => (
-							       <DashboardMainLayout
-								       user={this.props.user}
-								       employer={this.props.employer}
-								       siteFetching={this.props.siteFetching}
-								       saveJobPost={this.props.saveJobPost}
-								       {...props}
-							       />)
-						       }
-						/>
-						{/*APPLICANT LIST COMPONENT*/}
-						{/*<Route path={`${this.props.match.path}/home`}
-						       render={props => (
-							       <ApplicantListComponent
-								       user={this.props.user}
-								       employer={this.props.employer}
-							       />
-						       )}
-						/>*/}
-						<NotFoundComponent/>
-					</Switch>
-				</div>
+				<Switch>
+					{/*REGISTER COMPONENT*/}
+					<Route path={`${this.props.match.path}/register`}
+					       render={(props) => (
+						       <CompRegisterComponent
+							       submitData={this.handleEmployerRegistration}
+							       user={this.props.user}
+							       {...props}
+						       />
+					       )}
+					/>
+					{/*DASHBOARD MAIN LAYOUT*/}
+					<Route path={`${this.props.match.path}/home`}
+					       render={props => (
+						       <DashboardMainLayout
+							       user={this.props.user}
+							       employer={this.props.employer}
+							       siteFetching={this.props.siteFetching}
+							       saveJobPost={this.props.saveJobPost}
+							       {...props}
+						       />)
+					       }
+					/>
+					<NotFoundComponent/>
+				</Switch>
 				{login}
 			</div>
 		)
 	}
-};
+}
+;
 
 export default UserDashboardComponent;
