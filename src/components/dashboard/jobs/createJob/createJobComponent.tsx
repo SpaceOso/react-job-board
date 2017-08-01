@@ -4,7 +4,7 @@ import * as React from 'react';
 import {setFormState} from "../../../../utils/utils";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
 import {SiteFetching} from "../../../../types/index";
-import {SyntheticEvent} from "react";
+import {RichTextEditor} from 'react-rte';
 
 
 interface MyProps{
@@ -33,7 +33,8 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         this.state = {
             jobTitle: "",
             jobDescription: "",
-            keywords: []
+            keywords: [],
+	        value: RichTextEditor.createEmptyValue()
         };
         
         this.handleJobSubmit = this.handleJobSubmit.bind(this);
