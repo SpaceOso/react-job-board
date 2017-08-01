@@ -39,6 +39,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         
         this.handleJobSubmit = this.handleJobSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleEditorChange = this.handleEditorChange.bind(this);
     }
     
     handleJobSubmit(event:any): void{
@@ -54,7 +55,11 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
     handleChange(state, key, event){
         this.setState(setFormState(state,key, event));
     }
-    
+
+	handleEditorChange = (e) => {
+		console.log('Content was updated:', e.target.getContent());
+	}
+
     render(){
         let spinner = (<SpinnerComponent/>);
         let form = (
@@ -74,7 +79,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                     
                     <div>
                         <label htmlFor="job-description">Job Description</label>
-                        <input type="text"
+                        <textarea type="text"
                                id="job-description"
                                placeholder="Enter Job Description"
                                value={this.state.jobDescription}
