@@ -4,7 +4,7 @@ import * as React from 'react';
 import {setFormState} from "../../../../utils/utils";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
 import {SiteFetching} from "../../../../types/index";
-import {RichTextEditor} from 'react-rte';
+import * as RichTextEditor from 'react-rte';
 
 
 interface MyProps{
@@ -17,13 +17,15 @@ interface MyProps{
 interface MyState{
     jobTitle: string,
     jobDescription: string,
-    keywords: string[]
+    keywords: string[],
+    value: any
 }
 
 const initialState: MyState = {
     jobTitle: '',
     jobDescription: '',
-    keywords: []
+    keywords: [],
+    value: '',
 };
 
 class CreateJobComponent extends React.Component<MyProps, MyState>{
@@ -40,6 +42,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         this.handleJobSubmit = this.handleJobSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleEditorChange = this.handleEditorChange.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
     
     handleJobSubmit(event:any): void{
@@ -58,7 +61,12 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
 
 	handleEditorChange = (e) => {
 		console.log('Content was updated:', e.target.getContent());
-	}
+	};
+
+	onChange = (value) => {
+		this.setState({value});
+		console.log(value);
+	};
 
     render(){
         let spinner = (<SpinnerComponent/>);
@@ -76,10 +84,13 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                                onChange={(event) => this.handleChange(this.state, "jobTitle", event.target.value)}
                         />
                     </div>
-                    
+                    <div>
+
+                    </div>
+
                     <div>
                         <label htmlFor="job-description">Job Description</label>
-                        <textarea type="text"
+                        <input type="text"
                                id="job-description"
                                placeholder="Enter Job Description"
                                value={this.state.jobDescription}

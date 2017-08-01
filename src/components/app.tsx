@@ -16,6 +16,7 @@ import NotFoundComponent from './not-found/notFoundComponent';
 import {Employer, SiteErrors, User} from "../types/index";
 import {logInOnLoad} from "../actions/authActions";
 import ProtectedComponent from "./dashboard/protected/protectedComponent";
+import TestComponent from "./tests/testComponent";
 
 interface Props{
     logInOnLoad,
@@ -54,6 +55,7 @@ class App extends React.Component<Props>{
                             <Route exact path="/jobposts/:jobId" component={JobPostContainer as any}/>
                             <Route exact path="/jobseeker" component={UserComponent}/>
                             <Route exact path="/login" component={LoginContainer as any}/>
+                            <Route exact path="/test" component={TestComponent}/>
                             {/*<Route path="/user/dashboard/:userId" component={UserDashboardContainer as any} />*/}
                             <ProtectedComponent path="/user/dashboard/:userId" component={UserDashboardContainer} isAuth={this.props.user.isAuth} user={this.props.user}  />
                             <Route component={NotFoundComponent}/>
