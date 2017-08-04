@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 //styles
 import "./styles/employerComponent.scss";
+import TinymceComponent from "../../tinymce/tinymceComponent";
 
 class EmployerComponent extends React.Component<any>{
     render() {

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Editor, EditorState} from 'draft-js';
-
+import * as TinyMCE from 'tinymce';
 import "../../../node_modules/draft-js/dist/Draft";
+import TinymceComponent from "../tinymce/tinymceComponent";
 
 const myState:any  = {
 	jobTitle: "",
@@ -14,32 +14,39 @@ class TestComponent extends React.Component<any, any>{
 	constructor(props){
 		super(props);
 
-		this.state = {editorState: EditorState.createEmpty()};
+		this.state = {
+			formContent: ''
+		};
 		// this.onChange = (editorState) => this.setState({editorState});
 		this.onChange = this.onChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 
-	onChange = (editorState) => {
-		this.setState({editorState});
-		console.log(editorState);
+	onChange(value){
+		// this.setState({value});
+		this.setState({formContent: value});
+		console.log(value);
 	};
 
-
-	/*onChange = (value) => {
-		// this.setState({value});
-		console.log(value);
-	};*/
+	onSubmit(event){
+		console.log("form submitted holmes");
+		console.log("form has been submitted: ", this.state.formContent);
+		event.preventDefault();
+	}
 
 	render(){
 		return(
 			<div className="text-container">
 			<div> I'm the thest componet</div>
-				<Editor
-					editorState={this.state.editorState}
-					onChange={this.onChange}
-					placeholder="Add text here"
-					spellCheck={true}
+				<form  onSubmit={this.onSubmit}>
+
+				<h1>Below should be tinymce:</h1>
+				<TinymceComponent
+					id="testId"
+					onEditorChange={this.onChange}
 				/>
+				<button>Submit me bro</button>
+				</form>
 			</div>
 		)
 	}

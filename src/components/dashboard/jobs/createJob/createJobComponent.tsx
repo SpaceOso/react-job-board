@@ -4,8 +4,6 @@ import * as React from 'react';
 import {setFormState} from "../../../../utils/utils";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
 import {SiteFetching} from "../../../../types/index";
-import * as RichTextEditor from 'react-rte';
-
 
 interface MyProps{
     submitJobPost,
@@ -18,14 +16,12 @@ interface MyState{
     jobTitle: string,
     jobDescription: string,
     keywords: string[],
-    value: any
 }
 
 const initialState: MyState = {
     jobTitle: '',
     jobDescription: '',
     keywords: [],
-    value: '',
 };
 
 class CreateJobComponent extends React.Component<MyProps, MyState>{
@@ -36,13 +32,11 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
             jobTitle: "",
             jobDescription: "",
             keywords: [],
-	        value: RichTextEditor.createEmptyValue()
         };
         
         this.handleJobSubmit = this.handleJobSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleEditorChange = this.handleEditorChange.bind(this);
-        this.onChange = this.onChange.bind(this);
     }
     
     handleJobSubmit(event:any): void{
@@ -63,10 +57,6 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
 		console.log('Content was updated:', e.target.getContent());
 	};
 
-	onChange = (value) => {
-		this.setState({value});
-		console.log(value);
-	};
 
     render(){
         let spinner = (<SpinnerComponent/>);
@@ -78,6 +68,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                     <div>
                         <label htmlFor="job-title">Job Title</label>
                         <input type="text"
+                               required
                                id="job-title"
                                placeholder="Enter Job Title"
                                value={this.state.jobTitle}
@@ -85,12 +76,9 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                         />
                     </div>
                     <div>
-
-                    </div>
-
-                    <div>
                         <label htmlFor="job-description">Job Description</label>
                         <input type="text"
+                               required
                                id="job-description"
                                placeholder="Enter Job Description"
                                value={this.state.jobDescription}
@@ -100,6 +88,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                     <div>
                         <label htmlFor="keywords">Enter keywords</label>
                         <input type="text"
+                               required
                                id="keywords"
                                placeholder="Enter keywords"
                                value={this.state.keywords}

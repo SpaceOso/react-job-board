@@ -26,11 +26,13 @@
   },
   "homepage": "https://github.com/WebDevMR/react-job-board#readme",
   "dependencies": {
+    "@types/jquery": "^3.2.10",
     "@types/react": "^15.0.35",
     "@types/react-dom": "^15.5.1",
     "@types/react-redux": "^4.4.45",
     "@types/react-router-dom": "^4.0.6",
     "@types/redux-promise": "^0.5.24",
+    "@types/tinymce": "^4.5.10",
     "axios": "^0.16.1",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
@@ -38,6 +40,7 @@
     "express": "^4.15.3",
     "express-jwt": "^5.3.0",
     "hbs": "^4.0.1",
+    "jquery": "^3.2.1",
     "jsonwebtoken": "^7.4.1",
     "mongojs": "^2.4.0",
     "mongoose": "^4.10.2",
@@ -51,10 +54,12 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-rte": "^0.14.1",
+    "react-tinymce": "^0.6.0",
     "redux": "^3.7.1",
     "redux-devtools-extension": "^2.13.2",
     "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "tinymce": "^4.6.5"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.1",
