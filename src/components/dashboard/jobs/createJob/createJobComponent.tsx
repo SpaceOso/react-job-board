@@ -4,6 +4,7 @@ import * as React from 'react';
 import {setFormState} from "../../../../utils/utils";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
 import {SiteFetching} from "../../../../types/index";
+import TinymceComponent from "../../../tinymce/tinymceComponent";
 
 interface MyProps{
     submitJobPost,
@@ -37,16 +38,14 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         this.handleJobSubmit = this.handleJobSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleEditorChange = this.handleEditorChange.bind(this);
+        this.handleJobDescriptionChange = this.handleJobDescriptionChange.bind(this);
     }
     
     handleJobSubmit(event:any): void{
-        console.log("handleJobSubmit() before event what is this it:", event);
-        (event as React.SyntheticEvent<Event>).preventDefault();
-	    console.log("handleJobSubmit() after");
+        // (event as React.SyntheticEvent<Event>).preventDefault();
         this.props.submitJobPost({...this.state, employerId: this.props.employer});
 	    event.preventDefault();
 	    this.setState(initialState);
-	    // event.preventDefault();
     }
 
     handleChange(state, key, event){
@@ -56,6 +55,11 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
 	handleEditorChange = (e) => {
 		console.log('Content was updated:', e.target.getContent());
 	};
+
+    handleJobDescriptionChange(content){
+        console.log("setting job description content with:", content);
+        this.setState({jobDescription: content});
+    }
 
 
     render(){
@@ -77,13 +81,17 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                     </div>
                     <div>
                         <label htmlFor="job-description">Job Description</label>
-                        <input type="text"
-                               required
-                               id="job-description"
-                               placeholder="Enter Job Description"
-                               value={this.state.jobDescription}
-                               onChange={(event) => this.handleChange(this.state, "jobDescription", event.target.value)}
+                        <TinymceComponent
+                            id="job-create"
+                            onEditorChange={this.handleJobDescriptionChange}
                         />
+                        {/*<input type="text"*/}
+                               {/*required*/}
+                               {/*id="job-description"*/}
+                               {/*placeholder="Enter Job Description"*/}
+                               {/*value={this.state.jobDescription}*/}
+                               {/*onChange={(event) => this.handleChange(this.state, "jobDescription", event.target.value)}*/}
+                        {/*/>*/}
                     </div>
                     <div>
                         <label htmlFor="keywords">Enter keywords</label>

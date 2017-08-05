@@ -3,6 +3,10 @@ import * as TinyMCE from 'tinymce';
 
 interface thisState{
 	id: string,
+	/**
+	 * Function to call to set state with this
+	 * components content
+	 */
 	onEditorChange,
 };
 
@@ -15,16 +19,12 @@ class TinymceComponent extends React.Component<thisState, any>{
 			editor: null
 		};
 
-		this.onChange = this.onChange.bind(this);
 	};
 
 	componentDidMount(){
-		console.log("we have been initiated TINYMCE!!!!!!!!!!");
 		TinyMCE.init({
-			// selector: `#${this.props.id}`,
-			selector: 'textarea',
+			selector: '#tiny-mce-editor',
 			setup: editor => {
-				console.log("editor should have been initiated by now...");
 				this.setState({ editor });
 				editor.on('keyup change', () =>{
 					const content = editor.getContent();
@@ -34,18 +34,13 @@ class TinymceComponent extends React.Component<thisState, any>{
 		});
 	}
 
-	onChange(text){
-		console.log(text);
-	}
-
 	componentWillUnmount(){
-		console.log("we have been removed now...");
 		TinyMCE.EditorManager.remove(this.state.editor);
 	}
 
 	render(){
 		return(
-			<textarea id='text-some' />
+			<textarea id='tiny-mce-editor' />
 		)
 	}
 }
