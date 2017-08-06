@@ -22,7 +22,7 @@ class EditJobsComponent extends React.Component<MyProps>{
 	}
 
 	createJobList(){
-		const jobList = this.props.jobs.map(job => <li key={job} >{job}</li>);
+		const jobList = this.props.employer.jobs.map(job => <li key={job._id} >{job}</li>);
 		return (
 			<ul>
 				{jobList}

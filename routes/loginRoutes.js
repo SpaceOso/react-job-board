@@ -91,6 +91,7 @@ function findUserById(userId) {
 
             } else {
                 return Employer.findById(user.employerId)
+                    .populate('jobs')
                     .exec()
                     .then(employerDoc => {
                         "use strict";

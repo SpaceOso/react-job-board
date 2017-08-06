@@ -7,7 +7,7 @@ export function setAuth(token){
 
 		localStorage.setItem('tkn', token);
 		console.log("setAuth() token:", token);
-		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+			axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 	} else {
 		delete axios.defaults.headers.common['Authorization'];
 	}
