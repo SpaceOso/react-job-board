@@ -39,6 +39,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 		this.checkForEmployer = this.checkForEmployer.bind(this);
 		this.submitJobPost = this.submitJobPost.bind(this);
 
+		console.log("inside the dashboard component with employer: ", this.props.employer);
 	}
 
 	/*If the user doesn't have an ID we need them to login again.*/

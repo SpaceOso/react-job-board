@@ -46,8 +46,10 @@ function returnEmployerObject(employerDoc) {
     return employer;
 }
 
-function findEmployerById(employerId) {
+function
+findEmployerById(employerId) {
     return Employer.findById(employerId)
+        .populate('jobs')
         .exec()
         .then(employerDoc => {
             if (!employerDoc) {
