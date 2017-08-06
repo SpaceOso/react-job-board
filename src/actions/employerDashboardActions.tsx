@@ -100,7 +100,7 @@ export function saveJobPost(jobPostInfo, userId) {
             });
     }
 
-};
+}
 
 export function submitEmployerRegistration(employerInfo: Employer) {
 
