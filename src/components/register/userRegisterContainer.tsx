@@ -21,4 +21,5 @@ function mapStateToProps({user, siteFetching}: StoreState){
 const mapDispatchToProps = (dispatch) =>({
 	registerUser: (user:User) => dispatch(registerUser(user))
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(UserRegisterComponent);

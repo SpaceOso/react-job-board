@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
-var jwt = require('jsonwebtoken');
+let jwt = require('jsonwebtoken');
 
-var Employer = require('../models/employer');
-var User = require('../models/user');
-var Jobs = require('../models/jobs');
-var Applicants = require('../models/applicants');
+let Employer = require('../models/employer');
+let User = require('../models/user');
+let Jobs = require('../models/jobs');
+let Applicants = require('../models/applicants');
 
 /**
  * Returns all the info needed by the front end for the User model.

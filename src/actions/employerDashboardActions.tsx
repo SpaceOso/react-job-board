@@ -48,6 +48,15 @@ export function editingJobPost() {
     }
 }
 
+export function fetchAllEmployerJobModels(employerId){
+    return dispatch => {
+        dispatch(employerFetching());
+
+        axios.get(`${ROOT_URL}employer/dashboard/${employerId}/getAllJobs`)
+            .then()
+    }
+}
+
 export function editingJobPostSuccess(jobPost) {
     return {
         type: EDITING_JOB_POST_SUCCESS,

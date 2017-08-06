@@ -8,7 +8,7 @@ import CreateJobComponent from '../jobs/createJob/createJobComponent';
 import ApplicantListComponent from "../applicant-list/applicantListComponent";
 import {Employer, SiteFetching, User} from "../../../types/index";
 import {RouteComponentProps} from "react-router";
-import EditJobsComponent from "../jobs/editJob/editJobsComponent";
+import EditJobsContainer from '../../dashboard/jobs/editJob/editJobsContainer';
 import "./styles/mainLyout.scss";
 
 interface Props extends RouteComponentProps<any> {
@@ -35,22 +35,17 @@ class DashboardMainLayout extends React.Component<Props, any> {
 								       siteFetching={this.props.siteFetching}
 								       submitJobPost={this.props.saveJobPost}/>
 							       )}/>
+
+						{/*EDIT POSTINGS COMPONENT*/}
+						<Route path={`${this.props.match.url}/editpostings`}
+						       component={EditJobsContainer as any} />
 						{/*APPLICANT LIST COMPONENT*/}
 						<Route path={`${this.props.match.path}`}
 						       render={props =>
 							       (<ApplicantListComponent
-								       user={this.props.user}
-								       employer={this.props.employer}/>
+									       user={this.props.user}
+									       employer={this.props.employer}/>
 							       )}/>
-						{/*EDIT POSTINGS COMPONENT*/}
-						<Route path={`${this.props.match.url}/editpostings`}
-						       render={props => (
-							       <EditJobsComponent
-								       employer={this.props.employer}
-								       jobs={this.props.employer.jobs}
-							       />
-						       )}
-						/>
 					</Switch>
 				</div>
 			</div>
