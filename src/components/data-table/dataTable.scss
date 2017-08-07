@@ -1,0 +1,9 @@
+@import "../../styles/variables";
+
+.data-table {
+  width: 100%;
+    border-collapse: collapse;
+  table, tr{
+    border: 1px solid black;
+  }
+}

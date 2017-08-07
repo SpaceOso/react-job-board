@@ -1,4 +1,5 @@
 import * as React from 'react';
+import DataTable from "../../../data-table/dataTable";
 
 interface MyProps{
 	jobs,
@@ -33,7 +34,8 @@ class EditJobsComponent extends React.Component<MyProps>{
 		return(
 			<div>
 				<h1>I'm the Edit Jobs Container</h1>
-				<div>{this.displayJobList()}</div>
+				<DataTable/>
+				{/*<div>{this.displayJobList()}</div>*/}
 				{/*TODO we will need a list of jobs that we can edit.
 				 We will need to edit the title of the jobs.
 				 the description of the job.
