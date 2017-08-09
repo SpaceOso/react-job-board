@@ -13,6 +13,8 @@ class EditJobsComponent extends React.Component<MyProps>{
 
 		this.displayJobList = this.displayJobList.bind(this);
 		this.createJobList = this.createJobList.bind(this);
+
+
 	}
 
 	/*This will check to see if the employer has any job posts, if it does it will create a list of job posts. If not it should
@@ -31,10 +33,18 @@ class EditJobsComponent extends React.Component<MyProps>{
 	}
 
 	render(){
+		const dataInfo = [
+			{property: 'jobTitle', header:'Job Title'},
+			{property: 'jobDescription', header:'Job Description'},
+		];
+
 		return(
 			<div>
 				<h1>I'm the Edit Jobs Container</h1>
-				<DataTable/>
+				<DataTable
+					rowData={this.props.employer.jobs}
+					columnInfo={dataInfo}
+				/>
 				{/*<div>{this.displayJobList()}</div>*/}
 				{/*TODO we will need a list of jobs that we can edit.
 				 We will need to edit the title of the jobs.

@@ -2,96 +2,50 @@ import * as React from 'react';
 
 import './dataTable.scss'
 
-// const myState = {
-// 	headers: [],
-// 	columnData
-// };
+interface myProps{
+	rowData:any,
+	columnInfo: any,
+}
 
-class DataTable extends React.Component<any, any>{
+class DataTable extends React.Component<myProps, any>{
 	constructor(props){
 		super(props);
 
 		this.state = {
-			headers: ['Job Name', 'Job Description', 'Post Date', 'Applicants'],
-			columnData: [
-				{
-					name: "first job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the content inside"
-				},
-				{
-					name: "second job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the second content"
-				},
-				{
-					name: "third job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the third content"
-				},
-				{
-					name: "fourth job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the fourth content"
-				},
-				{
-					name: "fifth job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the second rown content inside"
-				},
-				{
-					name: "sixth job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the second row second content"
-				},
-				{
-					name: "7th job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the second row third content"
-				},
-				{
-					name: "8th job",
-					postDate: 'monday',
-					applicants: 0,
-					jobDescription: "I'm the second row fourth content"
-				}
-			]
+			columnInfo: this.props.columnInfo,
+			rowData: this.props.rowData,
 		};
 
 		this.createHeaders = this.createHeaders.bind(this);
 		this.createRows = this.createRows.bind(this);
+		this.createRowData = this.createRowData.bind(this);
 	}
 
 	createHeaders(){
-		return this.state.headers.map(header => <th key={header}>{header}</th>)
+		return this.state.columnInfo.map(column => <th key={column.header}>{column.header}</th>)
+	}
+
+	createRowData(rowObj){
+		return this.state.columnInfo.map((column , value) =>{
+			return <td key={`${rowObj._id}${value}`}>{rowObj[column.property]}</td>
+		})
 	}
 
 	createRows(){
-		return this.state.columnData.map(job =>
-			<tr key={job.name}>
-				<td >{job.name}</td>
-				<td >{job.jobDescription}</td>
-				<td >{job.applicants}</td>
-				<td >{job.postDate}</td>
+		return this.state.rowData.map(rowObj =>
+			<tr key={rowObj._id}>
+				{this.createRowData(rowObj)}
 			</tr>
 		)
 	}
 
 	render(){
 
-		// this.createRows();
 		return(
 			<div>I'm the DataTable Component
 				<table className="data-table">
 					<tbody>
-						<tr>
+						<tr key="headers">
 							{this.createHeaders()}
 						</tr>
 						{this.createRows()}

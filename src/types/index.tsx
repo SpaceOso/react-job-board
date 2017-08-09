@@ -7,7 +7,8 @@ export interface Job{
 	jobDescription: string,
 	employerName: string,
 	employerId?: string,
-	employerLogo?: string
+	employerLogo?: string,
+	postDate?: string
 }
 
 export interface SiteError{
