@@ -5,6 +5,9 @@ import './dataTable.scss'
 interface myProps{
 	rowData:any,
 	columnInfo: any,
+	handleClick: any
+	totalRows?: number
+
 }
 
 class DataTable extends React.Component<myProps, any>{
@@ -14,11 +17,13 @@ class DataTable extends React.Component<myProps, any>{
 		this.state = {
 			columnInfo: this.props.columnInfo,
 			rowData: this.props.rowData,
+			totalRows: 5
 		};
 
 		this.createHeaders = this.createHeaders.bind(this);
 		this.createRows = this.createRows.bind(this);
 		this.createRowData = this.createRowData.bind(this);
+		this.onClick = this.onClick.bind(this);
 	}
 
 	createHeaders(){
@@ -31,12 +36,24 @@ class DataTable extends React.Component<myProps, any>{
 		})
 	}
 
+	onClick(dataObj){
+		this.props.handleClick(dataObj);
+	}
+
 	createRows(){
-		return this.state.rowData.map(rowObj =>
-			<tr key={rowObj._id}>
-				{this.createRowData(rowObj)}
-			</tr>
-		)
+		return this.state.rowData.map((rowObj, index) => {
+			//TODO need to paginate this component by creating a prop that handles how many pages there should be per data table
+			//TODO learn why passing a blank function worked instead of passing rowOBJ in the first parameter
+			if(index > this.state.totalRows){
+				console.log("we should have created another page!!!");
+			}
+
+			return (
+				<tr key={rowObj._id} onClick={() => this.onClick(rowObj)}>
+					{this.createRowData(rowObj)}
+				</tr>
+			)
+		})
 	}
 
 	render(){
