@@ -3,7 +3,23 @@
 .data-table {
   width: 100%;
     border-collapse: collapse;
+
   table, tr{
     border: 1px solid black;
+  }
+
+  .data-row:nth-child(even){
+    background-color: $neutral;
+  }
+
+
+  .data-row:hover{
+    background-color: $jobTitle;
+    color:$white;
+    cursor: pointer;
+  }
+
+  .selected{
+    background-color: red;
   }
 }

@@ -7,7 +7,8 @@ interface myProps{
 	columnInfo: any,
 	handleClick: any
 	totalRows?: number,
-	pages?: any[]
+	pages?: any[],
+
 
 }
 
@@ -20,7 +21,8 @@ class DataTable extends React.Component<myProps, any>{
 			rowData: this.props.rowData,
 			totalRows: 5,
 			pages:[],
-			currentPage: 0
+			currentPage: 0,
+			activeDataRow: ''
 		};
 
 		// this.setPages = this.setPages.bind(this);
@@ -40,7 +42,7 @@ class DataTable extends React.Component<myProps, any>{
 			localPages[totalPages - 1].push(dataObj);
 			if(index === innerCount - 1){
 				innerCount += innerCount;
-				totalPages += totalPages;
+				totalPages++;
 				localPages[totalPages - 1] = [];
 			}
 		});
@@ -55,23 +57,22 @@ class DataTable extends React.Component<myProps, any>{
 
 	createRowData(rowObj){
 		return this.state.columnInfo.map((column , value) =>{
-			return <td key={`${rowObj._id}${value}`}>{rowObj[column.property]}</td>
+			return <td  key={`${rowObj._id}${value}`}>{rowObj[column.property]}</td>
 		})
 	}
 
-	onClick(dataObj){
+	onClick(dataObj, event){
 		this.props.handleClick(dataObj);
+		console.log("clicked item was: ", event.target);
+		this.setState({activeDataRow: dataObj});
 	}
 
 	createRows(){
 
-		console.log("inside createRows:", this.state.pages);
-		// return this.state.rowData.map((rowObj, index) => {
-		console.log("pages:", this.state.pages);
-		console.log("currentpage", this.state.currentPage);
 		if(this.state.pages.length <= 0){
 			return;
 		}
+
 		return this.state.pages[this.state.currentPage].map((rowObj, index) => {
 			//TODO need to paginate this component by creating a prop that handles how many pages there should be per data table
 			//TODO learn why passing a blank function worked instead of passing rowOBJ in the first parameter
@@ -80,7 +81,7 @@ class DataTable extends React.Component<myProps, any>{
 			}
 
 			return (
-				<tr key={rowObj._id} onClick={() => this.onClick(rowObj)}>
+				<tr className={rowObj._id  === this.state.activeDataRow._id  ? 'selected' : 'data-row'} key={rowObj._id} onClick={(event) => this.onClick(rowObj, event)}>
 					{this.createRowData(rowObj)}
 				</tr>
 			)
