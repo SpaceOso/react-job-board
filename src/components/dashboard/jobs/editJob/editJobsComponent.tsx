@@ -17,27 +17,11 @@ class EditJobsComponent extends React.Component<MyProps, myState>{
 		super(props);
 
 		this.state = {
-			selectedJob: null
+			selectedJob: null,
+
 		};
 
-		this.displayJobList = this.displayJobList.bind(this);
-		this.createJobList = this.createJobList.bind(this);
 		this.onClick = this.onClick.bind(this);
-	}
-
-	/*This will check to see if the employer has any job posts, if it does it will create a list of job posts. If not it should
-	 * display a message saying that they will be posted here once there is some.*/
-	displayJobList(){
-		return this.props.employer.jobs.length > 0 ? this.createJobList() : `We will display your job posts here once you submit some`;
-	}
-
-	createJobList(){
-		const jobList = this.props.employer.jobs.map(job => <li key={job._id} >{job.jobTitle}</li>);
-		return (
-			<ul>
-				{jobList}
-			</ul>
-		)
 	}
 
 	onClick(selectedJob){
@@ -53,7 +37,6 @@ class EditJobsComponent extends React.Component<MyProps, myState>{
 					<h3>{this.state.selectedJob.jobDescription}</h3>
 				</div>
 			)
-
 		}
 	}
 

@@ -6,7 +6,8 @@ interface myProps{
 	rowData:any,
 	columnInfo: any,
 	handleClick: any
-	totalRows?: number
+	totalRows?: number,
+	pages?: any[]
 
 }
 
@@ -17,13 +18,35 @@ class DataTable extends React.Component<myProps, any>{
 		this.state = {
 			columnInfo: this.props.columnInfo,
 			rowData: this.props.rowData,
-			totalRows: 5
+			totalRows: 5,
+			pages:[],
+			currentPage: 0
 		};
 
+		// this.setPages = this.setPages.bind(this);
+		// this.setPages();
 		this.createHeaders = this.createHeaders.bind(this);
 		this.createRows = this.createRows.bind(this);
 		this.createRowData = this.createRowData.bind(this);
 		this.onClick = this.onClick.bind(this);
+	}
+
+	componentDidMount(){
+		let innerCount = this.state.totalRows; //default at 5
+		let totalPages = 1;
+		let localPages:any[] = [];
+		localPages[totalPages - 1] = [];
+		this.state.rowData.map((dataObj, index) => {
+			localPages[totalPages - 1].push(dataObj);
+			if(index === innerCount - 1){
+				innerCount += innerCount;
+				totalPages += totalPages;
+				localPages[totalPages - 1] = [];
+			}
+		});
+		this.setState({pages: localPages});
+		console.log("in the end totalPages: ", totalPages);
+		console.log("in the end localPages: ", localPages);
 	}
 
 	createHeaders(){
@@ -41,7 +64,15 @@ class DataTable extends React.Component<myProps, any>{
 	}
 
 	createRows(){
-		return this.state.rowData.map((rowObj, index) => {
+
+		console.log("inside createRows:", this.state.pages);
+		// return this.state.rowData.map((rowObj, index) => {
+		console.log("pages:", this.state.pages);
+		console.log("currentpage", this.state.currentPage);
+		if(this.state.pages.length <= 0){
+			return;
+		}
+		return this.state.pages[this.state.currentPage].map((rowObj, index) => {
 			//TODO need to paginate this component by creating a prop that handles how many pages there should be per data table
 			//TODO learn why passing a blank function worked instead of passing rowOBJ in the first parameter
 			if(index > this.state.totalRows){
