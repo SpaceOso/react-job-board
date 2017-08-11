@@ -20,6 +20,8 @@
   }
 
   .selected{
-    background-color: red;
+    background-color: $watermelon;
+    color: $white;
+    font-weight: bold;
   }
 }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import './dataTable.scss'
+import DataTableNavigation from "./navigation/dataTableNavigation";
 
 interface myProps{
 	rowData:any,
@@ -47,8 +48,6 @@ class DataTable extends React.Component<myProps, any>{
 			}
 		});
 		this.setState({pages: localPages});
-		console.log("in the end totalPages: ", totalPages);
-		console.log("in the end localPages: ", localPages);
 	}
 
 	createHeaders(){
@@ -100,6 +99,11 @@ class DataTable extends React.Component<myProps, any>{
 						{this.createRows()}
 					</tbody>
 				</table>
+				<DataTableNavigation
+					currentPage={this.state.currentPage}
+					totalPages={this.state.pages.length}
+
+				/>
 			</div>
 		)
 	}
