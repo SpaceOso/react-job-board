@@ -1,8 +1,11 @@
 import * as React from 'react';
 
+import "./dataNavigation.scss";
+
 interface myProps{
 	currentPage: number,
 	totalPages: number
+	updatePage: (newPage) => void
 }
 
 interface myState{
@@ -23,6 +26,11 @@ class DataTableNavigation extends React.Component<myProps, myState>{
 		this.createButtons = this.createButtons.bind(this);
 	}
 
+	handleClick(event){
+		console.log("button has been clicked", event);
+		this.props.updatePage(event);
+	}
+
 	createButtons(){
 		let pageButtons:any = [];
 
@@ -32,7 +40,12 @@ class DataTableNavigation extends React.Component<myProps, myState>{
 		}
 
 		for(let i = 0; i < this.props.totalPages; i++){
-			pageButtons.push(<div key={`page-${i}`} className="data-nav-button">{i}</div>)
+			pageButtons.push(<div
+				key={`page-${i}`}
+				onClick={() => this.handleClick(i)}
+				className="data-nav-button">
+				{i}
+				</div>)
 		}
 
 		return pageButtons;
@@ -45,7 +58,7 @@ class DataTableNavigation extends React.Component<myProps, myState>{
 				totalPages: {this.props.totalPages}
 				on page right now: {this.props.currentPage}
 				<div className="data-nav-container">
-					{this.createButtons()};
+					{this.createButtons()}
 				</div>
 			</div>
 		)

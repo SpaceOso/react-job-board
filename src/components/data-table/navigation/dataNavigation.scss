@@ -1,2 +1,14 @@
 @import "../../../styles/variables";
 
+.data-nav-container{
+  .data-nav-button{
+    width: 35px;
+    height: 35px;
+    padding: 2px;
+    color: $jobTitle;
+    border: 1px solid $jobTitle;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+}

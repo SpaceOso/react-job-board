@@ -32,6 +32,7 @@ class DataTable extends React.Component<myProps, any>{
 		this.createRows = this.createRows.bind(this);
 		this.createRowData = this.createRowData.bind(this);
 		this.onClick = this.onClick.bind(this);
+		this.changeCurrentpage = this.changeCurrentpage.bind(this);
 	}
 
 	componentDidMount(){
@@ -42,7 +43,7 @@ class DataTable extends React.Component<myProps, any>{
 		this.state.rowData.map((dataObj, index) => {
 			localPages[totalPages - 1].push(dataObj);
 			if(index === innerCount - 1){
-				innerCount += innerCount;
+				innerCount += this.state.totalRows;
 				totalPages++;
 				localPages[totalPages - 1] = [];
 			}
@@ -60,9 +61,12 @@ class DataTable extends React.Component<myProps, any>{
 		})
 	}
 
+	changeCurrentpage(newPage){
+		this.setState({currentPage: newPage});
+	}
+
 	onClick(dataObj, event){
 		this.props.handleClick(dataObj);
-		console.log("clicked item was: ", event.target);
 		this.setState({activeDataRow: dataObj});
 	}
 
@@ -102,7 +106,7 @@ class DataTable extends React.Component<myProps, any>{
 				<DataTableNavigation
 					currentPage={this.state.currentPage}
 					totalPages={this.state.pages.length}
-
+					updatePage={this.changeCurrentpage}
 				/>
 			</div>
 		)
