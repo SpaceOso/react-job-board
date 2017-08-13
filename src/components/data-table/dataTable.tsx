@@ -32,7 +32,7 @@ class DataTable extends React.Component<myProps, any>{
 		this.createRows = this.createRows.bind(this);
 		this.createRowData = this.createRowData.bind(this);
 		this.onClick = this.onClick.bind(this);
-		this.changeCurrentpage = this.changeCurrentpage.bind(this);
+		this.changeCurrentPage = this.changeCurrentPage.bind(this);
 	}
 
 	componentDidMount(){
@@ -61,13 +61,36 @@ class DataTable extends React.Component<myProps, any>{
 		})
 	}
 
-	changeCurrentpage(newPage){
-		this.setState({currentPage: newPage});
+	changeCurrentPage(newPage: number | string){
+		let currentPage = this.state.currentPage;
+
+		if(typeof newPage === 'string'){
+			if(newPage === 'next'){
+				console.log("moving forward");
+				currentPage += 1;
+			} else if(newPage === 'prev'){
+				console.log("moving back");
+				currentPage -= 1;
+			}
+			if(currentPage >= 0 && currentPage < this.state.pages.length){
+				this.setState({currentPage})
+			} else {
+				console.log("we blocked from loading a page outside of scope");
+			}
+		} else {
+			this.setState({currentPage: newPage});
+		}
+
+
 	}
 
 	onClick(dataObj, event){
 		this.props.handleClick(dataObj);
 		this.setState({activeDataRow: dataObj});
+	}
+
+	cyclePage(direction){
+		console.log("in data table component and we're going:", direction);
 	}
 
 	createRows(){
@@ -106,7 +129,7 @@ class DataTable extends React.Component<myProps, any>{
 				<DataTableNavigation
 					currentPage={this.state.currentPage}
 					totalPages={this.state.pages.length}
-					updatePage={this.changeCurrentpage}
+					updatePage={this.changeCurrentPage}
 				/>
 			</div>
 		)

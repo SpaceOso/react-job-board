@@ -5,12 +5,13 @@ import "./dataNavigation.scss";
 interface myProps{
 	currentPage: number,
 	totalPages: number
-	updatePage: (newPage) => void
+	updatePage: (newPage) => void,
 }
 
 interface myState{
 	thisSection?: number,
-	totalSections?: number
+	totalSections?: number,
+	activePage?: number
 }
 
 
@@ -20,7 +21,8 @@ class DataTableNavigation extends React.Component<myProps, myState>{
 
 		this.state = {
 			thisSection: 0,
-			totalSections: 0
+			totalSections: 0,
+			// activePage: 0
 		};
 
 		this.createButtons = this.createButtons.bind(this);
@@ -28,7 +30,28 @@ class DataTableNavigation extends React.Component<myProps, myState>{
 
 	handleClick(event){
 		console.log("button has been clicked", event);
+		// this.setState({activePage: event});
 		this.props.updatePage(event);
+	}
+
+	createPrevButton(){
+		return (
+			<div key={'prev-btn'}
+			     className="data-nav-button"
+				onClick={ () => this.handleClick('prev')}>
+				{"<"}
+			</div>)
+	}
+
+	createNextButton(){
+		return (
+			<div
+				className="data-nav-button"
+				key={'next-btn'}
+				onClick={() => this.handleClick('next')}>
+				{">"}
+			</div>
+		)
 	}
 
 	createButtons(){
@@ -39,14 +62,19 @@ class DataTableNavigation extends React.Component<myProps, myState>{
 			//then we should add '...' buttons to skip to the 5th page
 		}
 
+		pageButtons.push(this.createPrevButton());
+
+
 		for(let i = 0; i < this.props.totalPages; i++){
 			pageButtons.push(<div
 				key={`page-${i}`}
 				onClick={() => this.handleClick(i)}
-				className="data-nav-button">
-				{i}
+				className={this.props.currentPage === i ? "data-nav-button active" : "data-nav-button"}>
+				{i + 1}
 				</div>)
 		}
+
+		pageButtons.push(this.createNextButton());
 
 		return pageButtons;
 	}
