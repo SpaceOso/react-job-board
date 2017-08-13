@@ -20,7 +20,7 @@ class DataTable extends React.Component<myProps, any>{
 		this.state = {
 			columnInfo: this.props.columnInfo,
 			rowData: this.props.rowData,
-			totalRows: 5,
+			totalRows: 10,
 			pages:[],
 			currentPage: 0,
 			activeDataRow: ''
