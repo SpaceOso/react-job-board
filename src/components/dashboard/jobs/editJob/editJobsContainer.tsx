@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {StoreState} from "../../../../types/index";
 import {connect} from "react-redux";
-import EditJobsComponent from "./editJobsComponent";
+import EditJobsComponent from "./editJobsLayout";
 import {fetchAllEmployerJobModels} from "../../../../actions/employerDashboardActions";
 
 function mapStateToProps({jobs, employer}:StoreState){

@@ -5,7 +5,7 @@ import SpinnerComponent from "../spinners/spinnerComponent";
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
 import CreateJobComponent from "./jobs/createJob/createJobComponent";
 import ApplicantListComponent from "./applicant-list/applicantListComponent";
-import EditJobsComponent from "./jobs/editJob/editJobsComponent";
+import EditJobsComponent from "./jobs/editJob/editJobsLayout";
 import UserDashboardNavMenu from "./nav-menu/userDashboardNavMenu";
 import NotFoundComponent from "../not-found/notFoundComponent";
 import MainLayout, {default as DashboardMainLayout} from "./main-layout/mainLayout";
