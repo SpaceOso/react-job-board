@@ -53,6 +53,7 @@ class EditJobsComponent extends React.Component<MyProps, myState>{
 					rowData={this.props.employer.jobs}
 					columnInfo={dataInfo}
 					handleClick={this.onClick}
+					totalRows={10}
 				/>
 				{/*<div>{this.displayJobList()}</div>*/}
 

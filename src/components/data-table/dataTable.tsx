@@ -7,7 +7,7 @@ interface myProps{
 	rowData:any,
 	columnInfo: any,
 	handleClick: any
-	totalRows?: number,
+	totalRows: number,
 	pages?: any[],
 
 
@@ -18,9 +18,6 @@ class DataTable extends React.Component<myProps, any>{
 		super(props);
 
 		this.state = {
-			columnInfo: this.props.columnInfo,
-			rowData: this.props.rowData,
-			totalRows: 5,
 			pages:[],
 			currentPage: 0,
 			activeDataRow: ''
@@ -36,27 +33,32 @@ class DataTable extends React.Component<myProps, any>{
 	}
 
 	componentDidMount(){
-		let innerCount = this.state.totalRows; //default at 5
-		let totalPages = 1;
-		let localPages:any[] = [];
-		localPages[totalPages - 1] = [];
-		this.state.rowData.map((dataObj, index) => {
-			localPages[totalPages - 1].push(dataObj);
+		//set to the total rows displayed per page
+		let innerCount = this.props.totalRows;
+		let totalPages = 0;
+		let pageList:any[] = [];
+		//pageList will contain an array of dataObjs to be displayed per page
+		pageList[totalPages] = [];
+		this.props.rowData.map((dataObj, index) => {
+			pageList[totalPages].push(dataObj);
 			if(index === innerCount - 1){
-				innerCount += this.state.totalRows;
-				totalPages++;
-				localPages[totalPages - 1] = [];
+				innerCount += this.props.totalRows;
+				if(this.props.rowData.length - 1 > index){
+					totalPages += 1;
+					pageList[totalPages] = [];
+				}
 			}
 		});
-		this.setState({pages: localPages});
+
+		this.setState({pages: pageList});
 	}
 
 	createHeaders(){
-		return this.state.columnInfo.map(column => <th key={column.header}>{column.header}</th>)
+		return this.props.columnInfo.map(column => <th key={column.header}>{column.header}</th>)
 	}
 
 	createRowData(rowObj){
-		return this.state.columnInfo.map((column , value) =>{
+		return this.props.columnInfo.map((column , value) =>{
 			return <td  key={`${rowObj._id}${value}`}>{rowObj[column.property]}</td>
 		})
 	}
@@ -66,10 +68,8 @@ class DataTable extends React.Component<myProps, any>{
 
 		if(typeof newPage === 'string'){
 			if(newPage === 'next'){
-				console.log("moving forward");
 				currentPage += 1;
 			} else if(newPage === 'prev'){
-				console.log("moving back");
 				currentPage -= 1;
 			}
 			if(currentPage >= 0 && currentPage < this.state.pages.length){
@@ -87,10 +87,6 @@ class DataTable extends React.Component<myProps, any>{
 	onClick(dataObj, event){
 		this.props.handleClick(dataObj);
 		this.setState({activeDataRow: dataObj});
-	}
-
-	cyclePage(direction){
-		console.log("in data table component and we're going:", direction);
 	}
 
 	createRows(){
