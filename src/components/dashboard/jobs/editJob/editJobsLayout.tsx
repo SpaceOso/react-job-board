@@ -12,7 +12,7 @@ interface myState{
 	selectedJob: Job | null
 }
 
-class EditJobsComponent extends React.Component<MyProps, myState>{
+class EditJobsLayout extends React.Component<MyProps, myState>{
 	constructor(props){
 		super(props);
 
@@ -67,4 +67,4 @@ class EditJobsComponent extends React.Component<MyProps, myState>{
 	}
 }
 
-export default EditJobsComponent;
+export default EditJobsLayout;
