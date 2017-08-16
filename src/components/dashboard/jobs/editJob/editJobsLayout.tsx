@@ -25,7 +25,6 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 	}
 
 	onClick(selectedJob){
-		console.log("we are in the edit jobs component with selecteds job:", selectedJob);
 		this.setState({selectedJob});
 	}
 
@@ -48,7 +47,7 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 
 		return(
 			<div>
-				<h1>I'm the Edit Jobs Container</h1>
+				<h1>Click on the following job posts to edit them.</h1>
 				<DataTable
 					rowData={this.props.employer.jobs}
 					columnInfo={dataInfo}
@@ -58,8 +57,7 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 				{/*<div>{this.displayJobList()}</div>*/}
 
 				{this.state.selectedJob !== null ? this.displayJobInformation() : null}
-				{/*TODO we will need a list of jobs that we can edit.
-				 We will need to edit the title of the jobs.
+				{/* We will need to edit the title of the jobs.
 				 the description of the job.
 				 the keywords of the job and be able to delete the job.*/}
 			</div>
