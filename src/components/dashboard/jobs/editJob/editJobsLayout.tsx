@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DataTable from "../../../data-table/dataTable";
 import {Job} from "../../../../types/index";
+import EditJobComponent from "./editJobComponent";
 
 interface MyProps{
 	jobs,
@@ -18,7 +19,6 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 
 		this.state = {
 			selectedJob: null,
-
 		};
 
 		this.onClick = this.onClick.bind(this);
@@ -26,17 +26,6 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 
 	onClick(selectedJob){
 		this.setState({selectedJob});
-	}
-
-	displayJobInformation(){
-		if(this.state.selectedJob !== null){
-			return(
-				<div>
-					<h1>{this.state.selectedJob.jobTitle}</h1>
-					<h3>{this.state.selectedJob.jobDescription}</h3>
-				</div>
-			)
-		}
 	}
 
 	render(){
@@ -56,7 +45,9 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 				/>
 				{/*<div>{this.displayJobList()}</div>*/}
 
-				{this.state.selectedJob !== null ? this.displayJobInformation() : null}
+				{this.state.selectedJob !== null ? <EditJobComponent job={this.state.selectedJob}/>: null}
+
+
 				{/* We will need to edit the title of the jobs.
 				 the description of the job.
 				 the keywords of the job and be able to delete the job.*/}
