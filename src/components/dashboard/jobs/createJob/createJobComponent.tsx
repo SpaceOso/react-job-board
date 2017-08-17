@@ -84,6 +84,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                         <TinymceComponent
                             id="job-create"
                             onEditorChange={this.handleJobDescriptionChange}
+                            priorContent={null}
                         />
                         {/*<input type="text"*/}
                                {/*required*/}

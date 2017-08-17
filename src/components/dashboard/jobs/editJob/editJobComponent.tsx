@@ -3,7 +3,7 @@ import {Job} from "../../../../types/index";
 import TinymceComponent from "../../../tinymce/tinymceComponent";
 
 interface myProps {
-	job: Job,
+	job: Job | null,
 }
 
 interface myState{
@@ -29,11 +29,11 @@ class EditJobComponent extends React.Component<myProps, myState> {
 	render() {
 		return (
 			<div>I"m the edit jobs component
-				{<h1>{this.props.job.jobTitle}</h1>}
-				{<p>{this.props.job.jobDescription}</p>}
+				{<h1>{this.props.job!.jobTitle}</h1>}
+				{<p>{this.props.job!.jobDescription}</p>}
 				<TinymceComponent id="job-edit"
 				                  onEditorChange={this.handleJobDescriptionChange}
-				                  priorContent={this.props.job.jobDescription}
+				                  priorContent={this.props.job!.jobDescription}
 				/>
 			</div>
 		)

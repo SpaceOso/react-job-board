@@ -44,6 +44,7 @@ class TestComponent extends React.Component<any, any>{
 				<TinymceComponent
 					id="testId"
 					onEditorChange={this.onChange}
+					priorContent={null}
 				/>
 				<button>Submit me bro</button>
 				</form>

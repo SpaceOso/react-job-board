@@ -3,7 +3,7 @@ import * as TinyMCE from 'tinymce';
 
 interface thisProps{
 	id: string,
-	priorContent?: string | null,
+	priorContent: string | null,
 	/**
 	 * Function to call to set state with this
 	 * components content
@@ -32,6 +32,12 @@ class TinymceComponent extends React.Component<thisProps, any>{
 					const content = editor.getContent();
 					this.props.onEditorChange(content);
 				})
+			},
+			init_instance_callback: (editor) =>{
+				if(this.props.priorContent !== null){
+					// let contentString = this.props.priorContent;
+					editor.setContent(this.props.priorContent);
+				}
 			}
 		});
 
@@ -51,10 +57,7 @@ class TinymceComponent extends React.Component<thisProps, any>{
 	}
 
 	render(){
-		console.log(this.state.editor);
-		if(this.state.editor !== null){
-			this.state.editor.get('tiny-mce-editor').setContent("helo");
-		}
+
 		return(
 			<textarea id='tiny-mce-editor' />
 		)

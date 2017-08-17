@@ -3,7 +3,11 @@ import DataTable from "../../../data-table/dataTable";
 import {Job} from "../../../../types/index";
 import EditJobComponent from "./editJobComponent";
 
-interface MyProps{
+//router
+import {Redirect, Route, RouteComponentProps, Switch} from "react-router";
+
+
+interface MyProps extends RouteComponentProps<any>{
 	jobs,
 	employer,
 	fetchAllEmployerJobModels,
@@ -26,6 +30,7 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 
 	onClick(selectedJob){
 		this.setState({selectedJob});
+
 	}
 
 	render(){
@@ -37,15 +42,30 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 		return(
 			<div>
 				<h1>Click on the following job posts to edit them.</h1>
-				<DataTable
-					rowData={this.props.employer.jobs}
-					columnInfo={dataInfo}
-					handleClick={this.onClick}
-					totalRows={10}
-				/>
+				{this.state.selectedJob !== null ? <Redirect to={`${this.props.match.path}/editjob`} /> : null}
+				<Switch>
+					<Route path={`${this.props.match.path}`}
+					       render={(props)=>(
+						       <DataTable
+							       rowData={this.props.employer.jobs}
+							       columnInfo={dataInfo}
+							       handleClick={this.onClick}
+							       totalRows={10}
+						       />
+					       )}
+					/>
+					<Route path={`${this.props.match.path}/editJob`}
+					       render={(state)=>(
+						       <EditJobComponent
+							       job={this.state.selectedJob}
+						       />
+					       )}
+					       />
+				</Switch>
+
 				{/*<div>{this.displayJobList()}</div>*/}
 
-				{this.state.selectedJob !== null ? <EditJobComponent job={this.state.selectedJob}/>: null}
+				{/*{this.state.selectedJob !== null ? <EditJobComponent job={this.state.selectedJob}/>: null}*/}
 
 
 				{/* We will need to edit the title of the jobs.
