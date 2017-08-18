@@ -42,7 +42,7 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 		return(
 			<div>
 				<h1>Click on the following job posts to edit them.</h1>
-				{this.state.selectedJob !== null ? <Redirect to={`${this.props.match.path}/editjob`} /> : null}
+				{this.state.selectedJob !== null ? <Redirect to={`${this.props.match.path}/editJob`} /> : null}
 				<Switch>
 					<Route path={`${this.props.match.path}`}
 					       render={(props)=>(
