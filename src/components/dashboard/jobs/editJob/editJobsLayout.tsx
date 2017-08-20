@@ -14,7 +14,8 @@ interface MyProps extends RouteComponentProps<any>{
 }
 
 interface myState{
-	selectedJob: Job | null
+	selectedJob: Job | null,
+	editingJob: boolean
 }
 
 class EditJobsLayout extends React.Component<MyProps, myState>{
@@ -23,13 +24,17 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 
 		this.state = {
 			selectedJob: null,
+			editingJob: false
 		};
 
 		this.onClick = this.onClick.bind(this);
 	}
 
 	onClick(selectedJob){
-		this.setState({selectedJob});
+		this.setState({
+			selectedJob,
+			editingJob: true
+		});
 
 	}
 
@@ -43,8 +48,15 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 			<div>
 				<h1>Click on the following job posts to edit them.</h1>
 				{this.state.selectedJob !== null ? <Redirect to={`${this.props.match.path}/editJob`} /> : null}
-				<Switch>
-					<Route path={`${this.props.match.path}`}
+			{/*	<DataTable
+					rowData={this.props.employer.jobs}
+					columnInfo={dataInfo}
+					handleClick={this.onClick}
+					totalRows={10}
+				/>*/}
+
+			<Switch>
+					<Route exact={true} path={`${this.props.match.path}`}
 					       render={(props)=>(
 						       <DataTable
 							       rowData={this.props.employer.jobs}
@@ -60,17 +72,8 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 							       job={this.state.selectedJob}
 						       />
 					       )}
-					       />
+					/>
 				</Switch>
-
-				{/*<div>{this.displayJobList()}</div>*/}
-
-				{/*{this.state.selectedJob !== null ? <EditJobComponent job={this.state.selectedJob}/>: null}*/}
-
-
-				{/* We will need to edit the title of the jobs.
-				 the description of the job.
-				 the keywords of the job and be able to delete the job.*/}
 			</div>
 		)
 	}

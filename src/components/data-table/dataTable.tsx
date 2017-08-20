@@ -23,8 +23,7 @@ class DataTable extends React.Component<myProps, any>{
 			activeDataRow: ''
 		};
 
-		// this.setPages = this.setPages.bind(this);
-		// this.setPages();
+		console.log("DataTable initilized");
 		this.createHeaders = this.createHeaders.bind(this);
 		this.createRows = this.createRows.bind(this);
 		this.createRowData = this.createRowData.bind(this);

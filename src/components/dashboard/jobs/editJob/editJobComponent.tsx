@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Job} from "../../../../types/index";
 import TinymceComponent from "../../../tinymce/tinymceComponent";
+import {Link} from "react-router-dom";
 
 interface myProps {
 	job: Job | null,
@@ -19,16 +20,25 @@ class EditJobComponent extends React.Component<myProps, myState> {
 			jobDescription: ''
 		};
 
+		console.log("edit job component initialized");
 		this.handleJobDescriptionChange = this.handleJobDescriptionChange.bind(this);
 	}
 
+	componentWillUnmount(){
+		console.log("I'm being deleted!");
+	}
+	
 	handleJobDescriptionChange(content){
 		console.log("setting job description content with:", content);
 		this.setState({jobDescription: content});
 	}
+	
 	render() {
 		return (
 			<div>I"m the edit jobs component
+				<div>
+					{/*<Link to={`${this.props.match.path}`}/>*/}
+				</div>
 				{<h1>{this.props.job!.jobTitle}</h1>}
 				{<p>{this.props.job!.jobDescription}</p>}
 				<TinymceComponent id="job-edit"
