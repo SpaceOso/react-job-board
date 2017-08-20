@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 //components
 import UserDashboardNavMenu from "../nav-menu/userDashboardNavMenu";
@@ -8,8 +8,9 @@ import CreateJobComponent from '../jobs/createJob/createJobComponent';
 import ApplicantListComponent from "../applicant-list/applicantListComponent";
 import {Employer, SiteFetching, User} from "../../../types/index";
 import {RouteComponentProps} from "react-router";
-import EditJobsContainer from '../../dashboard/jobs/editJob/editJobsContainer';
+// import EditJobsContainer from '../../dashboard/jobs/editJob/editJobsContainer';
 import "./styles/mainLyout.scss";
+import EditJobsLayout from "../jobs/editJob/editJobsLayout";
 
 interface Props extends RouteComponentProps<any> {
 	user: User,
@@ -30,15 +31,24 @@ class DashboardMainLayout extends React.Component<Props, any> {
 						<Route path={`${this.props.match.url}/createjob`}
 						       render={props =>
 							       (<CreateJobComponent
-								       userId={this.props.user._id}
-								       employer={this.props.employer}
-								       siteFetching={this.props.siteFetching}
-								       submitJobPost={this.props.saveJobPost}/>
+									       userId={this.props.user._id}
+									       employer={this.props.employer}
+									       siteFetching={this.props.siteFetching}
+									       submitJobPost={this.props.saveJobPost}/>
 							       )}/>
 
 						{/*EDIT POSTINGS COMPONENT*/}
 						<Route path={`${this.props.match.url}/editpostings`}
-						       component={EditJobsContainer as any} />
+						       render={(RouteComponentProps) => (
+							       <EditJobsLayout
+								       employer={this.props.employer}
+								       jobs={this.props.employer.jobs}
+								       {...RouteComponentProps}
+							       />
+						       )}
+						/>
+						{/*<Route path={`${this.props.match.url}/editpostings`}
+						       component={EditJobsContainer as any} />*/}
 						{/*APPLICANT LIST COMPONENT*/}
 						<Route path={`${this.props.match.path}`}
 						       render={props =>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import DataTable from "../../../data-table/dataTable";
-import {Job} from "../../../../types/index";
+import {Employer, Job} from "../../../../types/index";
 import EditJobComponent from "./editJobComponent";
 
 //router
@@ -8,9 +8,10 @@ import {Redirect, Route, RouteComponentProps, Switch} from "react-router";
 
 
 interface MyProps extends RouteComponentProps<any>{
+// interface MyProps{
 	jobs,
 	employer,
-	fetchAllEmployerJobModels,
+	// fetchAllEmployerJobModels,
 }
 
 interface myState{
@@ -47,19 +48,12 @@ class EditJobsLayout extends React.Component<MyProps, myState>{
 		return(
 			<div>
 				<h1>Click on the following job posts to edit them.</h1>
-				{this.state.selectedJob !== null ? <Redirect to={`${this.props.match.path}/editJob`} /> : null}
-			{/*	<DataTable
-					rowData={this.props.employer.jobs}
-					columnInfo={dataInfo}
-					handleClick={this.onClick}
-					totalRows={10}
-				/>*/}
-
+				{this.state.selectedJob !== null ? <Redirect to={`${this.props.match.path}/editJob`} push={true} /> : null}
 			<Switch>
 					<Route exact={true} path={`${this.props.match.path}`}
 					       render={(props)=>(
 						       <DataTable
-							       rowData={this.props.employer.jobs}
+							       rowData={this.props.employer!.jobs}
 							       columnInfo={dataInfo}
 							       handleClick={this.onClick}
 							       totalRows={10}
