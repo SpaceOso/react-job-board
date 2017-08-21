@@ -1,9 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
-export const FooterComponent = (props) =>{
+const FooterComponent = (props) =>{
     return (
         <div>
             <h1>I'm the footer and this is me testing</h1>
         </div>
     )
 };
+
+export default FooterComponent;

@@ -2,8 +2,9 @@ import * as React from 'react';
 import {Job} from "../../../../types/index";
 import TinymceComponent from "../../../tinymce/tinymceComponent";
 import {Link} from "react-router-dom";
+import {RouteComponentProps} from "react-router";
 
-interface myProps {
+interface myProps extends RouteComponentProps<any>{
 	job: Job | null,
 }
 
@@ -35,9 +36,10 @@ class EditJobComponent extends React.Component<myProps, myState> {
 	
 	render() {
 		return (
-			<div>I"m the edit jobs component
+			<div>
+				<h1>Here you can edit or delete your job posts.</h1>
 				<div>
-					{/*<Link to={`${this.props.match.path}`}/>*/}
+					<div onClick={() => {this.props.history.goBack()}}>Go Back</div>
 				</div>
 				{<h1>{this.props.job!.jobTitle}</h1>}
 				{<p>{this.props.job!.jobDescription}</p>}

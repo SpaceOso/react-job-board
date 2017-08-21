@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import HeaderComponent from './header/headerComponent';
-import {FooterComponent} from './footer/footerComponent';
+import FooterComponent from './footer/footerComponent';
 import {User} from "../types/index";
 
 interface Props{

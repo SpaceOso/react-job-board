@@ -24,3 +24,7 @@ export function setFormState(state, key, event){
 	
 	return keyObject;
 }
+
+export function HelloRico(){
+	return 'Hello Rico';
+}

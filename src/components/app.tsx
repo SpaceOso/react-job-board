@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {Route, Switch, HashRouter} from 'react-router-dom';
+import {Route, Switch, HashRouter, BrowserRouter} from 'react-router-dom';
 
 import EmployerComponent from './employer/home/employerComponent';
 import UserDashboardContainer from './dashboard/userDashboardContainer';
 import UserRegisterContainer from './register/userRegisterContainer';
 import LayoutComponent from './layoutComponent';
-import {UserComponent} from './applicant/userComponent';
+import UserComponent from './applicant/userComponent';
 import JobListContainer from './job-list/home/jobListContainer';
 import {JumboTron} from './home/jumboTron';
 import JobPostContainer from './job-posts/jobPostContainer';
@@ -45,7 +45,7 @@ class App extends React.Component<Props>{
 
     render() {
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <LayoutComponent user={this.props.user} logOutUser={this.props.logOutUser}>
                     <Route exact path="/" component={JumboTron}/>
                         <Switch>
@@ -61,7 +61,7 @@ class App extends React.Component<Props>{
                             <Route component={NotFoundComponent}/>
                         </Switch>
                 </LayoutComponent>
-            </HashRouter>
+            </BrowserRouter>
         )
     }
 }

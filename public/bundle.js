@@ -1864,12 +1864,12 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /* no static exports found */
 /* all exports used */
 /*!*************************************!*\
-  !*** ./components/userComponent.js ***!
+  !*** ./components/userComponent.tsx ***!
   \*************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.UserComponent = undefined;\n\nvar _react = __webpack_require__(/*! react */ 6);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar UserComponent = exports.UserComponent = function UserComponent() {\n\treturn _react2.default.createElement(\n\t\t'h1',\n\t\tnull,\n\t\t'I\\'m a user component'\n\t);\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./components/userComponent.js\n// module id = 96\n// module chunks = 0\n\n//# sourceURL=webpack:///./components/userComponent.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.UserComponent = undefined;\n\nvar _react = __webpack_require__(/*! react */ 6);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar UserComponent = exports.UserComponent = function UserComponent() {\n\treturn _react2.default.createElement(\n\t\t'h1',\n\t\tnull,\n\t\t'I\\'m a user component'\n\t);\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./components/userComponent.tsx\n// module id = 96\n// module chunks = 0\n\n//# sourceURL=webpack:///./components/userComponent.tsx?");
 
 /***/ }),
 /* 97 */
@@ -1900,12 +1900,12 @@ eval("Object.defineProperty(__webpack_exports__, \"__esModule\", { value: true }
 /* no static exports found */
 /* all exports used */
 /*!***************************************!*\
-  !*** ./components/footerComponent.js ***!
+  !*** ./components/footerComponent.tsx ***!
   \***************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.FooterComponent = undefined;\n\nvar _react = __webpack_require__(/*! react */ 6);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar FooterComponent = exports.FooterComponent = function FooterComponent(props) {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'h1',\n            null,\n            'I\\'m the footer'\n        )\n    );\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./components/footerComponent.js\n// module id = 99\n// module chunks = 0\n\n//# sourceURL=webpack:///./components/footerComponent.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.FooterComponent = undefined;\n\nvar _react = __webpack_require__(/*! react */ 6);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar FooterComponent = exports.FooterComponent = function FooterComponent(props) {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'h1',\n            null,\n            'I\\'m the footer'\n        )\n    );\n};\n\n//////////////////\n// WEBPACK FOOTER\n// ./components/footerComponent.tsx\n// module id = 99\n// module chunks = 0\n\n//# sourceURL=webpack:///./components/footerComponent.tsx?");
 
 /***/ }),
 /* 100 */

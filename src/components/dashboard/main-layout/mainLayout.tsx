@@ -38,8 +38,14 @@ class DashboardMainLayout extends React.Component<Props, any> {
 							       )}/>
 
 						{/*EDIT POSTINGS COMPONENT*/}
-						<Route path={`${this.props.match.url}/editpostings`}
-						       render={(RouteComponentProps) => (
+						{/*component={ () => <EditJobsLayout
+								       employer={this.props.employer}
+								       jobs={this.props.employer.jobs}
+								       {...this.props}
+							       />
+						       } />*/}
+						<Route path={`${this.props.match.path}/editpostings`}
+						     render={(RouteComponentProps) => (
 							       <EditJobsLayout
 								       employer={this.props.employer}
 								       jobs={this.props.employer.jobs}
@@ -47,8 +53,6 @@ class DashboardMainLayout extends React.Component<Props, any> {
 							       />
 						       )}
 						/>
-						{/*<Route path={`${this.props.match.url}/editpostings`}
-						       component={EditJobsContainer as any} />*/}
 						{/*APPLICANT LIST COMPONENT*/}
 						<Route path={`${this.props.match.path}`}
 						       render={props =>

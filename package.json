@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node bin/www",
     "ricodev": "set secretkey='Ifjefgke#fs@'&&nodemon bin/www --env.dev",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha  --require ts-node/register src/**/*.spec.ts",
     "build:dev": "webpack --env.dev",
     "dev": "webpack-dev-server --env.dev --port 3000 --hot --host 0.0.0.0"
   },
@@ -26,7 +26,9 @@
   },
   "homepage": "https://github.com/WebDevMR/react-job-board#readme",
   "dependencies": {
+    "@types/chai": "^4.0.3",
     "@types/jquery": "^3.2.10",
+    "@types/mocha": "^2.2.41",
     "@types/react": "^15.0.35",
     "@types/react-dom": "^15.5.1",
     "@types/react-redux": "^4.4.45",
@@ -63,8 +65,10 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.1",
+    "chai": "^4.1.1",
     "cross-env": "^5.0.0",
     "css-loader": "^0.28.2",
+    "mocha": "^3.5.0",
     "mongoose-unique-validator": "^1.0.5",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
@@ -73,6 +77,7 @@
     "serve-favicon": "^2.4.3",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.1",
+    "ts-node": "^3.3.0",
     "typescript": "^2.4.1",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
