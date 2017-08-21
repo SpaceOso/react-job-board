@@ -13,6 +13,7 @@ var mongoose = require('mongoose');
 var appRoutes = require('./routes/appRoutes');
 var employerRoutes = require('./routes/employerRoutes');
 var jobPosts = require('./routes/jobpostsRoutes');
+var jobseeker = require('./routes/jobseeker');
 var uploads = require('./routes/uploadRoutes');
 var userRoutes = require('./routes/userRoutes');
 var registerRoute = require('./routes/registerRoutes');
@@ -25,14 +26,14 @@ let authCheck = require('./routes/authCheck');
 var app = express();
 mongoose.connect('localhost:27017/JobBoard');
 // mongoose.connect("mongodb://mrico3d:password@ds127428.mlab.com:27428/jobboard");
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname+'\\src\\views\\'));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname+'\\views\\'));
 
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,7 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 //this was the default start up
-// app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //after me changing to try and find a working upload folder
 // app.use(express.static(path.join(__dirname, 'jobBoard/dist')));
@@ -69,14 +70,22 @@ app.use(function(req, res, next) {
 	next();
 });
 
+// app.use(express.static(path.resolve(__dirname,  'public')));
+
+// Always return the main index.html, so react-router render the route in the client
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, '..', 'views', 'index.hbs'));
+// });
 
 app.use('/uploads', uploads);
+app.use('/jobseeker', jobseeker);
 app.use('/jobposts', jobPosts);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/user', authCheck, userRoutes);
 app.use('/employer', authCheck, employerRoutes);
 app.use('/', appRoutes);
+app.use('/*', appRoutes);
 
 //todo need to remove this before shipping
 
@@ -93,22 +102,26 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
 	app.use(function(err, req, res, next) {
-		res.status(err.status || 500);
-		res.json({
+        res.render('index');
+		// res.status(err.status || 500);
+		/*res.json({
+            rico: "nope shouldn't be here either",
 			message: err.message,
 			error: err
-		});
+		});*/
 	});
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-	res.status(err.status || 500);
+    res.render('index');
+	/*res.status(err.status || 500);
 	res.render('error', {
+		rico: "nope shouldn't be here",
 		message: err.message,
 		error: {}
-	});
+	});*/
 });
 
 

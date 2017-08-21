@@ -22,7 +22,7 @@ class UserDashboardNavMenu extends React.Component<MyProps>{
 					<p className="btn-text">Applicants</p>
 				</div>
 				<div className="user-dashboard-btn">
-					<Link to={`${this.props.match.url}/editpostings`}>
+					<Link to={`${this.props.match.url}/editpostings`} replace={false}>
 						<p className="btn-text">Edit Postings</p>
 					</Link>
 				</div>
