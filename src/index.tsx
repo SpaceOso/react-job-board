@@ -16,6 +16,7 @@ import AppContainer from './components/appContainer';
 import {composeWithDevTools} from "redux-devtools-extension";
 
 import {StoreState} from './types/index';
+import {BrowserRouter} from "react-router-dom";
 
 const store = createStore<StoreState>(rootReducer, composeWithDevTools(
 	applyMiddleware(thunk, ReduxPromise))

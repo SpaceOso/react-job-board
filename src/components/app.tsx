@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Route, Switch, HashRouter, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import EmployerComponent from './employer/home/employerComponent';
 import UserDashboardContainer from './dashboard/userDashboardContainer';
@@ -56,7 +56,6 @@ class App extends React.Component<Props>{
 							<Route exact path="/jobseeker" component={UserComponent}/>
 							<Route exact path="/login" component={LoginContainer as any}/>
 							<Route exact path="/test" component={TestComponent}/>
-							{/*<Route path="/user/dashboard/:userId" component={UserDashboardContainer as any} />*/}
 							<ProtectedComponent path="/user/dashboard/:userId" component={UserDashboardContainer} isAuth={this.props.user.isAuth} user={this.props.user}  />
 							<Route component={NotFoundComponent}/>
 						</Switch>

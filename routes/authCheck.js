@@ -13,9 +13,7 @@ authCheck = (req, res, next) => {
 	if(token){
 		next();
 	}else{
-		res.status(401).json({
-			message: "You need to login before you can proceed!! from server"
-		})
+		res.render('index',{error: 'you need to login before proceeded'})
 	}
 };
 
