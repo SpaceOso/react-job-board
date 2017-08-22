@@ -1,0 +1,1 @@
+web: set secretkey='Ifjefgke#fs@'&&nodemon bin/www
