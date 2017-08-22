@@ -8,7 +8,7 @@
     "ricodev": "set secretkey='Ifjefgke#fs@'&&nodemon bin/www --env.dev",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
     "build:dev": "webpack --env.dev --hot",
-    "dev": "webpack-dev-server --env.dev --port 3000 --hot --host 0.0.0.0"
+    "dev": "webpack-dev-server --env.dev --history-api-fallback --port 3000 --hot --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
