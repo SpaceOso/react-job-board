@@ -1,1 +1,1 @@
-web: node bin/www.js
+web: node secretkey='Ifjefgke#fs@'&&bin/www.js

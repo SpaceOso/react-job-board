@@ -1,5 +1,21 @@
-export const URL = 'https://mr-job-board.herokuapp.com/';
-// export const URL = 'http://localhost:4200/';
+declare let process : {
+	env: {
+		NODE_ENV: string,
+		secretekey: string
+	}
+};
+
+let URL_Test = 'https://mr-job-board.herokuapp.com/';
+console.log(process.env.NODE_ENV);
+console.log("process secreteKey:", process.env.secretekey);
+
+
+if(process.env.NODE_ENV === "development"){
+	console.log("WE ARE IN DEVELOPMENT MODE!!!!!!!!!!!!");
+	URL_Test = 'http://localhost:4200/';
+}
+
+export const URL = URL_Test;
 import axios from 'axios';
 
 export function setAuth(token){
