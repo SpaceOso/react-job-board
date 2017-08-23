@@ -1,4 +1,5 @@
-export const URL = 'http://localhost:4200/';
+export const URL = 'https://mr-job-board.herokuapp.com/';
+// export const URL = 'http://localhost:4200/';
 import axios from 'axios';
 
 export function setAuth(token){
