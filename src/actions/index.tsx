@@ -1,4 +1,5 @@
-export const ROOT_URL = 'http://localhost:4200/';
+// export const ROOT_URL = 'http://localhost:4200/';
+export const ROOT_URL = 'https://mr-job-board.herokuapp.com/';
 // =====================================
 // 	SITE ACTIONS
 // =====================================

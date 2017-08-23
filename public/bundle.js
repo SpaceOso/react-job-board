@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "31417913b865fc3e5e74"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fa8a4f9a9a038a8edd9c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -4524,7 +4524,8 @@ exports.setEmployerAndUser = setEmployerAndUser;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ROOT_URL = 'http://localhost:4200/';
+// export const ROOT_URL = 'http://localhost:4200/';
+exports.ROOT_URL = 'https://mr-job-board.herokuapp.com/';
 // =====================================
 // 	SITE ACTIONS
 // =====================================
