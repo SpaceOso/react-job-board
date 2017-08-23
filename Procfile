@@ -1,1 +1,1 @@
-web: set secretkey='Ifjefgke#fs@'&&nodemon bin/www
+web: node bin/www.js

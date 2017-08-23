@@ -24,8 +24,8 @@ let authCheck = require('./routes/authCheck');
 
 
 var app = express();
-mongoose.connect('localhost:27017/JobBoard');
-// mongoose.connect("mongodb://mrico3d:password@ds127428.mlab.com:27428/jobboard");
+// mongoose.connect('localhost:27017/JobBoard');
+mongoose.connect("mongodb://mrico3d:password@ds127428.mlab.com:27428/jobboard");
 app.set('view engine', 'hbs');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
