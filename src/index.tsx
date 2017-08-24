@@ -5,6 +5,7 @@ import {createStore, applyMiddleware} from 'redux';
 import * as ReduxPromise from 'redux-promise';
 import thunk from 'redux-thunk';
 
+// console.log('in index with', process.env);
 //styles;
 import './styles/main.scss';
 

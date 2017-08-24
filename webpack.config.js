@@ -1,15 +1,14 @@
 const {resolve} = require('path');
 const webpack = require('webpack');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 module.exports = env => ({
-// module.exports = {
 	context: resolve('src'),
 	entry: "./index.tsx",
 	output: {
 		path: resolve('public'),
 		filename: "bundle.js",
 		publicPath: 'public/',
-		// pathinfo: !env.prod,
 	},
     devtool: "source-map",
     resolve: {
@@ -20,7 +19,11 @@ module.exports = env => ({
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
             },
-        })
+        }),
+		new DotenvPlugin({
+			path: './.env',
+			safe: true
+		})
     ],
     module: {
 		loaders: [
@@ -34,7 +37,8 @@ module.exports = env => ({
 	},
 	node: {
 		dns: 'empty',
-		net: 'empty'
+		net: 'empty',
+		fs:'empty'
 	}
 // };
 });
