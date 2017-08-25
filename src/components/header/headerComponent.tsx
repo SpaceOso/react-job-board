@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 //actions
 import {User} from "../../types/index";
 
-
 interface MyProps{
 	user: User,
 	logOutUser: ()=>{}
