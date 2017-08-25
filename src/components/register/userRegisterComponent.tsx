@@ -6,6 +6,7 @@ import SpinnerComponent from "../spinners/spinnerComponent";
 
 //styles
 import './styles/userRegister.scss';
+import SimpleForm from "../simple-form/simple-form";
 
 export interface registerComponent {
 	event: Event,
@@ -21,6 +22,14 @@ export interface registerComponent {
 		password: boolean,
 		passwordVerify: boolean
 	}
+}
+
+interface formInputs{
+	label: string,
+	required: boolean,
+	type: string,
+	placeHolder: string,
+	id: string
 }
 
 type registerComponentState = {
@@ -97,9 +106,38 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 		this.setState({user: keyObject});
 	}
 
+	onSubmitFunc(){
+		console.log("form has been submitted");
+	}
+
 	returnRegisterForm() {
+		let inputArr: formInputs[] = [
+			{
+				label: 'First Name',
+				required: true,
+				type: 'text',
+				placeHolder: 'Enter First Name',
+				id: 'user-f-name'
+			},
+			{
+				label: "Last Name",
+				required: true,
+				type: 'text',
+				placeHolder: "Enter Last Name",
+				id: 'user-l-name'
+			}
+
+		];
+
 		return (
 			<div className="employer-register-Component">
+
+				<SimpleForm
+					header="Sign Up"
+					inputs={inputArr}
+					onInputChangeCB={this.handleChange}
+				/>
+
 				<div className="register-form">
 					<h1>Sign Up</h1>
 					<form action="" onSubmit={() => this.handleSubmit()}>
