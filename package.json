@@ -4,10 +4,10 @@
   "description": "A job board app made with React",
   "main": "./src/index",
   "scripts": {
-    "start": "node bin/www",
+    "start": "set NODE_ENV=prod&& node bin/www",
     "ricodev": "nodemon bin/www --env.dev",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
-    "build": "webpack",
+    "build": "set NODE_ENV=prod&& webpack",
     "build:dev": "set NODE_ENV=dev webpack --env.dev --hot",
     "dev": "webpack-dev-server --env.development --history-api-fallback --port 3000 --hot --host 0.0.0.0"
   },
