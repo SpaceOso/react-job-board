@@ -81,7 +81,7 @@ router.post('/register', function (req, res, next) {
 							location: employer.location,
 						};
 
-                        let token = jwt.sign(localUser, process.env.secretkey, {expiresIn: "2 days"});
+                        let token = jwt.sign(localUser, process.env.SECRET_KEY, {expiresIn: "2 days"});
 
                         res.status(200).json({
                             token,

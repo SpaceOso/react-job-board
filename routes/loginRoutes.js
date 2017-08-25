@@ -111,7 +111,7 @@ router.post('/logcheck', function (req, res) {
 
     let token = req.body.token;
 
-    jwt.verify(token, process.env.secretkey, function (err, decoded) {
+    jwt.verify(token, process.env.SECRET_KEY, function (err, decoded) {
 
         if (err) {
            return res.status(401).json({
@@ -123,7 +123,7 @@ router.post('/logcheck', function (req, res) {
             findUserById(decoded._id)
                 .then(
                     response => {
-                        let token = jwt.sign(response.user, process.env.secretkey, {expiresIn: "2 days"});
+                        let token = jwt.sign(response.user, process.env.SECRET_KEY, {expiresIn: "2 days"});
                         console.log("Logcheck for employer:", response.employer);
                         res.status(200).json({
                             user: response.user,
@@ -158,7 +158,7 @@ router.post('/', function (req, res) {
         .then(user => {
             console.log("The final promises from route post /", user);
             if (user.employerId === null) {
-                let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
+                let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
 
                 return res.status(200).json({
                     token,
@@ -168,7 +168,7 @@ router.post('/', function (req, res) {
                 return findEmployerById(user.employerId)
                     .then(employer => {
 
-                        let token = jwt.sign(user, process.env.secretkey, {expiresIn: "2 days"});
+                        let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
 
                         console.log("employer we're going to send back:", employer);
 
