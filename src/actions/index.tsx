@@ -13,11 +13,8 @@ if(process.env.NODE_ENV === "development"){
 	URL_Test = 'http://localhost:4200/';
 }
 
-// export const URL = URL_Test;
-
-// export const ROOT_URL = 'http://localhost:4200/';
-// export const ROOT_URL = 'https://mr-job-board.herokuapp.com/';
 export const ROOT_URL = URL_Test;
+console.log("and the url we're using..", ROOT_URL);
 // =====================================
 // 	SITE ACTIONS
 // =====================================
