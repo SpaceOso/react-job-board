@@ -11,12 +11,7 @@ class SimpleForm extends React.Component<myProps, any>{
 	constructor(props){
 		super(props);
 
-		this.state ={
-
-		}
 	}
-
-
 
 	createInputs(){
 		return this.props.inputs.map((input, index) => {
@@ -38,7 +33,7 @@ class SimpleForm extends React.Component<myProps, any>{
 	render(){
 		return(
 			<div>
-				I'm the simple forms container;
+				<h1>{this.props.header}</h1>
 				<div>{this.createInputs()}</div>
 			</div>
 		)

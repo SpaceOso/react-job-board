@@ -6,7 +6,9 @@ let passwordHash = require('password-hash');
 let User = require('../models/user');
 
 router.post('/', function (req, res, next) {
-	
+
+	console.log("in register post /:", req.body);
+
     let user = new User({
 	    firstName: req.body.fName,
 	    lastName: req.body.lName,

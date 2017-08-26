@@ -34,15 +34,7 @@ interface formInputs{
 
 type registerComponentState = {
 	redirect: false,
-	user: {
-		fName: string,
-		lName: string,
-		email: string,
-		emailVerify: string,
-		password: string,
-		passwordVerify: string,
-		employer: string
-	},
+	user: any,
 	errors: {
 		fName: boolean,
 		lName: boolean,
@@ -62,13 +54,6 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 		this.state = {
 			redirect: false,
 			user: {
-				fName: '',
-				lName: '',
-				email: '',
-				emailVerify: '',
-				password: '',
-				passwordVerify: '',
-				employer: ''
 			},
 			errors: {
 				fName: false,
@@ -87,8 +72,9 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 		this.redirectToDashboard = this.redirectToDashboard.bind(this);
 	}
 
-	handleSubmit() {
+	handleSubmit(event) {
 		(event as Event).preventDefault();
+		console.log("form has been submitted with:", this.state.user);
 		this.props.registerUser(this.state.user);
 	}
 
@@ -100,6 +86,8 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 
 	handleChange(key, event) {
 		let keyObject = {...this.state.user};
+		console.log("key:", key);
+		console.log("event:", event);
 
 		keyObject[key] = event;
 
@@ -117,92 +105,55 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 				required: true,
 				type: 'text',
 				placeHolder: 'Enter First Name',
-				id: 'user-f-name'
+				id: 'fName'
 			},
 			{
 				label: "Last Name",
 				required: true,
 				type: 'text',
 				placeHolder: "Enter Last Name",
-				id: 'user-l-name'
+				id: 'lName'
+			},
+			{
+				label: "Email",
+				required: true,
+				type: 'email',
+				placeHolder: "Enter your email",
+				id: 'email'
+			},
+			{
+				label: "Confirm Email",
+				required: true,
+				type: 'email',
+				placeHolder: "Please confirm your email",
+				id: 'email-verify'
+			},
+			{
+				label: "Password",
+				required: true,
+				type: 'password',
+				placeHolder: "Enter password",
+				id: 'pWord'
+			},
+			{
+				label: "Verify Password",
+				required: true,
+				type: 'password',
+				placeHolder: "Please Verify Password",
+				id: 'pWord-verify'
 			}
-
 		];
 
 		return (
 			<div className="employer-register-Component">
 
-				<SimpleForm
-					header="Sign Up"
-					inputs={inputArr}
-					onInputChangeCB={this.handleChange}
-				/>
-
 				<div className="register-form">
-					<h1>Sign Up</h1>
-					<form action="" onSubmit={() => this.handleSubmit()}>
-						<div className="jb-form-group">
-							<label htmlFor="user-f-name">First Name:</label>
-							<input
-								id="user-f-name"
-								type="text"
-								placeholder="First Name"
-								value={this.state.user.fName}
-								onChange={(event) => this.handleChange('fName', event.target.value)}
-								required/>
-						</div>
-						<div className="jb-form-group">
-							<label htmlFor="user-l-name">Last Name:</label>
-							<input
-								id="user-l-name"
-								type="text"
-								placeholder="Last Name"
-								value={this.state.user.lName}
-								onChange={(event) => this.handleChange('lName', event.target.value)}
-								required/>
-						</div>
-						<div className="jb-form-group">
-							<label htmlFor="employer-email">Email:</label>
-							<input
-								id="employer-email"
-								type="email"
-								placeholder="Company Email"
-								onChange={(event) => this.handleChange('email', event.target.value)}
-								value={this.state.user.email}
-								required/>
-						</div>
-						<div className="jb-form-group">
-							<label htmlFor="user-email-verify">Verify email:</label>
-							<input
-								id="employer-email"
-								type="text"
-								placeholder="Verify email"
-								onChange={(event) => this.handleChange('emailVerify', event.target.value)}
-								value={this.state.user.emailVerify}
-								required
-							/>
-						</div>
-						<div className="jb-form-group">
-							<label htmlFor="employer-password">Password:</label>
-							<input
-								id="employer-password"
-								type="password"
-								placeholder="Enter your password"
-								onChange={(event) => this.handleChange('password', event.target.value)}
-								value={this.state.user.password}
-								required/>
-
-						</div>
-						<div className="jb-form-group">
-							<label htmlFor="employer-password-verify">Verify password:</label>
-							<input
-								id="employer-password-verify"
-								type="password"
-								placeholder="Verify your password"
-								onChange={(event) => this.handleChange('passwordVerify', event.target.value)}
-								value={this.state.user.passwordVerify}
-								required/>
-						</div>
+					<form action="" onSubmit={(event) => this.handleSubmit(event)}>
+						<SimpleForm
+							header="Sign Up"
+							inputs={inputArr}
+							onInputChangeCB={this.handleChange}
+						/>
 						<button>Submit Form</button>
 					</form>
 					{/*Once the user registers it should take them to the dashboard*/}

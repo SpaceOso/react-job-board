@@ -3,6 +3,7 @@ import {ADD_LOGIN_ERROR, CLEAR_ALL_ERRORS, REMOVE_LOGIN_ERROR, ROOT_URL, SITE_ID
 
 import {setAuth, removeAuth} from '../utils/utils';
 import {Employer, SiteError, SiteFetching, User} from "../types/index";
+import {register} from "ts-node/dist";
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const FETCHING_USER = 'FETCHING_USER';
@@ -70,6 +71,8 @@ export function registerUser(userObject) {
 	 accountType: 'user',
 	 employer: null
 	 },*/
+
+	console.log("authActions:", userObject);
 
 	return dispatch => {
 

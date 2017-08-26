@@ -25,6 +25,7 @@ let authCheck = require('./routes/authCheck');
 
 var app = express();
 console.log("node_env:", process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'development') {
     console.log("server is in development");
     mongoose.connect('localhost:27017/JobBoard');
