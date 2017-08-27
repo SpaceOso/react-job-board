@@ -1,32 +1,8 @@
 @import "../../../styles/_variables";
 
-.employer-register-Component{
-  //background-color: $panelBg;
-  color: $carbon;
-  display: flex;
-  width: auto;
+.register-form{
+  //width: 50rem;
   margin: auto;
-  font-size: 1.8rem;
-  padding: $contentPadding;
-
-  .register-form{
-    width: 50rem;
-    margin: auto;
-    padding: 2rem;
-    background-color: $panelBg;
-    text-align: center;
-  }
-  .jb-form-group{
-    text-align: left;
-    margin: 0 0 2rem 0;
-
-    label{
-      display: block;
-      margin: 0 0 .5rem 0;
-    }
-    input{
-      width: 100%;
-    }
-
-  }
+  padding: 2rem;
+  //text-align: center;
 }

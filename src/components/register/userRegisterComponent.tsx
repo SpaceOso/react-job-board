@@ -6,7 +6,7 @@ import SpinnerComponent from "../spinners/spinnerComponent";
 
 //styles
 import './styles/userRegister.scss';
-import SimpleForm from "../simple-form/simple-form";
+import SimpleForm from "../simple-form/simpleForm";
 
 export interface registerComponent {
 	event: Event,

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import "./simpleForm.scss";
+
 interface myProps {
 	header: string,
 	inputs: any[],
@@ -15,21 +17,25 @@ class SimpleForm extends React.Component<myProps, any> {
 		let propObj: any = {};
 
 		this.props.inputs.map(input => {
-			propObj[input.id] = '';
+			propObj[input.id] = {
+				content: '',
+				SF_error: false
+			};
 		});
 
 		this.state = {
 			inputsToVerify: this.props.verifyInputs.map(input => input + '-verify'),
+			formSubmitted: false,
 			inputValues: {...propObj}
 		}
 	}
 
-	handleChange(key, event) {
+	handleChange(key: string, event: any) {
 		let keyObject = {...this.state.inputValues};
 		// console.log("key:", key);
 		// console.log("event:", event);
 
-		keyObject[key] = event;
+		keyObject[key].content = event;
 
 		this.setState({inputValues: keyObject});
 	}
@@ -37,29 +43,30 @@ class SimpleForm extends React.Component<myProps, any> {
 
 	handleSubmit(event){
 		(event as Event).preventDefault();
-		this.props.onSubmitCB(this.state.inputValues);
+		if(this.state.errors.length <= 0 ){
+			console.log("do not have any errors so we can submit the form");
+			// this.props.onSubmitCB(this.state.inputValues);
+		}
 	}
 
 	createInputs() {
-		let inputList: any[] = [];
 		return this.props.inputs.map((input, index) => {
 
-			//need to check if the input id matches anything in verifyInputs
-			if (this.state.inputsToVerify.includes(input.id + '-verify')) {
-				console.log("we found on the inputs to verify:", input.id);
-			}
+			//inputID
+			let iID = input.id;
 
 			return (
-				<div className="jb-form-group" key={`${index}${input.id}`}>
-					<label htmlFor={input.id}>{input.label}</label>
+				<div className={this.state.inputValues[iID].SF_error === true ? 'job-form-group error' : 'job-form-group'} key={`${index}${iID}`}>
+					<label htmlFor={iID}>{input.label}</label>
 					<input
 						required={input.required}
 						placeholder={input.placeHolder}
-						id={input.id}
+						id={iID}
 						onChange={(event) => {
-							this.handleChange(input.id, event.target.value)
+							this.handleChange(iID, event.target.value)
 						}}
 						type={input.type}/>
+					{this.state.inputValues[iID].SF_error === true ? <div className="input-error-box">Error was</div> : null}
 				</div>
 			)
 		});
@@ -67,12 +74,13 @@ class SimpleForm extends React.Component<myProps, any> {
 
 	render() {
 		return (
-			<div>
+			<div className="simple-form">
 				<form action="" onSubmit={(event) => this.handleSubmit(event)}>
 					<h1>{this.props.header}</h1>
 					<div>{this.createInputs()}</div>
 					<button>Submit Form</button>
 				</form>
+				{/*<div className="form-error-box">Erorr: Please see errors above.</div>*/}
 			</div>
 		)
 	}
