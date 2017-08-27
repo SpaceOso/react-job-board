@@ -26,13 +26,15 @@ let authCheck = require('./routes/authCheck');
 var app = express();
 console.log("node_env:", process.env.NODE_ENV);
 
+var dbURL = 'localhost:27017/JobBoard';
 if (process.env.NODE_ENV === 'development') {
     console.log("server is in development");
-    mongoose.connect('localhost:27017/JobBoard');
 } else {
     console.log("server is in production");
-    mongoose.connect("mongodb://mrico3d:password@ds127428.mlab.com:27428/jobboard");
+   dbURL = "mongodb://mrico3d:password@ds127428.mlab.com:27428/jobboard";
 }
+
+mongoose.connect(dbURL);
 
 app.set('view engine', 'hbs');
 // view engine setup

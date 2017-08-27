@@ -24,7 +24,7 @@ export interface registerComponent {
 	}
 }
 
-interface formInputs{
+interface formInputs {
 	label: string,
 	required: boolean,
 	type: string,
@@ -33,17 +33,7 @@ interface formInputs{
 }
 
 type registerComponentState = {
-	redirect: false,
-	user: any,
-	errors: {
-		fName: boolean,
-		lName: boolean,
-		email: boolean,
-		verifyEmail: boolean,
-		password: boolean,
-		passwordVerify: boolean
-
-	}
+	redirect: false
 }
 
 
@@ -52,50 +42,23 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 		super(props);
 
 		this.state = {
-			redirect: false,
-			user: {
-			},
-			errors: {
-				fName: false,
-				lName: false,
-				email: false,
-				verifyEmail: false,
-				password: false,
-				passwordVerify: false
-
-			}
+			redirect: false
 		};
 
 		this.returnRegisterForm = this.returnRegisterForm.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleChange = this.handleChange.bind(this);
 		this.redirectToDashboard = this.redirectToDashboard.bind(this);
 	}
 
-	handleSubmit(event) {
-		(event as Event).preventDefault();
-		console.log("form has been submitted with:", this.state.user);
-		this.props.registerUser(this.state.user);
+	handleSubmit(userModel) {
+		console.log("form has been submitted with:", userModel);
+		this.props.registerUser(userModel);
 	}
 
 	redirectToDashboard() {
 		return (
 			<Redirect to={`/user/dashboard/${this.props.user._id}`} push/>
 		)
-	}
-
-	handleChange(key, event) {
-		let keyObject = {...this.state.user};
-		console.log("key:", key);
-		console.log("event:", event);
-
-		keyObject[key] = event;
-
-		this.setState({user: keyObject});
-	}
-
-	onSubmitFunc(){
-		console.log("form has been submitted");
 	}
 
 	returnRegisterForm() {
@@ -133,14 +96,14 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 				required: true,
 				type: 'password',
 				placeHolder: "Enter password",
-				id: 'pWord'
+				id: 'password'
 			},
 			{
 				label: "Verify Password",
 				required: true,
 				type: 'password',
 				placeHolder: "Please Verify Password",
-				id: 'pWord-verify'
+				id: 'password-verify'
 			}
 		];
 
@@ -148,14 +111,13 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 			<div className="employer-register-Component">
 
 				<div className="register-form">
-					<form action="" onSubmit={(event) => this.handleSubmit(event)}>
-						<SimpleForm
-							header="Sign Up"
-							inputs={inputArr}
-							onInputChangeCB={this.handleChange}
-						/>
-						<button>Submit Form</button>
-					</form>
+					<SimpleForm
+						header="Sign Up"
+						inputs={inputArr}
+						submitBtnText="Register Account"
+						onSubmitCB={this.handleSubmit}
+						verifyInputs={['email', 'password']}
+					/>
 					{/*Once the user registers it should take them to the dashboard*/}
 					{this.props.user.isAuth === true ? this.redirectToDashboard() : null}
 					{/*This will display once we register our user*/}
