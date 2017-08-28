@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import "./simpleForm.scss";
+import {Simulate} from "react-dom/test-utils";
+import input = Simulate.input;
 
 interface myProps {
 	header: string,
@@ -10,16 +12,29 @@ interface myProps {
 	onSubmitCB: (userModel) => void
 }
 
+interface inputObject{
+	content: string,
+	SF_error: boolean,
+	required: boolean
+
+}
+
 class SimpleForm extends React.Component<myProps, any> {
 	constructor(props) {
 		super(props);
 
+
 		let propObj: any = {};
 
+		/*Crate an object for each input to hold the user input and to know if there is an
+		* error associated with that input.*/
 		this.props.inputs.map(input => {
 			propObj[input.id] = {
 				content: '',
-				SF_error: false
+				SF_error: false,
+				SF_errorMessage: '',
+				type: input.type,
+				required: input.required
 			};
 		});
 
@@ -40,13 +55,32 @@ class SimpleForm extends React.Component<myProps, any> {
 		this.setState({inputValues: keyObject});
 	}
 
+	checkForErrors(){
+		let inputs = {...this.state.inputValues};
+		//need to check that all values contain something
+		Object.keys(inputs).map(input => {
+			let thisInput = inputs[input];
+
+			if(thisInput.required === true) {
+				// console.log("this field is required: ", thisInput);
+				if(thisInput.content.length <= 0){
+					thisInput.SF_error = true;
+					thisInput.SF_errorMessage = 'This field is required'
+				}
+			}
+
+			if(thisInput.type === 'email'){
+				console.log("this field is an email:", thisInput);
+			}
+		});
+
+		//need to check that emails follow email pattern
+	}
 
 	handleSubmit(event){
 		(event as Event).preventDefault();
-		if(this.state.errors.length <= 0 ){
-			console.log("do not have any errors so we can submit the form");
-			// this.props.onSubmitCB(this.state.inputValues);
-		}
+		this.checkForErrors();
+		console.log("form has been submitted");
 	}
 
 	createInputs() {
