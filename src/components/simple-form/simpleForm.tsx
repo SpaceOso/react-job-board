@@ -23,7 +23,6 @@ class SimpleForm extends React.Component<myProps, any> {
 	constructor(props) {
 		super(props);
 
-
 		let propObj: any = {};
 
 		/*Crate an object for each input to hold the user input and to know if there is an
@@ -47,12 +46,25 @@ class SimpleForm extends React.Component<myProps, any> {
 
 	handleChange(key: string, event: any) {
 		let keyObject = {...this.state.inputValues};
-		// console.log("key:", key);
-		// console.log("event:", event);
 
 		keyObject[key].content = event;
 
 		this.setState({inputValues: keyObject});
+	}
+
+	checkForVerification(){
+		let inputs = {...this.state.inputValues};
+		//need to check that all values contain something
+		Object.keys(inputs).map(input => {
+			let thisInput = inputs[input];
+
+			/*Need to match any inputs that need verification*/
+			if(this.state.inputsToVerify.includes(input + '-verify')){
+				console.log("There is something to verify and it's", thisInput);
+				console.log("do i");
+			}
+
+		});
 	}
 
 	checkForErrors(){
@@ -69,9 +81,12 @@ class SimpleForm extends React.Component<myProps, any> {
 				}
 			}
 
-			if(thisInput.type === 'email'){
-				console.log("this field is an email:", thisInput);
+			/*Need to match any inputs that need verification*/
+			if(this.state.inputsToVerify.includes(input + '-verify')){
+				console.log("There is something to verify and it's", thisInput);
+				console.log("do i");
 			}
+
 		});
 
 		//need to check that emails follow email pattern
