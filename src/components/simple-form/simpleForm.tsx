@@ -1,8 +1,6 @@
 import * as React from 'react';
 
 import "./simpleForm.scss";
-import {Simulate} from "react-dom/test-utils";
-import input = Simulate.input;
 
 interface myProps {
 	header: string,
@@ -25,7 +23,7 @@ class SimpleForm extends React.Component<myProps, any> {
 
 		let propObj: any = {};
 
-		/*Crate an object for each input to hold the user input and to know if there is an
+		/**Crate an object for each input to hold the user input and to know if there is an
 		* error associated with that input.*/
 		this.props.inputs.map(input => {
 			propObj[input.id] = {
@@ -52,44 +50,40 @@ class SimpleForm extends React.Component<myProps, any> {
 		this.setState({inputValues: keyObject});
 	}
 
-	checkForVerification(){
-		let inputs = {...this.state.inputValues};
-		//need to check that all values contain something
-		Object.keys(inputs).map(input => {
-			let thisInput = inputs[input];
+	/**
+	 * Will either add or remove the SF_error and error message
+	 * @param {boolean} setError - Removes or adds error and message
+	 * @param {string} message - The message readout when displaying an error
+	 * @param {string} inputId - The indexed id of the input we want to alter
+	 */
+	checkForVerification(setError:boolean, message:string, inputId:string){
+		let inputRef = {...this.state.inputValues};
 
-			/*Need to match any inputs that need verification*/
-			if(this.state.inputsToVerify.includes(input + '-verify')){
-				console.log("There is something to verify and it's", thisInput);
-				console.log("do i");
-			}
+		if(setError === true){
+			inputRef[inputId + '-verify'].SF_error = true;
+			inputRef[inputId + '-verify'].SF_errorMessage = message;
+		} else if (setError === false){
+			inputRef[inputId + '-verify'].SF_error = false;
+			inputRef[inputId + '-verify'].SF_errorMessage = message;
+		}
 
-		});
+		this.setState({inputValues: {...inputRef}});
 	}
 
 	checkForErrors(){
 		let inputs = {...this.state.inputValues};
 		//need to check that all values contain something
 		Object.keys(inputs).map(input => {
-			let thisInput = inputs[input];
-
-			if(thisInput.required === true) {
-				// console.log("this field is required: ", thisInput);
-				if(thisInput.content.length <= 0){
-					thisInput.SF_error = true;
-					thisInput.SF_errorMessage = 'This field is required'
+			/*Need to match any inputs that need verification*/
+			if(this.state.inputsToVerify.includes(input + '-verify')){
+				if(inputs[input].content !== inputs[input + '-verify'].content){
+					this.checkForVerification(true, 'Does not match', input);
+				} else {
+					this.checkForVerification(false, '', input);
 				}
 			}
 
-			/*Need to match any inputs that need verification*/
-			if(this.state.inputsToVerify.includes(input + '-verify')){
-				console.log("There is something to verify and it's", thisInput);
-				console.log("do i");
-			}
-
 		});
-
-		//need to check that emails follow email pattern
 	}
 
 	handleSubmit(event){
@@ -115,7 +109,7 @@ class SimpleForm extends React.Component<myProps, any> {
 							this.handleChange(iID, event.target.value)
 						}}
 						type={input.type}/>
-					{this.state.inputValues[iID].SF_error === true ? <div className="input-error-box">Error was</div> : null}
+					{this.state.inputValues[iID].SF_error === true ? <div className="input-error-box">{this.state.inputValues[iID].SF_errorMessage}</div> : null}
 				</div>
 			)
 		});
