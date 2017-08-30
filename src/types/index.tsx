@@ -32,12 +32,29 @@ export interface SiteFetching{
 
 }
 
-export interface User{
-	_id: string | null,
+/**
+ * @type AuthUser
+ * @property {(string | null)} firstName - The users first name
+ * @property {(string | null)} lastName - The users last name
+ * @property {(string | null)} email - The users email
+ * @property {(string | null)} password - The users hashed password //todo need to has this
+ */
+export interface AuthUser{
 	firstName: string | null,
 	lastName: string | null,
 	email: string | null,
 	password: string | null,
+}
+
+/**
+ * @type User
+ * @property {(string | null)} employerId - This gets set after the user creates an employer account after log-in in
+ * @property {(boolean | null)} isAuth - This gets set after the user logs in or we authenticate the JWT
+ * @property {(boolean | null)} isFetching - We use this to display a spinner component if the user is waiting for async operation
+ * @property {(string | null)} error - We currently are not using this //todo make sure if save to remove
+ */
+export interface User extends AuthUser{
+	_id: string | null,
 	employerId: string | null,
 	isAuth: boolean | null,
 	isFetching: boolean | null,

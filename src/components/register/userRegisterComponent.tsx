@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Redirect} from 'react-router-dom';
 
-import {SiteFetching, User} from "../../types/index";
+import {AuthUser, SiteFetching, User} from "../../types/index";
 import SpinnerComponent from "../spinners/spinnerComponent";
 
 //styles
@@ -11,7 +11,7 @@ import SimpleForm from "../simple-form/simpleForm";
 export interface registerComponent {
 	event: Event,
 	redirect: false
-	registerUser: (user) => any,
+	registerUser: (user:AuthUser) => any,
 	user: User,
 	siteFetching: SiteFetching,
 	errors: {
@@ -50,9 +50,17 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 		this.redirectToDashboard = this.redirectToDashboard.bind(this);
 	}
 
-	handleSubmit(userModel) {
+	handleSubmit(userModel:AuthUser) {
 		console.log("form has been submitted with:", userModel);
-		this.props.registerUser(userModel);
+		let newUser: AuthUser = {
+			email: userModel.email,
+			firstName: userModel.firstName,
+			lastName: userModel.lastName,
+			password: userModel.password
+		};
+
+		console.log("we're trying to submit newUser:", newUser);
+		this.props.registerUser(newUser);
 	}
 
 	redirectToDashboard() {
@@ -68,14 +76,14 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 				required: true,
 				type: 'text',
 				placeHolder: 'Enter First Name',
-				id: 'fName'
+				id: 'firstName'
 			},
 			{
 				label: "Last Name",
 				required: true,
 				type: 'text',
 				placeHolder: "Enter Last Name",
-				id: 'lName'
+				id: 'lastName'
 			},
 			{
 				label: "Email",

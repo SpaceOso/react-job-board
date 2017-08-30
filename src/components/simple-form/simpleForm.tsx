@@ -6,11 +6,11 @@ interface myProps {
 	header: string,
 	inputs: any[],
 	submitBtnText: string,
-	verifyInputs: string[],
-	onSubmitCB: (userModel) => void
+	verifyInputs: string[] | null,
+	onSubmitCB: (any) => void
 }
 
-interface inputObject{
+interface inputObject {
 	content: string,
 	SF_error: boolean,
 	required: boolean
@@ -24,7 +24,7 @@ class SimpleForm extends React.Component<myProps, any> {
 		let propObj: any = {};
 
 		/**Crate an object for each input to hold the user input and to know if there is an
-		* error associated with that input.*/
+		 * error associated with that input.*/
 		this.props.inputs.map(input => {
 			propObj[input.id] = {
 				content: '',
@@ -36,12 +36,18 @@ class SimpleForm extends React.Component<myProps, any> {
 		});
 
 		this.state = {
-			inputsToVerify: this.props.verifyInputs.map(input => input + '-verify'),
+			inputsToVerify: this.props.verifyInputs !== null ? this.props.verifyInputs.map(input => input + '-verify') : null,
 			formSubmitted: false,
+			formErrors: false,
 			inputValues: {...propObj}
 		}
 	}
 
+	/**
+	 *
+	 * @param {string} key
+	 * @param event
+	 */
 	handleChange(key: string, event: any) {
 		let keyObject = {...this.state.inputValues};
 
@@ -56,13 +62,13 @@ class SimpleForm extends React.Component<myProps, any> {
 	 * @param {string} message - The message readout when displaying an error
 	 * @param {string} inputId - The indexed id of the input we want to alter
 	 */
-	checkForVerification(setError:boolean, message:string, inputId:string){
+	handleVerificationError(setError: boolean, message: string, inputId: string) {
 		let inputRef = {...this.state.inputValues};
 
-		if(setError === true){
+		if (setError === true) {
 			inputRef[inputId + '-verify'].SF_error = true;
 			inputRef[inputId + '-verify'].SF_errorMessage = message;
-		} else if (setError === false){
+		} else if (setError === false) {
 			inputRef[inputId + '-verify'].SF_error = false;
 			inputRef[inputId + '-verify'].SF_errorMessage = message;
 		}
@@ -70,26 +76,54 @@ class SimpleForm extends React.Component<myProps, any> {
 		this.setState({inputValues: {...inputRef}});
 	}
 
-	checkForErrors(){
+	/**
+	 * Runs when form is submitted.
+	 * Checks if any two items that need verification match
+	 */
+	checkForErrors():void {
 		let inputs = {...this.state.inputValues};
-		//need to check that all values contain something
-		Object.keys(inputs).map(input => {
-			/*Need to match any inputs that need verification*/
-			if(this.state.inputsToVerify.includes(input + '-verify')){
-				if(inputs[input].content !== inputs[input + '-verify'].content){
-					this.checkForVerification(true, 'Does not match', input);
-				} else {
-					this.checkForVerification(false, '', input);
-				}
-			}
+		let formError = false;
 
-		});
+		if(this.state.inputsToVerify !== null){
+
+			// need to check that all values contain something
+			Object.keys(inputs).map(input => {
+
+				//Need to match any inputs that need verification
+				if (this.state.inputsToVerify.includes(input + '-verify')) {
+					if (inputs[input].content !== inputs[input + '-verify'].content) {
+						formError = true;
+						this.handleVerificationError(true, 'Does not match', input);
+					} else {
+						this.handleVerificationError(false, '', input);
+					}
+				}
+			});
+		}
+
+		if (formError === false) {
+			this.submitForm();
+		}
+
+	}
+	/**
+	 * Creates and sends a key-value pair object to the onSubmitCB given as props
+	 * @property name - Is the id given as the input id in the props, the value is what the user typed in the form
+	 */
+	submitForm():void {
+		let formObject = {};
+
+		for (let input in this.state.inputValues) {
+			if (this.state.inputValues.hasOwnProperty(input)) {
+				formObject[input] =	this.state.inputValues[input].content
+			}
+		}
+		this.props.onSubmitCB(formObject);
 	}
 
-	handleSubmit(event){
+	handleSubmit(event) {
 		(event as Event).preventDefault();
 		this.checkForErrors();
-		console.log("form has been submitted");
 	}
 
 	createInputs() {
@@ -99,7 +133,9 @@ class SimpleForm extends React.Component<myProps, any> {
 			let iID = input.id;
 
 			return (
-				<div className={this.state.inputValues[iID].SF_error === true ? 'job-form-group error' : 'job-form-group'} key={`${index}${iID}`}>
+				<div
+					className={this.state.inputValues[iID].SF_error === true ? 'job-form-group error' : 'job-form-group'}
+					key={`${index}${iID}`}>
 					<label htmlFor={iID}>{input.label}</label>
 					<input
 						required={input.required}
@@ -109,7 +145,8 @@ class SimpleForm extends React.Component<myProps, any> {
 							this.handleChange(iID, event.target.value)
 						}}
 						type={input.type}/>
-					{this.state.inputValues[iID].SF_error === true ? <div className="input-error-box">{this.state.inputValues[iID].SF_errorMessage}</div> : null}
+					{this.state.inputValues[iID].SF_error === true ?
+						<div className="input-error-box">{this.state.inputValues[iID].SF_errorMessage}</div> : null}
 				</div>
 			)
 		});

@@ -7,9 +7,10 @@ let User = require('../models/user');
 
 router.post('/', function (req, res, next) {
 
+	console.log('in the back end we get:', req.body);
     let user = new User({
-	    firstName: req.body.fName,
-	    lastName: req.body.lName,
+	    firstName: req.body.firstName,
+	    lastName: req.body.lastName,
 	    email: req.body.email,
 	    password: req.body.password, //TODO need to hash this
 	    employerId: null
