@@ -42,16 +42,9 @@ class HeaderComponent extends React.Component<MyProps, any> {
 						<h1>Job Board</h1>
 					</div>
 				</Link>
-				
-				<Link to={"/jobseeker"}>
+				<Link to={"/register"}>
 					<div className="nav-item">
-						Job Seeker
-					</div>
-				</Link>
-				
-				<Link to={"/employer"}>
-					<div className="nav-item">
-						Employers
+						Sign Up
 					</div>
 				</Link>
 				

@@ -7,6 +7,7 @@ import SpinnerComponent from "../spinners/spinnerComponent";
 //styles
 import './styles/userRegister.scss';
 import SimpleForm from "../simple-form/simpleForm";
+import {JumboTron} from "../home/jumboTron";
 
 export interface registerComponent {
 	event: Event,
@@ -117,7 +118,6 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 
 		return (
 			<div className="employer-register-Component">
-
 				<div className="register-form">
 					<SimpleForm
 						header="Sign Up"

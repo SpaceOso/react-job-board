@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import EmployerComponent from './employer/home/employerComponent';
 import UserDashboardContainer from './dashboard/userDashboardContainer';
 import UserRegisterContainer from './register/userRegisterContainer';
 import LayoutComponent from './layoutComponent';
@@ -50,7 +49,6 @@ class App extends React.Component<Props>{
 					<Route exact path="/" component={JumboTron}/>
 						<Switch>
 							<Route exact path="/" component={JobListContainer as any}/>
-							<Route exact path="/employer" component={EmployerComponent}/>
 							<Route exact path="/register" component={UserRegisterContainer as any}/>
 							<Route exact path="/jobposts/:jobId" component={JobPostContainer as any}/>
 							<Route exact path="/jobseeker" component={UserComponent}/>

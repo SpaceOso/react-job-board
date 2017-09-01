@@ -5,11 +5,13 @@ import "./styles/compRegisterComponent.scss";
 import {User} from "../../../types/index";
 import SpinnerComponent from "../../spinners/spinnerComponent";
 import {Redirect, RouteComponentProps} from "react-router";
+import {Simulate} from "react-dom/test-utils";
+import input = Simulate.input;
 
 
 interface compRegisterProps extends RouteComponentProps<any>{
 	submitData
-	user: User
+	user: User,
 }
 
 interface MyState{
@@ -26,6 +28,9 @@ interface MyState{
 }
 
 class CompRegisterComponent extends React.Component<compRegisterProps, MyState> {
+	private filesInput: HTMLInputElement;
+
+
 	constructor(props) {
 		super(props);
 		
@@ -41,15 +46,20 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 			linkedIn: "",
 			twitter: ""
 		};
-		
+
 		this.handleChange = this.handleChange.bind(this);
 		this.handleEmployerSubmit = this.handleEmployerSubmit.bind(this);
 		this.renderRegisterForm = this.renderRegisterForm.bind(this);
 	}
 
-	handleEmployerSubmit(){
+
+
+	handleEmployerSubmit(event){
+		(event as Event).preventDefault();
+		console.log("show me files");
 		//this will call an action that will send employer info to server
-		this.props.submitData(this.state);
+		console.log(this.filesInput.files);
+		// this.props.submitData(this.state);
 	}
 
 	handleChange(key, event) {
@@ -60,12 +70,24 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 		this.setState(keyObject);
 	}
 
+	handleFileUpload(){
+		let data = new FormData();
+		// data.append( 'file', file);
+		console.log(data);
+		// console.log("the event:", file);
+		/*let keyObject = {...this.state};
+
+		keyObject[key] = event;
+
+		this.setState(keyObject);*/
+	}
+
 	renderRegisterForm(){
 		return (
 			<div className="comp-register">
 				<h1>We need to set up your employer before we can start!</h1>
 				<div className="form-container">
-					<form action="" onSubmit={() => this.handleEmployerSubmit()}>
+					<form action="" onSubmit={(event) => this.handleEmployerSubmit(event)}>
 						{/*name and logo*/}
 						<div id="name-logo-group">
 							<div id="company-name-container">
@@ -81,11 +103,12 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 
 							<div id="company-logo-container">
 								<label htmlFor="company-logo">logo image:</label>
-								<input type="text"
+								<input type="file"
 								       id="company-logo"
 								       placeholder="upload logo"
-								       value={this.state.logoImg}
-								       onChange={(event) => this.handleChange('logoImg', event.target.value)}
+								       name="file"
+
+								       ref={ (input) => { this.filesInput = input; }
 								/>
 							</div>
 
