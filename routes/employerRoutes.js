@@ -3,19 +3,40 @@
  */
 
 /*These are the routes from express*/
- let express = require('express');
- let router = express.Router();
- let passwordHash = require('password-hash');
- let Employer = require('../models/employer');
- let Job = require('../models/jobs');
- let Applicants = require('../models/applicants');
- let User = require('../models/user');
- let jwt = require('jsonwebtoken');
+ const express = require('express');
+ const router = express.Router();
+ const passwordHash = require('password-hash');
+ const Employer = require('../models/employer');
+ const Job = require('../models/jobs');
+ const Applicants = require('../models/applicants');
+ const User = require('../models/user');
+ const jwt = require('jsonwebtoken');
+const path = require('path');
+const multer = require('multer');
 
- let routeTools = require('./route_utils');
+const uploadPath = path.join(__dirname, '..', '/assets/uploads');
+console.log("the route that I want is", uploadPath);
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadPath)
+    },
+    filename: function (req, file, cb) {
+        let ext = path.extname(file.originalname);
+        cb(null, `${Math.random().toString(36).substring(7)}${ext}`);
+    }
+});
+
+
+const upload = multer({storage: storage});
+
+ const routeTools = require('./route_utils');
 
 //requires an object with employerData and userId properties
-router.post('/register', function (req, res, next) {
+router.post('/register', upload.single('logoImg'), function (req, res, next) {
+	// console.log(req);
+	console.log('req.file:', req.file);
+	console.log('req.body:', req.body);
 	User.findById(req.body.userId, function (error, user) {
 		
 		if(error){
@@ -31,6 +52,7 @@ router.post('/register', function (req, res, next) {
 			//we found a user, now create an employer and save it and save it's id
 			// to the users employer property
 			//using the employer model
+			console.log("The employerdata before we save it:", req.body.employerData);
 			
 			let employer = new Employer({
 				name: req.body.employerData.name,

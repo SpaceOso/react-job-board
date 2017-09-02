@@ -20,7 +20,7 @@ interface MyState{
 	city: string,
 	state: string,
 	zip: string,
-	logoImg: string,
+	logoImg: File | null,
 	website: string,
 	facebook: string,
 	linkedIn: string,
@@ -29,7 +29,6 @@ interface MyState{
 
 class CompRegisterComponent extends React.Component<compRegisterProps, MyState> {
 	private filesInput: HTMLInputElement;
-
 
 	constructor(props) {
 		super(props);
@@ -40,18 +39,52 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 			city: "",
 			state: "",
 			zip: "",
-			logoImg: "",
+			logoImg: null,
 			website: "",
 			facebook: "",
 			linkedIn: "",
 			twitter: ""
 		};
 
+
+		this.sendRegistrationToServer = this.sendRegistrationToServer.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleEmployerSubmit = this.handleEmployerSubmit.bind(this);
 		this.renderRegisterForm = this.renderRegisterForm.bind(this);
 	}
 
+	sendRegistrationToServer(){
+		// console.log("Form has been submitted to server:", this.state);
+		let data = new FormData();
+		data.append('file', this.state.logoImg!);
+
+		let testForm = {};
+		for(let entries in this.state){
+			if(this.state.hasOwnProperty(entries))
+			{
+				console.log("entries", entries);
+				console.log("this.state.", this.state[entries]);
+				testForm[entries] = this.state[entries];
+				data.append(entries, this.state[entries]);
+			}
+		}
+
+		console.log("and the data is:", testForm);
+		// data.append('name', this.state.name);
+		// data.append('address', this.state.address);
+		// data.append('city', this.state.city);
+		// data.append('state', this.state.state);
+		// data.append('zip', this.state.zip);
+		// data.append('website', this.state.website);
+		// data.append('facebook', this.state.facebook);
+		// data.append('linkedIn', this.state.linkedIn);
+		// data.append('twitter', this.state.twitter);
+		// this.props.submitData(data);
+		// data.append("employer", this.state);
+
+		this.props.submitData(data);
+		// this.props.submitData(this.state);
+	}
 
 
 	handleEmployerSubmit(event){
@@ -59,7 +92,17 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 		console.log("show me files");
 		//this will call an action that will send employer info to server
 		console.log(this.filesInput.files);
-		// this.props.submitData(this.state);
+		if(this.filesInput.files !== null){
+			if(this.filesInput.files.length > 0){
+				console.log("there should be a file on this now..");
+				console.log(this.filesInput);
+				this.setState({logoImg: this.filesInput.files[0]}, this.sendRegistrationToServer);
+			}
+		} else {
+			console.log('and the form state:', this.state);
+			this.sendRegistrationToServer();
+		}
+
 	}
 
 	handleChange(key, event) {
@@ -68,18 +111,6 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 		keyObject[key] = event;
 		
 		this.setState(keyObject);
-	}
-
-	handleFileUpload(){
-		let data = new FormData();
-		// data.append( 'file', file);
-		console.log(data);
-		// console.log("the event:", file);
-		/*let keyObject = {...this.state};
-
-		keyObject[key] = event;
-
-		this.setState(keyObject);*/
 	}
 
 	renderRegisterForm(){
@@ -106,9 +137,9 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 								<input type="file"
 								       id="company-logo"
 								       placeholder="upload logo"
-								       name="file"
-
-								       ref={ (input) => { this.filesInput = input; }
+								       name="company-logo"
+								       accept={'image/gif, image/png, image/jpeg'}
+								       ref={ (input:HTMLInputElement) => {this.filesInput  = input }}
 								/>
 							</div>
 

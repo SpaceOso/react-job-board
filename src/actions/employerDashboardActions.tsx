@@ -104,6 +104,8 @@ export function saveJobPost(jobPostInfo, userId) {
 
 export function submitEmployerRegistration(employerInfo: Employer) {
 
+    console.log("we are about to dispatch to the server a new employer", employerInfo);
+
     return dispatch => {
         dispatch(siteFetch());
         axios.post(`${ROOT_URL}employer/register`, employerInfo)

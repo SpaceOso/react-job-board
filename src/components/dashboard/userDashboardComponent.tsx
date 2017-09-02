@@ -45,8 +45,9 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	}
 
 	handleEmployerRegistration(employerData) {
-		let userData = {employerData, userId: this.props.user._id};
-		this.props.submitEmployerRegistration(userData);
+		console.log("load");
+		// let userData = {employerData, userId: this.props.user._id};
+		this.props.submitEmployerRegistration(employerData);
 	};
 
 	/*This will check to see if the user property has an employer listed.
