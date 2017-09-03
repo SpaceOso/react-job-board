@@ -14,37 +14,48 @@
 const path = require('path');
 const multer = require('multer');
 
-const uploadPath = path.join(__dirname, '..', '/assets/uploads');
-console.log("the route that I want is", uploadPath);
+console.log("uploads requested..");
+const uploadPath = path.join(__dirname, '..', '/public/assets/uploads');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, uploadPath)
+const multerOpts = {
+    fileFilter: function (req, file, next) {
+        "use strict";
+        const isPhoto = file.mimetype.startsWith('image/');
+        if(isPhoto){
+            console.log("it is a photo");
+            next(null, true);
+        } else {
+            console.log("it is NOT  photo");
+            next({message: "That filetype isn't allowed"}, false);
+        }
     },
-    filename: function (req, file, cb) {
-        let ext = path.extname(file.originalname);
-        cb(null, `${Math.random().toString(36).substring(7)}${ext}`);
-    }
-});
+    storage: multer.diskStorage({
 
+        destination: function (req, file, cb) {
+            cb(null, uploadPath)
+        },
+        filename: function (req, file, cb) {
+            let ext = path.extname(file.originalname);
+            cb(null, `${Math.random().toString(36).substring(7)}${ext}`);
+        }
+    })
+};
 
-const upload = multer({storage: storage});
+const upload = multer(multerOpts);
 
  const routeTools = require('./route_utils');
 
 //requires an object with employerData and userId properties
-router.post('/register', upload.single('logoImg'), function (req, res, next) {
-	// console.log(req);
-	console.log('req.file:', req.file);
-	console.log('req.body:', req.body);
-	User.findById(req.body.userId, function (error, user) {
-		
+router.post('/register', upload.single('file'), function (req, res, next) {
+
+    User.findById(req.body.userId, function (error, user) {
 		if(error){
+			//TODO need to handle this error
 			console.log(error);
 		}
-		
 
 		if(!user){
+			//TODO need to handle this error
 			console.log("there was no  user with that id!", req.body.userId);
 		}
 		
@@ -52,22 +63,21 @@ router.post('/register', upload.single('logoImg'), function (req, res, next) {
 			//we found a user, now create an employer and save it and save it's id
 			// to the users employer property
 			//using the employer model
-			console.log("The employerdata before we save it:", req.body.employerData);
-			
+            console.log("was there a file submitted with this user:", req.file);
 			let employer = new Employer({
-				name: req.body.employerData.name,
-				logoImg: req.body.employerData.logoImg,
+				name: req.body.name,
+				logoImg: req.file !== undefined ? req.file.filename : '',
 				location: {
-					address: req.body.employerData.address,
-					city: req.body.employerData.city,
-					state: req.body.employerData.state,
-					zip: req.body.employerData.zip
+					address: req.body.address,
+					city: req.body.city,
+					state: req.body.state,
+					zip: req.body.zip
 				},
 				socialMedia:{
-					website: req.body.employerData.website,
-					twitter: req.body.employerData.twitter,
-					facebook: req.body.employerData.facebook,
-					linkedin: req.body.employerData.linkedin
+					website: req.body.website,
+					twitter: req.body.twitter,
+					facebook: req.body.facebook,
+					linkedin: req.body.linkedin
 				}
 			});
 

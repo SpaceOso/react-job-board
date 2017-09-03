@@ -36,7 +36,7 @@
     "@types/react-dom": "^15.5.4",
     "@types/react-redux": "^5.0.6",
     "@types/react-router-dom": "^4.0.7",
-    "@types/redux-promise": "^0.5.25",
+    "@types/redux-promise": "^0.5.26",
     "@types/tinymce": "^4.5.14",
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",

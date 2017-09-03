@@ -8,4 +8,5 @@
 *.iml
 /node_modules/
 out
+/public/assets/uploads/*
 gen

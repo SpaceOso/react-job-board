@@ -13,7 +13,7 @@ interface Props extends RouteComponentProps<any> {
 	employer: Employer,
 	siteFetching: SiteFetching,
 	saveJobPost: (jobInfo, userId) => {}
-	submitEmployerRegistration: (userData) => {}
+	submitEmployerRegistration: (userData, file) => {}
 }
 
 /*What is the purpose of this component?
@@ -44,15 +44,21 @@ class UserDashboardComponent extends React.Component<Props, any> {
 			<Redirect to={'/login'}/> : null;
 	}
 
-	handleEmployerRegistration(employerData) {
-		console.log("load");
-		// let userData = {employerData, userId: this.props.user._id};
-		this.props.submitEmployerRegistration(employerData);
+	/**
+	 *
+	 * @param employerData {Employer} - The employer information from CompRegisterComponent
+	 * @param file {File} - The logo of the employer
+	 */
+	handleEmployerRegistration(employerData, file) {
+		let userData = {...employerData, userId: this.props.user._id};
+		this.props.submitEmployerRegistration(userData, file);
 	};
 
-	/*This will check to see if the user property has an employer listed.
+	/**
+	 * This will check to see if the user property has an employer listed.
 	 * If it does not we will display the employer registration component.
-	 * Otherwise we weill load up the main layout*/
+	 * Otherwise we will load up the main layout
+	 */
 	checkForEmployer() {
 		if (this.props.siteFetching.isFetching === false) {
 			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> :

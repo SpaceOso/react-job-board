@@ -44,7 +44,7 @@ function mapStateToProps({user, employer, siteFetching}: StoreState ) {
 
 const mapDispatchToProps = (dispatch) => ({
 	saveJobPost: (jobInfo, userId) =>{dispatch(saveJobPost(jobInfo, userId))},
-	submitEmployerRegistration: (userData) =>{dispatch(submitEmployerRegistration(userData))},
+	submitEmployerRegistration: (employerData, file: File) =>{dispatch(submitEmployerRegistration(employerData, file))},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardComponent);
