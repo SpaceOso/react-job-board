@@ -3,17 +3,34 @@
  */
 
 /*These are the routes from express*/
- const express = require('express');
- const router = express.Router();
- const passwordHash = require('password-hash');
- const Employer = require('../models/employer');
- const Job = require('../models/jobs');
- const Applicants = require('../models/applicants');
- const User = require('../models/user');
- const jwt = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const passwordHash = require('password-hash');
+const Employer = require('../models/employer');
+const Job = require('../models/jobs');
+const Applicants = require('../models/applicants');
+const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 const path = require('path');
 const multer = require('multer');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 
+const S3_BUCKET = process.env.S3_BUCKET;
+const accessKeyId =  process.env.AWS_ACCESS_KEY_ID;
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+
+console.log(S3_BUCKET, accessKeyId, secretAccessKey);
+
+
+AWS.config.update({
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey,
+    region: 'us-east-1'
+});
+
+let s3 = new AWS.S3();
+let upload = {};
 console.log("uploads requested..");
 const uploadPath = path.join(__dirname, '..', '/public/assets/uploads');
 
@@ -21,7 +38,7 @@ const multerOpts = {
     fileFilter: function (req, file, next) {
         "use strict";
         const isPhoto = file.mimetype.startsWith('image/');
-        if(isPhoto){
+        if (isPhoto) {
             console.log("it is a photo");
             next(null, true);
         } else {
@@ -30,7 +47,6 @@ const multerOpts = {
         }
     },
     storage: multer.diskStorage({
-
         destination: function (req, file, cb) {
             cb(null, uploadPath)
         },
@@ -41,77 +57,107 @@ const multerOpts = {
     })
 };
 
-const upload = multer(multerOpts);
+if(process.env.NODE_ENV !== 'dev'){
+    upload = multer({
+    fileFilter: function (req, file, next) {
+        "use strict";
+        const isPhoto = file.mimetype.startsWith('image/');
+        if (isPhoto) {
+            console.log("it is a photo");
+            next(null, true);
+        } else {
+            console.log("it is NOT  photo");
+            next({message: "That filetype isn't allowed"}, false);
+        }
+    },
+    storage: multerS3({
+        s3: s3,
+        bucket: S3_BUCKET,
+        acl: 'public-read',
+        key: function (req, file, cb) {
+            console.log(file);
+            let newFileName = Date.now() + "-" + file.originalname;
+            let fullPath = 'uploads/images/'+ newFileName;
+            cb(null, fullPath); //use Date.now() for unique file keys
+        }
+    })
+});
+} else {
+    console.log("we're in dev mode so we're uploading locally");
+    upload = multer(multerOpts);
+}
+//todo this should be used when running locally
 
- const routeTools = require('./route_utils');
+
+const routeTools = require('./route_utils');
 
 //requires an object with employerData and userId properties
 router.post('/register', upload.single('file'), function (req, res, next) {
 
     User.findById(req.body.userId, function (error, user) {
-		if(error){
-			//TODO need to handle this error
-			console.log(error);
-		}
+        if (error) {
+            //TODO need to handle this error
+            console.log(error);
+        }
 
-		if(!user){
-			//TODO need to handle this error
-			console.log("there was no  user with that id!", req.body.userId);
-		}
-		
-		if(user){
-			//we found a user, now create an employer and save it and save it's id
-			// to the users employer property
-			//using the employer model
+        if (!user) {
+            //TODO need to handle this error
+            console.log("there was no  user with that id!", req.body.userId);
+        }
+
+        if (user) {
+            //we found a user, now create an employer and save it and save it's id
+            // to the users employer property
+            //using the employer model
             console.log("was there a file submitted with this user:", req.file);
-			let employer = new Employer({
-				name: req.body.name,
-				logoImg: req.file !== undefined ? req.file.filename : '',
-				location: {
-					address: req.body.address,
-					city: req.body.city,
-					state: req.body.state,
-					zip: req.body.zip
-				},
-				socialMedia:{
-					website: req.body.website,
-					twitter: req.body.twitter,
-					facebook: req.body.facebook,
-					linkedin: req.body.linkedin
-				}
-			});
+            let employer = new Employer({
+                name: req.body.name,
+                logoImg: req.file !== undefined ? req.file.filename : '',
+                location: {
+                    address: req.body.address,
+                    city: req.body.city,
+                    state: req.body.state,
+                    zip: req.body.zip
+                },
+                socialMedia: {
+                    website: req.body.website,
+                    twitter: req.body.twitter,
+                    facebook: req.body.facebook,
+                    linkedin: req.body.linkedin
+                }
+            });
 
 
-			employer.save(function(err, employer){
-				if(err){
-					console.log(err);
-				}
-				
-				if(employer){
-					user.employerId = employer._id;
-					
-					user.save(function(error, user){
-						if(error){
-							console.log("something went wrong saving employer")
-						}
-						
-						let localUser = {
-							employerId: user.employerId,
-							firstName: user.firstName,
-							lastName: user.lastName,
-							email: user.email,
-							_id: user._id
-						};
+            employer.save(function (err, employer) {
+                if (err) {
+                    console.log(err);
+                }
 
-						let localEmployer = {
-							name: employer.name,
-							logoImg: employer.logoImg,
-							_id: employer._id,
-							applicants: employer.applicants,
-							jobs: employer.jobs,
-							socialMedia: employer.socialMedia,
-							location: employer.location,
-						};
+                if (employer) {
+                    user.employerId = employer._id;
+
+                    user.save(function (error, user) {
+                        if (error) {
+                            console.log("something went wrong saving employer")
+                        }
+
+                        let localUser = {
+                            employerId: user.employerId,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            email: user.email,
+                            _id: user._id
+                        };
+
+                        let localEmployer = {
+                            name: employer.name,
+                            logoImg: employer.logoImg,
+                            _id: employer._id,
+                            applicants: employer.applicants,
+                            jobs: employer.jobs,
+                            socialMedia: employer.socialMedia,
+                            location: employer.location,
+                        };
 
                         let token = jwt.sign(localUser, process.env.SECRET_KEY, {expiresIn: "2 days"});
 
@@ -120,38 +166,38 @@ router.post('/register', upload.single('file'), function (req, res, next) {
                             employer: localEmployer,
                             user: localUser
                         });
-					})
-				}
-			})
-		}
+                    })
+                }
+            })
+        }
     })
 
 });
 
-router.get('/dashboard/:employerId/getAllJobs',function (req, res) {
-	"use strict";
-	console.log(req.params.employerId);
-	Employer.findById(req.params.employerId)
-		.populate('jobs')
-		.exec()
-		.then(employerDoc => {
-			if(!employerDoc){
-				return Promise.reject("Employer error! No employer with that ID!");
-			}
+router.get('/dashboard/:employerId/getAllJobs', function (req, res) {
+    "use strict";
+    console.log(req.params.employerId);
+    Employer.findById(req.params.employerId)
+        .populate('jobs')
+        .exec()
+        .then(employerDoc => {
+            if (!employerDoc) {
+                return Promise.reject("Employer error! No employer with that ID!");
+            }
 
-			return routeTools.returnEmployerObject(employerDoc);
-		})
-		.then(employerModel => {
-			res.status(200).json({
-				employerModel,
-				message: "here's the employer model"
-			})
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(404).json({errorMessage: err});
+            return routeTools.returnEmployerObject(employerDoc);
+        })
+        .then(employerModel => {
+            res.status(200).json({
+                employerModel,
+                message: "here's the employer model"
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(404).json({errorMessage: err});
         });
-	// res.status(200).json({message: "you've made it to the jobs."});
+    // res.status(200).json({message: "you've made it to the jobs."});
 
 });
 

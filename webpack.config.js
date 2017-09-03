@@ -21,6 +21,7 @@ module.exports = env => ({
             },
         }),
 		new DotenvPlugin({
+			sample: './.env.hide',
 			path: './.env',
 			safe: true
 		})
