@@ -7,7 +7,7 @@
     "start": "set NODE_ENV=prod&& node bin/www",
     "ricodev": "set NODE_ENV=development&& nodemon bin/www",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
-    "build": "set NODE_ENV=prod&& webpack",
+    "build": "webpack --env.dev=prod",
     "build:dev": "set NODE_ENV=dev webpack --env.dev --hot",
     "dev": "webpack-dev-server --env.dev=development --history-api-fallback --port 3000 --hot --host 0.0.0.0"
   },
