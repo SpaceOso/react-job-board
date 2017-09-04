@@ -12,7 +12,6 @@ const path = require('path');
 // console.log(path.join(__dirnamedirname));
 // console.log(path.join(__dirname, '..', 'uploads'));
 
-console.log("uploads requested..");
 const uploadPath = path.join(__dirname, '..', '/public/assets/uploads');
 
 const multerOpts = {

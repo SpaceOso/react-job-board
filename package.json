@@ -4,7 +4,7 @@
   "description": "A job board app made with React",
   "main": "./src/index",
   "scripts": {
-    "start": "set NODE_ENV=prod&& node bin/www",
+    "start": "node -r dotenv/config bin/www",
     "ricodev": "set NODE_ENV=dev&& nodemon  bin/www",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
     "build": "webpack --env.dev=prod",

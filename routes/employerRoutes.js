@@ -20,9 +20,6 @@ const S3_BUCKET = process.env.S3_BUCKET;
 const accessKeyId =  process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
-console.log(S3_BUCKET, accessKeyId, secretAccessKey);
-
-
 AWS.config.update({
     accessKeyId: accessKeyId,
     secretAccessKey: secretAccessKey,
@@ -30,23 +27,29 @@ AWS.config.update({
 });
 
 let s3 = new AWS.S3();
-let upload = {};
-console.log("uploads requested..");
+
 const uploadPath = path.join(__dirname, '..', '/public/assets/uploads');
 
-const multerOpts = {
-    fileFilter: function (req, file, next) {
-        "use strict";
-        const isPhoto = file.mimetype.startsWith('image/');
-        if (isPhoto) {
-            console.log("it is a photo");
-            next(null, true);
-        } else {
-            console.log("it is NOT  photo");
-            next({message: "That filetype isn't allowed"}, false);
+let storageType = {};
+/**
+ * If we are in prod we want to use s3 storage for files, if not we save files locally
+ */
+if(process.env.NODE_ENV !== 'dev'){
+    storageType = multerS3({
+        s3: s3,
+        bucket: S3_BUCKET,
+        acl: 'public-read',
+        key: function (req, file, cb) {
+            console.log("in multer options with:", file);
+            let ext = path.extname(file.originalname);
+            let newFileName = `${Math.random().toString(36).substring(7)}${ext}`;
+            let fullPath = 'uploads/images/'+ newFileName;
+            cb(null, fullPath);
         }
-    },
-    storage: multer.diskStorage({
+    });
+} else {
+    console.log("we're in dev mode so we're uploading locally");
+    storageType = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, uploadPath)
         },
@@ -55,10 +58,10 @@ const multerOpts = {
             cb(null, `${Math.random().toString(36).substring(7)}${ext}`);
         }
     })
-};
+}
 
-if(process.env.NODE_ENV !== 'dev'){
-    upload = multer({
+
+const upload = multer({
     fileFilter: function (req, file, next) {
         "use strict";
         const isPhoto = file.mimetype.startsWith('image/');
@@ -66,28 +69,12 @@ if(process.env.NODE_ENV !== 'dev'){
             console.log("it is a photo");
             next(null, true);
         } else {
-            console.log("it is NOT  photo");
+            console.log("it is NOT a photo");
             next({message: "That filetype isn't allowed"}, false);
         }
     },
-    storage: multerS3({
-        s3: s3,
-        bucket: S3_BUCKET,
-        acl: 'public-read',
-        key: function (req, file, cb) {
-            console.log(file);
-            let newFileName = Date.now() + "-" + file.originalname;
-            let fullPath = 'uploads/images/'+ newFileName;
-            cb(null, fullPath); //use Date.now() for unique file keys
-        }
-    })
+    storage: storageType
 });
-} else {
-    console.log("we're in dev mode so we're uploading locally");
-    upload = multer(multerOpts);
-}
-//todo this should be used when running locally
-
 
 const routeTools = require('./route_utils');
 
@@ -109,10 +96,26 @@ router.post('/register', upload.single('file'), function (req, res, next) {
             //we found a user, now create an employer and save it and save it's id
             // to the users employer property
             //using the employer model
-            console.log("was there a file submitted with this user:", req.file);
+            let filename = '';
+
+            if(req.file !== undefined){
+                if(req.file.key !== undefined){
+                    console.log('key:', req.file.key);
+                    filename = req.file.key;
+                }
+
+                if(req.file.filename !== undefined){
+                    console.log('req.file.filename', req.file.filename);
+                    filename = req.file.filename;
+                }
+
+            }
+
+            console.log("filename", filename);
+
             let employer = new Employer({
                 name: req.body.name,
-                logoImg: req.file !== undefined ? req.file.filename : '',
+                logoImg: filename, //TODO don't have a way to save names locally
                 location: {
                     address: req.body.address,
                     city: req.body.city,

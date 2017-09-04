@@ -27,11 +27,12 @@ var app = express();
 console.log("node_env:", process.env.NODE_ENV);
 
 var dbURL = 'localhost:27017/JobBoard';
-if (process.env.NODE_ENV === 'development') {
+
+if (process.env.NODE_ENV === 'dev') {
     console.log("server is in development");
 } else {
     console.log("server is in production");
-   dbURL = "mongodb://mrico3d:password@ds127428.mlab.com:27428/jobboard";
+    dbURL = process.env.MONGO_DB;
 }
 
 mongoose.connect(dbURL);
@@ -108,7 +109,6 @@ app.use(function (req, res, next) {
 });
 
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
