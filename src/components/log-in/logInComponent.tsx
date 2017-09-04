@@ -1,11 +1,15 @@
 import * as React from 'react';
 
 
-import './styles/loginComponent.scss';
 import SpinnerComponent from "../spinners/spinnerComponent";
 import {Redirect} from "react-router";
 import {SiteErrors, SiteFetching, User} from "../../types/index";
 import SimpleForm from "../simple-form/simpleForm";
+
+/**
+ * styles
+ */
+import './styles/loginComponent.scss';
 
 interface MyProps {
 	user: User,

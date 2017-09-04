@@ -1,10 +1,12 @@
 import * as React from 'react';
 
+import './footer.scss';
+
 const FooterComponent = (props) =>{
     return (
-        <div>
-            <h1>I'm the footer and this is me testing</h1>
-        </div>
+        <footer className="footer">
+            <h3>Jobs for the tech's out there.</h3>
+        </footer>
     )
 };
 

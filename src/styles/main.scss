@@ -1,5 +1,12 @@
 @import "variables";
 @import "../components/header/header";
+html {
+  font-size: 62.5%; /* font-size 1em = 10px on default browser settings */
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
 
 body{
   background-color: $siteBackground;
@@ -8,14 +15,10 @@ body{
 }
 
 
-html {
-  font-size: 62.5%; /* font-size 1em = 10px on default browser settings */
-  box-sizing: border-box;
-}
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
 
 body{
   text-align: center;
@@ -29,6 +32,24 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+[data-reactroot],
+#root{
+  height: 100%;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  //justify-content: space-between;
+}
+
+.content{
+  /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+  flex: 1 0 auto;
+}
+
 /*=======================================*/
 /*STANDARD SIZES*/
 /*=======================================*/
@@ -150,6 +171,7 @@ hr.style1 {
 .app-container{
   //width: 80%;
   max-width: 940px;
+  flex: 1 0 auto;
   margin: auto;
 }
 
@@ -157,6 +179,7 @@ hr.style1 {
   width: 100%;
   height: 250px;
   background-color: $dark;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
 

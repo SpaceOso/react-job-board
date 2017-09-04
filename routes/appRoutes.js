@@ -5,25 +5,11 @@ var express = require('express');
 var router = express.Router();
 var Employer = require('../models/employer');
 var Jobs = require('../models/jobs');
+let homeControllers = require('../controllers/homeController');
 // var User = require('../models/user');
 
 
-router.get('/homeload', function (req, res, next) {
-
-    Jobs.find({})
-        .sort({createdAt: -1})
-        // .limit(10)
-        .populate("employer")
-        .exec(function(error, doc){
-            // console.log(JSON.stringify(doc, null, "\t"))
-            res.status(200).json({
-                message: 'Success',
-                jobs: doc
-            })
-        });
-
-
-});
+router.get('/homeload', homeControllers.homeLoad);
 
 router.get('/home', function (req, res, next) {
 
@@ -50,12 +36,7 @@ router.get('/home', function (req, res, next) {
     }
 });
 
-router.get('/', function (req, res, next) {
-    // console.log('inside / of appRoutes.js');
-    res.render('index');
-    // res.send('Hello World!');
-	// next();
-});
+router.get('/', homeControllers.loadIndex);
 
 
 module.exports = router;

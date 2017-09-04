@@ -82,13 +82,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// app.use(express.static(path.resolve(__dirname,  'public')));
-
-// Always return the main index.html, so react-router render the route in the client
-/*app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'views', 'index.hbs'));
-});*/
-
 app.use('/uploads', uploads);
 app.use('/jobseeker', jobseeker);
 app.use('/jobposts', jobPosts);
@@ -112,27 +105,29 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+    console.log("in development error");
     app.use(function (err, req, res, next) {
-        res.render('index');
-        // res.status(err.status || 500);
-        /*res.json({
-            rico: "nope shouldn't be here either",
-            message: err.message,
-            error: err
-        });*/
+        // res.render('index');
+        res.status(err.status || 500);
+        // /*res.json({
+        //     rico: "nope shouldn't be here either",
+        //     message: err.message,
+        //     error: err
+        // });*/
     });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    res.render('index');
-    /*res.status(err.status || 500);
+    console.log("in prod error");
+    // res.render('index');
+    // /*res.status(err.status || 500);
     res.render('error', {
         rico: "nope shouldn't be here",
         message: err.message,
         error: {}
-    });*/
+    });
 });
 
 

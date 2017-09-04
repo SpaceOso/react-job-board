@@ -4,7 +4,7 @@ import JobListItem from "./jobListItemComponent";
 import {Job} from "../../../types/index";
 
 
-export interface Props{
+export interface Props {
 	jobs: Job[],
 	returnJobList: () => void,
 	getJobs: () => any,
@@ -33,11 +33,9 @@ class JobListComponent extends React.Component<Props> {
 
 	render() {
 		return (
-			<div className="app-container">
-				<div className="job-list-container">
-					<h1 id="job-post-header">Recent Job Posts</h1>
-					{this.props.isFetching ? <SpinnerComponent/> : this.returnJobList()}
-				</div>
+			<div className="job-list-container">
+				<h1 id="job-post-header">Recent Job Posts</h1>
+				{this.props.isFetching ? <SpinnerComponent/> : this.returnJobList()}
 			</div>
 		)
 	}

@@ -17,16 +17,16 @@ import {logInOnLoad} from "../actions/authActions";
 import ProtectedComponent from "./dashboard/protected/protectedComponent";
 import TestComponent from "./tests/testComponent";
 
-interface Props{
+interface Props {
 	logInOnLoad,
-	logOutUser: ()=>{},
+	logOutUser: () => {},
 	user: User,
 	employer: Employer,
 	siteErrors: SiteErrors
 }
 
-class App extends React.Component<Props>{
-	constructor(props){
+class App extends React.Component<Props> {
+	constructor(props) {
 		super(props);
 
 		this.checkReload = this.checkReload.bind(this);
@@ -34,10 +34,10 @@ class App extends React.Component<Props>{
 		this.checkReload();
 	}
 
-	checkReload(){
+	checkReload() {
 		let token = localStorage.getItem('tkn');
 
-		if(token !== undefined){
+		if (token !== undefined) {
 			this.props.logInOnLoad(token);
 		}
 	}
@@ -46,17 +46,18 @@ class App extends React.Component<Props>{
 		return (
 			<BrowserRouter>
 				<LayoutComponent user={this.props.user} logOutUser={this.props.logOutUser}>
-					<Route exact path="/" component={JumboTron}/>
-						<Switch>
-							<Route exact path="/" component={JobListContainer as any}/>
-							<Route exact path="/register" component={UserRegisterContainer as any}/>
-							<Route exact path="/jobposts/:jobId" component={JobPostContainer as any}/>
-							<Route exact path="/jobseeker" component={UserComponent}/>
-							<Route exact path="/login" component={LoginContainer as any}/>
-							<Route exact path="/test" component={TestComponent}/>
-							<ProtectedComponent path="/user/dashboard/:userId" component={UserDashboardContainer} isAuth={this.props.user.isAuth} user={this.props.user}  />
-							<Route component={NotFoundComponent}/>
-						</Switch>
+					{/*<Route exact path="/" component={JumboTron}/>*/}
+					<Switch>
+						<Route exact path="/" component={JobListContainer as any}/>
+						<Route exact path="/register" component={UserRegisterContainer as any}/>
+						<Route exact path="/jobposts/:jobId" component={JobPostContainer as any}/>
+						<Route exact path="/jobseeker" component={UserComponent}/>
+						<Route exact path="/login" component={LoginContainer as any}/>
+						<Route exact path="/test" component={TestComponent}/>
+						<ProtectedComponent path="/user/dashboard/:userId" component={UserDashboardContainer}
+						                    isAuth={this.props.user.isAuth} user={this.props.user}/>
+						<Route component={NotFoundComponent}/>
+					</Switch>
 				</LayoutComponent>
 			</BrowserRouter>
 		)
