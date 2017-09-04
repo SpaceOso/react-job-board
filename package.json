@@ -9,7 +9,8 @@
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
     "build": "webpack --env.dev=prod",
     "build:dev": "set NODE_ENV=dev webpack --env.dev --hot",
-    "dev": "webpack-dev-server --env.dev=development --history-api-fallback --port 3000 --hot --host 0.0.0.0"
+    "dev": "webpack-dev-server --env.dev=dev --history-api-fallback --port 3000 --hot --host 0.0.0.0",
+    "devprod": "webpack-dev-server --env.dev=prod --history-api-fallback --port 3000 --hot --host 0.0.0.0"
   },
   "repository": {
     "type": "git",

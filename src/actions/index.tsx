@@ -8,7 +8,7 @@ let URL_Test = 'https://mr-job-board.herokuapp.com/';
 
 
 	console.log(process.env.NODE_ENV);
-if(process.env.NODE_ENV === "development"){
+if(process.env.NODE_ENV === "dev"){
 	console.log("WE ARE IN DEVELOPMENT MODE!!!!!!!!!!!!");
 	URL_Test = 'http://localhost:4200/';
 }

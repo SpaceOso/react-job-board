@@ -6,11 +6,17 @@ declare let process : {
 };
 
 let URL_Test = 'https://mr-job-board.herokuapp.com/';
+let set_IMG_URL = 'http://localhost:3000/public/assets/uploads/';
 
-if(process.env.NODE_ENV === "development"){
+if(process.env.NODE_ENV === "dev"){
 	console.log("WE ARE IN DEVELOPMENT MODE!!!!!!!!!!!!");
 	URL_Test = 'http://localhost:4200/';
+} else {
+	console.log("We are in prod mode");
+	set_IMG_URL = 'https://s3.us-east-2.amazonaws.com/mrjobboard/';
 }
+
+export const IMG_URL = set_IMG_URL;
 
 import axios from 'axios';
 
