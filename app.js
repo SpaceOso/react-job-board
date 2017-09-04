@@ -121,13 +121,13 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
     console.log("in prod error");
-    // res.render('index');
-    // /*res.status(err.status || 500);
-    res.render('error', {
-        rico: "nope shouldn't be here",
-        message: err.message,
-        error: {}
-    });
+    res.render('index');
+    //res.status(err.status || 500);
+    // res.render('error', {
+    //     rico: "nope shouldn't be here",
+    //     message: err.message,
+    //     error: {}
+    // });
 });
 
 
