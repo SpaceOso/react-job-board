@@ -1,4 +1,7 @@
 @import '../../../styles/variables';
+.spinner-component{
+  flex: 1 0 auto;
+}
 .loader {
   color: $jobTitle;
   font-size: 90px;

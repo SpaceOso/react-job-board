@@ -5,6 +5,15 @@
   color: $carbon;
   text-align: left;
   font-size: 1.6rem;
+  width: 40%;
+  max-width: 400px;
+  padding-left: 20px;
+
+  .company-logo{
+    display: block;
+    margin: auto;
+    max-width: 130px;
+  }
 
   .title{
     color: $jobTitle;

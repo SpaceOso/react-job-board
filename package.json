@@ -82,6 +82,7 @@
     "chai": "^4.1.2",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
+    "file-loader": "^0.11.2",
     "mocha": "^3.5.0",
     "mongoose-unique-validator": "^1.0.5",
     "node-sass": "^4.5.3",

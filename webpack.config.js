@@ -33,7 +33,16 @@ module.exports = env => ({
 			{
 				test: /\.scss$/,
 				loaders: ["style-loader", "css-loader", "sass-loader"]
-			}
+			},
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
+            }
 		]
 	},
 	node: {

@@ -6,6 +6,7 @@ import './jobListItem.scss';
 
 //interfaces
 import {Job} from "../../../types/index";
+import {IMG_URL} from "../../../utils/utils";
 
 export interface Props {
 	job: Job,
@@ -15,13 +16,14 @@ export interface Props {
 // class JobListItem extends React.Component<JobListItemProps>{
 function JobListItem({job} : Props) {
 
+	let imgUrl = IMG_URL;
 	return (
 		<div className="job-list-item">
 			<div className="job-list-logo">
-				{/*<img className="job-list-logo"*/}
-				{/*src={ job.employerLogo ?*/}
-				{/*job.employerLogo : "../assets/images/no-icon.svg"}*/}
-				{/*/>*/}
+				<img className="job-list-logo"
+				src={ job.employerLogo ?
+				`${imgUrl}${job.employerLogo}` : require('../../../assets/images/no-icon.svg')}
+				/>
 			</div>
 			<div className="job-list-info">
 				<Link to={`/jobposts/${job._id}`}>

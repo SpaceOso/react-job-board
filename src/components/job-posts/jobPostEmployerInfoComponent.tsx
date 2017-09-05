@@ -3,8 +3,13 @@ import * as React from 'react';
 import {Link} from 'react-router-dom'
 
 
-import "./styles/jobPostEmployerInfo.scss";
 import {Employer} from "../../types/index";
+import {IMG_URL, LOCAL_URL} from "../../utils/utils";
+
+/**
+ * Styles
+ */
+import "./styles/jobPostEmployerInfo.scss";
 
 interface MyProps{
 	employer,
@@ -37,7 +42,6 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 	}
 
 
-
 	render(){
 
 		if(this.props.employer.name === null){
@@ -45,9 +49,12 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any>{
 		}
 
 		let employer:Employer = this.props.employer;
+		let logo = employer.logoImg.length > 0 ? `${IMG_URL}${employer.logoImg}` : `${LOCAL_URL}${require('../../assets/images/no-icon.svg')}`;
+		console.log('the logoimg', employer.logoImg);
+		console.log('the logo', logo);
 		return (
 			<aside className="jp-employer-aside">
-				<img src={employer.logoImg} alt={`${employer.name} logo`}/>
+				<img className="company-logo" src={logo} alt={`${employer.name} Logo`}/>
 				<h1 className="title">About {employer.name}</h1>
 				<p className="jp-employer-location">{`${employer.location.city},${employer.location.state}`}</p>
 				<div>Social media icons go here</div>
