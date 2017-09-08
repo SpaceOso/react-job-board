@@ -193,8 +193,8 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 							<div>
 								{/*<label htmlFor="company-linkedin">Company linkedin:</label>*/}
 								<input type="text"
-								       id="company-linkedin"
-								       placeholder="linkeIn"
+								       id="company-linkedIn"
+								       placeholder="linkedIn"
 								       value={this.state.linkedIn}
 								       onChange={(event) => this.handleChange('linkedIn', event.target.value)}
 								/>

@@ -126,7 +126,7 @@ router.post('/register', upload.single('file'), function (req, res, next) {
                     website: req.body.website,
                     twitter: req.body.twitter,
                     facebook: req.body.facebook,
-                    linkedin: req.body.linkedin
+                    linkedIn: req.body.linkedIn
                 }
             });
 

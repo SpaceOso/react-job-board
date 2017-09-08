@@ -15,7 +15,7 @@ let schema = new Schema({
 		website: {type: String},
 		twitter: {type: String},
 		facebook: {type: String},
-		linkedin: {type: String}
+        linkedIn: {type: String}
 	},
 	/*What we're saying below is: in the jobs property store references to the jobs we posted.
 	 * We don't post each job in here just an id to them. We might change this later to actually store the job.
