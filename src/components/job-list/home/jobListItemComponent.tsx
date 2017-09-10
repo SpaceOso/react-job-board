@@ -39,7 +39,7 @@ function JobListItem({job}: Props) {
 				</div>
 				<div className="post-info">
 					<p className="post-date">{job.updatedAt}</p>
-					<p className="post-location">City location</p>
+					<p className="post-location">{`${job.employerId.location.city},${job.employerId.location.state}`}</p>
 				</div>
 				{/*<p className="job-description" dangerouslySetInnerHTML={{__html: job.jobDescription}}></p>*/}
 			</Link>

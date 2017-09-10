@@ -91,6 +91,7 @@ router.get('/', function (req, res) {
     /*sorted by date created for the home page.*/
     Jobs.find({})
         .sort('-createdAt')
+        .populate({path: 'employerId', select: 'location'})
         .exec(function(err, jobs){
             res.send(jobs);
         });

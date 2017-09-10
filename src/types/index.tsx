@@ -6,7 +6,15 @@ export interface Job{
 	jobTitle: string,
 	jobDescription: string,
 	employerName: string,
-	employerId?: string,
+	employerId: {
+		_id: string,
+		location: {
+			address: string,
+			city: string,
+			state: string,
+			zip: string
+		}
+	},
 	employerLogo?: string,
 	updatedAt?: string
 }
