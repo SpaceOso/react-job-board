@@ -3,6 +3,9 @@
 .job-list-container{
   flex: 1 0 auto;
   padding: 40px;
+  width: 80%;
+  max-width: 990px;
+  margin: auto;
   //background-color: orange;
 }
 
@@ -10,4 +13,5 @@
   margin: 0;
   text-align: left;
   color: $jobTitle;
+  font-weight: normal;
 }

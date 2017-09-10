@@ -14,27 +14,35 @@ export interface Props {
 }
 
 // class JobListItem extends React.Component<JobListItemProps>{
-function JobListItem({job} : Props) {
+function JobListItem({job}: Props) {
 
 	let imgUrl = IMG_URL;
+	console.log("job info:", job);
 	return (
+		// LOGO
 		<div className="job-list-item">
-			<div className="job-list-logo">
-				<img className="job-list-logo"
-				src={ job.employerLogo ?
-				`${imgUrl}${job.employerLogo}` : require('../../../assets/images/no-icon.svg')}
-				/>
-			</div>
-			<div className="job-list-info">
-				<Link to={`/jobposts/${job._id}`}>
+			<Link className="link-container" to={`/jobposts/${job._id}`}>
+				{/*LOGO*/}
+				<div className="job-list-logo">
+					<img src={job.employerLogo ?
+						`${imgUrl}${job.employerLogo}` : require('../../../assets/images/no-icon.svg')}
+					/>
+				</div>
+				{/*JOB INFORMATION*/}
+				<div className="job-info">
 					<h1 className="job-title">
 						{job.jobTitle}
 					</h1>
-					<h2 className="job-employer">{job.employerName}</h2>
-					<p className="job-description" dangerouslySetInnerHTML={{__html: job.jobDescription}}></p>
-				</Link>
-				{/*<p className="job-description">{job.jobDescription}</p>*/}
-			</div>
+					<p className="job-employer">
+						{job.employerName}
+					</p>
+				</div>
+				<div className="post-info">
+					<p className="post-date">{job.updatedAt}</p>
+					<p className="post-location">City location</p>
+				</div>
+				{/*<p className="job-description" dangerouslySetInnerHTML={{__html: job.jobDescription}}></p>*/}
+			</Link>
 		</div>
 	)
 }

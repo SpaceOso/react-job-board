@@ -8,9 +8,14 @@ function JobReducer(state: StoreState, action) {
         case GET_JOBS_SUCCESS:
 
             let newJobs = {};
+            let jobDateRegex: RegExp = /.+?(?=T)/g;
 
             for (const job in action.payload.data) {
                 let currentJob = action.payload.data[job];
+
+	            let splitDate = currentJob.updatedAt.match(jobDateRegex)[0].split('-');
+	            currentJob.updatedAt = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
+
                 newJobs[currentJob._id] = {...currentJob};
             }
 

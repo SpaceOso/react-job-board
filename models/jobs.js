@@ -7,7 +7,8 @@ let schema = new Schema({
         applicants: [{type: Schema.Types.ObjectId, ref: 'Applicants'}],
         employerName: {type: String, required: true},
         employerId: {type: Schema.Types.ObjectId, ref: 'Employer'},
-        employerLogo: {type: String}
+        employerLogo: {type: String},
+        date: { type: Date, default: Date.now },
     },
     {timestamps: true}
 );
