@@ -21,8 +21,11 @@ class JobListComponent extends React.Component<Props> {
 	returnJobList() {
 		return (
 			Object.keys(this.props.jobs).map((job) => {
-				let currentJob = this.props.jobs[job];
-				return <JobListItem key={currentJob._id + 1} job={currentJob} />
+				let currentJob = this.props.jobs[job] ;
+				console.log("current job:", currentJob);
+				if(currentJob !== true){
+					return <JobListItem key={currentJob._id + 1} job={currentJob} />
+				}
 			})
 		)
 	}

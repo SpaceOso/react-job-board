@@ -63,7 +63,6 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 			return (
 				<div className="job-post-container">
 					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.currentJobPost.isFetching}/>
-					{/*<div className="divider"></div>*/}
 					<JobPostEmployerInfoComponent employer={this.props.currentJobPost} loadJob={this.loadNewJob}/>
 				</div>
 			)

@@ -1,51 +1,36 @@
 @import "../../../styles/variables";
 
-.job-post-container {
-  display: flex;
+.job-post-container{
   flex: 1 0 auto;
-  padding: 30px 0 0 0;
-  background-color: $white;
-  justify-content: center;
   width: 90%;
   margin: auto;
-  .divider {
-    border-right: 2px solid red;
-  }
-  .job-post {
-    width: 60%;
-    max-width: 620px;
-    border-right: 3px solid $jobTitle;
-    font-size: 1.8rem;
-    color: $carbon;
+  margin-top: 15px;
+}
+
+.job-post {
+  width: 60%;
+  margin: auto;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 45px;
+
+  .job-header-container{
+    border: 1px solid $borders;
+    max-height: 70px;
+    margin-bottom: 15px;
+    background-color: $panelBg;
     text-align: left;
-    padding: 20px;
-
-    .jp-job-header {
-      color: $jobTitle;
-      font-weight: bold;
-      margin: 0 0 15px 0;
-    }
+    padding: 15px;
 
   }
+  .job-description-container{
+    border: 1px solid $borders;
+    background-color: $panelBg;
+  }
 
-  /*  .jp-employer-aside {
-      padding: 20px;
-      width: 40%;
-      max-width: 320px;
-      //padding: 20px;
-      color: $carbon;
-      text-align: left;
-      font-size: 1.6rem;
-
-      .title {
-        color: $jobTitle;
-        font-weight: bold;
-        font-size: 2.0rem;
-      }
-
-      .other-job-ul{
-        list-style-type: none;
-        padding: 0;
-      }
-    }*/
+  .jp-job-header {
+    color: $jobTitle;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+  }
 }

@@ -79,11 +79,15 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
 		console.log('the logo', logo);
 		return (
 			<aside className="jp-employer-aside">
-				<img className="company-logo" src={logo} alt={`${employer.name} Logo`}/>
-				<h1 className="title">About {employer.name}</h1>
-				<p className="jp-employer-location">{`${employer.location.city},${employer.location.state}`}</p>
-				{this.createSocialMediaLinks()}
-				<div>
+				<img className="company-logo panel-shadow" src={logo} alt={`${employer.name} Logo`}/>
+				<div className="info-container panel-shadow" id="about-section">
+					<h1 className="title">About {employer.name}</h1>
+					<p className="jp-employer-location">{`${employer.location.city},${employer.location.state}`}</p>
+				</div>
+				<div className="info-container panel-shadow">
+					{this.createSocialMediaLinks()}
+				</div>
+				<div className="info-container panel-shadow">
 					<h1 className="title">Other jobs by {employer.name}</h1>
 					<ul className="other-job-ul">
 						{this.createJobList()}
