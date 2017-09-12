@@ -9,23 +9,20 @@ import {Job} from "../../../types/index";
 import {IMG_URL} from "../../../utils/utils";
 
 export interface Props {
-	job: Job,
-	key: string
+	job: Job
 }
 
-// class JobListItem extends React.Component<JobListItemProps>{
-function JobListItem({job}: Props) {
+export const JobListItem: React.SFC<Props> = (props) => {
+	const {job} = props;
 
-	let imgUrl = IMG_URL;
-	console.log("job info:", job);
 	return (
 		// LOGO
-		<div className="job-list-item">
+		<div className="job-list-item panel-shadow">
 			<Link className="link-container" to={`/jobposts/${job._id}`}>
 				{/*LOGO*/}
 				<div className="job-list-logo">
 					<img src={job.employerLogo ?
-						`${imgUrl}${job.employerLogo}` : require('../../../assets/images/no-icon.svg')}
+						`${IMG_URL}${job.employerLogo}` : require('../../../assets/images/no-icon.svg')}
 					/>
 				</div>
 				{/*JOB INFORMATION*/}
@@ -45,6 +42,6 @@ function JobListItem({job}: Props) {
 			</Link>
 		</div>
 	)
-}
+};
 
 export default JobListItem;
