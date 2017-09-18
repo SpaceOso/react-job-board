@@ -9,7 +9,7 @@ let URL_Test = 'https://mr-job-board.herokuapp.com/';
 let set_IMG_URL = 'http://localhost:3000/public/assets/uploads/';
 let set_LOCAL_URL = 'http://localhost:3000/';
 
-if(process.env.NODE_ENV === "dev"){
+if(process.env.NODE_ENV === "development"){
 	console.log("WE ARE IN DEVELOPMENT MODE!!!!!!!!!!!!");
 	URL_Test = 'http://localhost:4200/';
 } else {

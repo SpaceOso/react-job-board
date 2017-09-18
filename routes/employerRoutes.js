@@ -34,7 +34,7 @@ let storageType = {};
 /**
  * If we are in prod we want to use s3 storage for files, if not we save files locally
  */
-if(process.env.NODE_ENV !== 'dev'){
+if(process.env.NODE_ENV !== 'development'){
     storageType = multerS3({
         s3: s3,
         bucket: S3_BUCKET,

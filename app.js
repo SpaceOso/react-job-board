@@ -7,7 +7,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 
 // ROUTES
 var appRoutes = require('./routes/appRoutes');
@@ -28,20 +28,18 @@ console.log("node_env:", process.env.NODE_ENV);
 
 var dbURL = 'localhost:27017/JobBoard';
 
-if (process.env.NODE_ENV === 'dev') {
+if (process.env.NODE_ENV === 'development') {
     console.log("server is in development");
 } else {
     console.log("server is in production");
-    dbURL = process.env.MONGO_DB;
+    // dbURL = process.env.MONGO_DB;
 }
 
-mongoose.connect(dbURL);
+// mongoose.connect(dbURL);
 
 app.set('view engine', 'hbs');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-// app.set('views', path.join(__dirname+'\\views\\'));
-
 
 // uncomment after placing your favicon in /public
 console.log(path.join(__dirname, 'public'));
@@ -81,7 +79,7 @@ app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers", "Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization");
     next();
 });
-
+require('./server/routes')(app);
 app.use('/uploads', uploads);
 app.use('/jobseeker', jobseeker);
 app.use('/jobposts', jobPosts);
