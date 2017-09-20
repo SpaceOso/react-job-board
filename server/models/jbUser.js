@@ -5,6 +5,12 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            id: {
+                allowNull: false,
+                type: DataTypes.UUID,
+                primaryKey: true,
+                defaultValue: sequelize.literal('uuid_generate_v1()'),
+            },
             lastName: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -12,9 +18,6 @@ module.exports = (sequelize, DataTypes) => {
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            },
-            location: {
-                type: DataTypes.JSONB
             },
             password: {
                 type: DataTypes.STRING,
@@ -29,10 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     JbUser.associate = (models) => {
-        JbUser.hasOne(models.Employer, {
-            foreignKey: 'employerId',
-            as: 'employer',
-        });
+        JbUser.belongsTo(models.Employer, {foreignKey: "employerId"});
     };
 
     return JbUser;

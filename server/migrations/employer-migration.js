@@ -8,9 +8,10 @@ module.exports = {
                 allowNull: false,
             },
             id: {
-                type: Sequelize.UUID,
-                primaryKey: true,
                 allowNull: false,
+                type: Sequelize.DataTypes.UUID,
+                primaryKey: true,
+                defaultValue: Sequelize.literal('uuid_generate_v1()'),
             },
             location: {
                 type: Sequelize.JSONB,
@@ -30,10 +31,18 @@ module.exports = {
             },
             linkedIn: {
                 type: Sequelize.STRING,
+            },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
             }
         });
     },
-    down: (queryInterface, /*Sequelize*/) => {
+    down: (queryInterface, Sequelize) => {
         return queryInterface.dropTable('Employer');
     }
 };

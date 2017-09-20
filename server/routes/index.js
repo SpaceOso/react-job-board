@@ -10,6 +10,8 @@ module.exports = (app) => {
 
   app.post('/api/jobs', jobsController.create);
   app.post('/api/user', userController.create);
+  app.post('/api/user/addEmployer', userController.addEmployer);
+  app.get('/api/user/list', userController.list);
 
 
   // FROM TUTORIAL

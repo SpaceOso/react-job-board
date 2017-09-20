@@ -10,14 +10,6 @@ module.exports = {
                         primaryKey: true,
                         defaultValue: Sequelize.literal('uuid_generate_v1()'),
                     },
-                    employerId: {
-                        type: Sequelize.UUID,
-                        references: {
-                            model: 'Employer',
-                            key: 'id',
-                            as: 'employer',
-                        }
-                    },
                     firstName: {
                         type: Sequelize.STRING,
                         allowNull: false,
@@ -49,7 +41,7 @@ module.exports = {
             })
 
     },
-    down: (queryInterface, /*Sequelize*/) => {
+    down: (queryInterface, Sequelize) => {
         return queryInterface.dropTable('JbUser');
     }
 };

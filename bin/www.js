@@ -5,10 +5,11 @@
  */
 
 
+require('dotenv').config();
 var debug = require('debug')('node-rest:server');
 var http = require('http');
 var app = require('../app');
-require('dotenv').config();
+var models = require('../server/models');
 
 
 /**
@@ -25,13 +26,16 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+models.sequelize.sync().then(function() {
+    /**
+     * Listen on provided port, on all network interfaces.
+     */
+    server.listen(port, function() {
+        debug('Express server listening on port ' + server.address().port);
+    });
+    server.on('error', onError);
+    server.on('listening', onListening);
+});
 
 /**
  * Normalize a port into a number, string, or false.
