@@ -8,9 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Job.associate = (models) => {
-        Job.hasMany(models.JobItem, {
-            foreignKey: 'jobId'
-        });
     };
     return Job;
 };

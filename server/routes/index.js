@@ -1,5 +1,3 @@
-const todosController = require('../controllers').todos;
-const todoItemsController = require('../controllers').todoItems;
 const jobsController = require('../controllers').jobsController;
 const userController = require('../controllers').userController;
 
