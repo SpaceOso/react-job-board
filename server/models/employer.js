@@ -12,10 +12,22 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            location: {
-                type: DataTypes.JSONB,
+            address: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
+		    city: {
+			    type: DataTypes.STRING,
+			    allowNull: false,
+		    },
+		    state: {
+			    type: DataTypes.STRING,
+			    allowNull: false,
+		    },
+		    zip: {
+			    type: DataTypes.STRING,
+			    allowNull: false,
+		    },
             logoImg: {
                 type: DataTypes.STRING,
             },

@@ -1,15 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
     "use strict";
     const JbUser = sequelize.define("JbUser", {
+		    id: {
+			    allowNull: false,
+			    type: DataTypes.UUID,
+			    primaryKey: true,
+			    defaultValue: sequelize.literal('uuid_generate_v1()'),
+		    },
             firstName: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            },
-            id: {
-                allowNull: false,
-                type: DataTypes.UUID,
-                primaryKey: true,
-                defaultValue: sequelize.literal('uuid_generate_v1()'),
             },
             lastName: {
                 type: DataTypes.STRING,
