@@ -12,8 +12,21 @@ module.exports = {
             .catch((error) => res.status(400).send(error))
     },
 
-    list(req, res){
+    getJobs(req, res){
         "use strict";
-        console.log("job listed");
+        return Employer
+            .findById(req.body.employerId)
+            .then(employer => {
+                return employer.getJobs()
+                    .then(jobs => {
+                        res.status(201).send(jobs);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        res.status(400).send(error);
+                    })
+
+            })
+            .catch((error) => res.status(400).send(error));
     }
 };

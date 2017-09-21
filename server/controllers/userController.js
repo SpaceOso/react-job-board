@@ -14,7 +14,10 @@ module.exports = {
                 email: req.body.email,
                 password: req.body.password
             })
-            .then((job) => res.status(201).send(job))
+            .then((job) => {
+                console.log(Object.keys(employer.rawAttributes));
+                res.status(201).send(job);
+            })
             .catch((error) => {
                 res.status(400).send(error);
             })
@@ -31,9 +34,11 @@ module.exports = {
             })
             .then((employer) => {
                 JbUser.update({employerId: employer.id},
-                    {where: {id: req.body.userId},
+                    {
+                        where: {id: req.body.userId},
                         returning: true,
-                        plain: true})
+                        plain: true
+                    })
                     .then((user) => {
                         console.log("user has been updated with an employer..", user);
                         res.status(201).send(employer);

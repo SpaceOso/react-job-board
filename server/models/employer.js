@@ -1,4 +1,5 @@
 "use strict";
+
 module.exports = (sequelize, DataTypes) => {
     const Employer = sequelize.define("Employer", {
             id: {
@@ -39,7 +40,9 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     Employer.associate = (models) => {
-        Employer.hasMany(models.JbUser, {foreignKey: "employerId"});
+        Employer.hasMany(models.JbUser, {foreignKey: "employerId", as:'users'});
+        Employer.hasMany(models.Job, {foreignKey: 'employerId', as:'jobs'});
+        Employer.hasMany(models.Applicants, {foreignKey: 'employerId', as:'applicants'})
     };
 
     return Employer;

@@ -1,5 +1,7 @@
 const jobsController = require('../controllers').jobsController;
 const userController = require('../controllers').userController;
+const employerController = require('../controllers').employerController;
+const applicantController = require('../controllers').applicantController;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -7,8 +9,11 @@ module.exports = (app) => {
   }));
 
   app.post('/api/jobs', jobsController.create);
+  app.post('/api/jobs/list', jobsController.list);
   app.post('/api/user', userController.create);
+  app.post('/api/createApplicant', applicantController.create);
   app.post('/api/user/addEmployer', userController.addEmployer);
+  app.post('/api/listEmployer', employerController.getJobs);
   app.get('/api/user/list', userController.list);
 
 
