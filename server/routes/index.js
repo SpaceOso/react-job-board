@@ -8,9 +8,10 @@ module.exports = (app) => {
     message: 'Welcome to the Todos API!',
   }));
 
+  app.post('/login/logcheck', userController.loadOnLogin);
   app.post('/api/jobs', jobsController.create);
   app.post('/api/jobs/list', jobsController.list);
-  app.post('/api/user', userController.create);
+  app.post('/api/register', userController.create);
   app.post('/api/createApplicant', applicantController.create);
   app.post('/api/user/addEmployer', userController.addEmployer);
   app.post('/api/listEmployer', employerController.getJobs);

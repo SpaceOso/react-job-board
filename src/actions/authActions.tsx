@@ -78,7 +78,7 @@ export function registerUser(userObject) {
 
 		dispatch(siteFetch());
 
-		axios.post(`${ROOT_URL}register`, userObject)
+		axios.post(`${ROOT_URL}api/register`, userObject)
 			.then((response) => {
 				/*response: {user, token}*/
 
