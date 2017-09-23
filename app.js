@@ -16,8 +16,10 @@ var jobPosts = require('./routes/jobpostsRoutes');
 var jobseeker = require('./routes/jobseeker');
 var uploads = require('./routes/uploadRoutes');
 var userRoutes = require('./routes/userRoutes');
-var registerRoute = require('./routes/registerRoutes');
+// var registerRoute = require('./routes/registerRoutes');
 var loginRoute = require('./routes/loginRoutes');
+
+const registerRoute = require('./server/routes/registerRoute');
 
 //AUTHCHECK
 let authCheck = require('./routes/authCheck');
@@ -79,12 +81,12 @@ app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers", "Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization");
     next();
 });
-require('./server/routes')(app);
+// require('./server/routes')(app);
 app.use('/uploads', uploads);
 app.use('/jobseeker', jobseeker);
 app.use('/jobposts', jobPosts);
-// app.use('/register', registerRoute);
-// app.use('/login', loginRoute);
+app.use('/api/register', registerRoute);
+app.use('/login', loginRoute);
 app.use('/user', authCheck, userRoutes);
 app.use('/employer', authCheck, employerRoutes);
 app.use('/', appRoutes);

@@ -132,7 +132,7 @@ export function submitEmployerRegistration(employerInfo, file: File) {
 
 		dispatch(siteFetch());
 
-		axios.post(`${ROOT_URL}employer/register`, data)
+		axios.post(`${ROOT_URL}api/register/employer`, data)
 			.then((response) => {
 
 				/*recieving {token, employer}*/

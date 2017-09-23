@@ -73,11 +73,38 @@ module.exports = {
     addEmployer(req, res) {
         "use strict";
         console.log("adding employer");
-        return Employer
+        console.log('employer bod:', req.body);
+        //checking to see if we have a logoImg uploaded
+	    let filename = '';
+
+	    if(req.file !== undefined) {
+		    if (req.file.key !== undefined) {
+			    console.log('key:', req.file.key);
+			    filename = req.file.key;
+		    }
+
+		    if (req.file.filename !== undefined) {
+			    console.log('req.file.filename', req.file.filename);
+			    filename = req.file.filename;
+		    }
+	    }
+
+	    console.log("filename", filename);
+
+		    return Employer
             .create({
                 name: req.body.name,
-                location: req.body.location,
-                employerId: req.body.userId
+	            logoImg: filename,
+	            location: {
+	                address: req.body.address,
+	                city: req.body.city,
+	                state: req.body.state,
+	                zip: req.body.zip
+                },
+	            website: req.body.website,
+	            twitter: req.body.twitter,
+	            facebook: req.body.facebook,
+	            linkedIn: req.body.linkedIn
             })
             .then((employer) => {
                 JbUser.update({employerId: employer.id},
@@ -110,3 +137,31 @@ module.exports = {
             })
     }
 };
+
+
+/* addEmployer(req, res) {
+        "use strict";
+        console.log("adding employer");
+        return Employer
+            .create({
+                name: req.body.name,
+                location: req.body.location,
+                employerId: req.body.userId
+            })
+            .then((employer) => {
+                JbUser.update({employerId: employer.id},
+                    {
+                        where: {id: req.body.userId},
+                        returning: true,
+                        plain: true
+                    })
+                    .then((user) => {
+                        console.log("user has been updated with an employer..", user);
+                        res.status(201).send(employer);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    },*/

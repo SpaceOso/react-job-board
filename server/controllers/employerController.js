@@ -1,4 +1,8 @@
+const express = require('express');
+const router = express.Router();
+
 const Employer = require('../models').Employer;
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     create(req, res){
