@@ -3,6 +3,8 @@ const Employer = require('../models').Employer;
 let uuid = require('uuid');
 let jwt = require('jsonwebtoken');
 
+const sequelize = require('sequelize');
+
 module.exports = {
 	create(req, res) {
 		"use strict";
@@ -53,24 +55,30 @@ module.exports = {
 
 			if (decoded) {
 				return JbUser
-					.findById(decoded._id)
+					.findById(decoded._id, {
+						include: [Employer],
+						plain: true,
+						type: sequelize.QueryTypes.SELECT
+					})
 					.then((response) => {
-						console.log('the response:', response);
-						// console.log("Logcheck for employer:", response.employerId);
-						let user = {
-							_id: response.dataValues.id,
-							firstName: response.dataValues.firstName,
-							lastName: response.dataValues.lastName,
-							email: response.dataValues.email,
-							employerId: response.dataValues.employerId === undefined ? null : response.dataValues.employerId
+							console.log('the response:', response);
+							// console.log("Logcheck for employer:", response.employerId);
+							let user = {
+								_id: response.dataValues.id,
+								firstName: response.dataValues.firstName,
+								lastName: response.dataValues.lastName,
+								email: response.dataValues.email,
+								employerId: response.dataValues.employerId === undefined ? null : response.dataValues.employerId
+							};
 
-						};
+							let employer = {...response.Employer.dataValues};
 
-						let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
+							let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
 
-						res.status(200).json({
+							res.status(200).json({
 								user: user,
 								employerId: user.employerId,
+								employer: employer,
 								token: token
 							});
 						}
@@ -217,28 +225,28 @@ module.exports = {
 
 
 /* addEmployer(req, res) {
-        "use strict";
-        console.log("adding employer");
-        return Employer
-            .create({
-                name: req.body.name,
-                location: req.body.location,
-                employerId: req.body.userId
-            })
-            .then((employer) => {
-                JbUser.update({employerId: employer.id},
-                    {
-                        where: {id: req.body.userId},
-                        returning: true,
-                        plain: true
-                    })
-                    .then((user) => {
-                        console.log("user has been updated with an employer..", user);
-                        res.status(201).send(employer);
-                    });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+		"use strict";
+		console.log("adding employer");
+		return Employer
+			.create({
+				name: req.body.name,
+				location: req.body.location,
+				employerId: req.body.userId
+			})
+			.then((employer) => {
+				JbUser.update({employerId: employer.id},
+					{
+						where: {id: req.body.userId},
+						returning: true,
+						plain: true
+					})
+					.then((user) => {
+						console.log("user has been updated with an employer..", user);
+						res.status(201).send(employer);
+					});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 
-    },*/
+	},*/
