@@ -1,8 +1,9 @@
 // src/types/index.tsx
 
 import currentJobReducer from "../reducers/currentJobReducer";
-export interface Job{
-	_id: string | null,
+
+export interface Job {
+	id: string | null,
 	title: string,
 	description: string,
 	employerId: string,
@@ -24,23 +25,23 @@ export interface Job{
 	createdAt: string
 }
 
-export interface SiteError{
+export interface SiteError {
 	typeOfError: string,
 	message: string,
 }
 
 
-export interface privateJobView extends Job{
+export interface privateJobView extends Job {
 	applicants: string[]
 }
 
-export interface SiteErrors{
-		login: SiteError | null,
-		dashBoard: SiteError | null,
-		dataRequest: SiteError | null
+export interface SiteErrors {
+	login: SiteError | null,
+	dashBoard: SiteError | null,
+	dataRequest: SiteError | null
 }
 
-export interface SiteFetching{
+export interface SiteFetching {
 	isFetching: boolean,
 
 }
@@ -52,7 +53,7 @@ export interface SiteFetching{
  * @property {(string | null)} email - The users email
  * @property {(string | null)} password - The users hashed password //todo need to has this
  */
-export interface AuthUser{
+export interface AuthUser {
 	firstName: string | null,
 	lastName: string | null,
 	email: string | null,
@@ -66,7 +67,7 @@ export interface AuthUser{
  * @property {(boolean | null)} isFetching - We use this to display a spinner component if the user is waiting for async operation
  * @property {(string | null)} error - We currently are not using this //todo make sure if save to remove
  */
-export interface User extends AuthUser{
+export interface User extends AuthUser {
 	_id: string | null,
 	employerId: string | null,
 	isAuth: boolean | null,
@@ -74,8 +75,8 @@ export interface User extends AuthUser{
 	error: string | null
 }
 
-export interface Employer{
-	_id: string | null
+export interface Employer {
+	id: string | null
 	name: string,
 	location: {
 		address: string,
@@ -84,21 +85,19 @@ export interface Employer{
 		zip: number
 	},
 	logoImg: string,
-	socialMedia: {
-		website: string,
-		twitter: string,
-		facebook: string,
-		linkedin: string
-	} ,
+	website: string,
+	twitter: string,
+	facebook: string,
+	linkedin: string,
 	jobs: Job[] | null,
 	isFetching: boolean | null
 }
 
-export interface CurrentJobPost extends Job , Employer{
+export interface CurrentJobPost extends Job, Employer {
 	isFetching: boolean
 }
 
-export interface privateEmployerView extends Employer{
+export interface privateEmployerView extends Employer {
 	applicants: User[]
 }
 

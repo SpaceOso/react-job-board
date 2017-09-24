@@ -10,7 +10,7 @@ import "./styles/jobPostContainer.scss";
 
 interface jobPostProps extends RouteComponentProps<any> {
 	// job: Job
-	employer: Employer,
+	// employer: Employer,
 	getJobById: (arg) => {},
 	loadJob: () => {},
 	resetCurrentJob: () => {},
@@ -29,13 +29,13 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			jobPostEmployerInfo: {
-				employerLogo: '',
-				employerId: '',
-				employerName: ''
-			}
-		};
+		// this.state = {
+			// jobPostEmployerInfo: {
+			// 	employerLogo: '',
+			// 	employerId: '',
+			// 	employerName: ''
+			// }
+		// };
 
 		this.loadNewJob = this.loadNewJob.bind(this);
 	}
@@ -55,15 +55,16 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 
 	render() {
 
+		console.log("layout, props.currentEmployer", this.props.currentJobPost.Employer);
 		if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
 			return <SpinnerComponent/>
 		}
 
-		if(this.props.employer.name !== null)	{
+		if(this.props.currentJobPost.Employer.name !== null)	{
 			return (
 				<div className="job-post-container">
 					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.currentJobPost.isFetching}/>
-					<JobPostEmployerInfoComponent employer={this.props.currentJobPost} loadJob={this.loadNewJob}/>
+					<JobPostEmployerInfoComponent employer={this.props.currentJobPost.Employer} loadJob={this.loadNewJob}/>
 				</div>
 			)
 		} else {

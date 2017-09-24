@@ -18,7 +18,7 @@ export const JobListItem: React.SFC<Props> = (props) => {
 	return (
 		// LOGO
 		<div className="job-list-item panel-shadow">
-			<Link className="link-container" to={`/jobposts/${job._id}`}>
+			<Link className="link-container" to={`/jobposts/${job.id}`}>
 				{/*LOGO*/}
 				<div className="job-list-logo">
 					<img src={job.Employer.logoImg ?

@@ -30,11 +30,11 @@ function currentJobPostReducer(state: CurrentJobPost, action): CurrentJobPost{
 			    isFetching: true
 	    	};
 	    case SINGLE_JOB_SUCCESS:
+	    	console.log("inside reducuer:", action.payload);
 	    	return {
 			    ...state,
-	            ...action.payload.data.job,
-	            ...action.payload.data.employer,
-			    // employer: {...action.payload.data.employer},
+			    ...action.payload.data.job,
+			    // ...action.payload.data.job.Employer,
 			    isFetching: false
 		    };
         default:

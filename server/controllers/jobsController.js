@@ -33,6 +33,22 @@ module.exports = {
 				res.status(201).send(jobs);
 			})
 			.catch((error) => res.status(201).send(error));
+	},
+
+	getById(req, res) {
+		"use strict";
+		console.log("inside looking for id:", req.jobId);
+		return Job
+			.findById(req.params.jobId, {
+				include: [Employer]
+			})
+			.then((job) => {
+				console.log("we found a job!!:", job);
+				res.status(201).send({
+					job: job.dataValues
+				});
+			})
+			.catch((error) => res.status(401).send(error));
 	}
 };
 

@@ -7,11 +7,10 @@ import JobPostLayout from "./jobPostLayout";
 import {getJobById, resetCurrentJob} from "../../actions/jobActions";
 import {StoreState} from "../../types/index";
 
-function mapStateToProps({currentJobPost, employer}:StoreState) {
+function mapStateToProps({currentJobPost}:StoreState) {
 
     return {
-        currentJobPost,
-        employer
+        currentJobPost
     }
 }
 

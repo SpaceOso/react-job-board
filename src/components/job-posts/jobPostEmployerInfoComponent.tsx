@@ -30,17 +30,20 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
 		* Need to figure out if we need another component for this section or not*/
 		let employer = this.props.employer;
 
-		return employer.jobs.map(job =>
-			<Link to={`/jobposts/${job._id}`} key={`${job.title}${new Date()}${job._id}`} onClick={() => {
-				this.handleClick(job._id)
-			}}>
-				<li>{job.title}</li>
-			</Link>
-		)
+		if(employer.jobs !== undefined){
+			return employer.jobs.map(job =>
+				<Link to={`/jobposts/${job.id}`} key={`${job.title}${new Date()}${job.id}`} onClick={() => {
+					this.handleClick(job.id)
+				}}>
+					<li>{job.title}</li>
+				</Link>
+			)
+		}
+
 	}
 
 	createSocialMediaLinks() {
-		console.log("the social media links fo this accounta re..", this.props.employer.socialMedia);
+		console.log("the social media links fo this accounta re..", this.props.employer);
 		return (
 			<ul className="social-lists">
 				<li>

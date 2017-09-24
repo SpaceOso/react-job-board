@@ -20,6 +20,7 @@ class JobPostInfoComponent extends React.Component<jobPostInfoProps> {
 	dataReady = () => this.props.isFetching !== true;
 
 	render() {
+		console.log("jobPostInfoComponent job:", this.props.job);
 		if (this.props.isFetching) {
 			return <SpinnerComponent/>
 		} else {
