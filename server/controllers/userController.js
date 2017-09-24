@@ -95,7 +95,8 @@ module.exports = {
 			.find({
 				where: {
 					email: req.body.email
-				}
+				},
+				include:[Employer]
 			})
 			.then((userModel) => {
 					// console.log('the response:', userModel);
@@ -107,6 +108,7 @@ module.exports = {
 						return Promise.reject("No matching user information found.");
 					}
 
+					console.log("we found a user with this info..", userModel.dataValues);
 					let user = {
 						_id: userModel.id,
 						firstName: userModel.firstName,
@@ -115,11 +117,15 @@ module.exports = {
 						employerId: userModel.employerId === undefined ? null : userModel.employerId
 					};
 
+					let employer = {...userModel.Employer.dataValues};
+
+
 					let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
 					// console.log("Logcheck for employer:", user.employerId);
 					res.status(200).json({
 						user: user,
 						employerId: user.employerId,
+						employer,
 						token: user
 					});
 				}

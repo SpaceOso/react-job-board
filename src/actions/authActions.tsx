@@ -223,7 +223,7 @@ export function logInUser(user) {
 
 		dispatch(siteFetch());
 
-		axios.post(`${ROOT_URL}login`, user)
+		axios.post(`${ROOT_URL}api/login`, user)
 			.then((response) => {
 				//save token to local storage
 				const token = response.data.token;

@@ -9,5 +9,6 @@ const userController = require('../controllers').userController;
 /*need to fix this so when we create an employer and we do the log check
 * it will come back positive*/
 router.post('/logcheck', userController.loadOnLogin);
+router.post('/', userController.login);
 
 module.exports = router;
