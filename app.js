@@ -21,7 +21,7 @@ var userRoutes = require('./routes/userRoutes');
 
 const registerRoute = require('./server/routes/registerRoute');
 const loginRoute = require('./server/routes/loginRoute');
-const jobPosts = require('./server/routes/jobRoutes');
+const jobRoutes = require('./server/routes/jobRoutes');
 
 //AUTHCHECK
 let authCheck = require('./routes/authCheck');
@@ -86,7 +86,7 @@ app.use(function (req, res, next) {
 // require('./server/routes')(app);
 app.use('/uploads', uploads);
 app.use('/jobseeker', jobseeker);
-app.use('/api/jobposts', authCheck, jobPosts);
+app.use('/api/jobposts', jobRoutes);
 app.use('/api/register', registerRoute);
 app.use('/api/login', loginRoute);
 app.use('/user', authCheck, userRoutes);

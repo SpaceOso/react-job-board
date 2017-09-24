@@ -31,10 +31,10 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
 		let employer = this.props.employer;
 
 		return employer.jobs.map(job =>
-			<Link to={`/jobposts/${job._id}`} key={`${job.jobTitle}${new Date()}${job._id}`} onClick={() => {
+			<Link to={`/jobposts/${job._id}`} key={`${job.title}${new Date()}${job._id}`} onClick={() => {
 				this.handleClick(job._id)
 			}}>
-				<li>{job.jobTitle}</li>
+				<li>{job.title}</li>
 			</Link>
 		)
 	}

@@ -33,14 +33,14 @@ export function fetchingJobs() {
 }
 
 export function getJobs() {
-	
+
 	return dispatch => {
 
 		dispatch(fetchingJobs());
 
-		axios.get(`${ROOT_URL}${'jobposts'}`)
+		axios.get(`${ROOT_URL}api/jobposts`)
 			.then((response) => {
-
+				console.log("the response for jobs:", response);
 				dispatch(getJobsSuccess(response))
 
 			})
@@ -63,8 +63,8 @@ export function singleJobSuccess(data) {
 	}
 }
 
-export function fetchSingleJob(){
-	return{
+export function fetchSingleJob() {
+	return {
 		type: FETCHING_SINGLE_JOB,
 		payload: 'fetching single job'
 	}

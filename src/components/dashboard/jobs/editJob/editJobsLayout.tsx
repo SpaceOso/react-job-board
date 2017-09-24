@@ -56,8 +56,8 @@ class EditJobsLayout extends React.Component<MyProps, myState> {
 
 	render() {
 		const dataInfo = [
-			{property: 'jobTitle', header: 'Job Title'},
-			{property: 'jobDescription', header: 'Job Description'},
+			{property: 'title', header: 'Job Title'},
+			{property: 'description', header: 'Job Description'},
 		];
 
 		console.log("inside the edit layout with props: ", this.props);

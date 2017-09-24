@@ -15,8 +15,8 @@ const JobAtGlanceComponent: React.SFC<Props> = (props) => {
 	return(
 		<div>
 			I'm the job at glance Component
-			<h1>{props.job.jobTitle}</h1>
-			<h3>{props.job.jobDescription}</h3>
+			<h1>{props.job.title}</h1>
+			<h3>{props.job.description}</h3>
 			<div className="job-links" >
 				<ul>
 					<li onClick={props.handleJobDelete}>Delete</li>

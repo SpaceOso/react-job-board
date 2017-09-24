@@ -21,22 +21,22 @@ export const JobListItem: React.SFC<Props> = (props) => {
 			<Link className="link-container" to={`/jobposts/${job._id}`}>
 				{/*LOGO*/}
 				<div className="job-list-logo">
-					<img src={job.employerLogo ?
-						`${IMG_URL}${job.employerLogo}` : require('../../../assets/images/no-icon.svg')}
+					<img src={job.Employer.logoImg ?
+						`${IMG_URL}${job.Employer.logoImg}` : require('../../../assets/images/no-icon.svg')}
 					/>
 				</div>
 				{/*JOB INFORMATION*/}
 				<div className="job-info">
 					<h1 className="job-title">
-						{job.jobTitle}
+						{job.title}
 					</h1>
 					<p className="job-employer">
-						{job.employerName}
+						{job.Employer.name}
 					</p>
 				</div>
 				<div className="post-info">
-					<p className="post-date">{job.updatedAt}</p>
-					<p className="post-location">{`${job.employerId.location.city},${job.employerId.location.state}`}</p>
+					<p className="post-date">{job.createdAt}</p>
+					<p className="post-location">{`${job.Employer.location.city},${job.Employer.location.state}`}</p>
 				</div>
 				{/*<p className="job-description" dangerouslySetInnerHTML={{__html: job.jobDescription}}></p>*/}
 			</Link>

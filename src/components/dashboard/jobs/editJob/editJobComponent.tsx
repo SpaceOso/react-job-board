@@ -9,7 +9,7 @@ interface myProps extends RouteComponentProps<any>{
 }
 
 interface myState{
-	jobDescription: any
+	description: any
 }
 
 
@@ -18,7 +18,7 @@ class EditJobComponent extends React.Component<myProps, myState> {
 		super(props);
 
 		this.state = {
-			jobDescription: ''
+			description: ''
 		};
 
 		console.log("edit job component initialized");
@@ -31,7 +31,7 @@ class EditJobComponent extends React.Component<myProps, myState> {
 	
 	handleJobDescriptionChange(content){
 		console.log("setting job description content with:", content);
-		this.setState({jobDescription: content});
+		this.setState({description: content});
 	}
 	
 	render() {
@@ -41,11 +41,11 @@ class EditJobComponent extends React.Component<myProps, myState> {
 				<div>
 					<div onClick={() => {this.props.history.goBack()}}>Go Back</div>
 				</div>
-				{<h1>{this.props.job!.jobTitle}</h1>}
-				{<p>{this.props.job!.jobDescription}</p>}
+				{<h1>{this.props.job!.title}</h1>}
+				{<p>{this.props.job!.description}</p>}
 				<TinymceComponent id="job-edit"
 				                  onEditorChange={this.handleJobDescriptionChange}
-				                  priorContent={this.props.job!.jobDescription}
+				                  priorContent={this.props.job!.description}
 				/>
 			</div>
 		)

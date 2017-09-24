@@ -14,14 +14,14 @@ interface MyProps{
 }
 
 interface MyState{
-    jobTitle: string,
-    jobDescription: string,
+    title: string,
+	description: string,
     keywords: string[],
 }
 
 const initialState: MyState = {
-    jobTitle: '',
-    jobDescription: '',
+    title: '',
+	description: '',
     keywords: [],
 };
 
@@ -30,8 +30,8 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
         super(props);
         
         this.state = {
-            jobTitle: "",
-            jobDescription: "",
+	        title: "",
+	        description: "",
             keywords: [],
         };
         
@@ -59,7 +59,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
 
     handleJobDescriptionChange(content){
         console.log("setting job description content with:", content);
-        this.setState({jobDescription: content});
+        this.setState({description: content});
     }
 
 
@@ -76,7 +76,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                                required
                                id="job-title"
                                placeholder="Enter Job Title"
-                               value={this.state.jobTitle}
+                               value={this.state.title}
                                onChange={(event) => this.handleChange(this.state, "jobTitle", event.target.value)}
                         />
                     </div>

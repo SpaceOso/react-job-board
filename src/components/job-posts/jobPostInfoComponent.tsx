@@ -26,11 +26,11 @@ class JobPostInfoComponent extends React.Component<jobPostInfoProps> {
 			return (
 				<div className="job-post">
 					<div className="job-header-container panel-shadow">
-						<h1 className="jp-job-header">{this.props.job.jobTitle}</h1>
+						<h1 className="jp-job-header">{this.props.job.title}</h1>
 					</div>
 					<div className="job-description-container panel-shadow">
 						<div className="job-description"
-						     dangerouslySetInnerHTML={{__html: this.props.job.jobDescription}}></div>
+						     dangerouslySetInnerHTML={{__html: this.props.job.description}}></div>
 						<button>Apply Now</button>
 					</div>
 				</div>

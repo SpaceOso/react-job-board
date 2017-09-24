@@ -3,20 +3,25 @@
 import currentJobReducer from "../reducers/currentJobReducer";
 export interface Job{
 	_id: string | null,
-	jobTitle: string,
-	jobDescription: string,
-	employerName: string,
-	employerId: {
-		_id: string,
+	title: string,
+	description: string,
+	employerId: string,
+	Employer: {
+		id: string,
+		name: string,
 		location: {
 			address: string,
 			city: string,
 			state: string,
 			zip: string
-		}
+		},
+		logoImg?: string | null,
+		website: string | null,
+		facebook: string | null,
+		twitter: string | null,
+		linkedIn: string | null,
 	},
-	employerLogo?: string,
-	updatedAt?: string
+	createdAt: string
 }
 
 export interface SiteError{

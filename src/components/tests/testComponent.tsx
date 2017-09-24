@@ -4,8 +4,8 @@ import "../../../node_modules/draft-js/dist/Draft";
 import TinymceComponent from "../tinymce/tinymceComponent";
 
 const myState:any  = {
-	jobTitle: "",
-	jobDescription: "",
+	title: "",
+	description: "",
 	keywords: [],
 	value: ''
 };

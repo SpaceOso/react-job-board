@@ -34,8 +34,8 @@ router.post('/dashboard/:id/createjob', function (req, res) {
         console.log("the employer object:", employer);
 
         let job = new Job({
-            jobTitle: req.body.jobTitle,
-            jobDescription: req.body.jobDescription,
+			title: req.body.title,
+			description: req.body.description,
             employerName: employer.name,
             employerId: employer._id,
             employerLogo: employer.logoImg,

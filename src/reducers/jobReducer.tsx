@@ -13,11 +13,13 @@ function JobReducer(state: StoreState, action) {
             for (const job in action.payload.data) {
                 let currentJob = action.payload.data[job];
 
-	            let splitDate = currentJob.updatedAt.match(jobDateRegex)[0].split('-');
-	            currentJob.updatedAt = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
+	            let splitDate = currentJob.createdAt.match(jobDateRegex)[0].split('-');
+	            currentJob.createdAt = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
 
                 newJobs[currentJob._id] = {...currentJob};
             }
+
+            console.log("the final jobs:", newJobs);
 
             return newJobs;
         case GET_JOBS_ERROR:
