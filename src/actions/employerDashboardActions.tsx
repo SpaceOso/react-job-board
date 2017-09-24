@@ -135,6 +135,7 @@ export function submitEmployerRegistration(employerInfo, file: File) {
 		axios.post(`${ROOT_URL}api/register/employer`, data)
 			.then((response) => {
 
+				console.log("response from the server:", response);
 				/*recieving {token, employer}*/
 				setAuth(response.data.token);
 

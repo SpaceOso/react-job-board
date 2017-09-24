@@ -4,7 +4,7 @@ exports.loadIndex = (req, res, next) => {
 };
 
 exports.homeLoad = (req, res, next) => {
-    console.log("inside the homeload function");
+/*    console.log("inside the homeload function");
     Jobs.find({})
         .sort({createdAt: -1})
         // .limit(10)
@@ -15,5 +15,5 @@ exports.homeLoad = (req, res, next) => {
                 message: 'Success',
                 jobs: doc
             })
-        });
+        });*/
 };

@@ -187,7 +187,7 @@ export function logInOnLoad(token) {
 	return dispatch => {
 
 		dispatch(siteFetch());
-		axios.post(`${ROOT_URL}login/logcheck`, {token})
+		axios.post(`${ROOT_URL}api/login/logcheck`, {token})
 			.then((response) => {
 
 				//response contains uer, which is our decoded token

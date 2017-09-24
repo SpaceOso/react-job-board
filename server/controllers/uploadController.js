@@ -16,7 +16,7 @@ AWS.config.update({
 
 let s3 = new AWS.S3();
 
-const uploadPath = path.join(__dirname, '..', '/public/assets/uploads');
+const uploadPath = path.join(__dirname, '../..', '/public/assets/uploads');
 
 let storageType = {};
 /**
@@ -54,7 +54,7 @@ const upload = multer({
 		"use strict";
 		const isPhoto = file.mimetype.startsWith('image/');
 		if (isPhoto) {
-			console.log("it is a photo");
+			console.log("it is a photo, upload");
 			next(null, true);
 		} else {
 			console.log("it is NOT a photo");

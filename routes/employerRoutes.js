@@ -66,7 +66,7 @@ const upload = multer({
         "use strict";
         const isPhoto = file.mimetype.startsWith('image/');
         if (isPhoto) {
-            console.log("it is a photo");
+            console.log("it is a photo...old routes");
             next(null, true);
         } else {
             console.log("it is NOT a photo");

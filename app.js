@@ -17,9 +17,10 @@ var jobseeker = require('./routes/jobseeker');
 var uploads = require('./routes/uploadRoutes');
 var userRoutes = require('./routes/userRoutes');
 // var registerRoute = require('./routes/registerRoutes');
-var loginRoute = require('./routes/loginRoutes');
+// var loginRoute = require('./routes/loginRoutes');
 
 const registerRoute = require('./server/routes/registerRoute');
+const loginRoute = require('./server/routes/loginRoute');
 
 //AUTHCHECK
 let authCheck = require('./routes/authCheck');
@@ -86,10 +87,10 @@ app.use('/uploads', uploads);
 app.use('/jobseeker', jobseeker);
 app.use('/jobposts', jobPosts);
 app.use('/api/register', registerRoute);
-app.use('/login', loginRoute);
+app.use('/api/login', loginRoute);
 app.use('/user', authCheck, userRoutes);
 app.use('/employer', authCheck, employerRoutes);
-app.use('/', appRoutes);
+// app.use('/', appRoutes);
 app.use('/*', appRoutes);
 
 //todo need to remove this before shipping

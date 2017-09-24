@@ -12,7 +12,8 @@ let homeControllers = require('../controllers/homeController');
 router.get('/homeload', homeControllers.homeLoad);
 
 router.get('/home', function (req, res, next) {
-
+	console.log('TRYING TO LOAD HOME');
+/*
     if (req.body.id == undefined) {
 
         // console.log('check passed');
@@ -30,10 +31,9 @@ router.get('/home', function (req, res, next) {
                     message: 'Success',
                     obj: docs
                 });
-                // console.log('finished')
             });
 
-    }
+    }*/
 });
 
 router.get('/', homeControllers.loadIndex);
