@@ -1,19 +1,21 @@
 const Job = require('../models').Job;
+const Employer = require('../models').Employer;
 const Applicants = require('../models').Applicants;
 
 module.exports = {
     create(req, res){
         "use strict";
-        console.log("job created");
         return Job
             .create({
                 title: req.body.title,
-                description: req.body.description,
-                employerId: req.body.employerId
+                description: req.body.jobDescription,
+                employerId: req.body.employerId.id
             })
             .then((job) => {
                 console.log(job);
-                res.status(201).send(job);
+                res.status(201).send({
+					job
+				});
             })
             .catch((error) => res.status(400).send(error))
     },
@@ -22,7 +24,7 @@ module.exports = {
         "use strict";
         console.log("job listed");
         return Job
-            .findAll({include:[{model: Applicants}]})
+            .findAll({include:[{model: Employer}]})
             .then((jobs) => {
                 console.log("jobs have been found");
                 res.status(201).send(jobs);
@@ -30,3 +32,4 @@ module.exports = {
             .catch((error) => res.status(201).send(error));
     }
 };
+

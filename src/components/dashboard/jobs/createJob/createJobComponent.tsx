@@ -43,6 +43,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
     
     handleJobSubmit(event:any): void{
         // (event as React.SyntheticEvent<Event>).preventDefault();
+	    console.log("we are submitting a damn job, right?");
         this.props.submitJobPost({...this.state, employerId: this.props.employer});
 	    event.preventDefault();
 	    this.setState(initialState);

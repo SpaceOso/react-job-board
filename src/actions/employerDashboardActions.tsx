@@ -89,8 +89,11 @@ export function saveJobPost(jobPostInfo, userId) {
 
 		dispatch(employerFetching());
 
-		axios.post(`${ROOT_URL}user/dashboard/${userId}/createjob`, jobPostInfo)
+		console.log('TRYING TO SAVE A JOB POST!!!!!!');
+
+		axios.post(`${ROOT_URL}api/jobposts/create`, jobPostInfo)
 			.then((response) => {
+			console.log('in here trying to create a job', response);
 				dispatch(editingJobPostSuccess(response.data.jobPost));
 				dispatch(employerIdle());
 			})
