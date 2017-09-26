@@ -34,7 +34,6 @@ function currentJobPostReducer(state: CurrentJobPost, action): CurrentJobPost{
 	    	return {
 			    ...state,
 			    ...action.payload.data.job,
-			    // ...action.payload.data.job.Employer,
 			    isFetching: false
 		    };
         default:

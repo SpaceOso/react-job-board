@@ -37,16 +37,24 @@ module.exports = {
 
 	getById(req, res) {
 		"use strict";
-		console.log("inside looking for id:", req.jobId);
+		console.log("inside looking for id:", req.params.jobId);
 		return Job
 			.findById(req.params.jobId, {
-				include: [Employer]
+				include: [{
+					model: Employer
+				}]
 			})
 			.then((job) => {
-				console.log("we found a job!!:", job);
-				res.status(201).send({
-					job: job.dataValues
-				});
+				job.Employer.getJobs()
+					.then(employerJobs => {
+						console.log('the jobs within:', employerJobs);
+						console.log("we found a job!!:", job.dataValues);
+						job.dataValues.Employer.dataValues.jobs = employerJobs;
+						res.status(201).send({
+							job: job.dataValues
+						});
+					})
+
 			})
 			.catch((error) => res.status(401).send(error));
 	}

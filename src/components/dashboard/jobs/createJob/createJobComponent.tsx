@@ -77,7 +77,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState>{
                                id="job-title"
                                placeholder="Enter Job Title"
                                value={this.state.title}
-                               onChange={(event) => this.handleChange(this.state, "jobTitle", event.target.value)}
+                               onChange={(event) => this.handleChange(this.state, "title", event.target.value)}
                         />
                     </div>
                     <div>
