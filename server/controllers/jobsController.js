@@ -25,11 +25,10 @@ module.exports = {
 		console.log("job listed");
 		return Job
 			.findAll({
-				include: [{model: Employer}],
+				include: [Employer]
 			})
 			.then((jobs) => {
-				console.log("jobs found:", jobs);
-				console.log("jobs have been found");
+			console.log("the jobs are:", jobs);
 				res.status(201).send(jobs);
 			})
 			.catch((error) => res.status(201).send(error));

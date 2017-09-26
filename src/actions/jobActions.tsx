@@ -42,7 +42,6 @@ export function getJobs() {
 			.then((response) => {
 				console.log("the response for jobs:", response);
 				dispatch(getJobsSuccess(response))
-
 			})
 			.catch((error) => {
 			});

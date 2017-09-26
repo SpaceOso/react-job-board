@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 
 // ROUTES
 var appRoutes = require('./routes/appRoutes');
-var employerRoutes = require('./routes/employerRoutes');
+// var employerRoutes = require('./routes/employerRoutes');
 // var jobPosts = require('./routes/jobpostsRoutes');
 var jobseeker = require('./routes/jobseeker');
 var uploads = require('./routes/uploadRoutes');
@@ -22,6 +22,7 @@ var userRoutes = require('./routes/userRoutes');
 const registerRoute = require('./server/routes/registerRoute');
 const loginRoute = require('./server/routes/loginRoute');
 const jobRoutes = require('./server/routes/jobRoutes');
+const employerRoutes = require('./server/routes/employerRoutes');
 
 //AUTHCHECK
 let authCheck = require('./routes/authCheck');
@@ -88,7 +89,7 @@ app.use('/uploads', uploads);
 app.use('/jobseeker', jobseeker);
 app.use('/api/jobposts', jobRoutes);
 app.use('/api/register', registerRoute);
-app.use('/api/login', loginRoute);
+app.use('/api/login',authCheck, loginRoute);
 app.use('/user', authCheck, userRoutes);
 app.use('/employer', authCheck, employerRoutes);
 // app.use('/', appRoutes);
