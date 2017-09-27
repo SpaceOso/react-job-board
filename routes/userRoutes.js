@@ -37,7 +37,7 @@ router.post('/dashboard/:id/createjob', function (req, res) {
 			title: req.body.title,
 			description: req.body.description,
             employerName: employer.name,
-            employerId: employer._id,
+            employerId: employer.id,
             employerLogo: employer.logoImg,
 			applicants: [],
         });

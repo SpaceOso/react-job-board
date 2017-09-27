@@ -40,7 +40,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 
 	/*If the user doesn't have an ID we need them to login again.*/
 	checkForLogInErrors() {
-		return this.props.user._id === null || this.props.user._id === undefined || this.props.user === undefined ?
+		return this.props.user.id === null || this.props.user.id === undefined || this.props.user === undefined ?
 			<Redirect to={'/login'}/> : null;
 	}
 
@@ -50,7 +50,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	 * @param file {File} - The logo of the employer
 	 */
 	handleEmployerRegistration(employerData, file) {
-		let userData = {...employerData, userId: this.props.user._id};
+		let userData = {...employerData, userId: this.props.user.id};
 		this.props.submitEmployerRegistration(userData, file);
 	};
 
@@ -68,7 +68,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 
 	/* This will handle sending the job post information to the back end.*/
 	submitJobPost(jobPost) {
-		this.props.saveJobPost(jobPost, this.props.user._id);
+		this.props.saveJobPost(jobPost, this.props.user.id);
 	}
 
 	render() {
@@ -78,7 +78,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 			return <SpinnerComponent/>
 		}
 
-		if (this.props.user._id === null) {
+		if (this.props.user.id === null) {
 			login = <Redirect to={'/login'}/>;
 		} else {
 			login = this.checkForEmployer();

@@ -36,7 +36,7 @@ class App extends React.Component<Props> {
 
 	checkReload() {
 		let token = localStorage.getItem('tkn');
-
+		console.log("did we find a token:", token);
 		if (token !== undefined) {
 			this.props.logInOnLoad(token);
 		}

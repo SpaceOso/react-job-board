@@ -32,7 +32,7 @@ router.post('/', function (req, res, next) {
 			lastName: result.lastName,
 			email: result.email,
 			employerId: null,
-			_id: result._id
+			id: result.id
 		};
 
 		//TODO need to set up proper secret key

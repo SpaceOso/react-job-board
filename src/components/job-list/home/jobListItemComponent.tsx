@@ -14,14 +14,13 @@ export interface Props {
 
 export const JobListItem: React.SFC<Props> = (props) => {
 	const {job} = props;
-	console.log('inside jobListItem:', job);
 	return (
 		// LOGO
 		<div className="job-list-item panel-shadow">
 			<Link className="link-container" to={`/jobposts/${job.id}`}>
 				{/*LOGO*/}
 				<div className="job-list-logo">
-					<img src={job.Employer.logoImg !== null ?
+					<img src={job.Employer.logoImg ?
 						`${IMG_URL}${job.Employer.logoImg}` : require('../../../assets/images/no-icon.svg')}
 					/>
 				</div>

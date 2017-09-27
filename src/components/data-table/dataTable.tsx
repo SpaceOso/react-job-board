@@ -58,7 +58,7 @@ class DataTable extends React.Component<myProps, any>{
 
 	createRowData(rowObj){
 		return this.props.columnInfo.map((column , value) =>{
-			return <td  key={`${rowObj._id}${value}`}>{rowObj[column.property]}</td>
+			return <td  key={`${rowObj.id}${value}`}>{rowObj[column.property]}</td>
 		})
 	}
 
@@ -102,7 +102,7 @@ class DataTable extends React.Component<myProps, any>{
 			}
 
 			return (
-				<tr className={rowObj._id  === this.state.activeDataRow._id  ? 'selected' : 'data-row'} key={rowObj._id} onClick={(event) => this.onClick(rowObj, event)}>
+				<tr className={rowObj.id  === this.state.activeDataRow.id  ? 'selected' : 'data-row'} key={rowObj._id} onClick={(event) => this.onClick(rowObj, event)}>
 					{this.createRowData(rowObj)}
 				</tr>
 			)

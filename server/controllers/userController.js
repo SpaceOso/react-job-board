@@ -25,14 +25,14 @@ module.exports = {
 					lastName: user.lastName,
 					email: user.email,
 					employerId: null,
-					_id: user.id
+					id: user.id
 				};
 
 				let token = jwt.sign(userSignature, process.env.SECRET_KEY, {expiresIn: "1 day"});
-
+				console.log("the token:", token);
 				res.status(201).json({
 					user: userSignature,
-					token
+					token: token
 				});
 			})
 			.catch((error) => {
@@ -45,17 +45,22 @@ module.exports = {
 		console.log('LOAD ON LOGIN ROTUE!!!!!!');
 
 		let token = req.body.token;
+		console.log("did we get a token:", token);
 		jwt.verify(token, process.env.SECRET_KEY, function (err, decoded) {
 
 			if (err) {
+				console.log("there waas an error verifying token");
+				console.log(err);
 				return res.status(401).json({
 					message: "invalid credentials on reload."
 				})
 			}
 
 			if (decoded) {
+				console.log("there was NO ERROR with token reload");
+				console.log(decoded);
 				return JbUser
-					.findById(decoded._id, {
+					.findById(decoded.id, {
 						include: [Employer],
 						plain: true,
 						type: sequelize.QueryTypes.SELECT
@@ -64,7 +69,7 @@ module.exports = {
 							console.log('the response:', response);
 							// console.log("Logcheck for employer:", response.employerId);
 							let user = {
-								_id: response.dataValues.id,
+								id: response.dataValues.id,
 								firstName: response.dataValues.firstName,
 								lastName: response.dataValues.lastName,
 								email: response.dataValues.email,
@@ -110,7 +115,7 @@ module.exports = {
 
 					console.log("we found a user with this info..", userModel.dataValues);
 					let user = {
-						_id: userModel.id,
+						id: userModel.id,
 						firstName: userModel.firstName,
 						lastName: userModel.lastName,
 						email: userModel.email,
@@ -121,12 +126,13 @@ module.exports = {
 
 
 					let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
+					console.log('the token after login:', token);
 					// console.log("Logcheck for employer:", user.employerId);
 					res.status(200).json({
 						user: user,
 						employerId: user.employerId,
 						employer,
-						token: user
+						token: token
 					});
 				}
 			)
@@ -187,16 +193,18 @@ module.exports = {
 							firstName: user[1].firstName,
 							lastName: user[1].lastName,
 							email: user[1].email,
-							_id: user[1].id
+							id: user[1].id
 						};
 
 						let localEmployer = {
 							name: employer.name,
 							logoImg: employer.logoImg,
-							_id: employer.id,
-							applicants: employer.applicants,
+							id: employer.id,
 							jobs: employer.jobs,
-							socialMedia: employer.socialMedia,
+							website: employer.website,
+							twitter: employer.twitter,
+							facebook: employer.facebook,
+							linkedIn: employer.linkedIn,
 							location: employer.location,
 						};
 
@@ -228,31 +236,3 @@ module.exports = {
 			})
 	}
 };
-
-
-/* addEmployer(req, res) {
-		"use strict";
-		console.log("adding employer");
-		return Employer
-			.create({
-				name: req.body.name,
-				location: req.body.location,
-				employerId: req.body.userId
-			})
-			.then((employer) => {
-				JbUser.update({employerId: employer.id},
-					{
-						where: {id: req.body.userId},
-						returning: true,
-						plain: true
-					})
-					.then((user) => {
-						console.log("user has been updated with an employer..", user);
-						res.status(201).send(employer);
-					});
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-
-	},*/

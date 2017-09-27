@@ -12,7 +12,6 @@ module.exports = {
 				employerId: req.body.employerId.id
 			})
 			.then((job) => {
-				console.log(job);
 				res.status(201).send({
 					job
 				});
@@ -25,10 +24,11 @@ module.exports = {
 		console.log("job listed");
 		return Job
 			.findAll({
-				include: [Employer]
+				include: [Employer],
+				order: [['createdAt', 'DESC']]
 			})
 			.then((jobs) => {
-			console.log("the jobs are:", jobs);
+				console.log("the jobs:", jobs);
 				res.status(201).send(jobs);
 			})
 			.catch((error) => res.status(201).send(error));
@@ -36,7 +36,6 @@ module.exports = {
 
 	getById(req, res) {
 		"use strict";
-		console.log("inside looking for id:", req.params.jobId);
 		return Job
 			.findById(req.params.jobId, {
 				include: [{
@@ -46,8 +45,6 @@ module.exports = {
 			.then((job) => {
 				job.Employer.getJobs()
 					.then(employerJobs => {
-						console.log('the jobs within:', employerJobs);
-						console.log("we found a job!!:", job.dataValues);
 						job.dataValues.Employer.dataValues.jobs = employerJobs;
 						res.status(201).send({
 							job: job.dataValues

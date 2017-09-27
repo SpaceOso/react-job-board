@@ -89,7 +89,7 @@ app.use('/uploads', uploads);
 app.use('/jobseeker', jobseeker);
 app.use('/api/jobposts', jobRoutes);
 app.use('/api/register', registerRoute);
-app.use('/api/login',authCheck, loginRoute);
+app.use('/login', loginRoute);
 app.use('/user', authCheck, userRoutes);
 app.use('/employer', authCheck, employerRoutes);
 // app.use('/', appRoutes);

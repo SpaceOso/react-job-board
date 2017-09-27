@@ -137,7 +137,7 @@ router.post('/register', upload.single('file'), function (req, res, next) {
                 }
 
                 if (employer) {
-                    user.employerId = employer._id;
+                    user.employerId = employer.id;
 
                     user.save(function (error, user) {
                         if (error) {
@@ -149,13 +149,13 @@ router.post('/register', upload.single('file'), function (req, res, next) {
                             firstName: user.firstName,
                             lastName: user.lastName,
                             email: user.email,
-                            _id: user._id
+                            id: user.id
                         };
 
                         let localEmployer = {
                             name: employer.name,
                             logoImg: employer.logoImg,
-                            _id: employer._id,
+                            id: employer.id,
                             applicants: employer.applicants,
                             jobs: employer.jobs,
                             socialMedia: employer.socialMedia,

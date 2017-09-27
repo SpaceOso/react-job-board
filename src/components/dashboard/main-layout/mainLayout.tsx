@@ -31,7 +31,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
 						<Route path={`${this.props.match.url}/createjob`}
 						       render={props =>
 							       (<CreateJobComponent
-									       userId={this.props.user._id}
+									       userId={this.props.user.id}
 									       employer={this.props.employer}
 									       siteFetching={this.props.siteFetching}
 									       submitJobPost={this.props.saveJobPost}/>

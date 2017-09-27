@@ -12,7 +12,7 @@ import {
 import {User} from "../types/index";
 
 const defaultState: User = {
-	_id: null,
+	id: null,
 	firstName: null,
 	lastName: null,
 	email: null,

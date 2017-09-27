@@ -16,7 +16,7 @@ let Applicants = require('../models/applicants');
 function returnUserObject(userDoc) {
     "use strict";
     let user = {
-        _id: userDoc._id,
+        id: userDoc.id,
         firstName: userDoc.firstName,
         lastName: userDoc.lastName,
         email: userDoc.email,
@@ -40,7 +40,7 @@ function returnEmployerObject(employerDoc) {
         jobs: employerDoc.jobs,
         socialMedia: employerDoc.socialMedia,
         location: employerDoc.location,
-        _id: employerDoc._id
+        id: employerDoc.id
     };
 
     return employer;
@@ -120,7 +120,7 @@ router.post('/logcheck', function (req, res) {
         }
 
         if (decoded) {
-            findUserById(decoded._id)
+            findUserById(decoded.id)
                 .then(
                     response => {
                         let token = jwt.sign(response.user, process.env.SECRET_KEY, {expiresIn: "2 days"});

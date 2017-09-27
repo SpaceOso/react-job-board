@@ -7,7 +7,7 @@ module.exports = {
     returnUserObject: function(userDoc) {
         "use strict";
         let user = {
-            _id: userDoc._id,
+            id: userDoc.id,
             firstName: userDoc.firstName,
             lastName: userDoc.lastName,
             email: userDoc.email,
@@ -31,7 +31,7 @@ module.exports = {
             jobs: employerDoc.jobs,
             socialMedia: employerDoc.socialMedia,
             location: employerDoc.location,
-            _id: employerDoc._id
+            id: employerDoc.id
         };
 
         return employer;

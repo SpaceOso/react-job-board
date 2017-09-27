@@ -71,7 +71,7 @@ router.get('/:jobId', function (req, res, next) {
         logoImg: req.employerModel.logoImg,
         location: req.employerModel.location,
         socialMedia: req.employerModel.socialMedia,
-        _id: req.employerModel._id,
+        id: req.employerModel.id,
         jobs: req.employerModel.jobs
     };
 
@@ -128,7 +128,7 @@ router.patch('/:jobId', function (req, res, next) {
             //a registered user exists in the DB
             if (applicant) {
 
-                userID = applicant._id;
+                userID = applicant.id;
                 //if this jobID is not in the registered users jobsApplied array
                 //then it means they have not applied to this job
                 if (applicant.jobsApplied.indexOf(req.body.jobID) == -1) {

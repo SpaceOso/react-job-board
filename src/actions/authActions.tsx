@@ -187,7 +187,7 @@ export function logInOnLoad(token) {
 	return dispatch => {
 
 		dispatch(siteFetch());
-		axios.post(`${ROOT_URL}api/login/logcheck`, {token})
+		axios.post(`${ROOT_URL}login/logcheck`, {token})
 			.then((response) => {
 
 				//response contains uer, which is our decoded token
@@ -214,7 +214,7 @@ export function logInOnLoad(token) {
 
 //this will dispatch the users email and password to server for verification
 export function logInUser(user) {
-	console.log("calling logInUser...");
+	console.log("calling logInUser...", user);
 	/*user = {
 		email
 		password
@@ -223,7 +223,7 @@ export function logInUser(user) {
 
 		dispatch(siteFetch());
 
-		axios.post(`${ROOT_URL}api/login`, user)
+		axios.post(`${ROOT_URL}login`, user)
 			.then((response) => {
 				//save token to local storage
 				const token = response.data.token;
@@ -243,8 +243,8 @@ export function logInUser(user) {
 			})
 			.catch((error) => {
 				dispatch(setSiteIdle());
-				console.log("the error returned when logging in:", error.response);
-				dispatch(logInUserError(error.response.data.errorMessage));
+				console.log("the error returned when logging in:", error);
+				dispatch(logInUserError(error));
 
 			})
 	}

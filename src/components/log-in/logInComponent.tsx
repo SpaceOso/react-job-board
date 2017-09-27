@@ -68,7 +68,7 @@ class LogInComponent extends React.Component<MyProps, MyState> {
 
 				<div className="employer-register-Component">
 					{this.props.user.isAuth === true ?
-						<Redirect to={`${'/user/dashboard/'}${this.props.user._id}`}/> : null}
+						<Redirect to={`${'/user/dashboard/'}${this.props.user.id}`}/> : null}
 					<h1>Enter the following information to log in</h1>
 					<h3>{this.props.siteErrors.login !== null ? this.props.siteErrors.login.message : null}</h3>
 					<div>

@@ -68,7 +68,7 @@ export interface AuthUser {
  * @property {(string | null)} error - We currently are not using this //todo make sure if save to remove
  */
 export interface User extends AuthUser {
-	_id: string | null,
+	id: string | null,
 	employerId: string | null,
 	isAuth: boolean | null,
 	isFetching: boolean | null,
