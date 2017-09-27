@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
     console.log("server is in development");
 } else {
     console.log("server is in production");
-    // dbURL = process.env.MONGO_DB;
+    dbURL = process.env.DB_URL;
 }
 
 // mongoose.connect(dbURL);
