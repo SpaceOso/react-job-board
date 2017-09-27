@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A job board app made with React",
   "main": "./src/index",
+  "engines": {
+    "node": "8.6.0"
+  },
   "scripts": {
     "start": "node -r dotenv/config bin/www -w app.js -w server",
     "ricodev": "set NODE_ENV=development&& nodemon  bin/www",

@@ -10,7 +10,7 @@ console.log("the env is:", env);
 // const config= require(`${__dirname}/../config/config.js`)[env]; //env is the property of the config object
 const config= require(`${__dirname}/../config/config.js`)['production']; //env is the property of the config object
 const db = {};
-console.log('CONFIG:', config);
+
 let sequelize;
 sequelize = new Sequelize(
 	// config.database, config.username, config.password, config
