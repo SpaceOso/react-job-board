@@ -1,15 +1,22 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
+
+//rquired for production
 const pg = require('pg');
-pg.defaults.ssl = true;
 const Sequelize = require('sequelize');
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
 console.log("the env is:", env);
-// const config= require(`${__dirname}/../config/config.js`)[env]; //env is the property of the config object
-const config= require(`${__dirname}/../config/config.js`)['production']; //env is the property of the config object
+const config= require(`${__dirname}/../config/config.js`)[env]; //env is the property of the config object
+// const config= require(`${__dirname}/../config/config.js`)['production']; //env is the property of the config object
 const db = {};
+
+console.log(config);
+
+if(env === 'production'){
+	pg.defaults.ssl = true;
+}
 
 let sequelize;
 sequelize = new Sequelize(
@@ -17,16 +24,6 @@ sequelize = new Sequelize(
 	config.database, config.username, config.password, config
 );
 
-/*
-if (config.use_env_variable) {
-	console.log("yes there is an environment variable");
-    sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-    sequelize = new Sequelize(
-        config.database, config.username, config.password, config
-    );
-}
-*/
 
 sequelize
     .authenticate()
