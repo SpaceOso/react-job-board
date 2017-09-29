@@ -1,32 +1,44 @@
+//colors
 $watermelon: #ff3b3f;
-$carbon: #a9a9a9;
+$carbon: #8493A8;
 $sky: #caebf2;
-$siteBackground: #F3F4F5;
+$siteBackground: #E5E5E5;
 $neutral: #efefef;
+$dark: #312C32;
+//inputs
+$inputText: #8493A8;
+$inputError: rgba(255, 16, 0, 0.51);
+$inputTextBorder: #C9D3DF;
+$inputBg: #ECEFF4;
 $panelBg: #FDFDFD;
 $jobTitle: #638ADF;
+
 //$jobTitle: #0089FF;
-$inputText: #8493A8;
 $adminBackground: #4966A5;
 //$adminBackground: #63B7FF;
-$footerBg: #89BDD3;
+$footerBg: #747C92;
 $jobLocation: #ffffff;
 $headers: #EBEFF3;
+$headerFont: #31213D;
+$accentColor: #FF0B0B;
 $white: #ffffff;
 $borders: #8393A7;
-$button: #1455B3;
+$button: #0089FF;
 $buttonActivated: #1CB314;
 $disabled: #dcdcdc;
-$dark: #312C32;
 $testcolor: red;
-$inputError: rgba(255, 16, 0, 0.51);
-$header: #6D7993;
+
+$header: #FFF;
 //$header: #E05915;
 
 $contentPadding: 15px;
 
 @mixin panelShadow() {
-  -webkit-box-shadow: 0px 11px 5px -5px rgba(0, 0, 0, 0.24);
-  -moz-box-shadow: 0px 11px 5px -5px rgba(0, 0, 0, 0.24);
-  box-shadow: 0px 11px 5px -5px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0 17px 27px -13px rgba(182,201,214,1);
+  -moz-box-shadow: 0 17px 27px -13px rgba(182,201,214,1);
+  box-shadow: 0 17px 27px -13px rgba(182,201,214,1);
+}
+
+@mixin panelBorders(){
+  border: 1px solid $borders;
 }

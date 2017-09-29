@@ -158,7 +158,7 @@ class SimpleForm extends React.Component<myProps, any> {
 				<form action="" onSubmit={(event) => this.handleSubmit(event)}>
 					<h1>{this.props.header}</h1>
 					<div>{this.createInputs()}</div>
-					<button>Submit Form</button>
+					<button className="btn-standard">Submit Form</button>
 				</form>
 				{/*<div className="form-error-box">Erorr: Please see errors above.</div>*/}
 			</div>

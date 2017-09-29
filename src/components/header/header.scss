@@ -9,7 +9,8 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: flex-start;
-  color: $white;
+  color: $headerFont;
+  border-bottom: 5px solid $accentColor;
 
   #header-logo{
     margin-left: 23px;
