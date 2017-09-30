@@ -1,11 +1,8 @@
 @import "../../../../styles/variables";
 
-.layout-container{
+.dashboard-home-layout {
+  font-size: 1.6rem;
   display: flex;
-  flex-direction: row;
-  background-color: $white;
-  .dashboard-content{
-    width: 70%;
-    //margin: 0 auto;
-  }
+  width: 100%;
+  height: 100%;
 }

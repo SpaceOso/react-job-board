@@ -21,9 +21,8 @@ interface Props extends RouteComponentProps<any> {
 
 class DashboardMainLayout extends React.Component<Props, any> {
 	render() {
-		console.log("in the mainlayout component with:", this.props.match);
 		return (
-			<div className="layout-container">
+			<div className="dashboard-home-layout">
 				<UserDashboardNavMenu match={this.props.match}/>
 				<div className="dashboard-content">
 					<Switch>
@@ -36,14 +35,6 @@ class DashboardMainLayout extends React.Component<Props, any> {
 									       siteFetching={this.props.siteFetching}
 									       submitJobPost={this.props.saveJobPost}/>
 							       )}/>
-
-						{/*EDIT POSTINGS COMPONENT*/}
-						{/*component={ () => <EditJobsLayout
-								       employer={this.props.employer}
-								       jobs={this.props.employer.jobs}
-								       {...this.props}
-							       />
-						       } />*/}
 						<Route path={`${this.props.match.path}/editpostings`}
 						     render={(RouteComponentProps) => (
 							       <EditJobsLayout

@@ -85,7 +85,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 		}
 
 		return (
-			<div className="jb-dashboard">
+			<div className="dashboard-wrapper">
 				<Switch>
 					{/*REGISTER COMPONENT*/}
 					<Route path={`${this.props.match.path}/register`}
@@ -98,7 +98,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
 					       )}
 					/>
 					{/*DASHBOARD MAIN LAYOUT*/}
-					<Route path={`${this.props.match.path}/home`}
+					<Route path={`${this.props.match.path}`}
 					       render={props => (
 						       <DashboardMainLayout
 							       user={this.props.user}
