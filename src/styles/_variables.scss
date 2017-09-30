@@ -42,3 +42,9 @@ $contentPadding: 15px;
 @mixin panelBorders(){
   border: 1px solid $borders;
 }
+
+@mixin panel(){
+  background-color: $panelBg;
+  @include panelBorders();
+  @include panelShadow();
+}

@@ -11,6 +11,7 @@ import {RouteComponentProps} from "react-router";
 // import EditJobsContainer from '../../dashboard/jobs/editJob/editJobsContainer';
 import "./styles/mainLyout.scss";
 import EditJobsLayout from "../jobs/editJob/editJobsLayout";
+import UserDashboardHome from "../home/userDashboardHome";
 
 interface Props extends RouteComponentProps<any> {
 	user: User,
@@ -22,9 +23,10 @@ interface Props extends RouteComponentProps<any> {
 class DashboardMainLayout extends React.Component<Props, any> {
 	render() {
 		return (
-			<div className="dashboard-home-layout">
+			<div className="dashboard-layout">
+
 				<UserDashboardNavMenu match={this.props.match}/>
-				<div className="dashboard-content">
+				{/*<div className="dashboard-content">*/}
 					<Switch>
 						{/*CREATE JOB COMPONENT*/}
 						<Route path={`${this.props.match.url}/createjob`}
@@ -45,15 +47,22 @@ class DashboardMainLayout extends React.Component<Props, any> {
 						       )}
 						/>
 						{/*APPLICANT LIST COMPONENT*/}
-						<Route path={`${this.props.match.path}`}
+						<Route path={`${this.props.match.path}/applicants`}
 						       render={props =>
 							       (<ApplicantListComponent
 									       user={this.props.user}
 									       employer={this.props.employer}/>
 							       )}/>
+						{/*APPLICANT LIST COMPONENT*/}
+						<Route path={`${this.props.match.path}`}
+						       render={props =>
+							       (<UserDashboardHome
+									       user={this.props.user}
+									       employer={this.props.employer}/>
+							       )}/>
 					</Switch>
 				</div>
-			</div>
+			// </div>
 		)
 	}
 }
