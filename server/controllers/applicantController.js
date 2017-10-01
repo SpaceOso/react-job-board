@@ -7,14 +7,18 @@ module.exports = {
     create(req, res) {
         "use strict";
         console.log("user created");
-        // console.log("user information:", req.body);
+        console.log("user information:", req.body);
         return Applicants
             .create({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
+                firstName: req.body.fName,
+                lastName: req.body.lName,
                 email: req.body.email,
-                phoneNumber: req.body.phoneNumber,
-                jobsApplied: req.body.jobId,
+				homePhone: req.body.homePhone,
+				cellPhone: req.body.cellPhone,
+				resume: req.body.resume,
+				coverLetter: req.body.coverLetter,
+                jobId: req.body.jobId,
+				employerId: req.body.employerId
             })
             .then((applicant) => {
                 console.log('applicant created:', applicant);
