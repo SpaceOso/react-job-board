@@ -9,7 +9,7 @@ import ApplicationComponent from "./application/applicationComponent";
 interface jobPostInfoProps {
 	isFetching: boolean,
 	job: Job
-	addApplicantToJob: (applicantInfo)=>{}
+	addApplicantToJob
 }
 
 

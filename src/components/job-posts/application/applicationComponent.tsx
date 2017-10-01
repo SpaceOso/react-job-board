@@ -15,9 +15,14 @@ class ApplicationComponent extends React.Component<MyProps>{
 	}
 
 	handleApplicationSubmit(data){
-		console.log("this job id:", this.props.jobId);
-		console.log("this job employer:", this.props.employerId);
-		console.log("You have applied to this job!!", data);
+
+		/*We only get the info from the form here. We need to add the employer and jobId info to this.*/
+		let updatedData = {
+			...data,
+			employerId: this.props.employerId,
+			jobId: this.props.jobId
+		};
+		this.props.handleApplicantInfo(updatedData);
 	}
 
 	render(){

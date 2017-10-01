@@ -88,7 +88,8 @@ export function addingApplicantToJob(data){
 export function addApplicantToJob(applicantInfo){
 	return dispatch => {
 		dispatch(fetchingJobs());
-		axios.post(`${ROOT_URL}/api/createapplicant`, applicantInfo)
+		console.log("in the job actions creating applicant with:", applicantInfo);
+		axios.post(`${ROOT_URL}api/createapplicant`, applicantInfo)
 			.then(response => {
 				console.log("The response that we get after we create an applicant...", response);
 				dispatch(doneFetchingJobs());

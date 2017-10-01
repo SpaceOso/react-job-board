@@ -14,7 +14,7 @@ interface jobPostProps extends RouteComponentProps<any> {
 	getJobById: (arg) => {},
 	loadJob: () => {},
 	resetCurrentJob: () => {},
-	addApplicantInfo: (applicantInfo)=>{},
+	addApplicantToJob: (applicantInfo)=>{},
 	currentJobPost: CurrentJobPost
 }
 
@@ -30,15 +30,8 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 	constructor(props) {
 		super(props);
 
-		// this.state = {
-			// jobPostEmployerInfo: {
-			// 	employerLogo: '',
-			// 	employerId: '',
-			// 	employerName: ''
-			// }
-		// };
-
 		this.loadNewJob = this.loadNewJob.bind(this);
+		this.handleJobApplicantInfo = this.handleJobApplicantInfo.bind(this);
 	}
 
 	componentDidMount() {
@@ -54,6 +47,11 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 		this.props.getJobById(jobId);
 	}
 
+	handleJobApplicantInfo(data){
+		console.log("in the job post layout about to add applicant:", data);
+		this.props.addApplicantToJob(data);
+	}
+
 	render() {
 
 		console.log("layout, props.currentEmployer", this.props.currentJobPost.Employer);
@@ -67,7 +65,7 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 					<JobPostInfoComponent
 						job={this.props.currentJobPost}
 						isFetching={this.props.currentJobPost.isFetching}
-						addApplicantToJob={this.props.addApplicantInfo}
+						addApplicantToJob={this.handleJobApplicantInfo}
 					/>
 					<JobPostEmployerInfoComponent employer={this.props.currentJobPost.Employer} loadJob={this.loadNewJob}/>
 				</div>
