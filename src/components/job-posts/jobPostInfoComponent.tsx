@@ -3,6 +3,7 @@ import * as React from 'react';
 //components
 import SpinnerComponent from '../spinners/spinnerComponent';
 import {Job} from "../../types/index";
+import ModalComponent from "../modal/modalComponent";
 
 interface jobPostInfoProps {
 	isFetching: boolean,
@@ -10,7 +11,7 @@ interface jobPostInfoProps {
 }
 
 
-class JobPostInfoComponent extends React.Component<jobPostInfoProps> {
+class JobPostInfoComponent extends React.Component<jobPostInfoProps, any> {
 	constructor(props) {
 		super(props);
 
@@ -32,6 +33,7 @@ class JobPostInfoComponent extends React.Component<jobPostInfoProps> {
 					<div className="job-description-container panel-shadow">
 						<div className="job-description"
 						     dangerouslySetInnerHTML={{__html: this.props.job.description}}></div>
+
 						<button>Apply Now</button>
 					</div>
 				</div>
