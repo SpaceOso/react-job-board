@@ -4,6 +4,7 @@ import SimpleForm from "../../simple-form/simpleForm";
 interface MyProps{
 	jobId: string | null,
 	employerId: string | null,
+	handleApplicantInfo: (applicantInfo)=>{}
 }
 
 class ApplicationComponent extends React.Component<MyProps>{

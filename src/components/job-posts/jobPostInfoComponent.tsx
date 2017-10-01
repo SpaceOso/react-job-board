@@ -9,6 +9,7 @@ import ApplicationComponent from "./application/applicationComponent";
 interface jobPostInfoProps {
 	isFetching: boolean,
 	job: Job
+	addApplicantToJob: (applicantInfo)=>{}
 }
 
 
@@ -37,6 +38,7 @@ class JobPostInfoComponent extends React.Component<jobPostInfoProps, any> {
 						<ApplicationComponent
 							employerId={this.props.job.employerId}
 							jobId={this.props.job.id}
+							handleApplicantInfo={this.props.addApplicantToJob}
 						/>
 						<ModalComponent />
 						<button>Apply Now</button>

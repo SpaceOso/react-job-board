@@ -14,6 +14,7 @@ interface jobPostProps extends RouteComponentProps<any> {
 	getJobById: (arg) => {},
 	loadJob: () => {},
 	resetCurrentJob: () => {},
+	addApplicantInfo: (applicantInfo)=>{},
 	currentJobPost: CurrentJobPost
 }
 
@@ -63,7 +64,11 @@ class JobPostLayout extends React.Component<jobPostProps, MyState> {
 		if(this.props.currentJobPost.Employer.name !== null)	{
 			return (
 				<div className="job-post-container">
-					<JobPostInfoComponent job={this.props.currentJobPost} isFetching={this.props.currentJobPost.isFetching}/>
+					<JobPostInfoComponent
+						job={this.props.currentJobPost}
+						isFetching={this.props.currentJobPost.isFetching}
+						addApplicantToJob={this.props.addApplicantInfo}
+					/>
 					<JobPostEmployerInfoComponent employer={this.props.currentJobPost.Employer} loadJob={this.loadNewJob}/>
 				</div>
 			)

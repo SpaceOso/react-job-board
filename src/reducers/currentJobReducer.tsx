@@ -1,6 +1,7 @@
 import {
 	FIND_JOB_BY_ID,
 	RESET_CURRENT_JOB,
+	DONE_FETCHING,
 	FETCHING_JOBS,
 	SINGLE_JOB_SUCCESS,
 	FETCHING_SINGLE_JOB} from '../actions/jobActions';
@@ -24,6 +25,12 @@ function currentJobPostReducer(state: CurrentJobPost, action): CurrentJobPost{
 			    // currentJob: undefined,
 			    // employer: undefined
 	    	};
+	    case DONE_FETCHING:{
+	    	return {
+			    ...state,
+			    isFetching: false,
+		    }
+	    }
 	    case FETCHING_SINGLE_JOB:
 	    	return {
 	    		...state,
