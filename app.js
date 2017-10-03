@@ -76,9 +76,7 @@ app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers", "Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization");
     next();
 });
-// require('./server/routes')(app);
-// app.use('/uploads', uploads);
-// app.use('/jobseeker', jobseeker);
+
 app.use('/api/jobposts', jobRoutes);
 app.use('/api/register', registerRoute);
 app.use('/login', loginRoute);

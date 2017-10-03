@@ -9,8 +9,8 @@ module.exports = (app) => {
   }));
 
   app.post('/login/logcheck', userController.loadOnLogin);
-  app.post('/api/jobs', jobsController.create);
-  app.post('/api/jobs/list', jobsController.list);
+  // app.post('/api/jobs', jobsController.create);
+  // app.post('/api/jobs/list', jobsController.list);
   app.post('/api/register', userController.create);
   // app.post('/api/createapplicant', applicantController.create);
   app.post('/api/user/addEmployer', userController.addEmployer);

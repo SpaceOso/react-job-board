@@ -36,6 +36,7 @@ module.exports = {
 
 	getById(req, res) {
 		"use strict";
+		console.log("getting job by id..", req.params.jobId);
 		return Job
 			.findById(req.params.jobId, {
 				include: [{
@@ -52,7 +53,10 @@ module.exports = {
 					})
 
 			})
-			.catch((error) => res.status(401).send(error));
+			.catch((error) => {
+				console.log("there was an error...", error);
+				res.status(401).send(error)
+			});
 	}
 };
 

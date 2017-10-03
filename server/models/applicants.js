@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 	);
 
 	Applicants.associate = (models) => {
-		Applicants.belongsTo(models.Job, {foreignKey: 'jobId'});
+		Applicants.belongsToMany(models.Job, {through: 'JobApplications', foreignKey: 'applicantId'});
 	};
 	return Applicants;
 };
