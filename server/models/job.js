@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+			location: {
+				type: DataTypes.JSONB,
+				allowNull: false,
+			},
             description: {
                 type: DataTypes.TEXT,
                 allowNull: false

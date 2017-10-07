@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 	);
 
 	Applicants.associate = (models) => {
+		Applicants.hasMany(models.Notes, {foreignKey: "applicantId"});
 		Applicants.belongsToMany(models.Job, {through: 'JobApplications', foreignKey: 'applicantId'});
 	};
 	return Applicants;

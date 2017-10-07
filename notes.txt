@@ -1,24 +1,77 @@
-current issues:
+what data does the employer need when login in?
+Total job posts
+    applicant count per job post
+    status of jobs
 
-When login in we're not setting up the user in the store
+applicants
+    status of applicants
 
-when we are in dashboard/register and then copy and paste dashboard/home it lets us go there, need to create a check
-to bounce us back
+how should the employer know the status of the jobs?
+Set a status column on each job? or a second table?
 
+job =
+    {
+        title,
+        id,
+        location{
+            city,
+            state,
+            zip
+        },
+        description
+    }
 
-NOTES ABOUT REACT-ROUTER
-If you want to use router props, the interface for the component needs
-to extend RouteComponentProps<any> example can be seen in
+applicant = {
+    id,
+    firstName,
+    lastName,
+    email,
+    homePhone,
+    cellPhone,
+    resume,
+    coverLetter,
+    (hasMany)notes
+}
 
-#loginContainer
-dispatch: loginUser => logInUser();
-    loginUser calls url/login
-    recieves a token
-    setsAuth with that token
-    calls setEmployerAndUser
+jbUser = {
+    id,
+    firstName,
+    lastName,
+    email,
+    password
+}
 
-#userDashboardContainer
-dispatch: submitEmployerRegistration
-    calls url/employer/register
-    sets auth with response.data.token
-    dispatches setEmployerAndUser
+employer = {
+    id,
+    name,
+    location{
+        city,
+        state,
+        zip
+    },
+    logoImg,
+    website,
+    twitter,
+    facebook,
+    linkedIn
+}
+
+jobApplication = {
+    id,
+    applicantId,
+    jobId
+}
+
+notes = {
+    id,
+    date,
+    note,
+    applicantId
+}
+
+applicantNotes = {
+    id,
+    applicantId,
+    noteId
+}
+
