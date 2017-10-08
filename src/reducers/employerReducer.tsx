@@ -37,7 +37,10 @@ function employerReducer(state = defaultState, action): any {
 		case FETCHING_THIS_EMPLOYER_JOBS:
 			return state;
 		case GET_THIS_EMPLOYER_JOBS_SUCCESS:
-			return state;
+			return {
+				...state,
+				jobs: [...action.payload.data]
+			};
 		case EMPLOYER_FETCHING:
 			return {
 				...state,

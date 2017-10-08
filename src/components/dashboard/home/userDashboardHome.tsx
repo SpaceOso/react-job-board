@@ -20,6 +20,12 @@ class UserDashboardHome extends React.Component<MyProps> {
 					<h1>
 						Welcome {this.props.employer.name}
 					</h1>
+					<div>
+						This is where we need to job post updates component
+						<div>
+							<pre>{JSON.stringify(this.props.employer, null, 2)}</pre>
+						</div>
+					</div>
 				</div>
 
 			</div>

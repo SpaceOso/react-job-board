@@ -1,8 +1,7 @@
-const express = require('express');
-const router = express.Router();
-
 const Employer = require('../models').Employer;
 const Job = require('../models').Job;
+const Applicants = require('../models').Applicants;
+const JobApplications = require('../models').JobApplications;
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -22,7 +21,7 @@ module.exports = {
 		return Job
 			.create({
 				title: req.body.title,
-				location:{
+				location: {
 					city: req.body.city,
 					state: req.body.state,
 					zip: req.body.zip
@@ -43,11 +42,16 @@ module.exports = {
 
 	getJobs(req, res) {
 		"use strict";
+		console.log("getting jobs");
+
 		return Employer
-			.findById(req.body.employerId)
+			.findById(req.params.employerId)
 			.then(employer => {
-				return employer.getJobs()
+				return employer.getJobs({
+					include:[Applicants]
+				})
 					.then(jobs => {
+						console.log("the jobs:", jobs);
 						res.status(201).send(jobs);
 					})
 					.catch((error) => {
@@ -56,6 +60,9 @@ module.exports = {
 					})
 
 			})
-			.catch((error) => res.status(400).send(error));
+			.catch((error) => {
+				console.log(error);
+				res.status(400).send(error)
+		});
 	}
 };

@@ -2,7 +2,10 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 
 //actions
-import {submitEmployerRegistration, saveJobPost} from '../../actions/employerDashboardActions';
+import {
+	submitEmployerRegistration, saveJobPost,
+	fetchAllEmployerJobModels
+} from '../../actions/employerDashboardActions';
 
 //styles
 import './userDashboardContainer.scss';
@@ -44,6 +47,7 @@ function mapStateToProps({user, employer, siteFetching}: StoreState ) {
 
 const mapDispatchToProps = (dispatch) => ({
 	saveJobPost: (jobInfo, userId) =>{dispatch(saveJobPost(jobInfo, userId))},
+	fetchEmployerJobs: (employerId) =>{dispatch(fetchAllEmployerJobModels(employerId))},
 	submitEmployerRegistration: (employerData, file: File) =>{dispatch(submitEmployerRegistration(employerData, file))},
 });
 

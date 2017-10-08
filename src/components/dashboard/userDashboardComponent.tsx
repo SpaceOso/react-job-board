@@ -6,12 +6,12 @@ import CompRegisterComponent from "./compRegister/compRegisterComponent";
 import NotFoundComponent from "../not-found/notFoundComponent";
 import {default as DashboardMainLayout} from "./main-layout/mainLayout";
 
-
 //redux
 interface Props extends RouteComponentProps<any> {
 	user: User,
 	employer: Employer,
 	siteFetching: SiteFetching,
+	fetchEmployerJobs: (employerId) => void,
 	saveJobPost: (jobInfo, userId) => {}
 	submitEmployerRegistration: (userData, file) => {}
 }
@@ -38,10 +38,10 @@ class UserDashboardComponent extends React.Component<Props, any> {
 		console.log("inside the dashboard component with employer: ", this.props.employer);
 	}
 
-	/*If the user doesn't have an ID we need them to login again.*/
-	checkForLogInErrors() {
-		return this.props.user.id === null || this.props.user.id === undefined || this.props.user === undefined ?
-			<Redirect to={'/login'}/> : null;
+	componentDidMount(){
+		if(this.props.employer.id !== null){
+			this.props.fetchEmployerJobs(this.props.employer.id);
+		}
 	}
 
 	/**

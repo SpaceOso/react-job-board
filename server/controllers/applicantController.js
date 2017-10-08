@@ -25,7 +25,6 @@ module.exports = {
 				//TODO need to add applicant to JobApplications
 				return Job.findById(req.body.jobId)
 					.then(job => {
-						console.log("addinga pplicant..");
 						return job.addApplicant(applicant)
 							.then((JobApplication) => {
 								console.log("applicant added..", JobApplication);
