@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Employer, SiteFetching, User} from "../../types/index";
-import {Redirect, Route, RouteComponentProps, Switch} from "react-router";
+import { Route, RouteComponentProps, Switch} from "react-router";
 import SpinnerComponent from "../spinners/spinnerComponent";
 import CompRegisterComponent from "./compRegister/compRegisterComponent";
 import NotFoundComponent from "../not-found/notFoundComponent";
@@ -30,12 +30,9 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	constructor(props) {
 		super(props);
 
-		// this.checkForLogInErrors = this.checkForLogInErrors.bind(this);
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
-		this.checkForEmployer = this.checkForEmployer.bind(this);
 		this.submitJobPost = this.submitJobPost.bind(this);
 
-		console.log("inside the dashboard component with employer: ", this.props.employer);
 	}
 
 	componentDidMount(){
@@ -54,18 +51,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 		this.props.submitEmployerRegistration(userData, file);
 	};
 
-	/**
-	 * This will check to see if the user property has an employer listed.
-	 * If it does not we will display the employer registration component.
-	 * Otherwise we will load up the main layout
-	 */
-	checkForEmployer() {
-		if (this.props.siteFetching.isFetching === false) {
-			return this.props.user.employerId === null ? <Redirect to={`${this.props.match.url}/register`}/> :
-				<Redirect to={`${this.props.match.url}/home`} push/>;
-		}
-	}
-
 	/* This will handle sending the job post information to the back end.*/
 	submitJobPost(jobPost) {
 		this.props.saveJobPost(jobPost, this.props.user.id);
@@ -78,11 +63,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 			return <SpinnerComponent/>
 		}
 
-		if (this.props.user.id === null) {
-			login = <Redirect to={'/login'}/>;
-		} else {
-			login = this.checkForEmployer();
-		}
 
 		return (
 			<div className="dashboard-wrapper">
