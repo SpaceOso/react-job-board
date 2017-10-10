@@ -124,6 +124,7 @@ export function logOutUser() {
 	return dispatch => {
 		dispatch(clearEmployer());
 		dispatch(clearUser());
+		dispatch(setSiteIdle());
 	}
 }
 
