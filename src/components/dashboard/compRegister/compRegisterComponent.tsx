@@ -213,7 +213,7 @@ class CompRegisterComponent extends React.Component<compRegisterProps, MyState> 
 		}
 
 		if(this.props.user.employerId !== null){
-			return <Redirect to={`${'/user/dashboard/'}${this.props.user.id} `} />
+			return <Redirect to={`${'/user/dashboard/'}${this.props.user.id}/home `} />
 		}
 
 		return this.renderRegisterForm();

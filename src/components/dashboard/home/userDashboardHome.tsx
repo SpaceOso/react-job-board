@@ -3,6 +3,9 @@ import * as React from 'react';
 //styles
 import './userDashboardHome.scss';
 
+import SpinnerComponent from "../../spinners/spinnerComponent";
+import JobPostUpdatesComponent from "../jobs/job-post-updates/jobPostUpdatesComponent";
+
 interface MyProps {
 	user,
 	employer
@@ -14,6 +17,10 @@ class UserDashboardHome extends React.Component<MyProps> {
 	}
 
 	render() {
+		if(this.props.employer.isFeteching === true){
+			return <SpinnerComponent />
+		}
+
 		return (
 			<div className='dashboard-home'>
 				<div className='header'>
@@ -22,6 +29,7 @@ class UserDashboardHome extends React.Component<MyProps> {
 					</h1>
 					<div>
 						This is where we need to job post updates component
+						<JobPostUpdatesComponent jobs={this.props.employer.jobs}/>
 						<div>
 							<pre>{JSON.stringify(this.props.employer, null, 2)}</pre>
 						</div>

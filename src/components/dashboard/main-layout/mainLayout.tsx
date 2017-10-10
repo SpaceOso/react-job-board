@@ -16,7 +16,6 @@ import UserDashboardHome from "../home/userDashboardHome";
 interface Props extends RouteComponentProps<any> {
 	user: User,
 	employer: Employer,
-	siteFetching: SiteFetching,
 	saveJobPost: (jobInfo, userId) => {}
 }
 
@@ -34,7 +33,6 @@ class DashboardMainLayout extends React.Component<Props, any> {
 							       (<CreateJobComponent
 									       userId={this.props.user.id}
 									       employer={this.props.employer}
-									       siteFetching={this.props.siteFetching}
 									       submitJobPost={this.props.saveJobPost}/>
 							       )}/>
 						<Route path={`${this.props.match.path}/editpostings`}

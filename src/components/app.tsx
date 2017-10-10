@@ -12,7 +12,7 @@ import LoginContainer from './log-in/loginContainer';
 import NotFoundComponent from './not-found/notFoundComponent';
 
 //actions
-import {Employer, SiteErrors, User} from "../types/index";
+import {Employer, SiteErrors, SiteFetching, User} from "../types/index";
 import {logInOnLoad} from "../actions/authActions";
 import ProtectedComponent from "./dashboard/protected/protectedComponent";
 import TestComponent from "./tests/testComponent";
@@ -22,6 +22,7 @@ interface Props {
 	logOutUser: () => {},
 	user: User,
 	employer: Employer,
+	siteFetching: SiteFetching,
 	siteErrors: SiteErrors
 }
 

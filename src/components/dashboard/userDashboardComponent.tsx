@@ -30,13 +30,19 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			fetching: true
+		};
+
 		this.handleEmployerRegistration = this.handleEmployerRegistration.bind(this);
 		this.submitJobPost = this.submitJobPost.bind(this);
 
 	}
 
-	componentDidMount(){
+	componentWillMount(){
 		if(this.props.employer.id !== null){
+			console.log("we will mount, we are looking up the job posts");
+			console.log(this.props);
 			this.props.fetchEmployerJobs(this.props.employer.id);
 		}
 	}
@@ -57,12 +63,16 @@ class UserDashboardComponent extends React.Component<Props, any> {
 	}
 
 	render() {
-		let login: any = null;
 
-		if (this.props.siteFetching.isFetching === true) {
-			return <SpinnerComponent/>
+		if(this.state.isFetching === true){
+			console.log('employer is fetching so showing spinner');
+			if(this.props.employer.isFetching !== true){
+				this.setState({fetching: false});
+			}
+			return <SpinnerComponent/>;
+		} else {
+			console.log("employer is not fetching...");
 		}
-
 
 		return (
 			<div className="dashboard-wrapper">
@@ -83,7 +93,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 						       <DashboardMainLayout
 							       user={this.props.user}
 							       employer={this.props.employer}
-							       siteFetching={this.props.siteFetching}
 							       saveJobPost={this.props.saveJobPost}
 							       {...props}
 						       />)
@@ -91,7 +100,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 					/>
 					<NotFoundComponent/>
 				</Switch>
-				{login}
 			</div>
 		)
 	}

@@ -8,7 +8,7 @@ import TinymceComponent from "../../../tinymce/tinymceComponent";
 
 interface MyProps {
 	submitJobPost,
-	siteFetching: SiteFetching,
+	// siteFetching: SiteFetching,
 	employer,
 	userId
 }
