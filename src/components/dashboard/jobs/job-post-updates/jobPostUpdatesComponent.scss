@@ -1,0 +1,7 @@
+@import "../../../../styles/variables";
+
+.job-post-updates{
+  background-color: $panelBg;
+  padding: 20px 18px;
+  @include panel();
+}

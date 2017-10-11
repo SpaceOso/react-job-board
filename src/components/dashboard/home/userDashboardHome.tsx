@@ -25,10 +25,10 @@ class UserDashboardHome extends React.Component<MyProps> {
 			<div className='dashboard-home'>
 				<div className='header'>
 					<h1>
-						Welcome {this.props.employer.name}
+						Welcome {this.props.user.firstName} - {this.props.employer.name}
 					</h1>
 					<div>
-						This is where we need to job post updates component
+						Job Post Updates
 						<JobPostUpdatesComponent jobs={this.props.employer.jobs}/>
 						<div>
 							<pre>{JSON.stringify(this.props.employer, null, 2)}</pre>
