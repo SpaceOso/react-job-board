@@ -7,6 +7,12 @@ export interface Job {
 	title: string,
 	description: string,
 	employerId: string,
+	location:{
+		address: string,
+		city: string,
+		state: string,
+		zip: string
+	},
 	Employer: {
 		id: string,
 		name: string,
@@ -82,7 +88,7 @@ export interface Employer {
 		address: string,
 		city: string,
 		state: string,
-		zip: number
+		zip: string
 	},
 	logoImg: string,
 	website: string,
@@ -95,6 +101,24 @@ export interface Employer {
 
 export interface CurrentJobPost extends Job, Employer {
 	isFetching: boolean
+}
+
+export interface IApplicants {
+	id: string,
+	firstName: string,
+	lastName: string,
+	email: string,
+	homePhone: string,
+	cellPhone: string,
+	resume: null,
+	coverLetter: string,
+	createdAt: string,
+	updatedAt: string,
+	jobId: string
+}
+
+export interface IEmployerJobView extends Job{
+	Applicants: IApplicants[]
 }
 
 export interface privateEmployerView extends Employer {

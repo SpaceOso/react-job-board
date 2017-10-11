@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {Job} from "../../../../types/index";
+import {IEmployerJobView, Job} from "../../../../types/index";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
 
 //styles
 import './jobPostUpdatesComponent.scss';
 
 interface IProps {
-	jobs: Job[],
+	jobs: IEmployerJobView[],
 }
 
 
@@ -34,7 +34,10 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
 		}
 
 		return this.props.jobs.map((job, index) => {
-			return <li key={job.id ? job.id : index}>{job.title} - {job.location.city},{job.location.state}</li>
+			return <li key={job.id ? job.id : index}>
+				{job.title} - {job.location.city},{job.location.state}
+				<span>{job.Applicants.length} - applicants</span>
+				</li>
 		})
 	}
 

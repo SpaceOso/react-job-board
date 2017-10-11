@@ -19,7 +19,7 @@ const defaultState: Employer = {
 		address: '',
 		city: '',
 		state: '',
-		zip: 0
+		zip: '0'
 	},
 	logoImg: '',
 	website: '',
