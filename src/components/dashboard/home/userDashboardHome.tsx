@@ -17,25 +17,19 @@ class UserDashboardHome extends React.Component<MyProps> {
 	}
 
 	render() {
-		if(this.props.employer.isFeteching === true){
-			return <SpinnerComponent />
+		if (this.props.employer.isFeteching === true) {
+			return <SpinnerComponent/>
 		}
 
 		return (
 			<div className='dashboard-home'>
-				<div className='header'>
-					<h1>
-						Welcome {this.props.user.firstName} - {this.props.employer.name}
-					</h1>
-					<div>
-						Job Post Updates
-						<JobPostUpdatesComponent jobs={this.props.employer.jobs}/>
-						<div>
-							<pre>{JSON.stringify(this.props.employer, null, 2)}</pre>
-						</div>
-					</div>
+				<h1>
+					Welcome {this.props.user.firstName} - {this.props.employer.name}
+				</h1>
+				<JobPostUpdatesComponent jobs={this.props.employer.jobs}/>
+				<div>
+					<pre>{JSON.stringify(this.props.employer, null, 2)}</pre>
 				</div>
-
 			</div>
 		)
 	}

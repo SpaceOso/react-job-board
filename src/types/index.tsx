@@ -103,7 +103,7 @@ export interface CurrentJobPost extends Job, Employer {
 	isFetching: boolean
 }
 
-export interface IApplicants {
+export interface Applicants {
 	id: string,
 	firstName: string,
 	lastName: string,
@@ -117,12 +117,8 @@ export interface IApplicants {
 	jobId: string
 }
 
-export interface IEmployerJobView extends Job{
-	Applicants: IApplicants[]
-}
-
-export interface privateEmployerView extends Employer {
-	applicants: User[]
+export interface EmployerJobView extends Job{
+	Applicants: Applicants[]
 }
 
 export interface StoreState {

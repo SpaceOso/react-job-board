@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {IEmployerJobView, Job} from "../../../../types/index";
+import {EmployerJobView, Job} from "../../../../types/index";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
 
 //styles
 import './jobPostUpdatesComponent.scss';
 
 interface IProps {
-	jobs: IEmployerJobView[],
+	jobs: EmployerJobView[],
 }
 
 
@@ -27,19 +27,21 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
 			)
 		}
 
-		console.log(this.props);
 
 		if(this.props.jobs.length === 0){
 			return this.createEmptyMessageComponent();
 		}
 
-		return this.props.jobs.map((job, index) => {
-			return <li key={job.id ? job.id : index}>
-				{job.title} - {job.location.city},{job.location.state}
-				<span>{job.Applicants.length} - applicants</span>
-				</li>
-		})
+		let jobList = this.props.jobs.map((job, index) => {
+			return <li key={job.id ? job.id : index} className={'job-update-item'}>
+				<h3 className={'job-title'}>{job.title}</h3> - {job.location.city}, {job.location.state}
+				<span className={'float-right'}>{job.Applicants.length} applicants</span>
+			</li>
+		});
+
+		return (<ul className={'job-post-update-list'}>{jobList}</ul>)
 	}
+
 
 	createEmptyMessageComponent(){
 		return(
@@ -51,8 +53,9 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
 
 	render() {
 		return (
-			<div className={'job-post-updates'}>
-				<div>
+			<div className={'job-post-updates-container'}>
+				<h1>Job Post Updates</h1>
+				<div className={'job-post-updates'}>
 					{this.createList()}
 					{/*<pre>{JSON.stringify(this.props.jobs, null, 2)}</pre>*/}
 				</div>
