@@ -30,6 +30,12 @@ module.exports = (sequelize, DataTypes) => {
 		resume: {
 			type: DataTypes.STRING,
 		},
+		state:{
+			type: DataTypes.STRING,
+		},
+		city:{
+			type: DataTypes.STRING,
+		},
 		coverLetter: {
 			type: DataTypes.STRING
 		}},

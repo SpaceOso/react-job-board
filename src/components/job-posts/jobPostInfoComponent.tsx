@@ -38,6 +38,7 @@ class JobPostInfoComponent extends React.Component<jobPostInfoProps, any> {
 						<ApplicationComponent
 							employerId={this.props.job.employerId}
 							jobId={this.props.job.id}
+							jobTitle={this.props.job.title}
 							handleApplicantInfo={this.props.addApplicantToJob}
 						/>
 						<ModalComponent />

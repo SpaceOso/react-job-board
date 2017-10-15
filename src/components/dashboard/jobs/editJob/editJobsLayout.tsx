@@ -46,9 +46,6 @@ class EditJobsLayout extends React.Component<MyProps, myState> {
 	}
 
 	handleJobEdit() {
-		console.log("inside the edtJobsLayout handeling job edit");
-		console.log("Job being edited is: ", this.state.selectedJob!.id);
-		console.log('WHAT THE HELL IS HAPPENING!!!');
 		this.setState({
 			editingJob: true
 		});

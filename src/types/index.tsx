@@ -95,7 +95,7 @@ export interface Employer {
 	twitter: string,
 	facebook: string,
 	linkedin: string,
-	jobs: Job[] | null,
+	jobs: EmployerJobView[] | null,
 	isFetching: boolean | null
 }
 
@@ -110,6 +110,8 @@ export interface Applicants {
 	email: string,
 	homePhone: string,
 	cellPhone: string,
+	city: string,
+	state: string,
 	resume: null,
 	coverLetter: string,
 	createdAt: string,

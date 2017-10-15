@@ -14,6 +14,8 @@ module.exports = {
 				firstName: req.body.fName,
 				lastName: req.body.lName,
 				email: req.body.email,
+				state: req.body.state,
+				city: req.body.city,
 				homePhone: req.body.homePhone,
 				cellPhone: req.body.cellPhone,
 				resume: req.body.resume,
