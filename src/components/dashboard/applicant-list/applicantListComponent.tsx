@@ -6,6 +6,7 @@ import DataTable from "../../data-table/dataTable";
 
 //styles
 import './applicantListComponent.scss';
+import DropDownComponent from "../../drop-down/dropDownComponent";
 
 interface MyProps{
 	user: User,
@@ -77,6 +78,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 
 		return(
 			<div className={'dashboard-applicant-section'}>
+				<DropDownComponent/>
 				{this.createList()}
 				<DataTable rowData={this.props.employer!.jobs![0].Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
 				<pre>{JSON.stringify(this.props.employer.jobs, null, 2)}</pre>
