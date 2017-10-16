@@ -1,11 +1,9 @@
 @import '../../../styles/variables';
+@import '../dashboardStyles';
 
 
 .dashboard-home{
-  width: 100%;
-  height: 100%;
-  padding: 1% 3%;
-  text-align: left;
+  @include dashboard-main-section();
 
   .home-logo{
     max-width: 56px;

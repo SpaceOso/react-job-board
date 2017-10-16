@@ -57,21 +57,18 @@ class DataTable extends React.Component<myProps, any>{
 	createRowData(rowObj){
 		return this.props.columnInfo.map((column , value) =>{
 			if(column.join !== undefined && column.join === true){
-				console.log("this column is a join:", column);
-				console.log(column.properties[0], column.properties[1]);
 
 				let combinedDataArr: string[] = [];
 
 				for(let i = 0; i < column.properties.length; i++){
 
-					if(column.properties[i].includes('.')){
-						console.log("this property is nested:", column.properties[i]);
+					//TODO need to implement this, this checks to see if the property is nested 'location.city'
+				/*	if(column.properties[i].includes('.')){
 						let dividedString = column.properties[i].split('.');
 						let key = dividedString[0];
 						let value = dividedString[1];
-						console.log('rowObjs', rowObj);
 						combinedDataArr.push(rowObj[key]);
-					}
+					}*/
 
 					combinedDataArr.push(rowObj[column.properties[i]]);
 				}

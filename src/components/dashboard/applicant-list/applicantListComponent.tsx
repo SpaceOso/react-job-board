@@ -4,6 +4,9 @@ import {IMG_URL} from "../../../utils/utils";
 import SpinnerComponent from "../../spinners/spinnerComponent";
 import DataTable from "../../data-table/dataTable";
 
+//styles
+import './applicantListComponent.scss';
+
 interface MyProps{
 	user: User,
 	employer: Employer
@@ -60,6 +63,12 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 				property: 'email', header: 'Email'
 			},
 			{
+				property: 'status', header: 'Status'
+			},
+			{
+				property: 'interest', header: 'Interest'
+			},
+			{
 				join:true,
 				properties: ['city', 'state'],
 				header: 'Location'
@@ -67,7 +76,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 		];
 
 		return(
-			<div>
+			<div className={'dashboard-applicant-section'}>
 				{this.createList()}
 				<DataTable rowData={this.props.employer!.jobs![0].Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
 				<pre>{JSON.stringify(this.props.employer.jobs, null, 2)}</pre>

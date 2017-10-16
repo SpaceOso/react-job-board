@@ -113,6 +113,8 @@ export interface Applicants {
 	city: string,
 	state: string,
 	resume: null,
+	status: string,
+	reviewed: boolean
 	coverLetter: string,
 	createdAt: string,
 	updatedAt: string,
