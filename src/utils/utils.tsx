@@ -9,7 +9,7 @@ declare let process : {
 };
 
 let URL_Test = 'https://mr-job-board.herokuapp.com/';
-let set_IMG_URL = 'http://localhost:3000/public/assets/uploads/';
+let set_IMG_URL = 'http://localhost:3000/public/uploads/images/';
 let set_LOCAL_URL = 'http://localhost:3000/';
 
 if(process.env.NODE_ENV === "development"){
