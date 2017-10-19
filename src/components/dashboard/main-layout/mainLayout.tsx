@@ -12,6 +12,7 @@ import {RouteComponentProps} from "react-router";
 import "./styles/mainLyout.scss";
 import EditJobsLayout from "../jobs/editJob/editJobsLayout";
 import UserDashboardHome from "../home/userDashboardHome";
+import ApplicantViewComponent from "../applicant-view/applicantViewComponent";
 
 interface Props extends RouteComponentProps<any> {
 	user: User,
@@ -26,40 +27,45 @@ class DashboardMainLayout extends React.Component<Props, any> {
 
 				<UserDashboardNavMenu match={this.props.match}/>
 				{/*<div className="dashboard-content">*/}
-					<Switch>
-						{/*CREATE JOB COMPONENT*/}
-						<Route path={`${this.props.match.url}/createjob`}
-						       render={props =>
-							       (<CreateJobComponent
-									       userId={this.props.user.id}
-									       employer={this.props.employer}
-									       submitJobPost={this.props.saveJobPost}/>
-							       )}/>
-						<Route path={`${this.props.match.path}/editpostings`}
-						     render={(RouteComponentProps) => (
-							       <EditJobsLayout
+				<Switch>
+					{/*CREATE JOB COMPONENT*/}
+					<Route path={`${this.props.match.url}/createjob`}
+					       render={props =>
+						       (<CreateJobComponent
+								       userId={this.props.user.id}
 								       employer={this.props.employer}
-								       jobs={this.props.employer.jobs}
-								       {...RouteComponentProps}
-							       />
-						       )}
-						/>
-						{/*APPLICANT LIST COMPONENT*/}
-						<Route path={`${this.props.match.path}/applicants`}
-						       render={props =>
-							       (<ApplicantListComponent
-									       user={this.props.user}
-									       employer={this.props.employer}/>
-							       )}/>
-						{/*APPLICANT LIST COMPONENT*/}
-						<Route path={`${this.props.match.path}`}
-						       render={props =>
-							       (<UserDashboardHome
-									       user={this.props.user}
-									       employer={this.props.employer}/>
-							       )}/>
-					</Switch>
-				</div>
+								       submitJobPost={this.props.saveJobPost}/>
+						       )}/>
+					<Route path={`${this.props.match.path}/editpostings`}
+					       render={(RouteComponentProps) => (
+						       <EditJobsLayout
+							       employer={this.props.employer}
+							       jobs={this.props.employer.jobs}
+							       {...RouteComponentProps}
+						       />
+					       )}
+					/>
+					{/*APPLICANT LIST COMPONENT*/}
+					<Route path={`${this.props.match.path}/applicants/:applicantId`}
+					       render={props =>
+						       (<ApplicantViewComponent/>)}/>
+					{/*APPLICANT LIST COMPONENT*/}
+					<Route path={`${this.props.match.path}/applicants`}
+					       render={props =>
+						       (<ApplicantListComponent
+								       {...props}
+								       user={this.props.user}
+								       employer={this.props.employer}/>
+						       )}/>
+					{/*APPLICANT LIST COMPONENT*/}
+					<Route path={`${this.props.match.path}`}
+					       render={props =>
+						       (<UserDashboardHome
+								       user={this.props.user}
+								       employer={this.props.employer}/>
+						       )}/>
+				</Switch>
+			</div>
 			// </div>
 		)
 	}

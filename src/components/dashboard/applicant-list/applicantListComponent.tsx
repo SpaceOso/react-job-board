@@ -7,8 +7,9 @@ import DataTable from "../../data-table/dataTable";
 //styles
 import './applicantListComponent.scss';
 import DropDownComponent from "../../drop-down/dropDownComponent";
+import {Redirect, RouteComponentProps} from "react-router";
 
-interface MyProps{
+interface MyProps extends RouteComponentProps<any>{
 	user: User,
 	employer: Employer
 }
@@ -21,7 +22,7 @@ interface MyState{
 class ApplicantListComponent extends React.Component<MyProps, MyState>{
 	state: MyState = {
 		jobs: [],
-		applicant: {},
+		applicant: null,
 	};
 
 	constructor(props){
@@ -49,7 +50,8 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 
 	onClick(selectedApplicant){
 		console.log("selectedApplicant", selectedApplicant);
-		this.setState({applicant: selectedApplicant})
+		this.setState({applicant: selectedApplicant});
+		return (<Redirect to={`${this.props.match.url}/${selectedApplicant.id}`}/>)
 	}
 
 	render(){
@@ -82,6 +84,8 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 				{this.createList()}
 				<DataTable rowData={this.props.employer!.jobs![0].Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
 				<pre>{JSON.stringify(this.props.employer.jobs, null, 2)}</pre>
+				}
+				{this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null }
 			</div>
 		)
 	}
