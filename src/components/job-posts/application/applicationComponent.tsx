@@ -3,6 +3,7 @@ import SimpleForm from "../../simple-form/simpleForm";
 
 interface MyProps{
 	jobId: string | null,
+	jobTitle: string | null,
 	employerId: string | null,
 	handleApplicantInfo: (applicantInfo)=>{}
 }
@@ -28,7 +29,7 @@ class ApplicationComponent extends React.Component<MyProps>{
 	render(){
 		return(
 			<div>
-				<SimpleForm header={"Apply to this job"}
+				<SimpleForm header={`Apply to ${this.props.jobTitle}`}
 				            inputs={[
 					            {
 						            label: 'First Name',
@@ -50,6 +51,20 @@ class ApplicationComponent extends React.Component<MyProps>{
 						            type: 'text',
 						            placeHolder: 'email',
 						            id: 'email'
+					            },
+					            {
+					            	label: 'State',
+						            required: true,
+						            type: 'text',
+						            placeHolder: 'state',
+						            id: 'state'
+					            },
+					            {
+					            	label: 'City',
+						            required: true,
+						            type: 'text',
+						            placeHolder: 'city',
+						            id: 'city'
 					            },
 					            {
 						            label: 'Home Phone',

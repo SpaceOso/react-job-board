@@ -9,8 +9,6 @@ interface myProps{
 	handleClick: any
 	totalRows: number,
 	pages?: any[],
-
-
 }
 
 class DataTable extends React.Component<myProps, any>{
@@ -58,6 +56,26 @@ class DataTable extends React.Component<myProps, any>{
 
 	createRowData(rowObj){
 		return this.props.columnInfo.map((column , value) =>{
+			if(column.join !== undefined && column.join === true){
+
+				let combinedDataArr: string[] = [];
+
+				for(let i = 0; i < column.properties.length; i++){
+
+					//TODO need to implement this, this checks to see if the property is nested 'location.city'
+				/*	if(column.properties[i].includes('.')){
+						let dividedString = column.properties[i].split('.');
+						let key = dividedString[0];
+						let value = dividedString[1];
+						combinedDataArr.push(rowObj[key]);
+					}*/
+
+					combinedDataArr.push(rowObj[column.properties[i]]);
+				}
+				return <td  key={`${rowObj.id}${value}`}>{combinedDataArr.join(' ')}</td>
+
+			}
+
 			return <td  key={`${rowObj.id}${value}`}>{rowObj[column.property]}</td>
 		})
 	}
@@ -79,8 +97,6 @@ class DataTable extends React.Component<myProps, any>{
 		} else {
 			this.setState({currentPage: newPage});
 		}
-
-
 	}
 
 	onClick(dataObj, event){
@@ -102,7 +118,7 @@ class DataTable extends React.Component<myProps, any>{
 			}
 
 			return (
-				<tr className={rowObj.id  === this.state.activeDataRow.id  ? 'selected' : 'data-row'} key={rowObj._id} onClick={(event) => this.onClick(rowObj, event)}>
+				<tr className={rowObj.id  === this.state.activeDataRow.id  ? 'selected' : 'data-row'} key={rowObj.id} onClick={(event) => this.onClick(rowObj, event)}>
 					{this.createRowData(rowObj)}
 				</tr>
 			)

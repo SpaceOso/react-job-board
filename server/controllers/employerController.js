@@ -1,56 +1,68 @@
-const express = require('express');
-const router = express.Router();
-
 const Employer = require('../models').Employer;
 const Job = require('../models').Job;
+const Applicants = require('../models').Applicants;
+const JobApplications = require('../models').JobApplications;
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-    create(req, res){
-        "use strict";
-        console.log("job created");
-        return Employer
-            .create({
-                title: req.body.title,
-            })
-            .then((job) => res.status(201).send(job))
-            .catch((error) => res.status(400).send(error))
-    },
-
-	createJob(req, res){
-    	"use strict";
+	create(req, res) {
 		"use strict";
-		console.log("inside the job creation route");
+		console.log("job created");
+		return Employer
+			.create({
+				title: req.body.title,
+			})
+			.then((job) => res.status(201).send(job))
+			.catch((error) => res.status(400).send(error))
+	},
+
+	createJob(req, res) {
+		"use strict";
 		return Job
 			.create({
 				title: req.body.title,
+				location: {
+					city: req.body.city,
+					state: req.body.state,
+					zip: req.body.zip
+				},
 				description: req.body.description,
 				employerId: req.body.employerId.id
 			})
 			.then((job) => {
-				console.log(job);
 				res.status(201).send({
 					job
 				});
 			})
-			.catch((error) => res.status(400).send(error))
+			.catch((error) => {
+				// console.log(error);
+				res.status(400).send(error)
+			})
 	},
 
-    getJobs(req, res){
-        "use strict";
-        return Employer
-            .findById(req.body.employerId)
-            .then(employer => {
-                return employer.getJobs()
-                    .then(jobs => {
-                        res.status(201).send(jobs);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        res.status(400).send(error);
-                    })
+	getJobs(req, res) {
+		"use strict";
+		console.log("getting jobs");
 
-            })
-            .catch((error) => res.status(400).send(error));
-    }
+		return Employer
+			.findById(req.params.employerId)
+			.then(employer => {
+				return employer.getJobs({
+					include:[Applicants]
+				})
+					.then(jobs => {
+						console.log("the jobs:", jobs);
+						res.status(201).send(jobs);
+					})
+					.catch((error) => {
+						console.log(error);
+						res.status(400).send(error);
+					})
+
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(400).send(error)
+		});
+	}
 };

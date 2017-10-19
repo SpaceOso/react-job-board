@@ -28,10 +28,14 @@ module.exports = {
 				order: [['createdAt', 'DESC']]
 			})
 			.then((jobs) => {
+				console.log("WE FOUND ALL THE JOBS");
 				console.log("the jobs:", jobs);
 				res.status(201).send(jobs);
 			})
-			.catch((error) => res.status(201).send(error));
+			.catch((error) => {
+				console.log(error);
+				res.status(201).send(error)
+			});
 	},
 
 	getById(req, res) {

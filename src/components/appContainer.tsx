@@ -14,10 +14,11 @@ const mapDispatchToProps = (dispatch) =>({
 
 
 // function mapStateToProps(state : StoreState){
-function mapStateToProps({user, employer, siteErrors} : StoreState){
+function mapStateToProps({user, employer, siteErrors, siteFetching} : StoreState){
 	return{
 		user,
 		employer,
+		siteFetching,
 		siteErrors
 	}
 }

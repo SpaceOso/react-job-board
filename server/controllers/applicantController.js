@@ -14,6 +14,8 @@ module.exports = {
 				firstName: req.body.fName,
 				lastName: req.body.lName,
 				email: req.body.email,
+				state: req.body.state,
+				city: req.body.city,
 				homePhone: req.body.homePhone,
 				cellPhone: req.body.cellPhone,
 				resume: req.body.resume,
@@ -25,7 +27,6 @@ module.exports = {
 				//TODO need to add applicant to JobApplications
 				return Job.findById(req.body.jobId)
 					.then(job => {
-						console.log("addinga pplicant..");
 						return job.addApplicant(applicant)
 							.then((JobApplication) => {
 								console.log("applicant added..", JobApplication);

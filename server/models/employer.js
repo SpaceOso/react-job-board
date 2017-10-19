@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     Employer.associate = (models) => {
         Employer.hasMany(models.JbUser, {foreignKey: "employerId", as:'users'});
 		Employer.hasMany(models.Job, {foreignKey: 'employerId', as:'jobs'});
+		Employer.hasMany(models.JobApplications, {foreignKey: 'employerId', as:'jobApplicants'});
     };
 
     return Employer;

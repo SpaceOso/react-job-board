@@ -66,7 +66,7 @@ class UserRegisterComponent extends React.Component<registerComponent, registerC
 
 	redirectToDashboard() {
 		return (
-			<Redirect to={`/user/dashboard/${this.props.user.id}`} push/>
+			<Redirect to={`/user/dashboard/${this.props.user.id}/register`} push/>
 		)
 	}
 

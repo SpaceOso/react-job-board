@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
 	);
 
 	JobApplications.associate = (models) => {
+		JobApplications.belongsTo(models.Job, {foreignKey: 'jobId'});
+		JobApplications.belongsTo(models.Applicants, {foreignKey: 'applicantId'});
 	};
 	return JobApplications;
 };

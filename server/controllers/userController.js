@@ -8,7 +8,6 @@ const sequelize = require('sequelize');
 module.exports = {
 	create(req, res) {
 		"use strict";
-		console.log("user created");
 		// console.log("user information:", req.body);
 		return JbUser
 			.create({
@@ -18,7 +17,6 @@ module.exports = {
 				password: req.body.password
 			})
 			.then((user) => {
-				console.log("user created:", user);
 				//TODO need to set up proper secret key
 				let userSignature = {
 					firstName: user.firstName,
@@ -29,7 +27,6 @@ module.exports = {
 				};
 
 				let token = jwt.sign(userSignature, process.env.SECRET_KEY, {expiresIn: "1 day"});
-				console.log("the token:", token);
 				res.status(201).json({
 					user: userSignature,
 					token: token
@@ -42,23 +39,17 @@ module.exports = {
 
 	loadOnLogin(req, res) {
 		"use strict";
-		console.log('LOAD ON LOGIN ROTUE!!!!!!');
 
 		let token = req.body.token;
-		console.log("did we get a token:", token);
 		jwt.verify(token, process.env.SECRET_KEY, function (err, decoded) {
 
 			if (err) {
-				console.log("there waas an error verifying token");
-				console.log(err);
 				return res.status(401).json({
 					message: "invalid credentials on reload."
 				})
 			}
 
 			if (decoded) {
-				console.log("there was NO ERROR with token reload");
-				console.log(decoded);
 				return JbUser
 					.findById(decoded.id, {
 						include: [Employer],
@@ -66,8 +57,6 @@ module.exports = {
 						type: sequelize.QueryTypes.SELECT
 					})
 					.then((response) => {
-							console.log('the response:', response);
-							// console.log("Logcheck for employer:", response.employerId);
 							let user = {
 								id: response.dataValues.id,
 								firstName: response.dataValues.firstName,
@@ -76,7 +65,11 @@ module.exports = {
 								employerId: response.dataValues.employerId === undefined ? null : response.dataValues.employerId
 							};
 
-							let employer = {...response.Employer.dataValues};
+							let employer = null;
+
+							if(response.Employer !== null){
+								employer = {...response.Employer.dataValues};
+							}
 
 							let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
 
@@ -95,7 +88,6 @@ module.exports = {
 
 	login(req, res) {
 		"use strict";
-		console.log('LOGIN ROUTE!!!!!!!!!!');
 		return JbUser
 			.find({
 				where: {
@@ -104,7 +96,6 @@ module.exports = {
 				include:[Employer]
 			})
 			.then((userModel) => {
-					// console.log('the response:', userModel);
 					if (!userModel) {
 						return Promise.reject("There was no user found.");
 					}
@@ -113,7 +104,6 @@ module.exports = {
 						return Promise.reject("No matching user information found.");
 					}
 
-					console.log("we found a user with this info..", userModel.dataValues);
 					let user = {
 						id: userModel.id,
 						firstName: userModel.firstName,
@@ -122,12 +112,14 @@ module.exports = {
 						employerId: userModel.employerId === undefined ? null : userModel.employerId
 					};
 
-					let employer = {...userModel.Employer.dataValues};
+					let employer = null;
+
+					if(userModel.Employer !== null){
+						employer = {...userModel.Employer.dataValues};
+					}
 
 
 					let token = jwt.sign(user, process.env.SECRET_KEY, {expiresIn: "2 days"});
-					console.log('the token after login:', token);
-					// console.log("Logcheck for employer:", user.employerId);
 					res.status(200).json({
 						user: user,
 						employerId: user.employerId,

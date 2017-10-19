@@ -2,9 +2,17 @@ import * as React from 'react';
 
 import "./simpleForm.scss";
 
+interface SFInput{
+	label: string,
+	required: boolean,
+	type: string,
+	placeHolder: string,
+	id: string
+}
+
 interface myProps {
 	header: string,
-	inputs: any[],
+	inputs: SFInput[],
 	submitBtnText: string,
 	verifyInputs: string[] | null,
 	onSubmitCB: (any) => void

@@ -49,11 +49,18 @@ export function editingJobPost() {
 }
 
 export function fetchAllEmployerJobModels(employerId) {
+	console.log("fetching jobs:", employerId);
 	return dispatch => {
+		console.log("YOU HAVE REQUESTED TO OBTAIN ALL THE JOBS OF THE EMPLOYER WITH", employerId);
+		dispatch(siteFetch());
 		dispatch(employerFetching());
 
-		axios.get(`${ROOT_URL}employer/dashboard/${employerId}/getAllJobs`)
-			.then()
+		axios.get(`${ROOT_URL}employer/${employerId}/get-jobs`)
+			.then((jobs) =>{
+				console.log("we have the jobs!", jobs);
+				dispatch(getThisEmployerJobsSuccess(jobs));
+				dispatch(employerIdle());
+			})
 	}
 }
 
