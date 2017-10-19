@@ -1,6 +1,12 @@
 import * as React from 'react';
+import {Applicants} from "../../../types/index";
 
-class ApplicantViewComponent extends React.Component{
+interface MyProps{
+	applicant: Applicants | null
+}
+
+
+class ApplicantViewComponent extends React.Component<MyProps>{
 	constructor(props){
 		super(props);
 
@@ -10,6 +16,9 @@ class ApplicantViewComponent extends React.Component{
 		return(
 			<div>
 				I'm the applicant view component;
+
+				{this.props.applicant !== null ? this.props.applicant.firstName : null}
+
 			</div>
 		)
 	}

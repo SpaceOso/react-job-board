@@ -6,7 +6,7 @@ import UserDashboardNavMenu from "../nav-menu/userDashboardNavMenu";
 import CreateJobComponent from '../jobs/createJob/createJobComponent';
 //styles
 import ApplicantListComponent from "../applicant-list/applicantListComponent";
-import {Employer, SiteFetching, User} from "../../../types/index";
+import {Applicants, Employer, SiteFetching, User} from "../../../types/index";
 import {RouteComponentProps} from "react-router";
 // import EditJobsContainer from '../../dashboard/jobs/editJob/editJobsContainer';
 import "./styles/mainLyout.scss";
@@ -20,13 +20,30 @@ interface Props extends RouteComponentProps<any> {
 	saveJobPost: (jobInfo, userId) => {}
 }
 
+interface State{
+	selectedApplicant: Applicants | null
+}
+
 class DashboardMainLayout extends React.Component<Props, any> {
+	state: State = {
+		selectedApplicant: null,
+	};
+
+	constructor(props){
+		super(props);
+
+		this.handleApplicantSelect = this.handleApplicantSelect.bind(this);
+	}
+
+	handleApplicantSelect(selectedApplicant){
+		this.setState({selectedApplicant: selectedApplicant});
+	}
+
+
 	render() {
 		return (
 			<div className="dashboard-layout">
-
 				<UserDashboardNavMenu match={this.props.match}/>
-				{/*<div className="dashboard-content">*/}
 				<Switch>
 					{/*CREATE JOB COMPONENT*/}
 					<Route path={`${this.props.match.url}/createjob`}
@@ -48,12 +65,15 @@ class DashboardMainLayout extends React.Component<Props, any> {
 					{/*APPLICANT LIST COMPONENT*/}
 					<Route path={`${this.props.match.path}/applicants/:applicantId`}
 					       render={props =>
-						       (<ApplicantViewComponent/>)}/>
+						       (<ApplicantViewComponent
+							       applicant={this.state.selectedApplicant}
+						       />)}/>
 					{/*APPLICANT LIST COMPONENT*/}
 					<Route path={`${this.props.match.path}/applicants`}
 					       render={props =>
 						       (<ApplicantListComponent
 								       {...props}
+								       handleApplicantSelect={this.handleApplicantSelect}
 								       user={this.props.user}
 								       employer={this.props.employer}/>
 						       )}/>
@@ -66,7 +86,6 @@ class DashboardMainLayout extends React.Component<Props, any> {
 						       )}/>
 				</Switch>
 			</div>
-			// </div>
 		)
 	}
 }

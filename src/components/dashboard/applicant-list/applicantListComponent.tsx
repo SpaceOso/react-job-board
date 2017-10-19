@@ -11,7 +11,8 @@ import {Redirect, RouteComponentProps} from "react-router";
 
 interface MyProps extends RouteComponentProps<any>{
 	user: User,
-	employer: Employer
+	employer: Employer,
+	handleApplicantSelect: (applicant) =>void
 }
 
 interface MyState{
@@ -51,7 +52,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 	onClick(selectedApplicant){
 		console.log("selectedApplicant", selectedApplicant);
 		this.setState({applicant: selectedApplicant});
-		return (<Redirect to={`${this.props.match.url}/${selectedApplicant.id}`}/>)
+		this.props.handleApplicantSelect(selectedApplicant);
 	}
 
 	render(){
