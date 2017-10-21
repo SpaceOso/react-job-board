@@ -1,21 +1,21 @@
 import * as React from 'react';
 import SimpleForm from "../../simple-form/simpleForm";
 
-interface MyProps{
+interface MyProps {
 	jobId: string | null,
 	jobTitle: string | null,
 	employerId: string | null,
-	handleApplicantInfo: (applicantInfo)=>{}
+	handleApplicantInfo: (applicantInfo) => {}
 }
 
-class ApplicationComponent extends React.Component<MyProps>{
-	constructor(props){
+class ApplicationComponent extends React.Component<MyProps> {
+	constructor(props) {
 		super(props);
 
 		this.handleApplicationSubmit = this.handleApplicationSubmit.bind(this);
 	}
 
-	handleApplicationSubmit(data){
+	handleApplicationSubmit(data) {
 
 		/*We only get the info from the form here. We need to add the employer and jobId info to this.*/
 		let updatedData = {
@@ -26,8 +26,8 @@ class ApplicationComponent extends React.Component<MyProps>{
 		this.props.handleApplicantInfo(updatedData);
 	}
 
-	render(){
-		return(
+	render() {
+		return (
 			<div>
 				<SimpleForm header={`Apply to ${this.props.jobTitle}`}
 				            inputs={[
@@ -39,32 +39,39 @@ class ApplicationComponent extends React.Component<MyProps>{
 						            id: 'fName'
 					            },
 					            {
-					            	label: 'Last Name',
+						            label: 'Last Name',
 						            required: true,
 						            type: 'text',
 						            placeHolder: 'Last Name',
 						            id: 'lName',
 					            },
 					            {
-					            	label: 'email',
+						            label: 'email',
 						            required: true,
 						            type: 'text',
 						            placeHolder: 'email',
 						            id: 'email'
 					            },
 					            {
-					            	label: 'State',
+						            label: 'State',
 						            required: true,
 						            type: 'text',
 						            placeHolder: 'state',
 						            id: 'state'
 					            },
 					            {
-					            	label: 'City',
+						            label: 'City',
 						            required: true,
 						            type: 'text',
 						            placeHolder: 'city',
 						            id: 'city'
+					            },
+					            {
+						            label: 'Zip',
+						            required: true,
+						            type: 'text',
+						            placeHolder: 'zip',
+						            id: 'zip'
 					            },
 					            {
 						            label: 'Home Phone',
@@ -81,11 +88,39 @@ class ApplicationComponent extends React.Component<MyProps>{
 						            id: 'cellPhone'
 					            },
 					            {
-					            	label: 'Cover Letter',
+						            label: 'website',
+						            required: false,
+						            type: 'text',
+						            placeHolder: 'www.yourwebsite.com',
+						            id: 'website',
+					            },
+					            {
+						            label: 'linkedIn',
+						            required: false,
+						            type: 'text',
+						            placeHolder: 'www.yourlinkedin.com',
+						            id: 'linkedin',
+					            },
+					            {
+					            	label: 'github',
+						            required: false,
+						            type: 'text',
+						            placeHolder: 'www.yourgithub.com',
+						            id: 'github'
+					            },
+					            {
+					            	label: 'Resume',
+						            required: true,
+						            type: 'text',
+						            placeHolder: 'upload your resume',
+						            id: 'resume'
+					            },
+					            {
+						            label: 'Cover Letter',
 						            required: false,
 						            type: 'text',
 						            placeHolder: '',
-						            id:'coverLetter'
+						            id: 'coverLetter'
 					            }
 				            ]}
 				            submitBtnText={'Submit Application'}

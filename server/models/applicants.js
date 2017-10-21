@@ -28,8 +28,14 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			resume: {
-				type: DataTypes.STRING,
+			website:{
+				type: DataTypes.STRING
+			},
+			linkedin:{
+				type: DataTypes.STRING
+			},
+			github:{
+				type: DataTypes.STRING
 			},
 			state: {
 				type: DataTypes.STRING,
@@ -37,7 +43,13 @@ module.exports = (sequelize, DataTypes) => {
 			city: {
 				type: DataTypes.STRING,
 			},
+			zip:{
+				type: DataTypes.STRING,
+			},
 			coverLetter: {
+				type: DataTypes.STRING
+			},
+			resume: {
 				type: DataTypes.STRING
 			},
 			status: {

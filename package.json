@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node -r dotenv/config bin/www -w app.js -w server",
-    "ricodev": "set NODE_ENV=development&& nodemon  bin/www",
+    "server": "set NODE_ENV=development&& nodemon  bin/www",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
     "build": "webpack --env.dev=prod",
     "build:dev": "set NODE_ENV=development webpack --env.dev --hot",

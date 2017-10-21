@@ -112,6 +112,7 @@ export interface Applicants {
 	cellPhone: string,
 	city: string,
 	state: string,
+	zip: string,
 	resume: null,
 	status: string,
 	reviewed: boolean

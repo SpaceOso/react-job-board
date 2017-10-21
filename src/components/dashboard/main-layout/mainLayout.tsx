@@ -12,7 +12,7 @@ import {RouteComponentProps} from "react-router";
 import "./styles/mainLyout.scss";
 import EditJobsLayout from "../jobs/editJob/editJobsLayout";
 import UserDashboardHome from "../home/userDashboardHome";
-import ApplicantViewComponent from "../applicant-view/applicantViewComponent";
+import ApplicantViewContainer from "../applicant-view/applicantViewContainer";
 
 interface Props extends RouteComponentProps<any> {
 	user: User,
@@ -65,7 +65,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
 					{/*APPLICANT LIST COMPONENT*/}
 					<Route path={`${this.props.match.path}/applicants/:applicantId`}
 					       render={props =>
-						       (<ApplicantViewComponent
+						       (<ApplicantViewContainer
 							       applicant={this.state.selectedApplicant}
 						       />)}/>
 					{/*APPLICANT LIST COMPONENT*/}
