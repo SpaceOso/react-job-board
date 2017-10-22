@@ -6,6 +6,7 @@ import './userDashboardHome.scss';
 import SpinnerComponent from "../../spinners/spinnerComponent";
 import JobPostUpdatesComponent from "../jobs/job-post-updates/jobPostUpdatesComponent";
 import {IMG_URL} from "../../../utils/utils";
+import {EmployerJobView} from "../../../types/index";
 
 interface MyProps {
 	user,

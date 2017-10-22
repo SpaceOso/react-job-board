@@ -19,16 +19,7 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
 	}
 
 	createList() {
-		if(this.props.jobs === null || this.props.jobs === undefined){
-			return(
-				<div>
-					<SpinnerComponent />
-				</div>
-			)
-		}
-
-
-		if(this.props.jobs.length === 0){
+		if(this.props.jobs === null || this.props.jobs === undefined || this.props.jobs.length <= 0){
 			return this.createEmptyMessageComponent();
 		}
 
