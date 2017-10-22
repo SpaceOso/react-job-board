@@ -114,6 +114,9 @@ export interface Applicants {
 	state: string,
 	zip: string,
 	resume: null,
+	website: string | null,
+	linkedin: string | null,
+	github: string | null,
 	status: string,
 	reviewed: boolean
 	coverLetter: string,
