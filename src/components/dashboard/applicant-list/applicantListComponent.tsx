@@ -33,29 +33,6 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 	}
 
 	createList(){
-		if(this.props.employer.jobs === null || this.props.employer.jobs === undefined || this.props.employer.jobs.length <= 0){
-			return(
-				<div>
-					Sorry you don't have any jobs to display applicants for.
-				</div>
-			)
-		}
-
-		return(
-			<div>
-				<h1>Candidates for {this.props.employer.jobs[0].title} - {this.props.employer.jobs[0].location.city}</h1>
-				You have jobs but working on displaying applicants right now.
-			</div>
-		)
-	}
-
-	onClick(selectedApplicant){
-		console.log("selectedApplicant", selectedApplicant);
-		this.setState({applicant: selectedApplicant});
-		this.props.handleApplicantSelect(selectedApplicant);
-	}
-
-	render(){
 		const dataInfo = [
 			{
 				join: true,
@@ -79,13 +56,36 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 			}
 		];
 
+		if(this.props.employer.jobs === null || this.props.employer.jobs === undefined || this.props.employer.jobs.length <= 0){
+			return(
+				<div>
+					Sorry you don't have any jobs to display applicants for.
+				</div>
+			)
+		}
+
+		return(
+			<div>
+				<h1>Candidates for {this.props.employer.jobs[0].title} - {this.props.employer.jobs[0].location.city}</h1>
+				<DataTable rowData={this.props.employer.jobs![0].Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
+			</div>
+		)
+	}
+
+	onClick(selectedApplicant){
+		console.log("selectedApplicant", selectedApplicant);
+		this.setState({applicant: selectedApplicant});
+		this.props.handleApplicantSelect(selectedApplicant);
+	}
+
+	render(){
+
+
 		return(
 			<div className={'dashboard-applicant-section'}>
 				<DropDownComponent/>
 				{this.createList()}
-				<DataTable rowData={this.props.employer!.jobs![0].Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
 				<pre>{JSON.stringify(this.props.employer.jobs, null, 2)}</pre>
-				}
 				{this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null }
 			</div>
 		)
