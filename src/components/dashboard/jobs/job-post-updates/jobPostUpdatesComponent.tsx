@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {EmployerJobView, Job} from "../../../../types/index";
-import SpinnerComponent from "../../../spinners/spinnerComponent";
+import {EmployerJobView} from "../../../../types/index";
 
 //styles
 import './jobPostUpdatesComponent.scss';
@@ -48,7 +47,6 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
 				<h1>Job Post Updates</h1>
 				<div className={'job-post-updates'}>
 					{this.createList()}
-					{/*<pre>{JSON.stringify(this.props.jobs, null, 2)}</pre>*/}
 				</div>
 			</div>
 		)
