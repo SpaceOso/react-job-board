@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {EMPLOYER_FETCHING, EMPLOYER_IDLE, ROOT_URL} from './index';
+import {EDITING_JOB_POST_SUCCESS, EMPLOYER_FETCHING, EMPLOYER_IDLE, ROOT_URL} from './index';
 import {fetchingJobs} from "./jobActions";
 import {Employer} from "../types/index";
 import {setEmployerAndUser, setSiteIdle, siteFetch} from "./authActions";
@@ -9,7 +9,6 @@ export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
 export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
 export const REGISTER_EMPLOYER_SUCCESS = "REGISTER_EMPLOYER_SUCCESS";
 export const EDITING_JOB_POST = "EDITING_JOB_POST";
-export const EDITING_JOB_POST_SUCCESS = "EDITING_JOB_POST_SUCCESS";
 
 /*What are some of the actions you expect the dashboard to require?
  * Get all jobs
@@ -56,7 +55,7 @@ export function fetchAllEmployerJobModels(employerId) {
 		dispatch(employerFetching());
 
 		axios.get(`${ROOT_URL}employer/${employerId}/get-jobs`)
-			.then((jobs) =>{
+			.then((jobs) => {
 				console.log("we have the jobs!", jobs);
 				dispatch(getThisEmployerJobsSuccess(jobs));
 				dispatch(employerIdle());
@@ -65,6 +64,7 @@ export function fetchAllEmployerJobModels(employerId) {
 }
 
 export function editingJobPostSuccess(jobPost) {
+	console.log("will be dispatching editingJobPostSucces:", jobPost);
 	return {
 		type: EDITING_JOB_POST_SUCCESS,
 		payload: jobPost
@@ -96,15 +96,13 @@ export function saveJobPost(jobPostInfo, userId) {
 
 		dispatch(employerFetching());
 
-		console.log('TRYING TO SAVE A JOB POST!!!!!!');
-		console.log("with this data:", jobPostInfo);
 		axios.post(`${ROOT_URL}employer/createJob`, jobPostInfo)
 			.then((response) => {
-			console.log('in here trying to create a job', response);
-				dispatch(editingJobPostSuccess(response.data.jobPost));
-				dispatch(employerIdle());
+				dispatch(editingJobPostSuccess(response.data.job));
+				dispatch(setSiteIdle());
 			})
 			.catch((error) => {
+				console.log(error);
 				//TODO need to add an error handlers
 				dispatch(setSiteIdle());
 			});

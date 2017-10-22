@@ -10,7 +10,7 @@ import {
 } from '../actions/authActions';
 
 import {Employer, Job} from "../types/index";
-import {EMPLOYER_FETCHING, EMPLOYER_IDLE} from "../actions/index";
+import {EDITING_JOB_POST_SUCCESS, EMPLOYER_FETCHING, EMPLOYER_IDLE} from "../actions/index";
 
 const defaultState: Employer = {
 	id: null,
@@ -40,6 +40,25 @@ function employerReducer(state = defaultState, action): any {
 			return {
 				...state,
 				jobs: [...action.payload.data]
+			};
+		case EDITING_JOB_POST_SUCCESS:
+			let newArr;
+			if(state.jobs !== null){
+				console.log("state.jobs was not null");
+				newArr = state.jobs.slice();
+				newArr.push(action.payload);
+			} else {
+				console.log('state.jobs WAS null');
+				newArr = [];
+				newArr.push(action.payload);
+			}
+
+			console.log('newArr:', newArr);
+
+			return{
+				...state,
+				jobs:[...newArr],
+				isFetching: false,
 			};
 		case EMPLOYER_FETCHING:
 			return {

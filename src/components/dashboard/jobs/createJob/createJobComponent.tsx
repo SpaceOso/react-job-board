@@ -3,12 +3,10 @@ import * as React from 'react';
 //utils
 import {setFormState} from "../../../../utils/utils";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
-import {SiteFetching} from "../../../../types/index";
 import TinymceComponent from "../../../tinymce/tinymceComponent";
 
 interface MyProps {
 	submitJobPost,
-	// siteFetching: SiteFetching,
 	employer,
 	userId
 }
@@ -67,7 +65,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
 	};
 
 	handleJobDescriptionChange(content) {
-		console.log("setting job description content with:", content);
+		// console.log("setting job description content with:", content);
 		this.setState({description: content});
 	}
 
