@@ -65,7 +65,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
 	};
 
 	handleJobDescriptionChange(content) {
-		console.log("setting job description content with:", content);
+		// console.log("setting job description content with:", content);
 		this.setState({description: content});
 	}
 
