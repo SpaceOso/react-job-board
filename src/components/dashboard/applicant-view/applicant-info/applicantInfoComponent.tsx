@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {Applicants} from "../../../../types/index";
+import {ROOT_URL} from "../../../../actions/index";
+import {IMG_URL, LOCAL_URL} from "../../../../utils/utils";
 
 interface MyProps {
 	applicant: Applicants
@@ -14,25 +16,34 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 
 
 	createSocialLinks() {
-		let applicantLinks: any[] = [];
-		const socialLinksites = [{link:'github', icon: 'icon-github'}, 'linkedin', 'website'];
+		const socialLinksites = [
+			{
+				link: 'github',
+				icon: 'icon-github.svg'
+			},
+			{
+				link: 'linkedin',
+				icon: 'icon-linkedin.svg'
+			},
+			{
+				link: 'website',
+				icon: 'icon-web.svg'
+			}];
 
-		socialLinksites.map((social, key) => {
+		const socialLinks = socialLinksites.map((social, key) => {
 			let link = social.link.toString();
-			if(this.props.applicant[link] !== null){
-				// applicantLinks.push()
+			if (this.props.applicant[link] !== null && this.props.applicant[link].length > 0) {
+				return (
+					<li key={key}>
+						<a href={this.props.applicant[link]}>
+							<img src={`${LOCAL_URL}${require(`../../../../assets/images/${social.icon}`)}`} alt="link"/>
+						</a>
+					</li>
+				)
 			}
 		});
 
-		applicantLinks.push(this.props.applicant.website !== null ? this.props.applicant.website : '');
-		applicantLinks.push(this.props.applicant.linkedin !== null ? this.props.applicant.linkedin : '');
-		applicantLinks.push(this.props.applicant.github !== null ? this.props.applicant.github : '');
-
-		const socialLinks = applicantLinks.map((social, key) => {
-			return <li key={key}>{social.link}</li>
-		});
-
-		return <ul>{socialLinks}</ul>
+		return (<ul>{socialLinks}</ul>)
 	}
 
 	render() {
@@ -49,7 +60,7 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 					<p>{applicantAddress}</p>
 					<p>{applicantPhone}</p>
 					<p>{applicantEmail}</p>
-					{this.createSocialLinks()}
+					<ul>{this.createSocialLinks()}</ul>
 				</div>
 			</div>
 		)
