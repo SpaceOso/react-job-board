@@ -75,6 +75,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
 								       {...props}
 								       handleApplicantSelect={this.handleApplicantSelect}
 								       user={this.props.user}
+								       jobs={this.props.employer.jobs}
 								       employer={this.props.employer}/>
 						       )}/>
 					{/*APPLICANT LIST COMPONENT*/}

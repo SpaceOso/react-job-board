@@ -11,18 +11,21 @@ import {Redirect, RouteComponentProps} from "react-router";
 
 interface MyProps extends RouteComponentProps<any>{
 	user: User,
+	jobs: EmployerJobView[] | null,
 	employer: Employer,
 	handleApplicantSelect: (applicant) =>void
 }
 
 interface MyState{
-	jobs: EmployerJobView[],
+	jobs: EmployerJobView[] | null,
+	currentJob: EmployerJobView | null,
 	applicant: any
 }
 
 class ApplicantListComponent extends React.Component<MyProps, MyState>{
 	state: MyState = {
-		jobs: [],
+		jobs: this.props.jobs,
+		currentJob: null,
 		applicant: null,
 	};
 
@@ -30,6 +33,13 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 		super(props);
 
 		this.onClick = this.onClick.bind(this);
+	}
+
+	componentWillMount(){
+		if(this.props.employer.jobs !== null && this.props.employer.jobs.length > 0){
+			//adds the first job to state
+			this.setState({currentJob: this.props.employer.jobs[0]})
+		}
 	}
 
 	createList(){
@@ -56,7 +66,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 			}
 		];
 
-		if(this.props.employer.jobs === null || this.props.employer.jobs === undefined || this.props.employer.jobs.length <= 0){
+		if(this.state.currentJob === null){
 			return(
 				<div>
 					Sorry you don't have any jobs to display applicants for.
@@ -64,10 +74,18 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 			)
 		}
 
+		if(this.state.currentJob.Applicants.length <= 0){
+			return(
+				<div>
+					Sorry your current job doesn't have any applicants
+				</div>
+			)
+		}
+
 		return(
 			<div>
-				<h1>Candidates for {this.props.employer.jobs[0].title} - {this.props.employer.jobs[0].location.city}</h1>
-				<DataTable rowData={this.props.employer.jobs![0].Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
+				<h1>Candidates for {this.state.currentJob.title} - {this.state.currentJob.location.city}</h1>
+				<DataTable rowData={this.state.currentJob.Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
 			</div>
 		)
 	}
