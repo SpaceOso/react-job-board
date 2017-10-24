@@ -55,6 +55,7 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 		const applicantAddress = `${applicant.city}, ${applicant.state}, ${applicant.zip}`;
 		const applicantEmail = this.props.applicant.email;
 		const applicantPhone = this.props.applicant.cellPhone;
+		const applicantResume = this.props.applicant.resume;
 
 		return (
 			<div className={'applicant-info-component'}>
@@ -80,14 +81,14 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 						</select>
 					</div>
 					<div className={'applicant-links'}>
-						<button>View Resume</button>
-						<button>View Cover Letter</button>
-						<button>Download</button>
+						<button className={'btn-standard'}>View Resume</button>
+						<button className={'btn-standard'}>View Cover Letter</button>
+						<button className={'btn-standard'}>Download</button>
 					</div>
 				</div>
-				<div>
-					resume viewer
-				</div>
+				{applicantResume !== null ? <div dangerouslySetInnerHTML={{__html: applicantResume}}>
+				</div> : <div>Click to view resume</div>}
+
 			</div>
 		)
 	}
