@@ -11,16 +11,48 @@ interface MyProps {
 	applicant: Applicants
 }
 
-class ApplicantInfoComponent extends React.Component<MyProps> {
+interface MyState{
+	reviewStatus: string,
+	interestStatus: string,
+	statusUpdated: boolean,
+}
+
+class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			reviewStatus: 'needs-review',
+			interestStatus: 'needs-review',
+			statusUpdated: false
+		};
+
 		this.createSocialLinks = this.createSocialLinks.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.saveStatusUpdate = this.saveStatusUpdate.bind(this);
 	}
 
+	handleChange(event){
+		this.setState({
+			[event.target.id]: event.target.value,
+			statusUpdated: true
+		});
+	}
+
+	saveStatusUpdate(event){
+		console.log("saving status updates:");
+		const statusUpdate = {
+			interestStatus: this.state.interestStatus,
+			reviewStatus: this.state.reviewStatus
+		};
+
+		this.setState({statusUpdated: false});
+
+		console.log(statusUpdate);
+	}
 
 	createSocialLinks() {
-		const socialLinksites = [
+		const socialSites = [
 			{
 				link: 'github',
 				icon: 'icon-github.svg'
@@ -34,7 +66,7 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 				icon: 'icon-web.svg'
 			}];
 
-		const socialLinks = socialLinksites.map((social, key) => {
+		const socialLinks = socialSites.map((social, key) => {
 			let link = social.link.toString();
 			if (this.props.applicant[link] !== null && this.props.applicant[link].length > 0) {
 				return (
@@ -69,16 +101,18 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 					</div>
 					<div className={'applicant-status'}>
 						<h1>Status:</h1>
-						<select name="status" id="status">
+						<select value={this.state.reviewStatus} onChange={this.handleChange} id='reviewStatus'>
 							<option value="reviewed">Reviewed</option>
-							<option value="reviewed">Needs Review</option>
+							<option value="needs-review" >Needs Review</option>
 						</select>
 						<h1>Interest:</h1>
-						<select name="interest" id="interest">
-							<option value="interested">interested</option>
-							<option value="maybe">maybe</option>
-							<option value="no-interest">no interest</option>
+						<select value={this.state.interestStatus} onChange={this.handleChange} id='interestStatus'>
+							<option value="interested">Interested</option>
+							<option value="needs-review">Needs Review</option>
+							<option value="maybe">Maybe</option>
+							<option value="no-interest">No interest</option>
 						</select>
+						{this.state.statusUpdated !== false ? <button className={'btn-standard'} onClick={this.saveStatusUpdate}>Save Changes</button> : null}
 					</div>
 					<div className={'applicant-links'}>
 						<button className={'btn-standard'}>View Resume</button>
