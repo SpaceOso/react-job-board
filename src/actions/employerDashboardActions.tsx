@@ -152,3 +152,10 @@ export function submitEmployerRegistration(employerInfo, file: File) {
 			.catch((error) => console.log(error))
 	}
 }
+
+
+export function saveApplicantStatus(employerInfo, applicantInfo){
+	return dispatch => {
+		console.log("saving application status with:", employerInfo, applicantInfo);
+	}
+}

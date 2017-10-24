@@ -1,9 +1,13 @@
 import * as React from 'react';
-import {Applicants} from "../../../types/index";
+import {Applicants, StoreState} from "../../../types/index";
 import SpinnerComponent from "../../spinners/spinnerComponent";
 import ApplicantInfoComponent from "./applicant-info/applicantInfoComponent";
 
 import './applicantViewContainer.scss';
+import {
+	fetchAllEmployerJobModels, saveJobPost,
+	submitEmployerRegistration
+} from "../../../actions/employerDashboardActions";
 
 interface MyProps{
 	applicant: Applicants | null
@@ -24,5 +28,18 @@ class ApplicantViewContainer extends React.Component<MyProps>{
 		)
 	}
 }
+
+// function mapStateToProps({user, employer}: StoreState, {...props} ) {
+function mapStateToProps({user, employer, siteFetching}: StoreState ) {
+	return {
+		user,
+		employer,
+		siteFetching
+	}
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	updateApplicantInfo: (dispatch) => {dispatch()}
+});
 
 export default ApplicantViewContainer;
