@@ -1,0 +1,45 @@
+@import "../../../../styles/variables";
+
+.applicant-info-component {
+  text-align: left;
+  @include panel();
+  padding: 1%;
+
+  .applicant-info{
+    width: 100%;
+  }
+
+  .applicant-details{
+    display: inline-block;
+    p{
+      margin: 5px;
+    }
+  }
+
+  .applicant-links{
+    width: 100%;
+  }
+
+  .applicant-status{
+    display: inline-block;
+    float: right;
+    h1{
+      display: inline-block;
+    }
+  }
+
+  .social-links {
+    text-align: left;
+    margin: 10px 0;
+    padding: 0;
+    li {
+      list-style-type: none;
+      display: inline-block;
+      margin: 0 20px 0 0;
+    }
+
+    img {
+      width: 32px;
+    }
+  }
+}

@@ -3,6 +3,10 @@ import {Applicants} from "../../../../types/index";
 import {ROOT_URL} from "../../../../actions/index";
 import {IMG_URL, LOCAL_URL} from "../../../../utils/utils";
 
+//styles
+import './applicantInfoComponent.scss';
+
+
 interface MyProps {
 	applicant: Applicants
 }
@@ -34,7 +38,7 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 			let link = social.link.toString();
 			if (this.props.applicant[link] !== null && this.props.applicant[link].length > 0) {
 				return (
-					<li key={key}>
+					<li key={key} >
 						<a href={this.props.applicant[link]}>
 							<img src={`${LOCAL_URL}${require(`../../../../assets/images/${social.icon}`)}`} alt="link"/>
 						</a>
@@ -43,7 +47,7 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 			}
 		});
 
-		return (<ul>{socialLinks}</ul>)
+		return (<ul className={'social-links'}>{socialLinks}</ul>)
 	}
 
 	render() {
@@ -53,14 +57,36 @@ class ApplicantInfoComponent extends React.Component<MyProps> {
 		const applicantPhone = this.props.applicant.cellPhone;
 
 		return (
-			<div>
-				I'm the ApplicantInfoComponent
+			<div className={'applicant-info-component'}>
+				<div className={'applicant-info'}>
+					<div className={'applicant-details'}>
+						<h1>{applicant.firstName} {applicant.lastName}</h1>
+						<p>{applicantAddress}</p>
+						<p>{applicantPhone}</p>
+						<p>{applicantEmail}</p>
+						{this.createSocialLinks()}
+					</div>
+					<div className={'applicant-status'}>
+						<h1>Status:</h1>
+						<select name="status" id="status">
+							<option value="reviewed">Reviewed</option>
+							<option value="reviewed">Needs Review</option>
+						</select>
+						<h1>Interest:</h1>
+						<select name="interest" id="interest">
+							<option value="interested">interested</option>
+							<option value="maybe">maybe</option>
+							<option value="no-interest">no interest</option>
+						</select>
+					</div>
+					<div className={'applicant-links'}>
+						<button>View Resume</button>
+						<button>View Cover Letter</button>
+						<button>Download</button>
+					</div>
+				</div>
 				<div>
-					<h1>{applicant.firstName} {applicant.lastName}</h1>
-					<p>{applicantAddress}</p>
-					<p>{applicantPhone}</p>
-					<p>{applicantEmail}</p>
-					<ul>{this.createSocialLinks()}</ul>
+					resume viewer
 				</div>
 			</div>
 		)

@@ -3,6 +3,8 @@ import {Applicants} from "../../../types/index";
 import SpinnerComponent from "../../spinners/spinnerComponent";
 import ApplicantInfoComponent from "./applicant-info/applicantInfoComponent";
 
+import './applicantViewContainer.scss';
+
 interface MyProps{
 	applicant: Applicants | null
 }
@@ -16,9 +18,7 @@ class ApplicantViewContainer extends React.Component<MyProps>{
 
 	render(){
 		return(
-			<div>
-				I'm the applicant view container
-
+			<div className={'applicant-view-container'}>
 				{this.props.applicant !== null ? <ApplicantInfoComponent applicant={this.props.applicant} /> : <SpinnerComponent />}
 			</div>
 		)
