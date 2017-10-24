@@ -8,7 +8,8 @@ import './applicantInfoComponent.scss';
 
 
 interface MyProps {
-	applicant: Applicants
+	applicant: Applicants,
+	saveApplicantInfo: (employerInfo, applicantInfo) =>{}
 }
 
 interface MyState{
@@ -46,6 +47,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 			reviewStatus: this.state.reviewStatus
 		};
 
+		this.props.saveApplicantInfo('employerInfo', statusUpdate);
 		this.setState({statusUpdated: false});
 
 		console.log(statusUpdate);

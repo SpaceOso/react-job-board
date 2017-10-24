@@ -1,45 +1,42 @@
 import * as React from 'react';
-import {Applicants, StoreState} from "../../../types/index";
+import {Applicants, Employer, SiteFetching, StoreState} from "../../../types/index";
 import SpinnerComponent from "../../spinners/spinnerComponent";
 import ApplicantInfoComponent from "./applicant-info/applicantInfoComponent";
 
 import './applicantViewContainer.scss';
-import {
-	fetchAllEmployerJobModels, saveJobPost,
-	submitEmployerRegistration
-} from "../../../actions/employerDashboardActions";
+import {saveApplicantStatus} from "../../../actions/employerDashboardActions";
+import {connect} from "react-redux";
 
-interface MyProps{
-	applicant: Applicants | null
+interface MyProps {
+	applicant: Applicants | null,
+	employer: Employer,
+	siteFetching: SiteFetching,
+	updateApplicantInfo: (employerInfo, applicantInfo) => {};
 }
 
-class ApplicantViewContainer extends React.Component<MyProps>{
-	constructor(props){
-		super(props);
+const ApplicantViewContainer: React.SFC<MyProps> = (props) => {
+	return (
+		<div className={'applicant-view-container'}>
+			{props.applicant !== null ?
+				<ApplicantInfoComponent
+					saveApplicantInfo={props.updateApplicantInfo}
+					applicant={props.applicant}/> :
+				<SpinnerComponent/>}
+		</div>
+	)
+};
 
-		console.log("applicant view container loaded");
-	}
-
-	render(){
-		return(
-			<div className={'applicant-view-container'}>
-				{this.props.applicant !== null ? <ApplicantInfoComponent applicant={this.props.applicant} /> : <SpinnerComponent />}
-			</div>
-		)
-	}
-}
-
-// function mapStateToProps({user, employer}: StoreState, {...props} ) {
-function mapStateToProps({user, employer, siteFetching}: StoreState ) {
+function mapStateToProps({employer, siteFetching}: StoreState) {
 	return {
-		user,
 		employer,
 		siteFetching
 	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	updateApplicantInfo: (dispatch) => {dispatch()}
+	updateApplicantInfo: (employerInfo, applicantInfo) => {
+		dispatch(saveApplicantStatus(employerInfo, applicantInfo))
+	}
 });
 
-export default ApplicantViewContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicantViewContainer);

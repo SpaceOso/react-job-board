@@ -65,5 +65,12 @@ module.exports = {
                 console.log(error);
                 res.status(400).send(error)
             });
+    },
+
+    updateApplicantStatus(req,res){
+        console.log("inside the employer controller with:");
+        console.log(req.body);
+        console.log(res);
+        res.status(201).send("you got here ok");
     }
 };
