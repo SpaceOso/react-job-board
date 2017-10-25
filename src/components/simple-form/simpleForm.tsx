@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import "./simpleForm.scss";
+import {VideoHTMLAttributes} from "react";
 
 interface SFInput {
 	label: string,
@@ -28,9 +29,13 @@ interface inputObject {
 }
 
 class SimpleForm extends React.Component<myProps, any> {
+	private filesInput: HTMLInputElement;
+	private filesArray: any = {};
+
 	constructor(props) {
 		super(props);
 
+		// let filesInput: HTMLInputElement[];
 		let propObj: any = {};
 
 		/**Crate an object for each input to hold the user input and to know if there is an
@@ -50,7 +55,13 @@ class SimpleForm extends React.Component<myProps, any> {
 			formSubmitted: false,
 			formErrors: false,
 			inputValues: {...propObj}
-		}
+		};
+
+		this.createInputs = this.createInputs.bind(this);
+		this.createFileInput = this.createFileInput.bind(this);
+	}
+
+	componentDidMount(){
 	}
 
 	/**
@@ -61,9 +72,16 @@ class SimpleForm extends React.Component<myProps, any> {
 	handleChange(key: string, event: any) {
 		let keyObject = {...this.state.inputValues};
 
+		console.log("the change is:", key);
+		console.log("the event is :", event.files);
 		keyObject[key].content = event;
 
 		this.setState({inputValues: keyObject});
+	}
+
+	handleFileUpload(id, event){
+		console.log("file being uploaded id:", id);
+		console.log("file being uploaded event:", this.filesArray);
 	}
 
 	/**
@@ -133,11 +151,13 @@ class SimpleForm extends React.Component<myProps, any> {
 	}
 
 	handleSubmit(event) {
+		console.log("before submitting let's check what files we're updating...");
+		console.log(this.filesArray);
 		(event as Event).preventDefault();
 		this.checkForErrors();
 	}
 
-	createFileInput(input, index, iID) {
+	createFileInput(input, index, iID):JSX.Element {
 		return (
 			<div
 				className={this.state.inputValues[iID].SF_error === true ? 'job-form-group error' : 'job-form-group'}
@@ -147,10 +167,8 @@ class SimpleForm extends React.Component<myProps, any> {
 					required={input.required}
 					placeholder={input.placeHolder}
 					id={iID}
-					onChange={(event) => {
-						this.handleChange(iID, event.target.value)
-					}}
 					name={input.name}
+					ref={(ref:HTMLInputElement) =>  this.filesArray[iID] = ref }
 					accept={input.accept}
 					type={input.type}/>
 				{this.state.inputValues[iID].SF_error === true ?
@@ -159,7 +177,7 @@ class SimpleForm extends React.Component<myProps, any> {
 		)
 	}
 
-	createInputs() {
+	createInputs():JSX.Element[] {
 		return this.props.inputs.map((input, index) => {
 
 			//inputID
