@@ -1,28 +1,42 @@
 import * as React from 'react';
-import {Applicants} from "../../../types/index";
+import {Applicants, Employer, SiteFetching, StoreState} from "../../../types/index";
 import SpinnerComponent from "../../spinners/spinnerComponent";
 import ApplicantInfoComponent from "./applicant-info/applicantInfoComponent";
 
-interface MyProps{
-	applicant: Applicants | null
+import './applicantViewContainer.scss';
+import {saveApplicantStatus} from "../../../actions/employerDashboardActions";
+import {connect} from "react-redux";
+
+interface MyProps {
+	applicant: Applicants | null,
+	employer: Employer,
+	siteFetching: SiteFetching,
+	updateApplicantInfo: (applicantInfo) => {};
 }
 
-class ApplicantViewContainer extends React.Component<MyProps>{
-	constructor(props){
-		super(props);
+const ApplicantViewContainer: React.SFC<MyProps> = (props) => {
+	return (
+		<div className={'applicant-view-container'}>
+			{props.applicant !== null ?
+				<ApplicantInfoComponent
+					saveApplicantInfo={props.updateApplicantInfo}
+					applicant={props.applicant}/> :
+				<SpinnerComponent/>}
+		</div>
+	)
+};
 
-		console.log("applicant view container loaded");
-	}
-
-	render(){
-		return(
-			<div>
-				I'm the applicant view container
-
-				{this.props.applicant !== null ? <ApplicantInfoComponent applicant={this.props.applicant} /> : <SpinnerComponent />}
-			</div>
-		)
+function mapStateToProps({employer, siteFetching}: StoreState) {
+	return {
+		employer,
+		siteFetching
 	}
 }
 
-export default ApplicantViewContainer;
+const mapDispatchToProps = (dispatch) => ({
+	updateApplicantInfo: (applicantInfo) => {
+		dispatch(saveApplicantStatus( applicantInfo))
+	}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicantViewContainer);

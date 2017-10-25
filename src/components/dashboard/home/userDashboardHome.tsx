@@ -29,9 +29,6 @@ class UserDashboardHome extends React.Component<MyProps> {
 				</h1>
 				<img className={'home-logo'} src={`${IMG_URL}${this.props.employer.logoImg}`} alt=""/>
 				<JobPostUpdatesComponent jobs={this.props.employer.jobs}/>
-				<div>
-					<pre>{JSON.stringify(this.props.employer, null, 2)}</pre>
-				</div>
 			</div>
 		)
 	}

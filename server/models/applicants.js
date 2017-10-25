@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING
 			},
 			resume: {
-				type: DataTypes.STRING
+				type: DataTypes.TEXT
 			},
 			status: {
 				type: DataTypes.STRING,

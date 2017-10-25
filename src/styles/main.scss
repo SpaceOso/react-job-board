@@ -92,9 +92,13 @@ input:-webkit-autofill {
 .btn-standard{
   background-color: $button;
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   color: $white;
   min-height: 35px;
+}
+
+.btn-standard-selected{
+  background-color: $buttonActivated;
 }
 
 .text-left{
@@ -113,12 +117,9 @@ hr.style1 {
 
 .job-container{
   display: flex;
-  //align-content: flex-start;
-  //justify-content: flex-start;
   width: 100%;
   background-color: palevioletred;
 }
-
 
 .inlineblock{
   display: inline-block;

@@ -65,5 +65,29 @@ module.exports = {
                 console.log(error);
                 res.status(400).send(error)
             });
+    },
+
+    updateApplicantStatus(req, res) {
+        console.log("inside the employer controller with:");
+        console.log(req.body);
+        console.log(req.params);
+
+        return Applicants
+            .update({
+                    status: req.body.status,
+                    interest: req.body.interest
+                },
+                {
+                    where: {id: req.body.id}
+                })
+            .then(applicant => {
+                console.log("we updated the applicant:", applicant);
+                res.status(201).send(applicant);
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(400).send(error);
+            })
+
     }
 };
