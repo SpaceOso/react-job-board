@@ -9,12 +9,12 @@ import './applicantInfoComponent.scss';
 
 interface MyProps {
 	applicant: Applicants,
-	saveApplicantInfo: (employerInfo, applicantInfo) =>{}
+	saveApplicantInfo: (applicantInfo) =>{}
 }
 
 interface MyState{
-	reviewStatus: string,
-	interestStatus: string,
+	status: string,
+	interest: string,
 	statusUpdated: boolean,
 }
 
@@ -23,8 +23,8 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 		super(props);
 
 		this.state = {
-			reviewStatus: 'needs-review',
-			interestStatus: 'needs-review',
+			status: 'needs-review',
+			interest: 'needs-review',
 			statusUpdated: false
 		};
 
@@ -43,11 +43,12 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 	saveStatusUpdate(event){
 		console.log("saving status updates:");
 		const statusUpdate = {
-			interestStatus: this.state.interestStatus,
-			reviewStatus: this.state.reviewStatus
+			interest: this.state.interest,
+			status: this.state.status,
+			id: this.props.applicant.id
 		};
 
-		this.props.saveApplicantInfo('employerInfo', statusUpdate);
+		this.props.saveApplicantInfo(statusUpdate);
 		this.setState({statusUpdated: false});
 
 		console.log(statusUpdate);
@@ -103,12 +104,12 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 					</div>
 					<div className={'applicant-status'}>
 						<h1>Status:</h1>
-						<select value={this.state.reviewStatus} onChange={this.handleChange} id='reviewStatus'>
+						<select value={this.state.status} onChange={this.handleChange} id='status'>
 							<option value="reviewed">Reviewed</option>
 							<option value="needs-review" >Needs Review</option>
 						</select>
 						<h1>Interest:</h1>
-						<select value={this.state.interestStatus} onChange={this.handleChange} id='interestStatus'>
+						<select value={this.state.interest} onChange={this.handleChange} id='interest'>
 							<option value="interested">Interested</option>
 							<option value="needs-review">Needs Review</option>
 							<option value="maybe">Maybe</option>

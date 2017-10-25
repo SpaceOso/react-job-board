@@ -81,10 +81,7 @@ app.use('/api/jobposts', jobRoutes);
 app.use('/api/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/api/createapplicant', applicantRoutes);
-// app.use('/user', authCheck, userRoutes);
 app.use('/employer', authCheck, employerRoutes);
-// app.use('/', appRoutes);
-// app.use('/*', appRoutes);
 
 //todo need to remove this before shipping
 

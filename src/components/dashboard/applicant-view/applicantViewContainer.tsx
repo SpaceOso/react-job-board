@@ -11,7 +11,7 @@ interface MyProps {
 	applicant: Applicants | null,
 	employer: Employer,
 	siteFetching: SiteFetching,
-	updateApplicantInfo: (employerInfo, applicantInfo) => {};
+	updateApplicantInfo: (applicantInfo) => {};
 }
 
 const ApplicantViewContainer: React.SFC<MyProps> = (props) => {
@@ -34,8 +34,8 @@ function mapStateToProps({employer, siteFetching}: StoreState) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	updateApplicantInfo: (employerInfo, applicantInfo) => {
-		dispatch(saveApplicantStatus(employerInfo, applicantInfo))
+	updateApplicantInfo: (applicantInfo) => {
+		dispatch(saveApplicantStatus( applicantInfo))
 	}
 });
 

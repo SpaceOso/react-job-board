@@ -154,8 +154,19 @@ export function submitEmployerRegistration(employerInfo, file: File) {
 }
 
 
-export function saveApplicantStatus(employerInfo, applicantInfo){
+export function saveApplicantStatus(applicantInfo){
 	return dispatch => {
-		console.log("saving application status with:", employerInfo, applicantInfo);
+		dispatch(siteFetch());
+		console.log("saving application status with:", applicantInfo);
+
+		axios.post(`${ROOT_URL}employer/update/${applicantInfo.id}`, applicantInfo)
+			.then(response => {
+				console.log("the response from savingApplicantStatus:", response);
+				dispatch(setSiteIdle());
+			})
+			.catch(error => {
+				console.log(error);
+				dispatch(setSiteIdle());
+			});
 	}
 }
