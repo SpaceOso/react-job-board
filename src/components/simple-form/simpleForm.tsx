@@ -2,10 +2,12 @@ import * as React from 'react';
 
 import "./simpleForm.scss";
 
-interface SFInput{
+interface SFInput {
 	label: string,
 	required: boolean,
 	type: string,
+	name?: string,
+	accept?: string,
 	placeHolder: string,
 	id: string
 }
@@ -88,11 +90,11 @@ class SimpleForm extends React.Component<myProps, any> {
 	 * Runs when form is submitted.
 	 * Checks if any two items that need verification match
 	 */
-	checkForErrors():void {
+	checkForErrors(): void {
 		let inputs = {...this.state.inputValues};
 		let formError = false;
 
-		if(this.state.inputsToVerify !== null){
+		if (this.state.inputsToVerify !== null) {
 
 			// need to check that all values contain something
 			Object.keys(inputs).map(input => {
@@ -114,16 +116,17 @@ class SimpleForm extends React.Component<myProps, any> {
 		}
 
 	}
+
 	/**
 	 * Creates and sends a key-value pair object to the onSubmitCB given as props
 	 * @property name - Is the id given as the input id in the props, the value is what the user typed in the form
 	 */
-	submitForm():void {
+	submitForm(): void {
 		let formObject = {};
 
 		for (let input in this.state.inputValues) {
 			if (this.state.inputValues.hasOwnProperty(input)) {
-				formObject[input] =	this.state.inputValues[input].content
+				formObject[input] = this.state.inputValues[input].content
 			}
 		}
 		this.props.onSubmitCB(formObject);
@@ -134,11 +137,37 @@ class SimpleForm extends React.Component<myProps, any> {
 		this.checkForErrors();
 	}
 
+	createFileInput(input, index, iID) {
+		return (
+			<div
+				className={this.state.inputValues[iID].SF_error === true ? 'job-form-group error' : 'job-form-group'}
+				key={`${index}${iID}`}>
+				<label htmlFor={iID}>{input.label}</label>
+				<input
+					required={input.required}
+					placeholder={input.placeHolder}
+					id={iID}
+					onChange={(event) => {
+						this.handleChange(iID, event.target.value)
+					}}
+					name={input.name}
+					accept={input.accept}
+					type={input.type}/>
+				{this.state.inputValues[iID].SF_error === true ?
+					<div className="input-error-box">{this.state.inputValues[iID].SF_errorMessage}</div> : null}
+			</div>
+		)
+	}
+
 	createInputs() {
 		return this.props.inputs.map((input, index) => {
 
 			//inputID
 			let iID = input.id;
+
+			if(input.type === 'file'){
+				return this.createFileInput(input, index, iID);
+			}
 
 			return (
 				<div

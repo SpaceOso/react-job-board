@@ -111,7 +111,9 @@ class ApplicationComponent extends React.Component<MyProps> {
 					            {
 					            	label: 'Resume',
 						            required: true,
-						            type: 'text',
+						            type: 'file',
+						            name: 'resume',
+						            accept: '.doc, .docx, .pdf',
 						            placeHolder: 'upload your resume',
 						            id: 'resume'
 					            },
