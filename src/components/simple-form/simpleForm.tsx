@@ -13,6 +13,10 @@ interface SFInput {
 	id: string
 }
 
+interface FormObject{
+	[key: string]:any
+}
+
 interface myProps {
 	header: string,
 	inputs: SFInput[],
@@ -29,7 +33,6 @@ interface inputObject {
 }
 
 class SimpleForm extends React.Component<myProps, any> {
-	private filesInput: HTMLInputElement;
 	private filesArray: any = {};
 
 	constructor(props) {
@@ -61,8 +64,6 @@ class SimpleForm extends React.Component<myProps, any> {
 		this.createFileInput = this.createFileInput.bind(this);
 	}
 
-	componentDidMount(){
-	}
 
 	/**
 	 *
@@ -79,10 +80,6 @@ class SimpleForm extends React.Component<myProps, any> {
 		this.setState({inputValues: keyObject});
 	}
 
-	handleFileUpload(id, event){
-		console.log("file being uploaded id:", id);
-		console.log("file being uploaded event:", this.filesArray);
-	}
 
 	/**
 	 * Will either add or remove the SF_error and error message
@@ -140,19 +137,25 @@ class SimpleForm extends React.Component<myProps, any> {
 	 * @property name - Is the id given as the input id in the props, the value is what the user typed in the form
 	 */
 	submitForm(): void {
-		let formObject = {};
+		let formObject:FormObject = {};
 
 		for (let input in this.state.inputValues) {
 			if (this.state.inputValues.hasOwnProperty(input)) {
 				formObject[input] = this.state.inputValues[input].content
 			}
 		}
+
+		//TODO check to see if there is files that were uploaded
+		if(Object.keys(this.filesArray).length > 0){
+			Object.keys(this.filesArray).map(file =>{
+				formObject[file] = this.filesArray[file].files;
+			});
+			console.log("outside of array:", formObject);
+		}
 		this.props.onSubmitCB(formObject);
 	}
 
 	handleSubmit(event) {
-		console.log("before submitting let's check what files we're updating...");
-		console.log(this.filesArray);
 		(event as Event).preventDefault();
 		this.checkForErrors();
 	}
