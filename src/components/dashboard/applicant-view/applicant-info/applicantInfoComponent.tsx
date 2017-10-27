@@ -5,6 +5,7 @@ import {IMG_URL, LOCAL_URL} from "../../../../utils/utils";
 
 //styles
 import './applicantInfoComponent.scss';
+import Iframe from "../../../iframe/iframe";
 
 
 interface MyProps {
@@ -91,7 +92,8 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 		const applicantEmail = this.props.applicant.email;
 		const applicantPhone = this.props.applicant.cellPhone;
 		const applicantResume = this.props.applicant.resume;
-
+		const applicantCoverLetter = this.props.applicant.coverLetter;
+		console.log("URL", `${IMG_URL}${applicantCoverLetter}`);
 		return (
 			<div className={'applicant-info-component'}>
 				<div className={'applicant-info'}>
@@ -123,8 +125,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 						<button className={'btn-standard'}>Download</button>
 					</div>
 				</div>
-				{applicantResume !== null ? <div dangerouslySetInnerHTML={{__html: applicantResume}}>
-				</div> : <div>Click to view resume</div>}
+				<Iframe src={`${IMG_URL}${applicantCoverLetter}`} height={'300px'} width={'100%'}/>
 
 			</div>
 		)

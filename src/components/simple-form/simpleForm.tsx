@@ -138,7 +138,6 @@ class SimpleForm extends React.Component<myProps, any> {
 	 */
 	submitForm(): void {
 		let formObject:FormObject = {};
-		let fileArray:any = [];
 
 		for (let input in this.state.inputValues) {
 			if (this.state.inputValues.hasOwnProperty(input)) {
@@ -150,11 +149,7 @@ class SimpleForm extends React.Component<myProps, any> {
 		if(Object.keys(this.filesArray).length > 0){
 			Object.keys(this.filesArray).map(file =>{
 				formObject[file] = this.filesArray[file].files[0];
-				// let filetest = this.filesArray[file].files;
-				// fileArray.push(filetest);
 			});
-			// formObject.files = fileArray;
-			console.log("outside of array:", formObject);
 		}
 		this.props.onSubmitCB(formObject);
 	}
