@@ -5,6 +5,9 @@ import {setFormState} from "../../../../utils/utils";
 import SpinnerComponent from "../../../spinners/spinnerComponent";
 import TinymceComponent from "../../../tinymce/tinymceComponent";
 
+import './createJobComponent.scss';
+
+
 interface MyProps {
 	submitJobPost,
 	employer,
@@ -73,7 +76,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
 	render() {
 		let spinner = (<SpinnerComponent/>);
 		let form = (
-			<div>
+			<div className={'create-job-component'}>
 				<h1>Create a new job post</h1>
 				<form onSubmit={this.handleJobSubmit}>
 					<div>

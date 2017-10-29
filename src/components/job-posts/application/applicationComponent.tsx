@@ -113,7 +113,7 @@ class ApplicationComponent extends React.Component<MyProps> {
 						            required: true,
 						            type: 'file',
 						            name: 'resume',
-						            accept: '.doc, .docx, .pdf',
+						            accept: '.pdf',
 						            placeHolder: 'upload your resume',
 						            id: 'resume'
 					            },
@@ -121,7 +121,7 @@ class ApplicationComponent extends React.Component<MyProps> {
 						            label: 'Cover Letter',
 						            required: false,
 						            type: 'file',
-						            accept: '.doc, docx, .pdf',
+						            accept: '.pdf',
 						            placeHolder: 'upload your resume',
 						            id: 'coverLetter'
 					            }

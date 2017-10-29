@@ -103,7 +103,6 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 			<div className={'dashboard-applicant-section'}>
 				<DropDownComponent/>
 				{this.createList()}
-				<pre>{JSON.stringify(this.props.employer.jobs, null, 2)}</pre>
 				{this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null }
 			</div>
 		)

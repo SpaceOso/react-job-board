@@ -2,6 +2,9 @@
 
 .applicant-info-component {
   text-align: left;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   @include panel();
   padding: 1%;
 
@@ -29,6 +32,13 @@
     h1{
       display: inline-block;
     }
+    select{
+      margin: 0 20px;
+    }
+    button{
+      float:right;
+      margin: 20px;
+    }
   }
 
   .social-links {
@@ -44,5 +54,11 @@
     img {
       width: 32px;
     }
+  }
+
+  .document-container{
+    flex: 2 0 auto;
+    width: 100%;
+    padding-top: 11px;
   }
 }
