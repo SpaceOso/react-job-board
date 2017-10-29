@@ -83,6 +83,16 @@ input[type='password']::placeholder{
   font-size: 1.3rem;
 }
 
+select{
+  background-color: $inputBg;
+  height: 45px;
+  border: 1 px solid $accentColor;
+  color: $inputText;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 6px;
+}
+
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset;
 }

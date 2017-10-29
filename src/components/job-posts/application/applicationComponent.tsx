@@ -16,7 +16,7 @@ class ApplicationComponent extends React.Component<MyProps> {
 	}
 
 	handleApplicationSubmit(data) {
-
+		console.log("data from job application...", data);
 		/*We only get the info from the form here. We need to add the employer and jobId info to this.*/
 		let updatedData = {
 			...data,
@@ -111,15 +111,18 @@ class ApplicationComponent extends React.Component<MyProps> {
 					            {
 					            	label: 'Resume',
 						            required: true,
-						            type: 'text',
+						            type: 'file',
+						            name: 'resume',
+						            accept: '.pdf',
 						            placeHolder: 'upload your resume',
 						            id: 'resume'
 					            },
 					            {
 						            label: 'Cover Letter',
 						            required: false,
-						            type: 'text',
-						            placeHolder: '',
+						            type: 'file',
+						            accept: '.pdf',
+						            placeHolder: 'upload your resume',
 						            id: 'coverLetter'
 					            }
 				            ]}

@@ -59,8 +59,11 @@ const upload = multer({
 			next(null, true);
 		} else {
 			console.log("it is NOT a photo");
-			next({message: "That filetype isn't allowed"}, false);
+			// next({message: "That filetype isn't allowed"}, false);
 		}
+
+		console.log("it was something else:");
+		next(null, true);
 	},
 	storage: storageType
 });

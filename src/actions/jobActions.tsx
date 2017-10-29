@@ -86,10 +86,27 @@ export function addingApplicantToJob(data){
 }
 
 export function addApplicantToJob(applicantInfo){
+
+	let data = new FormData();
+
+	for (let entries in applicantInfo) {
+		if (applicantInfo.hasOwnProperty(entries)) {
+			data.set(entries, applicantInfo[entries]);
+		}
+	}
+
+	/*if(applicantInfo.coverLetter !== null || applicantInfo.coverLetter !== 'undefined'){
+		data.set('coverLetter', applicantInfo.coverLetter);
+	}
+
+	if(applicantInfo.resume !== null || applicantInfo.resume !== 'undefined'){
+		data.set('resume', applicantInfo.resume);
+	}*/
+
 	return dispatch => {
 		dispatch(fetchingJobs());
-		console.log("in the job actions creating applicant with:", applicantInfo);
-		axios.post(`${ROOT_URL}api/createapplicant`, applicantInfo)
+		console.log("in the job actions creating applicant with:", data);
+		axios.post(`${ROOT_URL}api/createapplicant`, data)
 			.then(response => {
 				console.log("The response that we get after we create an applicant...", response);
 				dispatch(doneFetchingJobs());

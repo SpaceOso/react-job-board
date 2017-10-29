@@ -78,8 +78,6 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
 
 		let employer: Employer = this.props.employer;
 		let logo = employer.logoImg.length > 0 ? `${IMG_URL}${employer.logoImg}` : `${LOCAL_URL}${require('../../assets/images/no-icon.svg')}`;
-		console.log('the logoimg', employer.logoImg);
-		console.log('the logo', logo);
 		return (
 			<aside className="jp-employer-aside">
 				<img className="company-logo panel-shadow" src={logo} alt={`${employer.name} Logo`}/>

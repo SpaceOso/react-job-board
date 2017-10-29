@@ -5,6 +5,8 @@
 .dashboard-home{
   @include dashboard-main-section();
 
+  width: 70%;
+  float: left;
   .home-logo{
     max-width: 56px;
     float: right;

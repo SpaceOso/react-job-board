@@ -1,13 +1,20 @@
 import * as React from 'react';
 
 import "./simpleForm.scss";
+import {VideoHTMLAttributes} from "react";
 
-interface SFInput{
+interface SFInput {
 	label: string,
 	required: boolean,
 	type: string,
+	name?: string,
+	accept?: string,
 	placeHolder: string,
 	id: string
+}
+
+interface FormObject{
+	[key: string]:any
 }
 
 interface myProps {
@@ -26,9 +33,12 @@ interface inputObject {
 }
 
 class SimpleForm extends React.Component<myProps, any> {
+	private filesArray: any = {};
+
 	constructor(props) {
 		super(props);
 
+		// let filesInput: HTMLInputElement[];
 		let propObj: any = {};
 
 		/**Crate an object for each input to hold the user input and to know if there is an
@@ -48,8 +58,12 @@ class SimpleForm extends React.Component<myProps, any> {
 			formSubmitted: false,
 			formErrors: false,
 			inputValues: {...propObj}
-		}
+		};
+
+		this.createInputs = this.createInputs.bind(this);
+		this.createFileInput = this.createFileInput.bind(this);
 	}
+
 
 	/**
 	 *
@@ -59,10 +73,13 @@ class SimpleForm extends React.Component<myProps, any> {
 	handleChange(key: string, event: any) {
 		let keyObject = {...this.state.inputValues};
 
+		console.log("the change is:", key);
+		console.log("the event is :", event.files);
 		keyObject[key].content = event;
 
 		this.setState({inputValues: keyObject});
 	}
+
 
 	/**
 	 * Will either add or remove the SF_error and error message
@@ -88,11 +105,11 @@ class SimpleForm extends React.Component<myProps, any> {
 	 * Runs when form is submitted.
 	 * Checks if any two items that need verification match
 	 */
-	checkForErrors():void {
+	checkForErrors(): void {
 		let inputs = {...this.state.inputValues};
 		let formError = false;
 
-		if(this.state.inputsToVerify !== null){
+		if (this.state.inputsToVerify !== null) {
 
 			// need to check that all values contain something
 			Object.keys(inputs).map(input => {
@@ -114,17 +131,25 @@ class SimpleForm extends React.Component<myProps, any> {
 		}
 
 	}
+
 	/**
 	 * Creates and sends a key-value pair object to the onSubmitCB given as props
 	 * @property name - Is the id given as the input id in the props, the value is what the user typed in the form
 	 */
-	submitForm():void {
-		let formObject = {};
+	submitForm(): void {
+		let formObject:FormObject = {};
 
 		for (let input in this.state.inputValues) {
 			if (this.state.inputValues.hasOwnProperty(input)) {
-				formObject[input] =	this.state.inputValues[input].content
+				formObject[input] = this.state.inputValues[input].content
 			}
+		}
+
+		//TODO check to see if there is files that were uploaded
+		if(Object.keys(this.filesArray).length > 0){
+			Object.keys(this.filesArray).map(file =>{
+				formObject[file] = this.filesArray[file].files[0];
+			});
 		}
 		this.props.onSubmitCB(formObject);
 	}
@@ -134,11 +159,35 @@ class SimpleForm extends React.Component<myProps, any> {
 		this.checkForErrors();
 	}
 
-	createInputs() {
+	createFileInput(input, index, iID):JSX.Element {
+		return (
+			<div
+				className={this.state.inputValues[iID].SF_error === true ? 'job-form-group error' : 'job-form-group'}
+				key={`${index}${iID}`}>
+				<label htmlFor={iID}>{input.label}</label>
+				<input
+					required={input.required}
+					placeholder={input.placeHolder}
+					id={iID}
+					name={input.name}
+					ref={(ref:HTMLInputElement) =>  this.filesArray[iID] = ref }
+					accept={input.accept}
+					type={input.type}/>
+				{this.state.inputValues[iID].SF_error === true ?
+					<div className="input-error-box">{this.state.inputValues[iID].SF_errorMessage}</div> : null}
+			</div>
+		)
+	}
+
+	createInputs():JSX.Element[] {
 		return this.props.inputs.map((input, index) => {
 
 			//inputID
 			let iID = input.id;
+
+			if(input.type === 'file'){
+				return this.createFileInput(input, index, iID);
+			}
 
 			return (
 				<div

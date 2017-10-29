@@ -3,4 +3,6 @@
 
 .dashboard-applicant-section{
   @include dashboard-main-section();
+  width: 70%;
+  float: left;
 }
