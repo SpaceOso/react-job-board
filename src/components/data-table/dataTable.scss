@@ -16,20 +16,7 @@
     height: 50px;
   }
 
-  .data-row td:first-child{
-    position: relative;
-  };
 
-  .data-row td:first-child::before{
-    content: '';
-    background-color: red;
-    width: 10px;
-    height: 50px;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 
   .data-row:nth-child(even) {
     background-color: $neutral;
