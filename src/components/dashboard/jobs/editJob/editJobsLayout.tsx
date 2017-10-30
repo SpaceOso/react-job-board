@@ -71,6 +71,7 @@ class EditJobsLayout extends React.Component<MyProps, myState> {
 							       <DataTable
 								       rowData={this.props.employer!.jobs}
 								       columnInfo={dataInfo}
+								       specialClasses={null}
 								       handleClick={this.onClick}
 								       totalRows={10}
 							       />

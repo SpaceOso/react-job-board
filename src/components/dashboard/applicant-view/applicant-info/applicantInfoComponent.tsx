@@ -141,9 +141,9 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 							<h1>Interest:</h1>
 							<select value={this.state.interest} onChange={this.handleChange} id='interest'>
 								<option value="interested">Interested</option>
-								<option value="needs-review">Needs Review</option>
+								<option value="needsReview">Needs Review</option>
 								<option value="maybe">Maybe</option>
-								<option value="no-interest">No interest</option>
+								<option value="noInterest">No interest</option>
 							</select>
 						</div>
 						{this.state.statusUpdated !== false ?
