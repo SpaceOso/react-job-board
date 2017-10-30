@@ -9,44 +9,51 @@ import './applicantListComponent.scss';
 import DropDownComponent from "../../drop-down/dropDownComponent";
 import {Redirect, RouteComponentProps} from "react-router";
 
-interface MyProps extends RouteComponentProps<any>{
+interface MyProps extends RouteComponentProps<any> {
 	user: User,
 	jobs: EmployerJobView[] | null,
 	employer: Employer,
-	handleApplicantSelect: (applicant) =>void
+	handleApplicantSelect: (applicant) => void
 }
 
-interface MyState{
+interface MyState {
 	jobs: EmployerJobView[] | null,
 	currentJob: EmployerJobView | null,
 	applicant: any
 }
 
-class ApplicantListComponent extends React.Component<MyProps, MyState>{
+class ApplicantListComponent extends React.Component<MyProps, MyState> {
 	state: MyState = {
 		jobs: this.props.jobs,
 		currentJob: null,
 		applicant: null,
 	};
 
-	constructor(props){
+	constructor(props) {
 		super(props);
 
 		this.onClick = this.onClick.bind(this);
 	}
 
-	componentWillMount(){
-		if(this.props.employer.jobs !== null && this.props.employer.jobs.length > 0){
+	componentWillMount() {
+		if (this.props.employer.jobs !== null && this.props.employer.jobs.length > 0) {
 			//adds the first job to state
 			this.setState({currentJob: this.props.employer.jobs[0]})
 		}
 	}
 
-	createList(){
+	createList() {
+		const specialClasses = {
+			Interested: 'interested',
+			'Needs Review': 'needsReview',
+			Maybe: 'maybe',
+			'No Interest': 'noInterest'
+		};
+
 		const dataInfo = [
 			{
 				join: true,
-				property:'firstName',
+				property: 'firstName',
 				properties: ['firstName', 'lastName'],
 				header: 'First Name'
 			},
@@ -60,50 +67,55 @@ class ApplicantListComponent extends React.Component<MyProps, MyState>{
 				property: 'interest', header: 'Interest'
 			},
 			{
-				join:true,
+				join: true,
 				properties: ['city', 'state'],
 				header: 'Location'
 			}
 		];
 
-		if(this.state.currentJob === null){
-			return(
+		if (this.state.currentJob === null) {
+			return (
 				<div>
 					Sorry you don't have any jobs to display applicants for.
 				</div>
 			)
 		}
 
-		if(this.state.currentJob.Applicants.length <= 0){
-			return(
+		if (this.state.currentJob.Applicants.length <= 0) {
+			return (
 				<div>
 					Sorry your current job doesn't have any applicants
 				</div>
 			)
 		}
 
-		return(
+		return (
 			<div>
 				<h1>Candidates for {this.state.currentJob.title} - {this.state.currentJob.location.city}</h1>
-				<DataTable rowData={this.state.currentJob.Applicants} columnInfo={dataInfo} handleClick={this.onClick} totalRows={5}/>
+				<DataTable rowData={this.state.currentJob.Applicants}
+				           specialClasses={specialClasses}
+				           columnInfo={dataInfo}
+				           handleClick={this.onClick}
+				           totalRows={5}/>
 			</div>
 		)
 	}
 
-	onClick(selectedApplicant){
+	onClick(selectedApplicant) {
 		console.log("selectedApplicant", selectedApplicant);
 		this.setState({applicant: selectedApplicant});
 		this.props.handleApplicantSelect(selectedApplicant);
 	}
 
-	render(){
+	render() {
 
 
-		return(
+		return (
 			<div className={'dashboard-applicant-section'}>
 				<DropDownComponent/>
 				{this.createList()}
-				{this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null }
+				{this.state.applicant !== null ?
+					<Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null}
 			</div>
 		)
 	}

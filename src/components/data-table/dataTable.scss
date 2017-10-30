@@ -2,24 +2,33 @@
 
 .data-table {
   width: 100%;
-    border-collapse: collapse;
+  border-collapse: collapse;
 
-  table, tr{
-    border: 1px solid black;
+  table, tr {
+    border: 1px solid $borders;
   }
 
-  .data-row:nth-child(even){
+  td,th {
+    padding: 10px 10px 10px 15px;
+  }
+
+  .data-row {
+    height: 50px;
+  }
+
+
+
+  .data-row:nth-child(even) {
     background-color: $neutral;
   }
 
-
-  .data-row:hover{
+  .data-row:hover {
     background-color: $jobTitle;
-    color:$white;
+    color: $white;
     cursor: pointer;
   }
 
-  .selected{
+  .selected {
     background-color: $watermelon;
     color: $white;
     font-weight: bold;

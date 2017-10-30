@@ -5,4 +5,39 @@
   @include dashboard-main-section();
   width: 70%;
   float: left;
+
+  .data-row td:first-child{
+    position: relative;
+  };
+
+  .data-row td:first-child::before{
+    content: '';
+    background-color: red;
+    width: 10px;
+    height: 50px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .data-row.needsReview{
+    font-weight: bold;
+  }
+
+  .data-row.maybe td:first-child::before{
+    background-color: $applicantMaybe;
+  }
+
+  .data-row.noInterest td:first-child::before{
+    background-color: $applicantNoInterest;
+  }
+
+  .data-row.interested td:first-child::before{
+    background-color: $applicantInterested;
+  }
+
+  .data-row.needsReview td:first-child::before{
+    background-color: $applicantNeedsReview;
+  }
 }
