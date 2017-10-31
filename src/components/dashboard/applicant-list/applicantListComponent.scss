@@ -23,6 +23,15 @@
 
   .data-row.needsReview{
     font-weight: bold;
+    color: red;
+  }
+
+  .data-row.maybe{
+    //color: $applicantMaybe;
+  }
+
+  .data-row.interested{
+    //color: $applicantInterested;
   }
 
   .data-row.maybe td:first-child::before{

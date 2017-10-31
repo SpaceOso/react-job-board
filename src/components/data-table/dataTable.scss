@@ -3,6 +3,7 @@
 .data-table {
   width: 100%;
   border-collapse: collapse;
+  @include panel();
 
   table, tr {
     border: 1px solid $borders;
@@ -19,7 +20,7 @@
 
 
   .data-row:nth-child(even) {
-    background-color: $neutral;
+    //background-color: $neutral;
   }
 
   .data-row:hover {
