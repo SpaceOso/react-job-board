@@ -1,37 +1,38 @@
-//action types
-import { GET_JOBS_ERROR, GET_JOBS_SUCCESS, FETCHING_JOBS} from "../actions/jobActions";
-import {StoreState} from "../types/index";
+// action types
+import { GET_JOBS_ERROR, GET_JOBS_SUCCESS, FETCHING_JOBS } from "../actions/jobActions";
+import { StoreState } from "../types/index";
 
 /*reducers are just functions that get passed the action. We then set up switch statements to handle the action.type*/
-function JobReducer(state: StoreState, action) {
-    switch (action.type) {
-        case GET_JOBS_SUCCESS:
+function jobReducer(state: StoreState, action) {
+  switch (action.type) {
+    case GET_JOBS_SUCCESS:
 
-            let newJobs = {};
-            let jobDateRegex: RegExp = /.+?(?=T)/g;
+      const newJobs = {};
+      const jobDateRegex: RegExp = /.+?(?=T)/g;
 
-            for (const job in action.payload.data) {
-                let currentJob = action.payload.data[job];
-                // console.log('currentJob', currentJob);
-	            let splitDate = currentJob.createdAt.match(jobDateRegex)[0].split('-');
-	            currentJob.createdAt = `${splitDate[1]}-${splitDate[2]}-${splitDate[0]}`;
+      for (const job in action.payload.data) {
+        const currentJob = action.payload.data[ job ];
+        // console.log('currentJob', currentJob);
+        const splitDate = currentJob.createdAt.match(jobDateRegex)[ 0 ].split('-');
+        currentJob.createdAt = `${splitDate[ 1 ]}-${splitDate[ 2 ]}-${splitDate[ 0 ]}`;
 
-                newJobs[currentJob.id] = {...currentJob};
-            }
+        newJobs[ currentJob.id ] = { ...currentJob };
+      }
 
-            return newJobs;
-        case GET_JOBS_ERROR:
+      return newJobs;
+    case GET_JOBS_ERROR:
 
-            return state;
-        case FETCHING_JOBS:
-            return {
-                ...state,
-                isFetching: true};
-        default:
-            return {
-                ...state
-            };
-    }
+      return state;
+    case FETCHING_JOBS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
 }
 
-export default JobReducer;
+export default jobReducer;
