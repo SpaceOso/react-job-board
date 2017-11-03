@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import { AuthUser, SiteFetching, User } from '../../types/index';
 import SimpleForm from '../simple-form/SimpleForm';
-import SpinnerComponent from '../spinners/SpinnerComponent';
+import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 
 // styles
 import './styles/UserRegister.scss';

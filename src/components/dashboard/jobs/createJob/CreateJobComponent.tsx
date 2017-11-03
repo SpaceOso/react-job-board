@@ -2,7 +2,7 @@ import * as React from 'react';
 
 //utils
 import {setFormState} from "../../../../utils/utils";
-import SpinnerComponent from "../../../spinners/SpinnerComponent";
+import SpinnerComponent from "../../../spinners/spinnerComponent";
 import TinymceComponent from "../../../tinymce/TinymceComponent";
 
 import './CreateJobComponent.scss';

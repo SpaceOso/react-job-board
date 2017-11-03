@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Applicants, Employer, SiteFetching, StoreState} from "../../../types/index";
-import SpinnerComponent from "../../spinners/SpinnerComponent";
+import SpinnerComponent from "../../spinners/spinnerComponent";
 import ApplicantInfoComponent from "./applicant-info/ApplicantInfoComponent";
 
 import './ApplicantViewContainer.scss';

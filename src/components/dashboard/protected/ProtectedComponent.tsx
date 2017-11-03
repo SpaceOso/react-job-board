@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Redirect, Route} from "react-router";
 import {employerFetching, fetchAllEmployerJobModels} from "../../../actions/employerDashboardActions";
 import {store} from "../../../index";
-import SpinnerComponent from "../../spinners/SpinnerComponent";
+import SpinnerComponent from "../../spinners/spinnerComponent";
 import {setSiteIdle} from "../../../actions/authActions";
 
 

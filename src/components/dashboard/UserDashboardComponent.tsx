@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Employer, SiteFetching, User} from "../../types/index";
 import { Route, RouteComponentProps, Switch} from "react-router";
-import SpinnerComponent from "../spinners/SpinnerComponent";
+import SpinnerComponent from "../spinners/spinnerComponent";
 import CompRegisterComponent from "./compRegister/CompRegisterComponent";
 import NotFoundComponent from "../not-found/NotFoundComponent";
 import {default as DashboardMainLayout} from "./main-layout/MainLayout";

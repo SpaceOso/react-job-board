@@ -73,6 +73,7 @@ class SimpleForm extends React.Component<MyProps, any> {
     keyObject[ key ].content = event;
 
     this.setState({ inputValues: keyObject });
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   /**
@@ -200,7 +201,7 @@ class SimpleForm extends React.Component<MyProps, any> {
   render() {
     return (
       <div className="simple-form">
-        <form action="" onSubmit={ event => this.handleSubmit(event)}>
+        <form action="" onSubmit={this.handleSubmit}>
           <h1>{this.props.header}</h1>
           <div>{this.createInputs()}</div>
           <button className="btn-standard">Submit Form</button>

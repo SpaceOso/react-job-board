@@ -3,7 +3,7 @@ import * as React from "react";
 //styles
 import "./styles/CompRegisterComponent.scss";
 import {User} from "../../../types/index";
-import SpinnerComponent from "../../spinners/SpinnerComponent";
+import SpinnerComponent from "../../spinners/spinnerComponent";
 import {Redirect, RouteComponentProps} from "react-router";
 import {Simulate} from "react-dom/test-utils";
 import input = Simulate.input;

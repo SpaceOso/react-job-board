@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 
-import SpinnerComponent from "../spinners/SpinnerComponent";
+import SpinnerComponent from "../spinners/spinnerComponent";
 import {Redirect} from "react-router";
 import {SiteErrors, SiteFetching, User} from "../../types/index";
 import SimpleForm from "../simple-form/SimpleForm";

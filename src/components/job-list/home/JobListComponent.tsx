@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Job } from '../../../types/index';
-import SpinnerComponent from '../../spinners/SpinnerComponent';
+import SpinnerComponent from '../../spinners/spinnerComponent';
 import JobListItemComponent from './JobListItemComponent';
 
 export interface Props {

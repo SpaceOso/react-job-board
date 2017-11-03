@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Applicants, Employer, EmployerJobView, User} from "../../../types/index";
 import {IMG_URL} from "../../../utils/utils";
-import SpinnerComponent from "../../spinners/SpinnerComponent";
+import SpinnerComponent from "../../spinners/spinnerComponent";
 import DataTable from "../../data-table/DataTable";
 
 //styles

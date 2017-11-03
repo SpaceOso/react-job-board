@@ -3,7 +3,7 @@ import * as React from 'react';
 //styles
 import './UserDashboardHome.scss';
 
-import SpinnerComponent from "../../spinners/SpinnerComponent";
+import SpinnerComponent from "../../spinners/spinnerComponent";
 import JobPostUpdatesComponent from "../jobs/job-post-updates/JobPostUpdatesComponent";
 import {IMG_URL} from "../../../utils/utils";
 
