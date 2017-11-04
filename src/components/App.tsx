@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import UserComponent from './applicant/UserComponent';
 import UserDashboardContainer from './dashboard/UserDashboardContainer';
 import JobListContainer from './job-list/home/JobListContainer';
 import JobPostContainer from './job-posts/JobPostContainer';
@@ -13,7 +12,6 @@ import UserRegisterContainer from './register/UserRegisterContainer';
 // actions
 import { Employer, SiteErrors, SiteFetching, User } from '../types/index';
 import ProtectedComponent from './dashboard/protected/ProtectedComponent';
-import TestComponent from './tests/TestComponent';
 
 interface Props {
   logInOnLoad;
@@ -50,9 +48,7 @@ class App extends React.Component<Props> {
             <Route exact path="/" component={JobListContainer as any}/>
             <Route exact path="/register" component={UserRegisterContainer as any}/>
             <Route exact path="/jobposts/:jobId" component={JobPostContainer as any}/>
-            <Route exact path="/jobseeker" component={UserComponent}/>
             <Route exact path="/login" component={LoginContainer as any}/>
-            <Route exact path="/test" component={TestComponent}/>
             <ProtectedComponent
               path="/user/dashboard/:userId"
               component={UserDashboardContainer}

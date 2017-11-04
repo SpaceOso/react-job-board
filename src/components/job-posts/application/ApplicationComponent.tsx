@@ -9,7 +9,7 @@ interface MyProps {
 }
 
 class ApplicationComponent extends React.Component<MyProps> {
-  private inputs = [
+  private locationInputs = [
     {
       label: 'First Name',
       required: true,
@@ -127,7 +127,7 @@ class ApplicationComponent extends React.Component<MyProps> {
       <div>
         <SimpleForm
           header={`Apply to ${this.props.jobTitle}`}
-          inputs={this.inputs}
+          inputs={this.locationInputs}
           submitBtnText={'Submit Application'}
           verifyInputs={null}
           onSubmitCB={this.handleApplicationSubmit}

@@ -1,6 +1,6 @@
 // action types
-import { GET_JOBS_ERROR, GET_JOBS_SUCCESS, FETCHING_JOBS } from "../actions/jobActions";
-import { StoreState } from "../types/index";
+import { FETCHING_JOBS, GET_JOBS_ERROR, GET_JOBS_SUCCESS } from '../actions/jobActions';
+import { StoreState } from '../types/index';
 
 /*reducers are just functions that get passed the action. We then set up switch statements to handle the action.type*/
 function jobReducer(state: StoreState, action) {
@@ -11,12 +11,13 @@ function jobReducer(state: StoreState, action) {
       const jobDateRegex: RegExp = /.+?(?=T)/g;
 
       for (const job in action.payload.data) {
-        const currentJob = action.payload.data[ job ];
-        // console.log('currentJob', currentJob);
-        const splitDate = currentJob.createdAt.match(jobDateRegex)[ 0 ].split('-');
-        currentJob.createdAt = `${splitDate[ 1 ]}-${splitDate[ 2 ]}-${splitDate[ 0 ]}`;
+        if (action.payload.data.hasOwnProperty(job)) {
+          const currentJob = action.payload.data[ job ];
+          const splitDate = currentJob.createdAt.match(jobDateRegex)[ 0 ].split('-');
+          currentJob.createdAt = `${splitDate[ 1 ]}-${splitDate[ 2 ]}-${splitDate[ 0 ]}`;
 
-        newJobs[ currentJob.id ] = { ...currentJob };
+          newJobs[ currentJob.id ] = { ...currentJob };
+        }
       }
 
       return newJobs;
