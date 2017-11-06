@@ -37,6 +37,51 @@ interface RegisterComponentState {
 }
 
 class UserRegisterComponent extends React.Component<RegisterComponent, RegisterComponentState> {
+  private inputs: FormInputs[] = [
+    {
+      label: 'First Name',
+      required: true,
+      type: 'text',
+      placeHolder: 'Enter First Name',
+      id: 'firstName',
+    },
+    {
+      label: 'Last Name',
+      required: true,
+      type: 'text',
+      placeHolder: 'Enter Last Name',
+      id: 'lastName',
+    },
+    {
+      label: 'Email',
+      required: true,
+      type: 'email',
+      placeHolder: 'Enter your email',
+      id: 'email',
+    },
+    {
+      label: 'Confirm Email',
+      required: true,
+      type: 'email',
+      placeHolder: 'Please confirm your email',
+      id: 'email-verify',
+    },
+    {
+      label: 'Password',
+      required: true,
+      type: 'password',
+      placeHolder: 'Enter password',
+      id: 'password',
+    },
+    {
+      label: 'Verify Password',
+      required: true,
+      type: 'password',
+      placeHolder: 'Please Verify Password',
+      id: 'password-verify',
+    },
+  ];
+
   constructor(props) {
     super(props);
 
@@ -69,60 +114,18 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
   }
 
   returnRegisterForm() {
-    const inputArr: FormInputs[] = [
-      {
-        label: 'First Name',
-        required: true,
-        type: 'text',
-        placeHolder: 'Enter First Name',
-        id: 'firstName',
-      },
-      {
-        label: 'Last Name',
-        required: true,
-        type: 'text',
-        placeHolder: 'Enter Last Name',
-        id: 'lastName',
-      },
-      {
-        label: 'Email',
-        required: true,
-        type: 'email',
-        placeHolder: 'Enter your email',
-        id: 'email',
-      },
-      {
-        label: 'Confirm Email',
-        required: true,
-        type: 'email',
-        placeHolder: 'Please confirm your email',
-        id: 'email-verify',
-      },
-      {
-        label: 'Password',
-        required: true,
-        type: 'password',
-        placeHolder: 'Enter password',
-        id: 'password',
-      },
-      {
-        label: 'Verify Password',
-        required: true,
-        type: 'password',
-        placeHolder: 'Please Verify Password',
-        id: 'password-verify',
-      },
-    ];
+
 
     return (
       <div className="employer-register-Component">
         <div className="register-form">
           <SimpleForm
             header="Sign Up"
-            inputs={inputArr}
+            inputs={this.inputs}
             submitBtnText="Register Account"
             onSubmitCB={this.handleSubmit}
             verifyInputs={['email', 'password']}
+            joined={true}
           />
           {/*Once the user registers it should take them to the dashboard*/}
           {this.props.user.isAuth === true ? this.redirectToDashboard() : null}

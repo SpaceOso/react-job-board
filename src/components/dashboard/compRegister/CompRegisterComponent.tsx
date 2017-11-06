@@ -3,7 +3,7 @@ import * as React from 'react';
 // styles
 import { Redirect, RouteComponentProps } from 'react-router';
 import { User } from '../../../types/index';
-import SimpleForm from '../../simple-form/SimpleForm';
+import SimpleForm, { SFInput } from '../../simple-form/SimpleForm';
 import { default as SpinnerComponent } from '../../spinners/spinnerComponent';
 import './styles/CompRegisterComponent.scss';
 
@@ -23,11 +23,13 @@ interface MyState {
   facebook: string;
   linkedIn: string;
   twitter: string;
+  currentForm: number;
+  forms: JSX.Element[];
 }
 
 class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> {
   private filesInput: HTMLInputElement;
-  private infoInputs = [
+  private inputs: SFInput[] = [
     {
       label: 'Company Name',
       required: true,
@@ -44,8 +46,6 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
       placeHolder: 'Upload company logo',
       id: 'company-logo',
     },
-  ];
-  private socialInputs = [
     {
       label: 'Company Website',
       required: true,
@@ -74,9 +74,6 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
       placeHolder: 'linkedin',
       id: 'company-linkedIn',
     },
-  ];
-
-  private locationInputs = [
     {
       label: 'address:',
       required: true,
@@ -121,6 +118,8 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
       facebook: '',
       linkedIn: '',
       twitter: '',
+      currentForm: 0,
+      forms: [],
     };
 
     this.sendRegistrationToServer = this.sendRegistrationToServer.bind(this);
@@ -168,7 +167,7 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
             <h3>tester</h3>
             <SimpleForm
               header={'location'}
-              inputs={this.infoInputs}
+              inputs={this.inputs}
               submitBtnText={'Enter Company'}
               verifyInputs={null}
               onSubmitCB={this.handleEmployerSubmit}

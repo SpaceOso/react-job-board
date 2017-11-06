@@ -3,7 +3,7 @@ import * as React from 'react';
 import './SimpleForm.scss';
 import SimpleFormInput from './SimpleFormInput';
 
-interface SFInput {
+export interface SFInput {
   label: string;
   required: boolean;
   type: string;
@@ -23,6 +23,7 @@ interface MyProps {
   submitBtnText: string;
   verifyInputs: string[] | null;
   onSubmitCB: (any) => void;
+  joined?: boolean;
 }
 
 class SimpleForm extends React.Component<MyProps, any> {
@@ -170,12 +171,17 @@ class SimpleForm extends React.Component<MyProps, any> {
           accept={input.accept}
           type={input.type}
         />
-        {this.state.inputValues[ iID ].SF_error === true ? <div className="input-error-box">{this.state.inputValues[ iID ].SF_errorMessage}</div> : null}
+        {this.state.inputValues[ iID ].SF_error === true ?
+          <div className="input-error-box">{this.state.inputValues[ iID ].SF_errorMessage}</div> : null}
       </div>
     );
   }
 
   createInputs(): JSX.Element[] {
+    let pairIndex = 0;
+    let progressCount = 0;
+    const combinedRows: any[] = [];
+    combinedRows[ pairIndex ] = [];
     return this.props.inputs.map((input, index) => {
 
       // inputID
@@ -183,6 +189,28 @@ class SimpleForm extends React.Component<MyProps, any> {
 
       if (input.type === 'file') {
         return this.createFileInput(input, index, iID);
+      }
+
+      if (this.props.joined === true) {
+        if (progressCount <= 1) {
+          combinedRows[ pairIndex ].push(
+            <SimpleFormInput
+              iID={iID}
+              input={input}
+              index={index}
+              key={`${index}${iID}`}
+              changeCB={this.handleChange}
+              inputValues={this.state.inputValues}
+            />,
+          );
+          progressCount = progressCount + 1;
+        }
+
+        if (progressCount === 2) {
+          pairIndex = pairIndex + 1;
+          progressCount = 0;
+          combinedRows[ pairIndex ] = [];
+        }
       }
 
       return (
