@@ -177,11 +177,41 @@ class SimpleForm extends React.Component<MyProps, any> {
     );
   }
 
-  createInputs(): JSX.Element[] {
-    let pairIndex = 0;
-    let progressCount = 0;
-    const combinedRows: any[] = [];
-    combinedRows[ pairIndex ] = [];
+  createJointInputs() {
+    return this.props.inputs.map((input, index) => {
+      let pairIndex = 0;
+      let progressCount = 0;
+      const combinedRows: any[] = [];
+      combinedRows[ pairIndex ] = [];
+
+      if (input.type === 'file') {
+        return this.createFileInput(input, index, iID);
+      }
+
+      if (progressCount <= 1) {
+        combinedRows[ pairIndex ].push(
+          <SimpleFormInput
+            iID={iID}
+            input={input}
+            index={index}
+            key={`${index}${iID}`}
+            changeCB={this.handleChange}
+            inputValues={this.state.inputValues}
+          />,
+        );
+        progressCount = progressCount + 1;
+      }
+
+      if (progressCount === 2) {
+        pairIndex = pairIndex + 1;
+        progressCount = 0;
+        combinedRows[ pairIndex ] = [];
+      }
+    });
+  }
+
+  createInputs(): JSX.Element[ ] {
+
     return this.props.inputs.map((input, index) => {
 
       // inputID
@@ -191,27 +221,7 @@ class SimpleForm extends React.Component<MyProps, any> {
         return this.createFileInput(input, index, iID);
       }
 
-      if (this.props.joined === true) {
-        if (progressCount <= 1) {
-          combinedRows[ pairIndex ].push(
-            <SimpleFormInput
-              iID={iID}
-              input={input}
-              index={index}
-              key={`${index}${iID}`}
-              changeCB={this.handleChange}
-              inputValues={this.state.inputValues}
-            />,
-          );
-          progressCount = progressCount + 1;
-        }
-
-        if (progressCount === 2) {
-          pairIndex = pairIndex + 1;
-          progressCount = 0;
-          combinedRows[ pairIndex ] = [];
-        }
-      }
+      console.log('the combined rows:', combinedRows);
 
       return (
         <SimpleFormInput
