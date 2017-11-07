@@ -171,23 +171,25 @@ class SimpleForm extends React.Component<MyProps, any> {
           accept={input.accept}
           type={input.type}
         />
-        {this.state.inputValues[ iID ].SF_error === true ?
-          <div className="input-error-box">{this.state.inputValues[ iID ].SF_errorMessage}</div> : null}
+        {this.state.inputValues[ iID ].SF_error === true ? <div className="input-error-box">{this.state.inputValues[ iID ].SF_errorMessage}</div> : null}
       </div>
     );
   }
 
-  createJointInputs() {
+  createJointInputs(): any[][] {
     return this.props.inputs.map((input, index) => {
       let pairIndex = 0;
       let progressCount = 0;
       const combinedRows: any[] = [];
       combinedRows[ pairIndex ] = [];
+      let fileInput: JSX.Element;
+
+      // inputID
+      const iID = input.id;
 
       if (input.type === 'file') {
-        return this.createFileInput(input, index, iID);
+        fileInput = this.createFileInput(input, index, iID);
       }
-
       if (progressCount <= 1) {
         combinedRows[ pairIndex ].push(
           <SimpleFormInput
@@ -207,11 +209,15 @@ class SimpleForm extends React.Component<MyProps, any> {
         progressCount = 0;
         combinedRows[ pairIndex ] = [];
       }
+
+      console.log('the combined rows:', combinedRows);
+
+      return combinedRows;
+
     });
   }
 
   createInputs(): JSX.Element[ ] {
-
     return this.props.inputs.map((input, index) => {
 
       // inputID
@@ -220,8 +226,6 @@ class SimpleForm extends React.Component<MyProps, any> {
       if (input.type === 'file') {
         return this.createFileInput(input, index, iID);
       }
-
-      console.log('the combined rows:', combinedRows);
 
       return (
         <SimpleFormInput
@@ -241,7 +245,7 @@ class SimpleForm extends React.Component<MyProps, any> {
       <div className="simple-form">
         <form action="" onSubmit={this.handleSubmit}>
           <h1>{this.props.header}</h1>
-          <div>{this.createInputs()}</div>
+          <div>{this.props.joined === true ? this.createJointInputs() : this.createInputs()}</div>
           <button className="btn-standard">Submit Form</button>
         </form>
         {/*<div className="form-error-box">Erorr: Please see errors above.</div>*/}
