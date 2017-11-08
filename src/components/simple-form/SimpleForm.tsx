@@ -24,6 +24,7 @@ interface MyProps {
   verifyInputs: string[] | null;
   onSubmitCB: (any) => void;
   joined?: boolean;
+  style?: {};
 }
 
 class SimpleForm extends React.Component<MyProps, any> {
@@ -183,21 +184,18 @@ class SimpleForm extends React.Component<MyProps, any> {
 
     for (let i = 0; i < totalInputs; i + 1) {
       adjustArray.push(
-        <div key={`${i}joinedinput`}>
+        <div key={`${i}joinedinput`} className={'joined-row'}>
           {inputs[i]}
           {inputs[i + 1]}
         </div>,
       );
       i = i + inputPerRow;
     }
-    console.log("adjusted array:", adjustArray);
-
     return adjustArray;
   }
 
   createInputs(): JSX.Element[ ] {
-    let inputElements: any[] = [];
-    inputElements = this.props.inputs.map((input, index) => {
+    const inputElements = this.props.inputs.map((input, index) => {
 
       // inputID
       const iID = input.id;
@@ -227,7 +225,7 @@ class SimpleForm extends React.Component<MyProps, any> {
 
   render() {
     return (
-      <div className="simple-form">
+      <div className="simple-form" style={this.props.style}>
         <form action="" onSubmit={this.handleSubmit}>
           <h1>{this.props.header}</h1>
           <div>{this.createInputs()}</div>

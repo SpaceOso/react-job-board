@@ -126,6 +126,7 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
             onSubmitCB={this.handleSubmit}
             verifyInputs={['email', 'password']}
             joined={true}
+            style={{ width: '57rem' }}
           />
           {/*Once the user registers it should take them to the dashboard*/}
           {this.props.user.isAuth === true ? this.redirectToDashboard() : null}

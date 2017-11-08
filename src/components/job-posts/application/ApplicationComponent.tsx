@@ -131,6 +131,7 @@ class ApplicationComponent extends React.Component<MyProps> {
           submitBtnText={'Submit Application'}
           verifyInputs={null}
           onSubmitCB={this.handleApplicationSubmit}
+          joined={true}
         />
         I'm the application component
       </div>
