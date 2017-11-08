@@ -176,49 +176,20 @@ class SimpleForm extends React.Component<MyProps, any> {
     );
   }
 
-  createJointInputs(): any[][] {
-    return this.props.inputs.map((input, index) => {
-      let pairIndex = 0;
-      let progressCount = 0;
-      const combinedRows: any[] = [];
-      combinedRows[ pairIndex ] = [];
-      let fileInput: JSX.Element;
+  createJointInputs(inputs: JSX.Element[]): JSX.Element[] {
+    const inputPerRow: number = 2;
+    const totalInputs: number = inputs.length;
 
-      // inputID
-      const iID = input.id;
+    for (let i = 0; i < inputs.length; i++) {
 
-      if (input.type === 'file') {
-        fileInput = this.createFileInput(input, index, iID);
-      }
-      if (progressCount <= 1) {
-        combinedRows[ pairIndex ].push(
-          <SimpleFormInput
-            iID={iID}
-            input={input}
-            index={index}
-            key={`${index}${iID}`}
-            changeCB={this.handleChange}
-            inputValues={this.state.inputValues}
-          />,
-        );
-        progressCount = progressCount + 1;
-      }
+    }
 
-      if (progressCount === 2) {
-        pairIndex = pairIndex + 1;
-        progressCount = 0;
-        combinedRows[ pairIndex ] = [];
-      }
-
-      console.log('the combined rows:', combinedRows);
-
-      return combinedRows;
-
-    });
+    return inputs;
   }
 
   createInputs(): JSX.Element[ ] {
-    return this.props.inputs.map((input, index) => {
+    let inputElements: any[] = [];
+    inputElements = this.props.inputs.map((input, index) => {
 
       // inputID
       const iID = input.id;
@@ -238,6 +209,12 @@ class SimpleForm extends React.Component<MyProps, any> {
         />
       );
     });
+
+    if (this.props.joined === true) {
+      return this.createJointInputs(inputElements);
+    }
+
+    return inputElements;
   }
 
   render() {
@@ -245,7 +222,7 @@ class SimpleForm extends React.Component<MyProps, any> {
       <div className="simple-form">
         <form action="" onSubmit={this.handleSubmit}>
           <h1>{this.props.header}</h1>
-          <div>{this.props.joined === true ? this.createJointInputs() : this.createInputs()}</div>
+          <div>{this.createInputs()}</div>
           <button className="btn-standard">Submit Form</button>
         </form>
         {/*<div className="form-error-box">Erorr: Please see errors above.</div>*/}
