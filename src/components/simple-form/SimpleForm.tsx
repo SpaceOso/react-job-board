@@ -179,12 +179,20 @@ class SimpleForm extends React.Component<MyProps, any> {
   createJointInputs(inputs: JSX.Element[]): JSX.Element[] {
     const inputPerRow: number = 2;
     const totalInputs: number = inputs.length;
+    const adjustArray: any[] = [];
 
-    for (let i = 0; i < inputs.length; i++) {
-
+    for (let i = 0; i < totalInputs; i + 1) {
+      adjustArray.push(
+        <div key={`${i}joinedinput`}>
+          {inputs[i]}
+          {inputs[i + 1]}
+        </div>,
+      );
+      i = i + inputPerRow;
     }
+    console.log("adjusted array:", adjustArray);
 
-    return inputs;
+    return adjustArray;
   }
 
   createInputs(): JSX.Element[ ] {
