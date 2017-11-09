@@ -1,5 +1,5 @@
 @import "variables";
-@import "../components/header/header";
+@import "../components/header/Header";
 html {
   font-size: 62.5%; /* font-size 1em = 10px on default browser settings */
   box-sizing: border-box;
@@ -83,6 +83,16 @@ input[type='password']::placeholder{
   font-size: 1.3rem;
 }
 
+select{
+  background-color: $inputBg;
+  height: 45px;
+  border: 1 px solid $accentColor;
+  color: $inputText;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 6px;
+}
+
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset;
 }
@@ -92,9 +102,13 @@ input:-webkit-autofill {
 .btn-standard{
   background-color: $button;
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   color: $white;
   min-height: 35px;
+}
+
+.btn-standard-selected{
+  background-color: $buttonActivated;
 }
 
 .text-left{
@@ -113,12 +127,9 @@ hr.style1 {
 
 .job-container{
   display: flex;
-  //align-content: flex-start;
-  //justify-content: flex-start;
   width: 100%;
   background-color: palevioletred;
 }
-
 
 .inlineblock{
   display: inline-block;

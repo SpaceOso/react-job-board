@@ -1,16 +1,15 @@
 import * as React from 'react';
 
-import './styles/spinnerComponent.scss';
+import './styles/SpinnerComponent.scss';
 
-function SpinnerComponent () {
-        return (
-            <div className="spinner-component">
-                <div className="loader">
-                    Loading your data...
-                </div>
-            </div>
-
-        )
+function spinnerComponent(): JSX.Element {
+  return (
+    <div className="spinner-component">
+      <div className="loader">
+        Loading your data...
+      </div>
+    </div>
+  );
 }
 
-export default SpinnerComponent;
+export default spinnerComponent;
