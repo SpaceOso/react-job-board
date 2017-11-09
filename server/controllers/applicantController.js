@@ -9,6 +9,22 @@ module.exports = {
 		"use strict";
 		console.log("user created");
 		console.log("user information:", req.body);
+		console.log("the user files:", req.files);
+
+		let resume = '';
+		let coverLetter = '';
+
+		console.log('resume:', req.files.resume);
+
+        if (req.files.resume !== null || req.files.resume !== undefined) {
+           resume = req.files.resume[0].filename;
+        }
+
+        if(req.files.coverLetter !== null || req.files.coverLetter !== undefined){
+        	coverLetter = req.files.coverLetter[0].filename;
+		}
+
+
 		return Applicants
 			.create({
 				firstName: req.body.fName,
@@ -22,8 +38,8 @@ module.exports = {
 				website: req.body.website,
 				linkedin: req.body.linkedin,
 				github: req.body.github,
-				resume: req.body.resume,
-				coverLetter: req.body.coverLetter,
+				resume: resume,
+				coverLetter: coverLetter,
 				jobId: req.body.jobId,
 				employerId: req.body.employerId
 			})
@@ -41,6 +57,7 @@ module.exports = {
 
 			})
 			.catch((error) => {
+				console.log(error);
 				res.status(400).send(error);
 			})
 	},
