@@ -29,7 +29,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
     console.log('button has been clicked', event.currentTarget.id);
     // this.setState({activePage: event});
-    this.props.updatePage(event);
+    this.props.updatePage(event.currentTarget.id);
   }
 
   createPrevButton() {
