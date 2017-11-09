@@ -115,7 +115,6 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
 
   returnRegisterForm() {
 
-
     return (
       <div className="employer-register-Component">
         <div className="register-form">
