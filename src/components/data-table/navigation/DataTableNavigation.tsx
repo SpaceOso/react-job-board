@@ -28,8 +28,13 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
 
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
     console.log('button has been clicked', event.currentTarget.id);
-    // this.setState({activePage: event});
-    this.props.updatePage(event.currentTarget.id);
+    const id = parseInt(event.currentTarget.id, 0);
+
+    if (Number.isNaN(id)) {
+      this.props.updatePage(event.currentTarget.id);
+    } else {
+      this.props.updatePage(id);
+    }
   }
 
   createPrevButton() {
@@ -67,7 +72,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
 
     pageButtons.push(this.createPrevButton());
 
-    for (let i = 0; i < this.props.totalPages; i++) {
+    for (let i = 0; i < this.props.totalPages; i + 1) {
       pageButtons.push(
         <div
           key={`page-${i}`}

@@ -83,7 +83,7 @@ class DataTable extends React.Component<MyProps, any> {
 
   changeCurrentPage(newPage: number | string) {
     let currentPage = this.state.currentPage;
-    console.log('newPage:', newPage);
+
     if (typeof newPage === 'string') {
       if (newPage === 'next') {
         currentPage += 1;
