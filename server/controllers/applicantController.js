@@ -15,12 +15,13 @@ module.exports = {
 		let coverLetter = '';
 
 		console.log('resume:', req.files.resume);
+		console.log('coverLetter', req.files.coverLetter);
 
-        if (req.files.resume !== null || req.files.resume !== undefined) {
+        if ( req.files.resume !== undefined) {
            resume = req.files.resume[0].filename;
         }
 
-        if(req.files.coverLetter !== null || req.files.coverLetter !== undefined){
+        if(req.files.coverLetter !== undefined){
         	coverLetter = req.files.coverLetter[0].filename;
 		}
 
