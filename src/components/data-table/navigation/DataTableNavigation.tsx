@@ -45,7 +45,8 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
         className="data-nav-button"
         onClick={this.handleClick}
       >
-        {'<'}
+        <i className="fa fa-arrow-left" aria-hidden="true" />
+        Prev
       </div>);
   }
 
@@ -57,7 +58,8 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
         id={'next'}
         onClick={this.handleClick}
       >
-        {'>'}
+        Next
+        <i className="fa fa-arrow-right" aria-hidden="true" />
       </div>
     );
   }
@@ -92,14 +94,9 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
 
   render() {
     return (
-      <div>
-        I'm the data table navigation
-        totalPages: {this.props.totalPages}
-        on page right now: {this.props.currentPage}
         <div className="data-nav-container">
           {this.createButtons()}
         </div>
-      </div>
     );
   }
 }
