@@ -56,12 +56,12 @@ class DataTable extends React.Component<MyProps, any> {
   }
 
   createRowData(rowObj) {
+    console.log(this.props.columnInfo);
     return this.props.columnInfo.map((column, value) => {
       if (column.join !== undefined && column.join === true) {
 
         const combinedDataArr: string[] = [];
-
-        for (let i = 0; i < column.properties.length; i++) {
+        for (let i = 0; i < column.properties.length; i += 1) {
 
           // TODO need to implement this, this checks to see if the property is nested 'location.city'
           /*	if(column.properties[i].includes('.')){
@@ -70,7 +70,6 @@ class DataTable extends React.Component<MyProps, any> {
               let value = dividedString[1];
               combinedDataArr.push(rowObj[key]);
             }*/
-
           combinedDataArr.push(rowObj[ column.properties[ i ] ]);
         }
         return <td key={`${rowObj.id}${value}`}>{combinedDataArr.join(' ')}</td>;
@@ -106,14 +105,12 @@ class DataTable extends React.Component<MyProps, any> {
   }
 
   createRows() {
-
     if (this.state.pages.length <= 0) {
       return;
     }
 
     return this.state.pages[ this.state.currentPage ].map((rowObj, index) => {
       // TODO need to paginate this component by creating a prop that handles how many pages there should be per data table
-      // TODO learn why passing a blank function worked instead of passing rowOBJ in the first parameter
       if (index > this.state.totalRows) {
         console.log('we should have created another page!!!');
       }
@@ -123,9 +120,7 @@ class DataTable extends React.Component<MyProps, any> {
       // if there is a special class it will add it to every row whos
       // property matches the specialClass key
       if (this.props.specialClasses !== null) {
-        console.log('this object has special classes:', rowObj.interest);
         specialClassName = this.props.specialClasses[ rowObj.interest ];
-
       }
 
       return (

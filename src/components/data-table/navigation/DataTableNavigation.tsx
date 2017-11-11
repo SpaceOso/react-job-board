@@ -72,7 +72,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
 
     pageButtons.push(this.createPrevButton());
 
-    for (let i = 0; i < this.props.totalPages; i + 1) {
+    for (let i = 0; i < this.props.totalPages; i++) {
       pageButtons.push(
         <div
           key={`page-${i}`}
