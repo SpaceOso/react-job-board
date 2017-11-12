@@ -44,6 +44,7 @@ class UserDashboardComponent extends React.Component<Props, any> {
    * @param file {File} - The logo of the employer
    */
   handleEmployerRegistration(employerData, file) {
+    console.log('handleEmployerRegistration:', employerData, file);
     const userData = { ...employerData, userId: this.props.user.id };
     this.props.submitEmployerRegistration(userData, file);
   }

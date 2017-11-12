@@ -19,11 +19,19 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     super(props);
 
     this.state = {
-      thisSection: 0, totalSections: 0, // activePage: 0
+      thisSection: 0,
+      totalSections: 0, // activePage: 0
     };
 
     this.createButtons = this.createButtons.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('will recieve:', nextProps);
+    if (nextProps.totalPages !== this.props.totalPages) {
+      this.setState({ totalSections: this.props.totalPages / 4 });
+    }
   }
 
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -45,7 +53,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
         className="data-nav-button"
         onClick={this.handleClick}
       >
-        <i className="fa fa-arrow-left" aria-hidden="true" />
+        <i className="fa fa-arrow-left" aria-hidden="true"/>
         Prev
       </div>);
   }
@@ -59,20 +67,31 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
         onClick={this.handleClick}
       >
         Next
-        <i className="fa fa-arrow-right" aria-hidden="true" />
+        <i className="fa fa-arrow-right" aria-hidden="true"/>
+      </div>
+    );
+  }
+
+  createNextSectionButton() {
+    return (
+      <div
+        className={'data-nav-button'}
+        key={'section-btn'}
+        id={'section-next'}
+        onClick={this.handleClick}
+      >
+        ...
       </div>
     );
   }
 
   createButtons() {
     const pageButtons: any = [];
-
-    // TODO need to check if wee need to add '...' buttons to skip more than a page at a time
-    if (this.props.totalPages > 4) {
-      // then we should add '...' buttons to skip to the 5th page
-    }
-
-    pageButtons.push(this.createPrevButton());
+    const helperButtons: any = [];
+    console.log('sections:', this.state.totalSections);
+    console.log('this section', this.state.thisSection);
+    console.log('activePage', this.state.activePage);
+    helperButtons.push(this.createPrevButton());
 
     for (let i = 0; i < this.props.totalPages; i++) {
       pageButtons.push(
@@ -87,16 +106,25 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
       );
     }
 
-    pageButtons.push(this.createNextButton());
+    // TODO need to check if wee need to add '...' buttons to skip more than a page at a time
+    if (this.props.totalPages > 4) {
+      // then we should add '...' buttons to skip to the 5th page
+      helperButtons.push(this.createNextSectionButton());
+    }
+
+    /**
+     * This creates the next page button
+     */
+    helperButtons.push(this.createNextButton());
 
     return pageButtons;
   }
 
   render() {
     return (
-        <div className="data-nav-container">
-          {this.createButtons()}
-        </div>
+      <div className="data-nav-container">
+        {this.createButtons()}
+      </div>
     );
   }
 }

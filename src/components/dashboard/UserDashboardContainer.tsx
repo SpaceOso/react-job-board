@@ -1,20 +1,19 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-//actions
+// actions
 import {
-	submitEmployerRegistration, saveJobPost,
-	fetchAllEmployerJobModels
+  fetchAllEmployerJobModels, saveJobPost,
+  submitEmployerRegistration,
 } from '../../actions/employerDashboardActions';
 
-//styles
+// styles
 import './UserDashboardContainer.scss';
 
-//components
+// components
 
-import {StoreState} from "../../types/index";
-import UserDashboardComponent from "./UserDashboardComponent";
-
+import { StoreState } from '../../types/index';
+import UserDashboardComponent from './UserDashboardComponent';
 
 /*What data are we going to need?
  * jobs
@@ -33,22 +32,27 @@ import UserDashboardComponent from "./UserDashboardComponent";
  * an applicant at a glance component
  * a component to view the applicants resume on click*/
 
-
 /*need to show a company sign up form before proceeding*/
 
 // function mapStateToProps({user, employer}: StoreState, {...props} ) {
-function mapStateToProps({user, employer, siteFetching}: StoreState ) {
-	return {
-		user,
-		employer,
-		siteFetching
-	}
+function mapStateToProps({ user, employer, siteFetching }: StoreState) {
+  return {
+    user,
+    employer,
+    siteFetching,
+  };
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	saveJobPost: (jobInfo, userId) =>{dispatch(saveJobPost(jobInfo, userId))},
-	fetchEmployerJobs: (employerId) =>{dispatch(fetchAllEmployerJobModels(employerId))},
-	submitEmployerRegistration: (employerData, file: File) =>{dispatch(submitEmployerRegistration(employerData, file))},
+const mapDispatchToProps = dispatch => ({
+  saveJobPost: (jobInfo, userId) => {
+    dispatch(saveJobPost(jobInfo, userId));
+  },
+  fetchEmployerJobs: (employerId) => {
+    dispatch(fetchAllEmployerJobModels(employerId));
+  },
+  submitEmployerRegistration: (employerData, file: File) => {
+    dispatch(submitEmployerRegistration(employerData, file));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDashboardComponent);

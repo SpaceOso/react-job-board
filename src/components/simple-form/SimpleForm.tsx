@@ -59,6 +59,7 @@ class SimpleForm extends React.Component<MyProps, any> {
     this.createInputs = this.createInputs.bind(this);
     this.createFileInput = this.createFileInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   /**
@@ -75,7 +76,6 @@ class SimpleForm extends React.Component<MyProps, any> {
     keyObject[ key ].content = event;
 
     this.setState({ inputValues: keyObject });
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   /**

@@ -13,16 +13,6 @@ interface CompRegisterProps extends RouteComponentProps<any> {
 }
 
 interface MyState {
-  name: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  logoImg: File | null;
-  website: string;
-  facebook: string;
-  linkedIn: string;
-  twitter: string;
   currentForm: number;
   forms: JSX.Element[];
 }
@@ -35,7 +25,7 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
       required: true,
       type: 'text',
       placeHolder: 'Enter company name',
-      id: 'company-name',
+      id: 'name',
     },
     {
       label: 'Company logo:',
@@ -44,63 +34,63 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
       name: 'company-logo',
       accept: 'image/gif, image/png, image/jpeg',
       placeHolder: 'Upload company logo',
-      id: 'company-logo',
+      id: 'logo',
     },
     {
       label: 'Company Website',
       required: true,
       type: 'text',
       placeHolder: 'website',
-      id: 'company-website',
+      id: 'website',
     },
     {
       label: 'twitter',
       required: false,
       type: 'text',
       placeHolder: 'twitter',
-      id: 'company-twitter',
+      id: 'twitter',
     },
     {
       label: 'facebook',
       required: false,
       type: 'text',
       placeHolder: 'facebook',
-      id: 'company-facebook',
+      id: 'facebook',
     },
     {
       label: 'linkedin',
       required: false,
       type: 'text',
       placeHolder: 'linkedin',
-      id: 'company-linkedIn',
+      id: 'linkedIn',
     },
     {
       label: 'address:',
       required: true,
-      type: 'text',
+      type: 'address',
       placeHolder: 'address',
-      id: 'company-address',
+      id: 'address',
     },
     {
       label: 'city:',
       required: true,
       type: 'text',
       placeHolder: 'text',
-      id: 'company-city',
+      id: 'city',
     },
     {
       label: 'state:',
       required: true,
       type: 'text',
       placeHolder: 'state',
-      id: 'company-state',
+      id: 'state',
     },
     {
       label: 'zip',
       required: true,
       type: 'text',
       placeHolder: 'zip',
-      id: 'company-zip',
+      id: 'zip',
     },
   ];
 
@@ -108,21 +98,10 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
     super(props);
 
     this.state = {
-      name: '',
-      address: '',
-      city: '',
-      state: '',
-      zip: '',
-      logoImg: null,
-      website: '',
-      facebook: '',
-      linkedIn: '',
-      twitter: '',
       currentForm: 0,
       forms: [],
     };
 
-    this.sendRegistrationToServer = this.sendRegistrationToServer.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleEmployerSubmit = this.handleEmployerSubmit.bind(this);
     this.renderRegisterForm = this.renderRegisterForm.bind(this);
@@ -131,20 +110,14 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
   /**
    * This well send the update state to the back end
    */
-  sendRegistrationToServer(file: File | null) {
-    this.props.submitData(this.state, file);
-  }
-
-  handleEmployerSubmit(event) {
-    (event as Event).preventDefault();
-
+  handleEmployerSubmit(formData) {
     /** If there was a file uploaded update logoImg state property */
-    if (this.filesInput.files !== null) {
-      if (this.filesInput.files.length > 0) {
-        this.sendRegistrationToServer(this.filesInput.files[ 0 ]);
-      } else {
-        this.sendRegistrationToServer(null);
-      }
+    if (formData.logo !== undefined) {
+      console.log('sending:', formData, formData.logo);
+      this.props.submitData(formData, formData.logo);
+    } else {
+      this.props.submitData(formData, null);
+      console.log('only sending:', formData);
     }
 
   }

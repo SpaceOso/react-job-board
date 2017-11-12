@@ -47,8 +47,8 @@ class DataTable extends React.Component<MyProps, any> {
         }
       }
     });
-
-    this.setState({ pages: pageList });
+    console.log('total pages:', pageList.length);
+    this.setState({ pages: pageList.slice(0) });
   }
 
   createHeaders() {
@@ -106,6 +106,7 @@ class DataTable extends React.Component<MyProps, any> {
 
   createRows() {
     if (this.state.pages.length <= 0) {
+      console.log('pages was less than 0');
       return;
     }
 
