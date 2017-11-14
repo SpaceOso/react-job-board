@@ -139,7 +139,7 @@ class DataTable extends React.Component<MyProps, any> {
   render() {
 
     return (
-      <div>I'm the DataTable Component
+      <div>
         <table className="data-table">
           <tbody>
           <tr key="headers">
@@ -148,11 +148,7 @@ class DataTable extends React.Component<MyProps, any> {
           {this.createRows()}
           </tbody>
         </table>
-        <DataTableNavigation
-          currentPage={this.state.currentPage}
-          totalPages={this.state.pages.length}
-          updatePage={this.changeCurrentPage}
-        />
+        {this.state.pages.length > 1 ? <DataTableNavigation currentPage={this.state.currentPage} totalPages={this.state.pages.length} updatePage={this.changeCurrentPage}/> : null}
       </div>
     );
   }

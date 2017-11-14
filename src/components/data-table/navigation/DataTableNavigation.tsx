@@ -10,8 +10,10 @@ interface MyProps {
 
 interface MyState {
   thisSection?: number;
+  currentSection: number;
   totalSections?: number;
   activePage?: number;
+  totalPageButtons: any[] | null;
 }
 
 class DataTableNavigation extends React.Component<MyProps, MyState> {
@@ -20,11 +22,14 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
 
     this.state = {
       thisSection: 0,
-      totalSections: 0, // activePage: 0
+      currentSection: 0,
+      totalPageButtons: null,
+      totalSections: 0,
     };
 
     this.createButtons = this.createButtons.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.createPageButtonSections = this.createPageButtonSections.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,6 +37,15 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     if (nextProps.totalPages !== this.props.totalPages) {
       this.setState({ totalSections: this.props.totalPages / 4 });
     }
+  }
+
+  updateSection() {
+    const newSection = this.state.currentSection + 1;
+    this.setState({ currentSection: newSection });
+  }
+
+  componentDidMount() {
+    this.createPageButtonSections();
   }
 
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -85,16 +99,20 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     );
   }
 
-  createButtons() {
-    const pageButtons: any = [];
-    const helperButtons: any = [];
+  createPageButtonSections() {
+    if (this.props.totalPages <= 1) {
+      return null;
+    }
+    const pageButtons: any[][] = [];
     console.log('sections:', this.state.totalSections);
     console.log('this section', this.state.thisSection);
     console.log('activePage', this.state.activePage);
-    helperButtons.push(this.createPrevButton());
 
+    let sectionCount = 0;
+    let pageCount = 0;
+    pageButtons[sectionCount] = [];
     for (let i = 0; i < this.props.totalPages; i++) {
-      pageButtons.push(
+      pageButtons[sectionCount].push(
         <div
           key={`page-${i}`}
           id={`${i}`}
@@ -104,20 +122,61 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
           {i + 1}
         </div>,
       );
+      pageCount = pageCount + 1;
+      if (pageCount >= 4) {
+        pageCount = 0;
+        sectionCount = sectionCount + 1;
+        pageButtons[sectionCount] = [];
+      }
     }
+    console.log('adding to state:', pageButtons);
+    this.setState({ totalPageButtons: [...pageButtons] });
+  }
 
-    // TODO need to check if wee need to add '...' buttons to skip more than a page at a time
+  createButtons() {
+    if (this.props.totalPages <= 1) {
+      return null;
+    }
+    const pageButtons: any[][] = [];
+    const prevButtonSet: any = [];
+    const nextButtonSet: any = [];
+    console.log('sections:', this.state.totalSections);
+    console.log('this section', this.state.thisSection);
+    console.log('activePage', this.state.activePage);
+    prevButtonSet.push(this.createPrevButton());
+
+    let sectionCount = 0;
+    let pageCount = 0;
+    pageButtons[sectionCount] = [];
+    for (let i = 0; i < this.props.totalPages; i++) {
+      pageButtons[sectionCount].push(
+        <div
+          key={`page-${i}`}
+          id={`${i}`}
+          onClick={this.handleClick}
+          className={this.props.currentPage === i ? 'data-nav-button active' : 'data-nav-button'}
+        >
+          {i + 1}
+        </div>,
+      );
+      pageCount = pageCount + 1;
+      if (pageCount >= 4) {
+        sectionCount = sectionCount + 1;
+        pageButtons[sectionCount] = [];
+      }
+    }
+    // TODO need to check if we need to add '...' buttons to skip more than a page at a time
     if (this.props.totalPages > 4) {
       // then we should add '...' buttons to skip to the 5th page
-      helperButtons.push(this.createNextSectionButton());
+      nextButtonSet.push(this.createNextSectionButton());
     }
 
     /**
      * This creates the next page button
      */
-    helperButtons.push(this.createNextButton());
+    nextButtonSet.push(this.createNextButton());
 
-    return pageButtons;
+    return prevButtonSet.concat(pageButtons[0], nextButtonSet);
   }
 
   render() {

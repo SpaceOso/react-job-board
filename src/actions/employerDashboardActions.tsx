@@ -1,14 +1,12 @@
 import axios from 'axios';
+import { setAuth } from '../utils/utils';
+import { setEmployerAndUser, setSiteIdle, siteFetch } from './authActions';
 import { EDITING_JOB_POST_SUCCESS, EMPLOYER_FETCHING, EMPLOYER_IDLE, ROOT_URL } from './index';
-import { fetchingJobs } from "./jobActions";
-import { Employer } from "../types/index";
-import { setEmployerAndUser, setSiteIdle, siteFetch } from "./authActions";
-import { setAuth } from "../utils/utils";
 
-export const GET_THIS_EMPLOYER_JOBS_SUCCESS = "GET_THIS_EMPLOYER_JOBS_SUCCESS";
-export const FETCHING_THIS_EMPLOYER_JOBS = "FETCHING_THIS_EMPLOYER_JOBS";
-export const REGISTER_EMPLOYER_SUCCESS = "REGISTER_EMPLOYER_SUCCESS";
-export const EDITING_JOB_POST = "EDITING_JOB_POST";
+export const GET_THIS_EMPLOYER_JOBS_SUCCESS = 'GET_THIS_EMPLOYER_JOBS_SUCCESS';
+export const FETCHING_THIS_EMPLOYER_JOBS = 'FETCHING_THIS_EMPLOYER_JOBS';
+export const REGISTER_EMPLOYER_SUCCESS = 'REGISTER_EMPLOYER_SUCCESS';
+export const EDITING_JOB_POST = 'EDITING_JOB_POST';
 
 /*What are some of the actions you expect the dashboard to require?
  * Get all jobs
@@ -22,67 +20,67 @@ export const EDITING_JOB_POST = "EDITING_JOB_POST";
 export function fetchingThisEmployerInfo() {
   return {
     type: FETCHING_THIS_EMPLOYER_JOBS,
-    payload: "fetching jobs"
-  }
+    payload: 'fetching jobs',
+  };
 }
 
 export function registerEmployerSuccess() {
   return {
     type: REGISTER_EMPLOYER_SUCCESS,
-    payload: "employer registered"
-  }
+    payload: 'employer registered',
+  };
 }
 
 export function getThisEmployerJobsSuccess(jobs) {
   return {
     type: GET_THIS_EMPLOYER_JOBS_SUCCESS,
-    payload: jobs
-  }
+    payload: jobs,
+  };
 }
 
 export function editingJobPost() {
   return {
     type: EDITING_JOB_POST,
-    payload: 'editing job post'
-  }
+    payload: 'editing job post',
+  };
 }
 
 export function fetchAllEmployerJobModels(employerId) {
-  console.log("fetching jobs:", employerId);
-  return dispatch => {
-    console.log("YOU HAVE REQUESTED TO OBTAIN ALL THE JOBS OF THE EMPLOYER WITH", employerId);
+  console.log('fetching jobs:', employerId);
+  return (dispatch) => {
+    console.log('YOU HAVE REQUESTED TO OBTAIN ALL THE JOBS OF THE EMPLOYER WITH', employerId);
     dispatch(siteFetch());
     dispatch(employerFetching());
 
     axios.get(`${ROOT_URL}employer/${employerId}/get-jobs`)
       .then((jobs) => {
-        console.log("we have the jobs!", jobs);
+        console.log('we have the jobs!', jobs);
         dispatch(getThisEmployerJobsSuccess(jobs));
         dispatch(employerIdle());
-      })
-  }
+      });
+  };
 }
 
 export function editingJobPostSuccess(jobPost) {
-  console.log("will be dispatching editingJobPostSucces:", jobPost);
+  console.log('will be dispatching editingJobPostSucces:', jobPost);
   return {
     type: EDITING_JOB_POST_SUCCESS,
-    payload: jobPost
-  }
+    payload: jobPost,
+  };
 }
 
 export function employerFetching() {
   return {
     type: EMPLOYER_FETCHING,
-    payload: "Employer Fetching"
-  }
+    payload: 'Employer Fetching',
+  };
 }
 
 export function employerIdle() {
   return {
     type: EMPLOYER_IDLE,
-    payload: "Employer Idle"
-  }
+    payload: 'Employer Idle',
+  };
 }
 
 /**
@@ -92,7 +90,7 @@ export function employerIdle() {
  * @return {(dispatch) => any}
  */
 export function saveJobPost(jobPostInfo, userId) {
-  return dispatch => {
+  return (dispatch) => {
 
     dispatch(employerFetching());
 
@@ -103,10 +101,10 @@ export function saveJobPost(jobPostInfo, userId) {
       })
       .catch((error) => {
         console.log(error);
-        //TODO need to add an error handlers
+        // TODO need to add an error handlers
         dispatch(setSiteIdle());
       });
-  }
+  };
 
 }
 
@@ -119,13 +117,13 @@ export function saveJobPost(jobPostInfo, userId) {
  */
 export function submitEmployerRegistration(employerInfo, file: File) {
 
-  let data = new FormData();
+  const data = new FormData();
   if (file !== null) {
     data.append('file', file);
   }
 
   console.log('employerInfo:', employerInfo);
-  for (let entries in employerInfo) {
+  for (const entries in employerInfo) {
     if (employerInfo.hasOwnProperty(entries)) {
 
       if (entries === 'logo') {
@@ -137,37 +135,36 @@ export function submitEmployerRegistration(employerInfo, file: File) {
     }
   }
 
-  return dispatch => {
+  return (dispatch) => {
 
     dispatch(siteFetch());
 
     axios.post(`${ROOT_URL}api/register/employer`, data)
       .then((response) => {
 
-        console.log("response from the server:", response);
+        console.log('response from the server:', response);
         /*recieving {token, employer}*/
         setAuth(response.data.token);
 
         dispatch(setEmployerAndUser(response.data.employer, response.data.user));
       })
-      .catch((error) => console.log(error))
-  }
+      .catch(error => console.log(error));
+  };
 }
 
-
 export function saveApplicantStatus(applicantInfo) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(siteFetch());
-    console.log("saving application status with:", applicantInfo);
+    console.log('saving application status with:', applicantInfo);
 
     axios.post(`${ROOT_URL}employer/update/${applicantInfo.id}`, applicantInfo)
-      .then(response => {
-        console.log("the response from savingApplicantStatus:", response);
+      .then((response) => {
+        console.log('the response from savingApplicantStatus:', response);
         dispatch(setSiteIdle());
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         dispatch(setSiteIdle());
       });
-  }
+  };
 }
