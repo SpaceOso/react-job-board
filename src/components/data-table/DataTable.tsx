@@ -56,7 +56,6 @@ class DataTable extends React.Component<MyProps, any> {
   }
 
   createRowData(rowObj) {
-    console.log(this.props.columnInfo);
     return this.props.columnInfo.map((column, value) => {
       if (column.join !== undefined && column.join === true) {
 
@@ -80,7 +79,9 @@ class DataTable extends React.Component<MyProps, any> {
     });
   }
 
+  // TODO probably good case for an overload function
   changeCurrentPage(newPage: number | string) {
+    console.log('dataTable changeCurrentPage:', newPage);
     let currentPage = this.state.currentPage;
 
     if (typeof newPage === 'string') {
@@ -95,6 +96,7 @@ class DataTable extends React.Component<MyProps, any> {
         console.log('we blocked from loading a page outside of scope');
       }
     } else {
+      console.log('dataTable setting state: currentPage:', newPage);
       this.setState({ currentPage: newPage });
     }
   }
