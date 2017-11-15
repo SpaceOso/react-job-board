@@ -13,7 +13,6 @@ interface MyState {
   currentSection: number;
   totalSections: number;
   activePage?: number;
-  totalPageButtons: any[] | null;
 }
 
 class DataTableNavigation extends React.Component<MyProps, MyState> {
@@ -22,7 +21,6 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
 
     this.state = {
       currentSection: 0,
-      totalPageButtons: null,
       totalSections: 0,
       activePage: this.props.currentPage,
     };
@@ -37,11 +35,24 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
   componentWillReceiveProps(nextProps) {
     console.log('will recieve:', nextProps);
     if (nextProps.totalPages !== this.props.totalPages && nextProps.totalPages !== 0) {
-      this.setState({ totalSections: this.props.totalPages / 4 });
+      this.setState({ totalSections: parseInt((this.props.totalPages / 4).toFixed(), 2) });
     }
 
     if (nextProps.currentPage !== this.state.activePage) {
-      console.log("the current page is changing");
+      for (let i = 1; i < this.state.totalSections + 1; i++) {
+        console.log('before loop: ', i);
+        if (nextProps.currentPage < (i * 4)) {
+          console.log('currentSection:', this.state.currentSection);
+          console.log('new currentSection:', i);
+          console.log('is less thatn', i * 4);
+          if (this.state.currentSection !== i - 1) {
+            this.setState({ currentSection: i - 1 });
+            break;
+          } else {
+            break;
+          }
+        }
+      }
     }
   }
 
