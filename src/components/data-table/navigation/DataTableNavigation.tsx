@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import './DataNavigation.scss';
+import HTML = Mocha.reporters.HTML
 
 interface MyProps {
   currentPage: number;
@@ -9,7 +10,6 @@ interface MyProps {
 }
 
 interface MyState {
-  thisSection?: number;
   currentSection: number;
   totalSections: number;
   activePage?: number;
@@ -21,7 +21,6 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     super(props);
 
     this.state = {
-      thisSection: 0,
       currentSection: 0,
       totalPageButtons: null,
       totalSections: 0,
@@ -32,32 +31,37 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     this.handleClick = this.handleClick.bind(this);
     this.createPageButtonSections = this.createPageButtonSections.bind(this);
     this.updateSection = this.updateSection.bind(this);
+    this.cratePrevSectionButton = this.cratePrevSectionButton.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('will recieve:', nextProps);
-    if (nextProps.totalPages !== this.props.totalPages) {
+    if (nextProps.totalPages !== this.props.totalPages && nextProps.totalPages !== 0) {
       this.setState({ totalSections: this.props.totalPages / 4 });
     }
-    if (nextProps.currentPage !== this.props.currentPage) {
-      console.log('setting a new currentPage');
-      this.createPageButtonSections();
-      // this.setState({ activePage: nextProps.currentPage });
+
+    if (nextProps.currentPage !== this.state.activePage) {
+      console.log("the current page is changing");
     }
   }
 
-  updateSection() {
-    console.log('section updating()');
-    const newSection = this.state.currentSection + 1;
-    this.setState({ currentSection: newSection });
+  updateSection = (event: React.MouseEvent<HTMLElement>) => {
+    const eventId: string = event.currentTarget.id;
+    const currentSection: number = this.state.currentSection;
+    if (eventId === 'section-next') {
+      this.setState({ currentSection: currentSection + 1 });
+    }
+    if (eventId === 'section-prev') {
+      this.setState({ currentSection: currentSection - 1 });
+    }
   }
 
   componentDidMount() {
-    this.createPageButtonSections();
+    // this.createPageButtonSections();
+    this.setState({ totalSections: this.props.totalPages / 4 });
   }
 
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    console.log('button has been clicked', event.currentTarget.id);
     const id = parseInt(event.currentTarget.id, 0);
 
     if (Number.isNaN(id)) {
@@ -65,7 +69,6 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     } else {
       this.props.updatePage(id);
     }
-    // this.createPageButtonSections();
   }
 
   createPrevButton() {
@@ -79,6 +82,20 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
         <i className="fa fa-arrow-left" aria-hidden="true"/>
         Prev
       </div>);
+  }
+
+  // TODO tie this up
+  cratePrevSectionButton() {
+    return (
+      <div
+        className={'data-nav-button'}
+        key={'section-prev-btn'}
+        id={'section-prev'}
+        onClick={this.updateSection}
+      >
+        ...
+      </div>
+    );
   }
 
   createNextButton() {
@@ -113,15 +130,11 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
       return null;
     }
     const pageButtons: any[][] = [];
-    console.log('sections:', this.state.totalSections);
-    console.log('this section', this.state.thisSection);
-    console.log('activePage', this.props.currentPage);
-
     let sectionCount = 0;
     let pageCount = 0;
     pageButtons[sectionCount] = [];
+
     for (let i = 0; i < this.props.totalPages; i++) {
-      console.log('does activePage match i', this.state.activePage === i, i);
       pageButtons[sectionCount].push(
         <div
           key={`page-${i}`}
@@ -129,9 +142,10 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
           onClick={this.handleClick}
           className={this.props.currentPage === i ? 'data-nav-button active' : 'data-nav-button'}
         >
-          {this.props.currentPage === i ? 'T' : i + 1}
+          {i + 1}
         </div>,
       );
+
       pageCount = pageCount + 1;
       if (pageCount >= 4) {
         pageCount = 0;
@@ -139,8 +153,6 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
         pageButtons[sectionCount] = [];
       }
     }
-    console.log('adding to state:', pageButtons);
-    // this.setState({ totalPageButtons: pageButtons.slice() });
     return pageButtons;
   }
 
@@ -153,9 +165,17 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     const pageButtons = this.createPageButtonSections();
     prevButtonSet.push(this.createPrevButton());
 
-    // TODO need to check if we need to add '...' buttons to skip more than a page at a time
+    /**
+     * This checks if we need a previous section and if we should display it
+     */
+    if (this.state.totalSections > 1 && this.state.currentSection !== 0) {
+      prevButtonSet.push(this.cratePrevSectionButton());
+    }
+
+    /**
+     * This will add the next ... button
+     */
     if (this.props.totalPages > 4) {
-      // then we should add '...' buttons to skip to the 5th page
       nextButtonSet.push(this.createNextSectionButton());
     }
 
@@ -168,7 +188,6 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
       return prevButtonSet.concat(pageButtons[this.state.currentSection], nextButtonSet);
     }
 
-    // return null;
   }
 
   render() {
