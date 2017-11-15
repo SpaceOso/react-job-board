@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import './DataNavigation.scss';
-import HTML = Mocha.reporters.HTML
 
 interface MyProps {
   currentPage: number;
@@ -33,18 +32,13 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('will recieve:', nextProps);
     if (nextProps.totalPages !== this.props.totalPages && nextProps.totalPages !== 0) {
       this.setState({ totalSections: parseInt((this.props.totalPages / 4).toFixed(), 2) });
     }
 
     if (nextProps.currentPage !== this.state.activePage) {
-      for (let i = 1; i < this.state.totalSections + 1; i++) {
-        console.log('before loop: ', i);
+      for (let i = 1; i < this.state.totalSections + 1; i += 1) {
         if (nextProps.currentPage < (i * 4)) {
-          console.log('currentSection:', this.state.currentSection);
-          console.log('new currentSection:', i);
-          console.log('is less thatn', i * 4);
           if (this.state.currentSection !== i - 1) {
             this.setState({ currentSection: i - 1 });
             break;
@@ -68,8 +62,8 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
   }
 
   componentDidMount() {
-    // this.createPageButtonSections();
-    this.setState({ totalSections: this.props.totalPages / 4 });
+    const totalPages = Number((this.props.totalPages / 4).toFixed());
+    this.setState({ totalSections: totalPages });
   }
 
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -82,7 +76,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     }
   }
 
-  createPrevButton() {
+  createPrevButton(): JSX.Element {
     return (
       <div
         key={'prev-btn'}
@@ -95,8 +89,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
       </div>);
   }
 
-  // TODO tie this up
-  cratePrevSectionButton() {
+  cratePrevSectionButton(): JSX.Element {
     return (
       <div
         className={'data-nav-button'}
@@ -109,7 +102,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     );
   }
 
-  createNextButton() {
+  createNextButton(): JSX.Element {
     return (
       <div
         className="data-nav-button"
@@ -123,7 +116,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     );
   }
 
-  createNextSectionButton() {
+  createNextSectionButton(): JSX.Element {
     return (
       <div
         className={'data-nav-button'}
@@ -136,16 +129,16 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     );
   }
 
-  createPageButtonSections() {
+  createPageButtonSections(): JSX.Element[][] | null {
     if (this.props.totalPages <= 1) {
       return null;
     }
-    const pageButtons: any[][] = [];
+    const pageButtons: JSX.Element[][] = [];
     let sectionCount = 0;
     let pageCount = 0;
     pageButtons[sectionCount] = [];
 
-    for (let i = 0; i < this.props.totalPages; i++) {
+    for (let i = 0; i < this.props.totalPages; i += 1) {
       pageButtons[sectionCount].push(
         <div
           key={`page-${i}`}
@@ -167,13 +160,16 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     return pageButtons;
   }
 
-  createButtons() {
+  createButtons(): JSX.Element[] | null {
     if (this.props.totalPages <= 1) {
       return null;
     }
     const prevButtonSet: any = [];
     const nextButtonSet: any = [];
     const pageButtons = this.createPageButtonSections();
+    if (pageButtons === null) {
+      return null;
+    }
     prevButtonSet.push(this.createPrevButton());
 
     /**
@@ -186,7 +182,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     /**
      * This will add the next ... button
      */
-    if (this.props.totalPages > 4) {
+    if (this.props.totalPages > 4 && this.state.currentSection !== this.state.totalSections - 1) {
       nextButtonSet.push(this.createNextSectionButton());
     }
 
@@ -195,9 +191,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
      */
     nextButtonSet.push(this.createNextButton());
 
-    if (pageButtons !== null) {
-      return prevButtonSet.concat(pageButtons[this.state.currentSection], nextButtonSet);
-    }
+    return prevButtonSet.concat(pageButtons[this.state.currentSection], nextButtonSet);
 
   }
 
