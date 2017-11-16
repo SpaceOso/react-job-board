@@ -31,6 +31,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
     super(props);
 
     this.onClick = this.onClick.bind(this);
+    this.handleJobSelectionChange = this.handleJobSelectionChange.bind(this);
   }
 
   componentWillMount() {
@@ -110,11 +111,15 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
     this.props.handleApplicantSelect(selectedApplicant);
   }
 
+  handleJobSelectionChange(jobId) {
+    console.log('handleJobSelectionChange:', jobId);
+  }
+
   render() {
 
     return (
       <div className={'dashboard-applicant-section'}>
-        {/*<DropDownComponent/>*/}
+        {this.props.jobs !== null ? <DropDownComponent list={this.props.jobs} listName={'job-select'} onChangeCB={this.handleJobSelectionChange} /> : null}
         {this.createList()}
         {this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null}
       </div>

@@ -1,27 +1,47 @@
 import * as React from 'react';
 
-interface MyProps{
-	list: any[],
-	totalLists: number,
+interface MyProps {
+  list: any[];
+  listName: string;
+  onChangeCB: (value) => void;
 }
 
-class DropDownComponent extends React.Component{
-	constructor(props){
-		super(props);
-	}
+class DropDownComponent extends React.Component<MyProps, any> {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-	render(){
-		return(
-			<div>
-				I'm the drop down component;
-				<select name="select">
-					<option value="value1">Value 1</option>
-					<option value="value2" selected>Value 2</option>
-					<option value="value3">Value 3</option>
-				</select>
-			</div>
-		)
-	}
-};
+  componentDidMount() {
+    if (this.props.list !== null) {
+      console.log('this list:', this.props.list);
+      console.log('we have this many options:', this.props.list.length);
+    }
+  }
 
-export default DropDownComponent
+  createOptions() {
+    return this.props.list.map((listItem, index) => {
+      console.log(listItem);
+      return (
+        <option key={listItem.id} value={listItem.id}>{listItem.title}</option>
+      );
+    });
+  }
+
+  handleChange(event){
+    console.log('dropdown change detected:', event.target.value);
+  }
+
+  render() {
+    return (
+      <div>
+        I'm the drop down component;
+        <select name={this.props.listName} onChange={this.handleChange}>
+          {this.createOptions()}
+        </select>
+      </div>
+    );
+  }
+}
+
+export default DropDownComponent;
