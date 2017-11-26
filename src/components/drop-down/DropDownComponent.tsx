@@ -28,8 +28,9 @@ class DropDownComponent extends React.Component<MyProps, any> {
     });
   }
 
-  handleChange(event){
+  handleChange(event) {
     console.log('dropdown change detected:', event.target.value);
+    this.props.onChangeCB(event.target.value);
   }
 
   render() {

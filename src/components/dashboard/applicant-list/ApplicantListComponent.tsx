@@ -34,7 +34,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
     this.handleJobSelectionChange = this.handleJobSelectionChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.employer.jobs !== null && this.props.employer.jobs.length > 0) {
       // adds the first job to state
       this.setState({ currentJob: this.props.employer.jobs[ 0 ] });
@@ -42,6 +42,9 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
   }
 
   createList() {
+    if (this.state.currentJob !== null) {
+      console.log('new list created with job:', this.state.currentJob.title);
+    }
     const specialClasses = {
       Interested: 'interested',
       'Needs Review': 'needsReview',
@@ -100,6 +103,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
           columnInfo={dataInfo}
           handleClick={this.onClick}
           totalRows={5}
+          itemId={this.state.currentJob.id}
         />
       </div>
     );
@@ -113,10 +117,18 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
 
   handleJobSelectionChange(jobId) {
     console.log('handleJobSelectionChange:', jobId);
+    if (this.props.jobs !== null) {
+      this.props.jobs.forEach((job) => {
+        if (job.id === jobId) {
+          console.log('we found a matching job:', jobId);
+          this.setState({ currentJob: job });
+        }
+      });
+    }
   }
 
   render() {
-
+    console.log('applicant list component is updating');
     return (
       <div className={'dashboard-applicant-section'}>
         {this.props.jobs !== null ? <DropDownComponent list={this.props.jobs} listName={'job-select'} onChangeCB={this.handleJobSelectionChange} /> : null}

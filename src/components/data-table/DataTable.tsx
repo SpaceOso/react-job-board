@@ -9,10 +9,16 @@ interface MyProps {
   handleClick: any;
   totalRows: number;
   specialClasses: any | null;
-  pages?: any[];
+  itemId: string;
 }
 
-class DataTable extends React.Component<MyProps, any> {
+interface MyState {
+  pages: any[];
+  currentPage: number;
+  activeDataRow: any;
+}
+
+class DataTable extends React.Component<MyProps, MyState> {
   constructor(props) {
     super(props);
 
@@ -31,6 +37,10 @@ class DataTable extends React.Component<MyProps, any> {
   }
 
   componentDidMount() {
+    this.setPages();
+  }
+
+  setPages() {
     // set to the total rows displayed per page
     let innerCount = this.props.totalRows;
     let totalPages = 0;
@@ -38,7 +48,9 @@ class DataTable extends React.Component<MyProps, any> {
     // pageList will contain an array of dataObjs to be displayed per page
     pageList[ totalPages ] = [];
     this.props.rowData.map((dataObj, index) => {
+
       pageList[ totalPages ].push(dataObj);
+
       if (index === innerCount - 1) {
         innerCount += this.props.totalRows;
         if (this.props.rowData.length - 1 > index) {
@@ -51,11 +63,20 @@ class DataTable extends React.Component<MyProps, any> {
     this.setState({ pages: pageList.slice(0) });
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('data table got new props:', nextProps);
+    if (nextProps.itemId !== this.props.itemId) {
+      this.setPages();
+    }
+  }
+
   createHeaders() {
+    console.log('data table create Headers is updating');
     return this.props.columnInfo.map(column => <th key={column.header}>{column.header}</th>);
   }
 
   createRowData(rowObj) {
+    console.log(this.props.columnInfo);
     return this.props.columnInfo.map((column, value) => {
       if (column.join !== undefined && column.join === true) {
 
@@ -114,7 +135,7 @@ class DataTable extends React.Component<MyProps, any> {
 
     return this.state.pages[ this.state.currentPage ].map((rowObj, index) => {
       // TODO need to paginate this component by creating a prop that handles how many pages there should be per data table
-      if (index > this.state.totalRows) {
+      if (index > this.props.totalRows) {
         console.log('we should have created another page!!!');
       }
 
