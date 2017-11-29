@@ -35,9 +35,9 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
   }
 
   componentDidMount() {
-    if (this.props.employer.jobs !== null && this.props.employer.jobs.length > 0) {
+    if (this.props.jobs !== null && this.props.jobs.length > 0) {
       // adds the first job to state
-      this.setState({ currentJob: this.props.employer.jobs[ 0 ] });
+      this.setState({ currentJob: this.props.jobs[ 0 ] });
     }
   }
 
@@ -93,7 +93,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
         </div>
       );
     }
-
+    console.log('new applicants..', this.state.currentJob.Applicants);
     return (
       <div>
         <h1>Candidates for {this.state.currentJob.title} - {this.state.currentJob.location.city}</h1>
@@ -117,6 +117,9 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
 
   handleJobSelectionChange(jobId) {
     console.log('handleJobSelectionChange:', jobId);
+    if (this.state.currentJob !== null) {
+      console.log(this.state.currentJob.id);
+    }
     if (this.props.jobs !== null) {
       this.props.jobs.forEach((job) => {
         if (job.id === jobId) {
@@ -131,7 +134,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
     console.log('applicant list component is updating');
     return (
       <div className={'dashboard-applicant-section'}>
-        {this.props.jobs !== null ? <DropDownComponent list={this.props.jobs} listName={'job-select'} onChangeCB={this.handleJobSelectionChange} /> : null}
+        {this.props.jobs !== null ? <DropDownComponent list={this.props.jobs} listName={'job-select'} onChangeCB={this.handleJobSelectionChange}/> : null}
         {this.createList()}
         {this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null}
       </div>

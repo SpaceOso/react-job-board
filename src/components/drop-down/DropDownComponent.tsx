@@ -19,9 +19,8 @@ class DropDownComponent extends React.Component<MyProps, any> {
     }
   }
 
-  createOptions() {
+  createOptions(): JSX.Element[] {
     return this.props.list.map((listItem, index) => {
-      console.log(listItem);
       return (
         <option key={listItem.id} value={listItem.id}>{listItem.title}</option>
       );
