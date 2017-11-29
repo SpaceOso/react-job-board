@@ -59,24 +59,24 @@ class DataTable extends React.Component<MyProps, MyState> {
         }
       }
     });
-    console.log('total pages:', pageList.length);
+    // console.log('total pages:', pageList.length);
     this.setState({ pages: pageList.slice(0) });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('data table got new props:', nextProps);
+    // console.log('data table got new props:', nextProps);
     if (nextProps.itemId !== this.props.itemId) {
       this.setPages();
     }
   }
 
   createHeaders() {
-    console.log('data table create Headers is updating');
+    // console.log('data table create Headers is updating');
     return this.props.columnInfo.map(column => <th key={column.header}>{column.header}</th>);
   }
 
   createRowData(rowObj) {
-    console.log(this.props.columnInfo);
+    // console.log(this.props.columnInfo);
     return this.props.columnInfo.map((column, value) => {
       if (column.join !== undefined && column.join === true) {
 
@@ -100,9 +100,8 @@ class DataTable extends React.Component<MyProps, MyState> {
     });
   }
 
-  // TODO probably good case for an overload function
   changeCurrentPage(newPage: number | string) {
-    console.log('dataTable changeCurrentPage:', newPage);
+    // console.log('dataTable changeCurrentPage:', newPage);
     let currentPage = this.state.currentPage;
 
     if (typeof newPage === 'string') {

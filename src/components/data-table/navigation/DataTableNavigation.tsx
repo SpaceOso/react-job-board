@@ -33,11 +33,16 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.totalPages !== this.props.totalPages && nextProps.totalPages !== 0) {
-      this.setState({ totalSections: parseInt((this.props.totalPages / 4).toFixed(), 2) });
+      this.setState({ totalSections: parseInt((nextProps.totalPages / 4).toFixed(), 10) });
     }
 
     if (nextProps.currentPage !== this.state.activePage) {
+      this.setState({ activePage: nextProps.currentPage });
+      // checking to see if the current page is within the current section
       for (let i = 1; i < this.state.totalSections + 1; i += 1) {
+        /**
+         * if nextProps.currentPage falls inside the page range of this currentSection
+         */
         if (nextProps.currentPage < (i * 4)) {
           if (this.state.currentSection !== i - 1) {
             this.setState({ currentSection: i - 1 });
@@ -67,7 +72,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
   }
 
   handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    const id = parseInt(event.currentTarget.id, 0);
+    const id = parseInt(event.currentTarget.id, 10);
 
     if (Number.isNaN(id)) {
       this.props.updatePage(event.currentTarget.id);
@@ -136,10 +141,10 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     const pageButtons: JSX.Element[][] = [];
     let sectionCount = 0;
     let pageCount = 0;
-    pageButtons[sectionCount] = [];
+    pageButtons[ sectionCount ] = [];
 
     for (let i = 0; i < this.props.totalPages; i += 1) {
-      pageButtons[sectionCount].push(
+      pageButtons[ sectionCount ].push(
         <div
           key={`page-${i}`}
           id={`${i}`}
@@ -154,7 +159,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
       if (pageCount >= 4) {
         pageCount = 0;
         sectionCount = sectionCount + 1;
-        pageButtons[sectionCount] = [];
+        pageButtons[ sectionCount ] = [];
       }
     }
     return pageButtons;
@@ -176,6 +181,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
      * This checks if we need a previous section and if we should display it
      */
     if (this.state.totalSections > 1 && this.state.currentSection !== 0) {
+      console.log('prev button is being created..');
       prevButtonSet.push(this.cratePrevSectionButton());
     }
 
@@ -191,7 +197,7 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
      */
     nextButtonSet.push(this.createNextButton());
 
-    return prevButtonSet.concat(pageButtons[this.state.currentSection], nextButtonSet);
+    return prevButtonSet.concat(pageButtons[ this.state.currentSection ], nextButtonSet);
 
   }
 
