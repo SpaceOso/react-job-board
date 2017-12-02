@@ -14,6 +14,7 @@ interface MyProps {
 
 interface MyState {
   pages: any[];
+  rowData: any[];
   currentPage: number;
   activeDataRow: any;
 }
@@ -24,6 +25,7 @@ class DataTable extends React.Component<MyProps, MyState> {
 
     this.state = {
       pages: [],
+      rowData: [],
       currentPage: 0,
       activeDataRow: '',
     };
@@ -66,9 +68,28 @@ class DataTable extends React.Component<MyProps, MyState> {
 
   componentWillReceiveProps(nextProps) {
     console.log('data table got new props:', nextProps.itemId);
-    if (nextProps.itemId !== this.props.itemId) {
+
+    if (nextProps.rowData.length !== this.props.rowData.length) {
+      console.log('frist check');
       this.setPages();
+      return false;
+    } else {
+      console.log('starting secnod check');
+      for (var i = nextProps.rowData.length; i--;) {
+        if (nextProps.rowData[ i ] !== this.props.rowData[ i ]) {
+          console.log('broke out at: ', i);
+          return false;
+        }
+      }
+      console.log('all checks');
+      // this.setPages();
     }
+
+
+    // if (nextProps.itemId !== this.props.itemId) {
+    //   this.setState({ rowData: nextProps.rowData });
+    //   this.setPages();
+    // }
   }
 
   createHeaders() {
