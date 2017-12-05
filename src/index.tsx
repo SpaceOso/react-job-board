@@ -23,7 +23,7 @@ export const store = createStore<StoreState>(
 );
 
 class JobBoard extends React.Component {
-  public render() {
+  render() {
     return (
       <Provider store={store}>
         <div>

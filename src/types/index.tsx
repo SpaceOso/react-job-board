@@ -1,7 +1,7 @@
 // src/types/index.tsx
 
 export interface Job {
-  id: string | null;
+  id: string;
   title: string;
   description: string;
   employerId: string;
@@ -78,7 +78,7 @@ export interface User extends AuthUser {
 }
 
 export interface Employer {
-  id: string | null;
+  id: string;
   name: string;
   location: {
     address: string;

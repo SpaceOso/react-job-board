@@ -9,10 +9,16 @@ interface MyProps {
   handleClick: any;
   totalRows: number;
   specialClasses: any | null;
-  pages?: any[];
+  itemId: string;
 }
 
-class DataTable extends React.Component<MyProps, any> {
+interface MyState {
+  pages: any[];
+  currentPage: number;
+  activeDataRow: any;
+}
+
+class DataTable extends React.Component<MyProps, MyState> {
   constructor(props) {
     super(props);
 
@@ -22,15 +28,19 @@ class DataTable extends React.Component<MyProps, any> {
       activeDataRow: '',
     };
 
-    console.log('DataTable initilized');
     this.createHeaders = this.createHeaders.bind(this);
     this.createRows = this.createRows.bind(this);
     this.createRowData = this.createRowData.bind(this);
     this.onClick = this.onClick.bind(this);
     this.changeCurrentPage = this.changeCurrentPage.bind(this);
+    this.setPages = this.setPages.bind(this);
   }
 
   componentDidMount() {
+    this.setPages();
+  }
+
+  setPages() {
     // set to the total rows displayed per page
     let innerCount = this.props.totalRows;
     let totalPages = 0;
@@ -38,7 +48,9 @@ class DataTable extends React.Component<MyProps, any> {
     // pageList will contain an array of dataObjs to be displayed per page
     pageList[ totalPages ] = [];
     this.props.rowData.map((dataObj, index) => {
+
       pageList[ totalPages ].push(dataObj);
+
       if (index === innerCount - 1) {
         innerCount += this.props.totalRows;
         if (this.props.rowData.length - 1 > index) {
@@ -47,8 +59,17 @@ class DataTable extends React.Component<MyProps, any> {
         }
       }
     });
-    console.log('total pages:', pageList.length);
+    // console.log('total pages:', pageList.length);
     this.setState({ pages: pageList.slice(0) });
+  }
+
+  componentDidUpdate(nextProps) {
+
+    const a1 = nextProps.rowData;
+    const a2 = this.props.rowData;
+    if (a1.length !== a2.length && a1.every((v, i) => v !== a2[ i ])) {
+      this.setPages();
+    }
   }
 
   createHeaders() {
@@ -79,9 +100,7 @@ class DataTable extends React.Component<MyProps, any> {
     });
   }
 
-  // TODO probably good case for an overload function
   changeCurrentPage(newPage: number | string) {
-    console.log('dataTable changeCurrentPage:', newPage);
     let currentPage = this.state.currentPage;
 
     if (typeof newPage === 'string') {
@@ -114,14 +133,15 @@ class DataTable extends React.Component<MyProps, any> {
 
     return this.state.pages[ this.state.currentPage ].map((rowObj, index) => {
       // TODO need to paginate this component by creating a prop that handles how many pages there should be per data table
-      if (index > this.state.totalRows) {
+      if (index > this.props.totalRows) {
         console.log('we should have created another page!!!');
       }
 
       let specialClassName = '';
 
-      // if there is a special class it will add it to every row whos
-      // property matches the specialClass key
+      /**
+       * if there is a special class it will add it to every row where the property matches the specialClass key
+       */
       if (this.props.specialClasses !== null) {
         specialClassName = this.props.specialClasses[ rowObj.interest ];
       }
@@ -142,6 +162,7 @@ class DataTable extends React.Component<MyProps, any> {
 
     return (
       <div>
+        viewing current jobID: {this.props.itemId}
         <table className="data-table">
           <tbody>
           <tr key="headers">
