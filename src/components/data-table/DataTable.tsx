@@ -68,6 +68,7 @@ class DataTable extends React.Component<MyProps, MyState> {
     const a1 = nextProps.rowData;
     const a2 = this.props.rowData;
     if (a1.length !== a2.length && a1.every((v, i) => v !== a2[ i ])) {
+      this.setState({ currentPage: 0 });
       this.setPages();
     }
   }
