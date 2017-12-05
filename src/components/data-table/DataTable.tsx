@@ -28,7 +28,6 @@ class DataTable extends React.Component<MyProps, MyState> {
       activeDataRow: '',
     };
 
-    console.log('DataTable initilized');
     this.createHeaders = this.createHeaders.bind(this);
     this.createRows = this.createRows.bind(this);
     this.createRowData = this.createRowData.bind(this);
@@ -64,20 +63,20 @@ class DataTable extends React.Component<MyProps, MyState> {
     this.setState({ pages: pageList.slice(0) });
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('data table got new props:', nextProps.itemId);
-    if (nextProps.itemId !== this.props.itemId) {
+  componentDidUpdate(nextProps) {
+
+    const a1 = nextProps.rowData;
+    const a2 = this.props.rowData;
+    if (a1.length !== a2.length && a1.every((v, i) => v !== a2[ i ])) {
       this.setPages();
     }
   }
 
   createHeaders() {
-    // console.log('data table create Headers is updating');
     return this.props.columnInfo.map(column => <th key={column.header}>{column.header}</th>);
   }
 
   createRowData(rowObj) {
-    // console.log(this.props.columnInfo);
     return this.props.columnInfo.map((column, value) => {
       if (column.join !== undefined && column.join === true) {
 
@@ -102,7 +101,6 @@ class DataTable extends React.Component<MyProps, MyState> {
   }
 
   changeCurrentPage(newPage: number | string) {
-    // console.log('dataTable changeCurrentPage:', newPage);
     let currentPage = this.state.currentPage;
 
     if (typeof newPage === 'string') {
