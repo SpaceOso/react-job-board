@@ -97,7 +97,6 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
     return (
       <div>
         <h1>Candidates for {this.state.currentJob.title} - {this.state.currentJob.location.city}</h1>
-        <h2>Length of applicants {this.state.currentJob.Applicants.length}</h2>
         <DataTable
           rowData={this.state.currentJob.Applicants}
           specialClasses={specialClasses}
@@ -136,7 +135,6 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
     console.log('applicant list component is updating');
     return (
       <div className={'dashboard-applicant-section'}>
-        applicant list current job id: {this.state.currentJob !== null ? this.state.currentJob.id : null}
         {this.props.jobs !== null ? <DropDownComponent list={this.props.jobs} listName={'job-select'} onChangeCB={this.handleJobSelectionChange}/> : null}
         {this.createList()}
         {this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null}

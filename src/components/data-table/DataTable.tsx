@@ -162,7 +162,6 @@ class DataTable extends React.Component<MyProps, MyState> {
 
     return (
       <div>
-        viewing current jobID: {this.props.itemId}
         <table className="data-table">
           <tbody>
           <tr key="headers">
