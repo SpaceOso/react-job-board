@@ -4,14 +4,15 @@ import { Route, Switch } from 'react-router-dom';
 // components
 import { RouteComponentProps } from 'react-router';
 import { Applicants, Employer, User } from '../../../types/index';
-// styles
 import ApplicantListComponent from '../applicant-list/ApplicantListComponent';
 import ApplicantViewContainer from '../applicant-view/ApplicantViewContainer';
 import UserDashboardHome from '../home/UserDashboardHome';
 import CreateJobComponent from '../jobs/createJob/CreateJobComponent';
 import EditJobsLayout from '../jobs/editJob/EditJobsLayout';
 import UserDashboardNavMenu from '../nav-menu/UserDashboardNavMenu';
+// styles
 import './styles/MainLyout.scss';
+import UnderConstruction from '../../under-construction/UnderConstruction'
 
 interface Props extends RouteComponentProps<any> {
   user: User;
@@ -36,6 +37,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
     this.editJobsLayout = this.editJobsLayout.bind(this);
     this.applicantVewContainer = this.applicantVewContainer.bind(this);
     this.applicantListComponent = this.applicantListComponent.bind(this);
+    this.underConstruction = this.underConstruction.bind(this);
   }
 
   handleApplicantSelect(selectedApplicant) {
@@ -53,7 +55,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
   }
 
   editJobsLayout = (props) => {
-    return(
+    return (
       <EditJobsLayout
         employer={this.props.employer}
         jobs={this.props.employer.jobs}
@@ -63,7 +65,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
   }
 
   applicantVewContainer = (state) => {
-    return(
+    return (
       <ApplicantViewContainer
         applicant={this.state.selectedApplicant}
       />
@@ -91,36 +93,50 @@ class DashboardMainLayout extends React.Component<Props, any> {
     );
   }
 
+  underConstruction = (props) => {
+    return (
+      <UnderConstruction/>
+    );
+  };
+
   render() {
     return (
       <div className="dashboard-layout">
         <UserDashboardNavMenu match={this.props.match}/>
-        <Switch>
-          {/*CREATE JOB COMPONENT*/}
-          <Route
-            path={`${this.props.match.url}/createjob`}
-            render={this.createJobComponent}
-          />
-          <Route
-            path={`${this.props.match.path}/editpostings`}
-            render={this.editJobsLayout}
-          />
-          {/*APPLICANT LIST COMPONENT*/}
-          <Route
-            path={`${this.props.match.path}/applicants/:applicantId`}
-            render={this.applicantVewContainer}
-          />
-          {/*APPLICANT LIST COMPONENT*/}
-          <Route
-            path={`${this.props.match.path}/applicants`}
-            render={this.applicantListComponent}
-          />
-          {/*APPLICANT LIST COMPONENT*/}
-          <Route
-            path={`${this.props.match.path}`}
-            render={this.userDashboardHome}
-          />
-        </Switch>
+        <div className="dashboard-info-panel">
+          <Switch>
+            {/*CREATE JOB COMPONENT*/}
+            <Route
+              path={`${this.props.match.url}/createjob`}
+              render={this.createJobComponent}
+            />
+            {/*EDIT JOB COMPONENT*/}
+            <Route
+              path={`${this.props.match.path}/editpostings`}
+              render={this.editJobsLayout}
+            />
+            {/*SINGLE APPLICANT VIEW CONTAINER*/}
+            <Route
+              path={`${this.props.match.path}/applicants/:applicantId`}
+              render={this.applicantVewContainer}
+            />
+            {/*APPLICANT LIST*/}
+            <Route
+              path={`${this.props.match.path}/applicants`}
+              render={this.applicantListComponent}
+            />
+            {/*EDIT PROFILE*/}
+            <Route
+              path={`${this.props.match.path}/profile`}
+              render={this.underConstruction}
+            />
+            {/*DASHBOARD HOME*/}
+            <Route
+              path={`${this.props.match.path}`}
+              render={this.userDashboardHome}
+            />
+          </Switch>
+        </div>
       </div>
     );
   }

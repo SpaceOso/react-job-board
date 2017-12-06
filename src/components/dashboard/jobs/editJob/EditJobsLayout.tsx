@@ -3,9 +3,9 @@ import { Employer, Job } from '../../../../types/index';
 import DataTable from '../../../data-table/DataTable';
 import EditJobComponent from './EditJobComponent';
 
-//router
+// router
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router';
-import JobAtGlanceComponent from './JobAtGlanceComponent';
+import './EditJobComponent.scss';
 
 interface MyProps extends RouteComponentProps<any> {
   jobs;
@@ -36,7 +36,6 @@ class EditJobsLayout extends React.Component<MyProps, myState> {
       selectedJob,
       editingJob: true,
     });
-
   }
 
   handleJobDelete() {
@@ -58,12 +57,13 @@ class EditJobsLayout extends React.Component<MyProps, myState> {
 
     console.log('inside the edit layout with props: ', this.props);
     return (
-      <div>
-
+      <div className="dashboard-edit-job-section">
         {this.state.editingJob === true ? <Redirect to={`${this.props.match.url}/editJob`}/> : null}
         <Switch>
-          <Route exact={true} path={`${this.props.match.path}`}
-                 render={(props) => (
+          <Route
+            exact={true}
+            path={`${this.props.match.path}`}
+            render={(props) => (
                    <div>
                      <h1>Click bellow to edit a job</h1>
                      <h1>Please Select a job</h1>
@@ -78,8 +78,9 @@ class EditJobsLayout extends React.Component<MyProps, myState> {
                    </div>
                  )}
           />
-          <Route path={`${this.props.match.url}/editJob`}
-                 render={(state) => (
+          <Route
+            path={`${this.props.match.url}/editJob`}
+            render={(state) => (
                    <EditJobComponent
                      job={this.state.selectedJob}
                      {...this.props}

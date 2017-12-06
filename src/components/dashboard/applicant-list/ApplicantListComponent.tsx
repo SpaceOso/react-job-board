@@ -150,7 +150,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
   render() {
     console.log('applicant list component is updating');
     return (
-      <div className={'dashboard-applicant-section'}>
+      <div className="dashboard-applicant-section">
         {this.props.jobs !== null ? this.displayJobDropDown() : null}
         {this.createList()}
         {this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null}
