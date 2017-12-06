@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import './DataNavigation.scss';
-import { networkInterfaces } from 'os'
 
 interface MyProps {
   currentPage: number;
