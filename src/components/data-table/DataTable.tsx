@@ -59,7 +59,6 @@ class DataTable extends React.Component<MyProps, MyState> {
         }
       }
     });
-    // console.log('total pages:', pageList.length);
     this.setState({ pages: pageList.slice(0) });
   }
 
@@ -116,7 +115,6 @@ class DataTable extends React.Component<MyProps, MyState> {
         console.log('we blocked from loading a page outside of scope');
       }
     } else {
-      console.log('dataTable setting state: currentPage:', newPage);
       this.setState({ currentPage: newPage });
     }
   }
@@ -128,7 +126,6 @@ class DataTable extends React.Component<MyProps, MyState> {
 
   createRows() {
     if (this.state.pages.length <= 0) {
-      console.log('pages was less than 0');
       return;
     }
 
@@ -140,9 +137,7 @@ class DataTable extends React.Component<MyProps, MyState> {
 
       let specialClassName = '';
 
-      /**
-       * if there is a special class it will add it to every row where the property matches the specialClass key
-       */
+       // if there is a special class it will add it to every row where the property matches the specialClass key
       if (this.props.specialClasses !== null) {
         specialClassName = this.props.specialClasses[ rowObj.interest ];
       }
