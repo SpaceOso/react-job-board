@@ -35,7 +35,6 @@ class DropDownComponent extends React.Component<MyProps, any> {
   render() {
     return (
       <div>
-        I'm the drop down component;
         <select name={this.props.listName} onChange={this.handleChange}>
           {this.createOptions()}
         </select>

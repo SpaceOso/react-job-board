@@ -32,6 +32,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
 
     this.onClick = this.onClick.bind(this);
     this.handleJobSelectionChange = this.handleJobSelectionChange.bind(this);
+    this.displayJobDropDown = this.displayJobDropDown.bind(this);
   }
 
   componentDidMount() {
@@ -73,7 +74,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
       },
       {
         join: true,
-        properties: ['city', 'state'],
+        properties: [ 'city', 'state' ],
         header: 'Location',
       },
     ];
@@ -131,11 +132,26 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
     }
   }
 
+  displayJobDropDown() {
+    if (this.props.jobs !== null) {
+      return (
+        <div>
+          Currently viewing applicants for job:
+          <DropDownComponent
+            list={this.props.jobs}
+            listName={'job-select'}
+            onChangeCB={this.handleJobSelectionChange}
+          />
+        </div>
+      );
+    }
+  }
+
   render() {
     console.log('applicant list component is updating');
     return (
       <div className={'dashboard-applicant-section'}>
-        {this.props.jobs !== null ? <DropDownComponent list={this.props.jobs} listName={'job-select'} onChangeCB={this.handleJobSelectionChange}/> : null}
+        {this.props.jobs !== null ? this.displayJobDropDown() : null}
         {this.createList()}
         {this.state.applicant !== null ? <Redirect to={`${this.props.match.url}/${this.state.applicant.id}`}/> : null}
       </div>
