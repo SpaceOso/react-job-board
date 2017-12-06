@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import './DataNavigation.scss';
+import { networkInterfaces } from 'os'
 
 interface MyProps {
   currentPage: number;
@@ -32,18 +33,21 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
   }
 
   componentWillReceiveProps(nextProps) {
+    /**
+     * Creates sections based on the amount of pages. If we have more pages than before create new sections.
+     */
     if (nextProps.totalPages !== this.props.totalPages && nextProps.totalPages !== 0) {
-      this.setState({ totalSections: parseInt((nextProps.totalPages / 4).toFixed(), 10) });
+      this.setState({ totalSections: Math.ceil(nextProps.totalPages / 4) });
     }
 
     if (nextProps.currentPage !== this.state.activePage) {
       this.setState({ activePage: nextProps.currentPage });
       // checking to see if the current page is within the current section
       for (let i = 1; i < this.state.totalSections + 1; i += 1) {
-        /**
-         * if nextProps.currentPage falls inside the page range of this currentSection
-         */
+
+        // if nextProps.currentPage falls inside the page range of this currentSection
         if (nextProps.currentPage < (i * 4)) {
+          // If we are not in the section where the currentPage falls under, change state to that section
           if (this.state.currentSection !== i - 1) {
             this.setState({ currentSection: i - 1 });
             break;
@@ -177,24 +181,17 @@ class DataTableNavigation extends React.Component<MyProps, MyState> {
     }
     prevButtonSet.push(this.createPrevButton());
 
-    /**
-     * This checks if we need a previous section and if we should display it
-     */
+    // This checks if we need a previous section and if we should display it
     if (this.state.totalSections > 1 && this.state.currentSection !== 0) {
-      console.log('prev button is being created..');
       prevButtonSet.push(this.cratePrevSectionButton());
     }
 
-    /**
-     * This will add the next ... button
-     */
+    // This will add the next ... button
     if (this.props.totalPages > 4 && this.state.currentSection !== this.state.totalSections - 1) {
       nextButtonSet.push(this.createNextSectionButton());
     }
 
-    /**
-     * This creates the next page button
-     */
+    // This creates the next page button
     nextButtonSet.push(this.createNextButton());
 
     return prevButtonSet.concat(pageButtons[ this.state.currentSection ], nextButtonSet);
