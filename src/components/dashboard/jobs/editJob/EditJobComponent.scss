@@ -1,0 +1,8 @@
+@import '../../../../styles/variables';
+@import '../../dashboardStyles';
+
+.dashboard-edit-job-section{
+  @include dashboard-main-section();
+  width: 70%;
+  float: left;
+}
