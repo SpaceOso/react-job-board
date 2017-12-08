@@ -1,5 +1,5 @@
-import * as ReaactDOM from 'react-dom';
 import * as React from 'react';
+
 import SimpleForm from '../../simple-form/SimpleForm';
 
 interface MyProps {
@@ -128,7 +128,7 @@ class ApplicationComponent extends React.Component<MyProps> {
 
   render() {
     return (
-      ReactDOM.createPortal(<div>Im the damn modal</div>, modalParent)
+      <div>test</div>
     );
 
     /* return (

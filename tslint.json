@@ -6,6 +6,7 @@
         "tslint-react"
     ],
     "jsRules": {},
+    "rulesDirectory": ["tslint-consistent-codestyle"],
     "rules": {
         "no-console": [false],
         "import-name": true,
