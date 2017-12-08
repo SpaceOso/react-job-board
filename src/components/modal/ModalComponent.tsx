@@ -6,42 +6,44 @@ import * as ReactDOM from 'react-dom';
 // const appRoot = document.getElementById('root');
 // const modalRoot = document.getElementById('modal-root');
 
-interface MyProps{
-	modalRoot
+interface MyProps {
+  modalRoot
 }
 
-class ModalComponent extends React.Component{
-	el: HTMLElement;
-	appRoot: HTMLElement | null;
-	modalRoot: HTMLElement | null;
-	constructor(props){
-		super(props);
+class ModalComponent extends React.Component {
+  el: HTMLElement;
+  appRoot: HTMLElement | null;
+  modalRoot: HTMLElement | null;
 
-		this.el = document.createElement('h1');
-		this.appRoot = document.getElementById('root');
-		this.modalRoot = document.getElementById('modal-root');
-	}
+  constructor(props) {
+    super(props);
 
-	componentDidMount() {
-		if(this.modalRoot !== null){
-			console.log("appending..");
-			this.modalRoot.appendChild(this.el);
-		}
-	}
+    this.el = document.createElement('h1');
+    this.appRoot = document.getElementById('root');
+    this.modalRoot = document.getElementById('modal-root');
+  }
 
-	componentWillUnmount() {
-		if(this.modalRoot !== null){
-			console.log("removing...");
-			this.modalRoot.removeChild(this.el);
-		}
-	}
-	render(){
-		return(
-			<div>
-				I'm the modal component
-			</div>
-		)
-	}
+  componentDidMount() {
+    if (this.modalRoot !== null) {
+      console.log('appending..');
+      this.modalRoot.appendChild(this.el);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.modalRoot !== null) {
+      console.log('removing...');
+      this.modalRoot.removeChild(this.el);
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        I'm the modal component
+      </div>
+    );
+  }
 }
 
 export default ModalComponent;

@@ -12,14 +12,52 @@ interface JobPostInfoProps {
   addApplicantToJob;
 }
 
-class JobPostInfoComponent extends React.Component<JobPostInfoProps, any> {
+interface MyState {
+  isApplying: boolean;
+  didApply: boolean;
+}
+
+class JobPostInfoComponent extends React.Component<JobPostInfoProps, MyState> {
   constructor(props) {
     super(props);
 
+    this.state = {
+      isApplying: false,
+      didApply: false,
+    };
     this.dataReady = this.dataReady.bind(this);
+    this.displayJobApplication = this.displayJobApplication.bind(this);
+    this.handleApplication = this.handleApplication.bind(this);
+    this.handleApplicationCancel = this.handleApplicationCancel.bind(this);
   }
 
   dataReady = () => this.props.isFetching !== true;
+
+  // Will fire when apply button is clicked
+  handleApplication() {
+    console.log('application button clicked');
+    if (this.state.isApplying === false) {
+      this.setState({ isApplying: true });
+    }
+  }
+
+  // gets called when this.state.isApplying === true
+  displayJobApplication() {
+    return (
+      <ApplicationComponent
+        employerId={this.props.job.employerId}
+        jobId={this.props.job.id}
+        jobTitle={this.props.job.title}
+        handleApplicantInfo={this.props.addApplicantToJob}
+        cancelApplication={this.handleApplicationCancel}
+      />
+    );
+  }
+
+  handleApplicationCancel() {
+    console.log('job application canceled');
+    this.setState({ isApplying: false });
+  }
 
   render() {
     console.log('jobPostInfoComponent job:', this.props.job);
@@ -36,14 +74,8 @@ class JobPostInfoComponent extends React.Component<JobPostInfoProps, any> {
               className="job-description"
               dangerouslySetInnerHTML={{ __html: this.props.job.description }}
             />
-            <ApplicationComponent
-              employerId={this.props.job.employerId}
-              jobId={this.props.job.id}
-              jobTitle={this.props.job.title}
-              handleApplicantInfo={this.props.addApplicantToJob}
-            />
-            <ModalComponent/>
-            <button>Apply Now</button>
+            {this.state.isApplying === true ? this.displayJobApplication() : null}
+            <button onClick={this.handleApplication}>Apply Now</button>
           </div>
         </div>
       );
