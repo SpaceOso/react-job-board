@@ -50,7 +50,9 @@ class JobPostInfoComponent extends React.Component<JobPostInfoProps, MyState> {
         jobTitle={this.props.job.title}
         handleApplicantInfo={this.props.addApplicantToJob}
         cancelApplication={this.handleApplicationCancel}
-      />
+      >
+        tester div
+      </ApplicationComponent>
     );
   }
 

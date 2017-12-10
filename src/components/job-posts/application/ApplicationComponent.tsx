@@ -1,18 +1,19 @@
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
 import SimpleForm from '../../simple-form/SimpleForm';
 
 interface MyProps {
-  jobId: string | null;
-  jobTitle: string | null;
-  employerId: string | null;
-  handleApplicantInfo: (applicantInfo) => {};
-  cancelApplication: () => void;
+  // jobId: string | null;
+  // jobTitle: string | null;
+  // employerId: string | null;
+  // handleApplicantInfo: (applicantInfo) => {};
+  // cancelApplication: () => void;
 }
 
 const modalParent = document.getElementById('modal-root');
 
-class ApplicationComponent extends React.Component<MyProps> {
+class ApplicationComponent extends React.Component<any> {
   private locationInputs = [
     {
       label: 'First Name',
@@ -128,7 +129,7 @@ class ApplicationComponent extends React.Component<MyProps> {
 
   render() {
     return (
-      <div>test</div>
+      ReactDOM.createPortal(this.props.children, modalParent as Element)
     );
 
     /* return (
