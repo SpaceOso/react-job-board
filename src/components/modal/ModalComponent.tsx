@@ -1,48 +1,23 @@
 import * as React from 'react';
-// import * as ReactDOM from 'react-dom';
 import * as ReactDOM from 'react-dom';
 
-// These two containers are siblings in the DOM
-// const appRoot = document.getElementById('root');
-// const modalRoot = document.getElementById('modal-root');
+// styles
+import './ModalComponent.scss';
 
-interface MyProps {
-  modalRoot
-}
+const modalParent = document.getElementById('modal-root');
 
-class ModalComponent extends React.Component {
-  el: HTMLElement;
-  appRoot: HTMLElement | null;
-  modalRoot: HTMLElement | null;
+class ModalComponent extends React.Component<any> {
 
   constructor(props) {
     super(props);
 
-    this.el = document.createElement('h1');
-    this.appRoot = document.getElementById('root');
-    this.modalRoot = document.getElementById('modal-root');
-  }
-
-  componentDidMount() {
-    if (this.modalRoot !== null) {
-      console.log('appending..');
-      this.modalRoot.appendChild(this.el);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.modalRoot !== null) {
-      console.log('removing...');
-      this.modalRoot.removeChild(this.el);
-    }
   }
 
   render() {
     return (
-      <div>
-        I'm the modal component
-      </div>
+      ReactDOM.createPortal(this.props.children, modalParent as Element)
     );
+
   }
 }
 

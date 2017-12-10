@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import SimpleForm from '../../simple-form/SimpleForm';
+import ModalComponent from '../../modal/ModalComponent'
 
 interface MyProps {
   // jobId: string | null;
@@ -129,23 +130,21 @@ class ApplicationComponent extends React.Component<any> {
 
   render() {
     return (
-      ReactDOM.createPortal(this.props.children, modalParent as Element)
+      <ModalComponent>
+        <div className="modal">
+          <SimpleForm
+            header={`Apply to ${this.props.jobTitle}`}
+            inputs={this.locationInputs}
+            submitBtnText={'Submit Application'}
+            verifyInputs={null}
+            onSubmitCB={this.handleApplicationSubmit}
+            joined={true}
+          />
+          <button onClick={this.props.cancelApplication}>Cancel</button>
+          I'm the application component
+        </div>
+      </ModalComponent>
     );
-
-    /* return (
-       <div>
-         <SimpleForm
-           header={`Apply to ${this.props.jobTitle}`}
-           inputs={this.locationInputs}
-           submitBtnText={'Submit Application'}
-           verifyInputs={null}
-           onSubmitCB={this.handleApplicationSubmit}
-           joined={true}
-         />
-         <button onClick={this.props.cancelApplication}>Cancel</button>
-         I'm the application component
-       </div>
-     );*/
   }
 }
 
