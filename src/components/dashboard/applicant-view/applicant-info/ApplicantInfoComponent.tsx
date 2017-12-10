@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ROOT_URL } from '../../../../actions/index';
 import { Applicants } from '../../../../types/index';
 import { IMG_URL, LOCAL_URL } from '../../../../utils/utils';
 
@@ -43,7 +42,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 
   handleChange(event) {
     this.setState({
-      [event.target.id]: event.target.value,
+      [ event.target.id ]: event.target.value,
       statusUpdated: true,
     });
   }
@@ -86,7 +85,8 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
       {
         link: 'website',
         icon: 'icon-web.svg',
-      }];
+      },
+    ];
 
     const socialLinks = socialSites.map((social, key) => {
       const link = social.link.toString();
@@ -114,9 +114,8 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
 
   render() {
     const applicant = this.props.applicant;
-    const applicantAddress = `${applicant.city}, ${applicant.state}, ${applicant.zip}`;
     const applicantEmail = this.props.applicant.email;
-    const applicantPhone = this.props.applicant.cellPhone;
+    const applicantPhone = this.props.applicant.phoneNumber;
     const applicantResume = this.props.applicant.resume;
     const applicantCoverLetter = this.props.applicant.coverLetter;
 
@@ -125,7 +124,6 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
         <div className={'applicant-info'}>
           <div className={'applicant-details'}>
             <h1>{applicant.firstName} {applicant.lastName}</h1>
-            <p>{applicantAddress}</p>
             <p>{applicantPhone}</p>
             <p>{applicantEmail}</p>
             {this.createSocialLinks()}

@@ -20,31 +20,12 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			homePhone: {
-				type: DataTypes.STRING,
-				allowNull: false,
-			},
-			cellPhone: {
+			phoneNumber: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
 			website:{
 				type: DataTypes.STRING
-			},
-			linkedin:{
-				type: DataTypes.STRING
-			},
-			github:{
-				type: DataTypes.STRING
-			},
-			state: {
-				type: DataTypes.STRING,
-			},
-			city: {
-				type: DataTypes.STRING,
-			},
-			zip:{
-				type: DataTypes.STRING,
 			},
 			coverLetter: {
 				type: DataTypes.STRING

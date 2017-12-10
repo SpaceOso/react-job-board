@@ -38,39 +38,11 @@ class ApplicationComponent extends React.Component<any> {
       id: 'email',
     },
     {
-      label: 'State',
-      required: true,
-      type: 'text',
-      placeHolder: 'state',
-      id: 'state',
-    },
-    {
-      label: 'City',
-      required: true,
-      type: 'text',
-      placeHolder: 'city',
-      id: 'city',
-    },
-    {
-      label: 'Zip',
-      required: true,
-      type: 'text',
-      placeHolder: 'zip',
-      id: 'zip',
-    },
-    {
-      label: 'Home Phone',
+      label: 'Phone Number',
       required: true,
       type: 'tel',
       placeHolder: '555-555-555',
-      id: 'homePhone',
-    },
-    {
-      label: 'Cell Phone',
-      required: true,
-      type: 'tel',
-      placeHolder: '555-555-555',
-      id: 'cellPhone',
+      id: 'phoneNumber',
     },
     {
       label: 'website',
@@ -78,20 +50,6 @@ class ApplicationComponent extends React.Component<any> {
       type: 'text',
       placeHolder: 'www.yourwebsite.com',
       id: 'website',
-    },
-    {
-      label: 'linkedIn',
-      required: false,
-      type: 'text',
-      placeHolder: 'www.yourlinkedin.com',
-      id: 'linkedin',
-    },
-    {
-      label: 'github',
-      required: false,
-      type: 'text',
-      placeHolder: 'www.yourgithub.com',
-      id: 'github',
     },
     {
       label: 'Resume',
@@ -109,7 +67,8 @@ class ApplicationComponent extends React.Component<any> {
       accept: '.pdf',
       placeHolder: 'upload your resume',
       id: 'coverLetter',
-    }, ];
+    },
+  ];
 
   constructor(props) {
     super(props);

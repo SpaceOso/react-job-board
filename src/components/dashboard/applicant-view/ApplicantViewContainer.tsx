@@ -14,7 +14,7 @@ interface MyProps {
   updateApplicantInfo: (applicantInfo) => {};
 }
 
-const ApplicantViewContainer: React.SFC<MyProps> = (props) => {
+const applicantViewContainer: React.SFC<MyProps> = (props) => {
   return (
     <div className={'applicant-view-container'}>
       {props.applicant !== null ? <ApplicantInfoComponent saveApplicantInfo={props.updateApplicantInfo} applicant={props.applicant}/> : <SpinnerComponent/>}
@@ -35,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApplicantViewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(applicantViewContainer);

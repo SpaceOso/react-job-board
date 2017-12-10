@@ -104,15 +104,9 @@ export interface Applicants {
   firstName: string;
   lastName: string;
   email: string;
-  homePhone: string;
-  cellPhone: string;
-  city: string;
-  state: string;
-  zip: string;
+  phoneNumber: string;
   resume: null;
   website: string | null;
-  linkedin: string | null;
-  github: string | null;
   status: string;
   reviewed: boolean;
   coverLetter: string;
