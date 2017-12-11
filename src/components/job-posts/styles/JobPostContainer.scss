@@ -1,10 +1,12 @@
 @import "../../../styles/variables";
 
-.job-post-container{
+.job-post-container {
   flex: 1 0 auto;
   width: 90%;
   margin: auto;
   margin-top: 15px;
+  text-align: left;
+  padding: 10px;
 }
 
 .job-post {
@@ -13,8 +15,9 @@
   display: inline-block;
   vertical-align: top;
   margin-right: 45px;
+  text-align: left;
 
-  .job-header-container{
+  .job-header-container {
     border: 1px solid $borders;
     max-height: 70px;
     margin-bottom: 15px;
@@ -23,10 +26,12 @@
     padding: 15px;
 
   }
-  .job-description-container{
+  .job-description-container {
     border: 1px solid $borders;
     background-color: $panelBg;
     margin-bottom: 75px;
+    padding: 10px;
+    font-size: 1.6rem;
   }
 
   .jp-job-header {

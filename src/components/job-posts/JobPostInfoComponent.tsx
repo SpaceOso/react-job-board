@@ -2,9 +2,10 @@ import * as React from 'react';
 
 // components
 import { Job } from '../../types/index';
-import ModalComponent from '../modal/ModalComponent';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 import ApplicationComponent from './application/ApplicationComponent';
+
+// import './styles/JobPostContainer.scss';
 
 interface JobPostInfoProps {
   isFetching: boolean;
