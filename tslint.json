@@ -14,6 +14,5 @@
         "interface-name": [false],
         "jsx-boolean-value": false,
         "member-access": [true, "no-public"]
-    },
-    "rulesDirectory": []
+    }
 }
