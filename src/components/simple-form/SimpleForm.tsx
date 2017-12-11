@@ -25,6 +25,7 @@ interface MyProps {
   onSubmitCB: (any) => void;
   joined?: boolean;
   style?: {};
+  cancelButton?: { click: () => void, btnText: string };
 }
 
 class SimpleForm extends React.Component<MyProps, any> {
@@ -185,8 +186,8 @@ class SimpleForm extends React.Component<MyProps, any> {
     for (let i = 0; i < totalInputs; i + 1) {
       adjustArray.push(
         <div key={`${i}joinedinput`} className={'joined-row'}>
-          {inputs[i]}
-          {inputs[i + 1]}
+          {inputs[ i ]}
+          {inputs[ i + 1 ]}
         </div>,
       );
       i = i + inputPerRow;
@@ -229,6 +230,7 @@ class SimpleForm extends React.Component<MyProps, any> {
         <form action="" onSubmit={this.handleSubmit}>
           <h1>{this.props.header}</h1>
           <div>{this.createInputs()}</div>
+          {this.props.cancelButton ? <button className="btn-standard" onClick={this.props.cancelButton.click}> {this.props.cancelButton.btnText} </button> : null}
           <button className="btn-standard">Submit Form</button>
         </form>
         {/*<div className="form-error-box">Erorr: Please see errors above.</div>*/}

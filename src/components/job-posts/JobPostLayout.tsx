@@ -70,9 +70,8 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
           <JobPostEmployerInfoComponent employer={this.props.currentJobPost.Employer} loadJob={this.loadNewJob}/>
         </div>
       );
-    } else {
-      return null;
     }
+    return null;
   }
 }
 

@@ -75,14 +75,6 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
   createSocialLinks() {
     const socialSites = [
       {
-        link: 'github',
-        icon: 'icon-github.svg',
-      },
-      {
-        link: 'linkedin',
-        icon: 'icon-linkedin.svg',
-      },
-      {
         link: 'website',
         icon: 'icon-web.svg',
       },

@@ -1,20 +1,19 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 
+import ModalComponent from '../../modal/ModalComponent';
 import SimpleForm from '../../simple-form/SimpleForm';
-import ModalComponent from '../../modal/ModalComponent'
 
 interface MyProps {
-  // jobId: string | null;
-  // jobTitle: string | null;
-  // employerId: string | null;
-  // handleApplicantInfo: (applicantInfo) => {};
-  // cancelApplication: () => void;
+  jobId: string | null;
+  jobTitle: string | null;
+  employerId: string | null;
+  handleApplicantInfo: (applicantInfo) => {};
+  cancelApplication: () => void;
 }
 
 const modalParent = document.getElementById('modal-root');
 
-class ApplicationComponent extends React.Component<any> {
+class ApplicationComponent extends React.Component<MyProps> {
   private locationInputs = [
     {
       label: 'First Name',
@@ -88,6 +87,7 @@ class ApplicationComponent extends React.Component<any> {
   }
 
   render() {
+    const cancelButton = { click: this.props.cancelApplication, btnText: 'Cancel' };
     return (
       <ModalComponent>
         <div className="modal">
@@ -98,9 +98,9 @@ class ApplicationComponent extends React.Component<any> {
             verifyInputs={null}
             onSubmitCB={this.handleApplicationSubmit}
             joined={true}
+            style={{ width: 'auto' }}
+            cancelButton={cancelButton}
           />
-          <button onClick={this.props.cancelApplication}>Cancel</button>
-          I'm the application component
         </div>
       </ModalComponent>
     );
