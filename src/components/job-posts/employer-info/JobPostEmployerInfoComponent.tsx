@@ -1,17 +1,20 @@
 import * as React from 'react';
 
-import { Employer } from '../../types/index';
-import { IMG_URL, LOCAL_URL } from '../../utils/utils';
-import JobLinkComponent from './JobLinkComponent';
+import { Employer } from '../../../types/index';
+import { IMG_URL, LOCAL_URL } from '../../../utils/utils';
+import JobLinkComponent from '../JobLinkComponent';
+import OtherJobsComponent from './OtherJobsComponent';
 
 /**
  * Styles
  */
-import './styles/JobPostEmployerInfo.scss';
+import '../styles/JobPostEmployerInfo.scss';
 
 interface MyProps {
-  employer;
-  loadJob: (arg: any) => (any);
+  isFetching: boolean;
+  employer?;
+  loadJob?: (arg: any) => (any);
+  currentJob?: string;
 }
 
 class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
@@ -23,26 +26,29 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
 
   handleClick(jobId) {
     console.log('JOB ID:', jobId);
-    this.props.loadJob(jobId);
+    if (this.props.loadJob !== undefined) {
+      this.props.loadJob(jobId);
+    }
   }
 
   createJobList() {
     const employer: Employer = this.props.employer;
 
-    if (employer.jobs !== undefined) {
-      if (employer.jobs !== null) {
-        return employer.jobs.map(job => (
-          <JobLinkComponent
-            key={`${job.id}`}
-            to={`/jobposts/${job.id}`}
-            onClick={this.handleClick}
-            jobTitle={job.title}
-            jobID={job.id}
-          />
-        ));
-      }
+    if (employer.jobs !== undefined && employer.jobs !== null) {
+      return employer.jobs.map((job) => {
+        if (job.id !== this.props.currentJob) {
+          return (
+            <JobLinkComponent
+              key={`${job.id}`}
+              to={`/jobposts/${job.id}`}
+              onClick={this.handleClick}
+              jobTitle={job.title}
+              jobID={job.id}
+            />
+          );
+        }
+      });
     }
-
   }
 
   createSocialMediaLinks() {
@@ -51,17 +57,17 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
       <ul className="social-lists">
         <li>
           <a href={`https://www.facebook.com/`} target="blank">
-            <img src={`${LOCAL_URL}${require('../../assets/images/icon-facebook.svg')}`}/>
+            <img src={`${LOCAL_URL}${require('../../../assets/images/icon-facebook.svg')}`}/>
           </a>
         </li>
         <li>
           <a href={`https://www.twitter.com/`} target="blank">
-            <img src={`${LOCAL_URL}${require('../../assets/images/icon-twitter.svg')}`}/>
+            <img src={`${LOCAL_URL}${require('../../../assets/images/icon-twitter.svg')}`}/>
           </a>
         </li>
         <li>
           <a href={`https://www.linkedin.com/`} target="blank">
-            <img src={`${LOCAL_URL}${require('../../assets/images/icon-linkedin.svg')}`}/>
+            <img src={`${LOCAL_URL}${require('../../../assets/images/icon-linkedin.svg')}`}/>
           </a>
         </li>
       </ul>
@@ -69,23 +75,23 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
   }
 
   render() {
-
-    if (this.props.employer.name === null) {
+    if (this.props.employer === undefined) {
       return null;
     }
 
     const employer: Employer = this.props.employer;
-    const logo = employer.logoImg.length > 0 ? `${IMG_URL}${employer.logoImg}` : `${LOCAL_URL}${require('../../assets/images/no-icon.svg')}`;
+    const logo = employer.logoImg.length > 0 ? `${IMG_URL}${employer.logoImg}` : `${LOCAL_URL}${require('../../../assets/images/no-icon.svg')}`;
     return (
       <aside className="jp-employer-aside">
         <img className="company-logo panel-shadow" src={logo} alt={`${employer.name} Logo`}/>
         <div className="info-container panel-shadow" id="about-section">
           <h1 className="title">About {employer.name}</h1>
-          <p className="jp-employer-location">{`${employer.location.city},${employer.location.state}`}</p>
+          <p className="jp-employer-location">{`${employer.location.city}, ${employer.location.state}`}</p>
         </div>
         <div className="info-container panel-shadow">
           {this.createSocialMediaLinks()}
         </div>
+        <OtherJobsComponent />
         <div className="info-container panel-shadow">
           <h1 className="title">Other jobs by {employer.name}</h1>
           <ul className="other-job-ul">

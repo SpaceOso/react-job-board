@@ -12,7 +12,7 @@
   -moz-border-radius: 25rem;
   border-radius: 2rem;
   @include panelBorders();
-  @include panelShadow();
+  //@include panelShadow();
 
   .job-form-group {
     text-align: left;
