@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-//utils
-import { setFormState } from "../../../../utils/utils";
-import TinymceComponent from "../../../tinymce/TinymceComponent";
-import SpinnerComponent from "../../../spinners/spinnerComponent";
+// utils
+import { setFormState } from '../../../../utils/utils';
+import SpinnerComponent from '../../../spinners/spinnerComponent';
+import TinymceComponent from '../../../tinymce/TinymceComponent';
 
 import './CreateJobComponent.scss';
 
