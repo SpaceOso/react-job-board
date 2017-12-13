@@ -31,25 +31,6 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
     }
   }
 
-  createJobList() {
-    const employer: Employer = this.props.employer;
-
-    if (employer.jobs !== undefined && employer.jobs !== null) {
-      return employer.jobs.map((job) => {
-        if (job.id !== this.props.currentJob) {
-          return (
-            <JobLinkComponent
-              key={`${job.id}`}
-              to={`/jobposts/${job.id}`}
-              onClick={this.handleClick}
-              jobTitle={job.title}
-              jobID={job.id}
-            />
-          );
-        }
-      });
-    }
-  }
 
   createSocialMediaLinks() {
     console.log('the social media links fo this accounta re..', this.props.employer);
@@ -91,13 +72,7 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
         <div className="info-container panel-shadow">
           {this.createSocialMediaLinks()}
         </div>
-        <OtherJobsComponent />
-        <div className="info-container panel-shadow">
-          <h1 className="title">Other jobs by {employer.name}</h1>
-          <ul className="other-job-ul">
-            {this.createJobList()}
-          </ul>
-        </div>
+        <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob}/>
       </aside>
     );
   }
