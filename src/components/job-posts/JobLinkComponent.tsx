@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 interface Props {
   to: string;
   onClick: (jobId) => void;
-  jobTitle: string | null;
-  jobID: string | null;
+  value: string | null;
 }
 
 class JobLinkComponent extends React.Component<Props> {
@@ -15,7 +14,7 @@ class JobLinkComponent extends React.Component<Props> {
   }
 
   handleClick() {
-    this.props.onClick(this.props.jobID);
+    this.props.onClick(this.props.value);
   }
 
   render() {
@@ -24,7 +23,7 @@ class JobLinkComponent extends React.Component<Props> {
         to={this.props.to}
         onClick={this.handleClick}
       >
-        <li>{this.props.jobTitle}</li>
+       {this.props.children}
       </Link>
     );
   }

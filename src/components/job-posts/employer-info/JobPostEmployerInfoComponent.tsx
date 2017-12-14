@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { Employer } from '../../../types/index';
 import { IMG_URL, LOCAL_URL } from '../../../utils/utils';
-import JobLinkComponent from '../JobLinkComponent';
 import OtherJobsComponent from './OtherJobsComponent';
+import SocialMediaComponent from './SocialMediaComponent';
 
 /**
  * Styles
@@ -31,30 +31,6 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
     }
   }
 
-
-  createSocialMediaLinks() {
-    console.log('the social media links fo this accounta re..', this.props.employer);
-    return (
-      <ul className="social-lists">
-        <li>
-          <a href={`https://www.facebook.com/`} target="blank">
-            <img src={`${LOCAL_URL}${require('../../../assets/images/icon-facebook.svg')}`}/>
-          </a>
-        </li>
-        <li>
-          <a href={`https://www.twitter.com/`} target="blank">
-            <img src={`${LOCAL_URL}${require('../../../assets/images/icon-twitter.svg')}`}/>
-          </a>
-        </li>
-        <li>
-          <a href={`https://www.linkedin.com/`} target="blank">
-            <img src={`${LOCAL_URL}${require('../../../assets/images/icon-linkedin.svg')}`}/>
-          </a>
-        </li>
-      </ul>
-    );
-  }
-
   render() {
     if (this.props.employer === undefined) {
       return null;
@@ -69,9 +45,7 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
           <h1 className="title">About {employer.name}</h1>
           <p className="jp-employer-location">{`${employer.location.city}, ${employer.location.state}`}</p>
         </div>
-        <div className="info-container panel-shadow">
-          {this.createSocialMediaLinks()}
-        </div>
+        <SocialMediaComponent/>
         <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob}/>
       </aside>
     );

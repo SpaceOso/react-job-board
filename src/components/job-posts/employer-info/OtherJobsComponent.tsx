@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { Employer } from '../../../types';
+import JobLinkComponent from '../JobLinkComponent';
 
 interface MyProps {
   employer: Employer;
@@ -9,10 +9,6 @@ interface MyProps {
 }
 
 function otherJobsComponent(props: MyProps) {
-  function handleClick(e) {
-    console.log('handling click event...');
-    console.log(typeof e);
-  }
 
   function createJobList() {
     const employer: Employer = props.employer;
@@ -21,13 +17,14 @@ function otherJobsComponent(props: MyProps) {
       return employer.jobs.map((job) => {
         if (job.id !== props.currentJob) {
           return (
-            <Link
+            <JobLinkComponent
               key={`${job.id}`}
               to={`/jobposts/${job.id}`}
-              onClick={handleClick}
+              value={job.id}
+              onClick={props.handleClick}
             >
               <li>{job.title}</li>
-            </Link>
+            </JobLinkComponent>
           );
         }
       });
