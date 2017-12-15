@@ -123,7 +123,7 @@ export interface StoreState {
   jobs?: Job[];
   user?: User | null;
   employer?: Employer | null;
-  currentJobPost?: CurrentJobPost;
+  currentJobPost?: CurrentJobPost | null;
   siteFetching?: SiteFetching;
   siteErrors?: SiteErrors;
 }

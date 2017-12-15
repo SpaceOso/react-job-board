@@ -25,6 +25,7 @@ interface MyState {
   //   employerId: string,
   // };
   jobInfoLoaded: boolean;
+  currentJobPost: CurrentJobPost | null;
 }
 
 class JobPostLayout extends React.Component<JobPostProps, MyState> {
@@ -33,6 +34,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
 
     this.state = {
       jobInfoLoaded: false,
+      currentJobPost: null,
     };
     this.loadNewJob = this.loadNewJob.bind(this);
     this.handleJobApplicantInfo = this.handleJobApplicantInfo.bind(this);
@@ -40,7 +42,13 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
 
   componentDidMount() {
     this.props.getJobById(this.props.match.params.jobId);
-    this.setState({ jobInfoLoaded: true });
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      jobInfoLoaded: true,
+      currentJobPost: this.props.currentJobPost,
+    });
   }
 
   componentWillUnmount() {
@@ -59,19 +67,15 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
 
   render() {
 
-    console.log('layout, props.currentEmployer', this.props.currentJobPost.Employer);
-    if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
+    console.log('layout, props.currentEmployer', this.props.currentJobPost);
+    // if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
+    if (this.state.currentJobPost === null) {
       return (
-        <div className="job-post-container">
-          <JobPostInfoComponent
-            isFetching={this.props.currentJobPost.isFetching}
-          />
-          <JobPostEmployerInfoComponent isFetching={this.props.currentJobPost.isFetching} />
-        </div>
+        <SpinnerComponent />
       );
     }
 
-    if (this.props.currentJobPost.Employer.name !== null) {
+    if (this.props.currentJobPost.Employer !== null) {
       return (
         <div className="job-post-container">
           <JobPostInfoComponent
