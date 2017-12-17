@@ -11,9 +11,8 @@ import { CurrentJobPost } from '../types/index';
 const thisState: CurrentJobPost = {
   id: '',
   title: '',
-  name: '',
-  employerId: '',
   description: '',
+  employerId: '',
   isFetching: false,
   createdAt: '',
   location: {

@@ -95,7 +95,7 @@ export interface Employer {
   isFetching: boolean | null;
 }
 
-export interface CurrentJobPost extends Job, Employer {
+export interface CurrentJobPost extends Job {
   isFetching: boolean;
 }
 

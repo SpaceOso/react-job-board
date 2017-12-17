@@ -33,7 +33,7 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
 
   render() {
     if (this.props.employer === undefined) {
-      // return null;
+      return null;
     }
 
     const employer: Employer = this.props.employer;
