@@ -46,7 +46,7 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
           <p className="jp-employer-location">{`${employer.location.city}, ${employer.location.state}`}</p>
         </div>
         <SocialMediaComponent/>
-        <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob}/>
+        <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching}/>
       </aside>
     );
   }

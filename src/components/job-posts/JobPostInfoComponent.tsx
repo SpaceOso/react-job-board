@@ -67,7 +67,16 @@ class JobPostInfoComponent extends React.Component<JobPostInfoProps, MyState> {
   render() {
     console.log('jobPostInfoComponent job:', this.props.job);
     if (this.props.isFetching) {
-      return <SpinnerComponent/>;
+      return (
+        <div className="job-post">
+          <div className="job-header-container panel-shadow">
+            <h1 className="jp-job-header">---- @ <span className="italic">----</span></h1>
+          </div>
+          <div className="job-description-container panel-shadow">
+            <SpinnerComponent/>
+          </div>
+        </div>
+      );
     }
 
     if (this.props.job !== undefined) {

@@ -71,7 +71,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
     // if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
     if (this.state.currentJobPost === null) {
       return (
-        <SpinnerComponent />
+       null
       );
     }
 
