@@ -12,6 +12,7 @@ import UserRegisterContainer from './register/UserRegisterContainer';
 // actions
 import { Employer, SiteErrors, SiteFetching, User } from '../types/index';
 import ProtectedComponent from './dashboard/protected/ProtectedComponent';
+import TestComponent from './tests/TestComponent';
 
 interface Props {
   logInOnLoad;
@@ -46,6 +47,7 @@ class App extends React.Component<Props> {
           {/*<Route exact path="/" component={JumboTron}/>*/}
           <Switch>
             <Route exact path="/" component={JobListContainer as any}/>
+            <Route exact path="/tests" component={TestComponent}/>
             <Route exact path="/register" component={UserRegisterContainer as any}/>
             <Route exact path="/jobposts/:jobId" component={JobPostContainer as any}/>
             <Route exact path="/login" component={LoginContainer as any}/>

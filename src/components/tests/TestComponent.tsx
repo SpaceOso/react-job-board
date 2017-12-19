@@ -1,56 +1,47 @@
 import * as React from 'react';
-import * as TinyMCE from 'tinymce';
-import "../../../node_modules/draft-js/dist/Draft";
-import TinymceComponent from "../tinymce/TinymceComponent";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-const myState:any  = {
-	title: "",
-	description: "",
-	keywords: [],
-	value: ''
-};
+class TestComponent extends React.Component<any, any> {
+  constructor(props) {
+    super(props);
+    this.state = { items: [ 'hello', 'world', 'click', 'me' ] };
+    console.log('dang it');
+    this.handleAdd = this.handleAdd.bind(this);
+  }
 
-class TestComponent extends React.Component<any, any>{
-	constructor(props){
-		super(props);
+  handleAdd() {
+    const newItems = this.state.items.concat([
+      prompt('Enter some text'),
+    ]);
+    this.setState({ items: newItems });
+  }
 
-		this.state = {
-			formContent: ''
-		};
-		// this.onChange = (editorState) => this.setState({editorState});
-		this.onChange = this.onChange.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
-	}
+  handleRemove(i) {
+    let newItems = this.state.items.slice();
+    newItems.splice(i, 1);
+    this.setState({ items: newItems });
+  }
 
-	onChange(value){
-		// this.setState({value});
-		this.setState({formContent: value});
-		console.log(value);
-	};
+  render() {
+    const items = this.state.items.map((item, i) => (
+      <div key={item} onClick={() => this.handleRemove(i)}>
+        {item}
+      </div>
+    ));
 
-	onSubmit(event){
-		console.log("form submitted holmes");
-		console.log("form has been submitted: ", this.state.formContent);
-		event.preventDefault();
-	}
 
-	render(){
-		return(
-			<div className="text-container">
-			<div> I'm the thest componet</div>
-				<form  onSubmit={this.onSubmit}>
-
-				<h1>Below should be tinymce:</h1>
-				<TinymceComponent
-					id="testId"
-					onEditorChange={this.onChange}
-					priorContent={null}
-				/>
-				<button>Submit me bro</button>
-				</form>
-			</div>
-		)
-	}
+    return (
+      <div>
+        <button onClick={this.handleAdd}>Add Item</button>
+        <CSSTransition
+          timeout={500}
+          classNames={{appear: 'my-appear',appearActive: 'my-active-appear',enter: 'my-enter',enterActive: 'my-active-enter', exit: 'my-exit', exitActive: 'my-active-exit'}}
+        >
+          {items}
+        </CSSTransition>
+      </div>
+    );
+  }
 }
 
 export default TestComponent;
