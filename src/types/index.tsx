@@ -90,7 +90,7 @@ export interface Employer {
   website: string;
   twitter: string;
   facebook: string;
-  linkedin: string;
+  linkedIn: string;
   jobs: EmployerJobView[] | null;
   isFetching: boolean | null;
 }

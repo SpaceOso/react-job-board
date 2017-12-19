@@ -12,7 +12,7 @@ import '../styles/JobPostEmployerInfo.scss';
 
 interface MyProps {
   isFetching: boolean;
-  employer?;
+  employer: any;
   loadJob?: (arg: any) => (any);
   currentJob?: string;
 }
@@ -45,8 +45,8 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
           <h1 className="title">About {employer.name}</h1>
           <p className="jp-employer-location">{`${employer.location.city}, ${employer.location.state}`}</p>
         </div>
-        <SocialMediaComponent/>
-        <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching}/>
+        <SocialMediaComponent employer={employer}/>
+        <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching} />
       </aside>
     );
   }

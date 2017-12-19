@@ -25,7 +25,7 @@ const defaultState: Employer = {
   website: '',
   twitter: '',
   facebook: '',
-  linkedin: '',
+  linkedIn: '',
   jobs: null,
   isFetching: false,
 };

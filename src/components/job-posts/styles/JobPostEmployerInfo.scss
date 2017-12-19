@@ -7,15 +7,13 @@
   font-size: 1.6rem;
   width: 40%;
   max-width: 350px;
-  //padding-left: 20px;
   display: inline-block;
   border: 1px solid $borders;
   padding: 16px;
   position: relative;
-  margin-top: 135px;
 
   #about-section{
-    margin-top: 35px;
+    margin-top: 17px;
   }
 
   .info-container{
@@ -27,14 +25,13 @@
       margin-top: 0;
     }
     p{
-      margin-bottom: 0;
+      margin: 0;
     }
   }
   .company-logo{
     display: block;
     margin: auto;
     max-width: 130px;
-    position: absolute;
     left: 34%;
     top: -27%;
     background-color: white;
