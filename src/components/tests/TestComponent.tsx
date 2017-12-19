@@ -33,12 +33,9 @@ class TestComponent extends React.Component<any, any> {
     return (
       <div>
         <button onClick={this.handleAdd}>Add Item</button>
-        <CSSTransition
-          timeout={500}
-          classNames={{appear: 'my-appear',appearActive: 'my-active-appear',enter: 'my-enter',enterActive: 'my-active-enter', exit: 'my-exit', exitActive: 'my-active-exit'}}
-        >
+        <TransitionGroup>
           {items}
-        </CSSTransition>
+        </TransitionGroup>
       </div>
     );
   }

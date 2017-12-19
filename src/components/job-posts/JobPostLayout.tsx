@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+// import { CSSTransition } from 'react-transition-group';
 import { CurrentJobPost } from '../../types/index';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 import JobPostEmployerInfoComponent from './employer-info/JobPostEmployerInfoComponent';
@@ -7,6 +8,7 @@ import JobPostInfoComponent from './JobPostInfoComponent';
 
 // styles
 import './styles/JobPostContainer.scss';
+import TestComponent from '../tests/TestComponent'
 
 interface JobPostProps extends RouteComponentProps<any> {
   // job: Job
@@ -78,6 +80,8 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
     if (this.props.currentJobPost.Employer !== null) {
       return (
         <div className="job-post-container">
+          {/*<CSSTransition classNames={'tester'} timeout={500}/>*/}
+          <TestComponent/>
           <JobPostInfoComponent
             job={this.props.currentJobPost}
             isFetching={this.props.currentJobPost.isFetching}

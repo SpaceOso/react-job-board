@@ -50,5 +50,4 @@ module.exports = env => ({
 		net: 'empty',
 		fs:'empty'
 	}
-// };
 });
