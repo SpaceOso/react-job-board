@@ -5,7 +5,7 @@
   "main": "./src/index",
   "scripts": {
     "start": "node -r dotenv/config bin/www -w app.js -w server",
-    "server": "set NODE_ENV=development&& nodemon  bin/www",
+    "server": "set NODE_ENV=development&& nodemon  bin/www.js",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
     "build": "webpack --env.dev=prod",
     "build:dev": "set NODE_ENV=development webpack --env.dev --hot",
