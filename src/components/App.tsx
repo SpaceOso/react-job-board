@@ -12,7 +12,6 @@ import UserRegisterContainer from './register/UserRegisterContainer';
 // actions
 import { Employer, SiteErrors, SiteFetching, User } from '../types/index';
 import ProtectedComponent from './dashboard/protected/ProtectedComponent';
-import TestComponent from './tests/TestComponent';
 
 interface Props {
   logInOnLoad;

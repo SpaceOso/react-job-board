@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import Fade from '../animations/Fade';
 
 class TestComponent extends React.Component<any, any> {
   constructor(props) {
@@ -24,18 +25,29 @@ class TestComponent extends React.Component<any, any> {
 
   render() {
     const items = this.state.items.map((item, i) => (
-      <div key={item} onClick={() => this.handleRemove(i)}>
-        {item}
-      </div>
+      <Fade in={item} key={item}>
+        <div key={item} onClick={() => this.handleRemove(i)}>
+          {item}
+        </div>
+      </Fade>
     ));
 
 
     return (
-      <div>
-        <button onClick={this.handleAdd}>Add Item</button>
-        <TransitionGroup>
-          {items}
+      <div className='container'>
+        <TransitionGroup className='todo-list'>
+          {this.state.items.map((item, i) => (
+            <Fade key={item}>
+              <div>
+                {`${item} `}
+                <button onClick={() => this.handleRemove(i)}>
+                  &times;
+                </button>
+              </div>
+            </Fade>
+          ))}
         </TransitionGroup>
+        <button onClick={() => this.handleAdd()}>Add Item</button>
       </div>
     );
   }

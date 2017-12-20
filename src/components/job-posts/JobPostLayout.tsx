@@ -81,7 +81,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
       return (
         <div className="job-post-container">
           {/*<CSSTransition classNames={'tester'} timeout={500}/>*/}
-          <TestComponent/>
+          <TestComponent />
           <JobPostInfoComponent
             job={this.props.currentJobPost}
             isFetching={this.props.currentJobPost.isFetching}
