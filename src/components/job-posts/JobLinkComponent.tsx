@@ -23,7 +23,7 @@ class JobLinkComponent extends React.Component<Props> {
         to={this.props.to}
         onClick={this.handleClick}
       >
-       {this.props.children}
+        {this.props.children}
       </Link>
     );
   }

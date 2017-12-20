@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Employer } from '../../../types/index';
 import { IMG_URL, LOCAL_URL } from '../../../utils/utils';
+import { default as Fade } from '../../animations/Fade';
 import OtherJobsComponent from './OtherJobsComponent';
 import SocialMediaComponent from './SocialMediaComponent';
 
@@ -46,7 +47,9 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
           <p className="jp-employer-location">{`${employer.location.city}, ${employer.location.state}`}</p>
         </div>
         <SocialMediaComponent employer={employer}/>
-        <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching} />
+        <Fade key={'josbs'}>
+          <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching} />
+        </Fade>
       </aside>
     );
   }

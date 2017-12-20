@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Transition from 'react-transition-group/Transition';
-import * as CSSTransition from 'react-transition-group/CSSTransition'
+import * as CSSTransition from 'react-transition-group/CSSTransition';
 
 import './animationStyles.scss';
 

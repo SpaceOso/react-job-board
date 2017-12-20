@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Employer } from '../../../types';
+import { default as Fade } from '../../animations/Fade';
 import { default as SpinnerComponent } from '../../spinners/spinnerComponent';
 import JobLinkComponent from '../JobLinkComponent';
+import { TransitionGroup } from 'react-transition-group';
 
 interface MyProps {
   employer: Employer;
@@ -15,7 +17,8 @@ function otherJobsComponent(props: MyProps) {
   function createJobList() {
     const employer: Employer = props.employer;
     if (props.isFetching) {
-      return <SpinnerComponent/>;
+      // return <SpinnerComponent/>;
+      // return null;
     }
     if (employer.jobs !== undefined && employer.jobs !== null) {
       return employer.jobs.map((job) => {
@@ -41,6 +44,7 @@ function otherJobsComponent(props: MyProps) {
       <ul className="other-job-ul">
         {createJobList()}
       </ul>
+      <div>tester</div>
     </div>
   );
 }
