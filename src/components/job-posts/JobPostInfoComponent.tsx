@@ -2,14 +2,17 @@ import * as React from 'react';
 
 // components
 import { Job } from '../../types/index';
+import Fade from '../animations/Fade';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 import ApplicationComponent from './application/ApplicationComponent';
+import { TransitionGroup } from 'react-transition-group'
+import TestComponent from '../tests/TestComponent'
 
 // import './styles/JobPostContainer.scss';
 
 interface JobPostInfoProps {
   isFetching: boolean;
-  job?: Job;
+  job: Job;
   addApplicantToJob?;
 }
 
@@ -44,7 +47,7 @@ class JobPostInfoComponent extends React.Component<JobPostInfoProps, MyState> {
 
   // gets called when this.state.isApplying === true
   displayJobApplication() {
-    if (this.props.job !== undefined) {
+    if (this.state.isApplying) {
       return (
         <ApplicationComponent
           employerId={this.props.job.employerId}
@@ -52,6 +55,7 @@ class JobPostInfoComponent extends React.Component<JobPostInfoProps, MyState> {
           jobTitle={this.props.job.title}
           handleApplicantInfo={this.props.addApplicantToJob}
           cancelApplication={this.handleApplicationCancel}
+          viewingApplication={this.state.isApplying}
         >
           tester div
         </ApplicationComponent>
@@ -66,31 +70,19 @@ class JobPostInfoComponent extends React.Component<JobPostInfoProps, MyState> {
 
   render() {
     console.log('jobPostInfoComponent job:', this.props.job);
-    if (this.props.isFetching) {
-      return (
-        <div className="job-post">
-          <div className="job-header-container panel-shadow">
-            <h1 className="jp-job-header">---- @ <span className="italic">----</span></h1>
-          </div>
-          <div className="job-description-container panel-shadow">
-            <SpinnerComponent/>
-          </div>
-        </div>
-      );
-    }
 
     if (this.props.job !== undefined) {
       return (
         <div className="job-post">
           <div className="job-header-container panel-shadow">
-            <h1 className="jp-job-header">{this.props.job.title} @ <span className="italic">{this.props.job.Employer.name}</span></h1>
+            <h1 className="jp-job-header">{this.state.isApplying}{this.props.job.title} @ <span className="italic">{this.props.job.Employer.name}</span></h1>
           </div>
           <div className="job-description-container panel-shadow">
             <div
               className="job-description"
               dangerouslySetInnerHTML={{ __html: this.props.job.description }}
             />
-            {this.state.isApplying === true ? this.displayJobApplication() : null}
+            {this.displayJobApplication()}
             <button className="btn-standard" onClick={this.handleApplication}>Apply Now</button>
           </div>
         </div>

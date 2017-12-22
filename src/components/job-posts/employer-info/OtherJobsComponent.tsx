@@ -44,7 +44,6 @@ function otherJobsComponent(props: MyProps) {
       <ul className="other-job-ul">
         {createJobList()}
       </ul>
-      <div>tester</div>
     </div>
   );
 }

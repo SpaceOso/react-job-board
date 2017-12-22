@@ -20,7 +20,7 @@ export interface Job {
       state: string;
       zip: string;
     };
-    logoImg?: string | null;
+    logoImg: string | null;
     website: string | null;
     facebook: string | null;
     twitter: string | null;
@@ -123,7 +123,7 @@ export interface StoreState {
   jobs?: Job[];
   user?: User | null;
   employer?: Employer | null;
-  currentJobPost?: CurrentJobPost | null;
+  currentJobPost?: CurrentJobPost;
   siteFetching?: SiteFetching;
   siteErrors?: SiteErrors;
 }

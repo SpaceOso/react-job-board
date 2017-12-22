@@ -2,13 +2,15 @@ import * as React from 'react';
 
 import ModalComponent from '../../modal/ModalComponent';
 import SimpleForm from '../../simple-form/SimpleForm';
+import Fade from '../../animations/Fade';
 
 interface MyProps {
   jobId: string | null;
-  jobTitle: string | null;
+  jobTitle: string;
   employerId: string | null;
   handleApplicantInfo: (applicantInfo) => {};
   cancelApplication: () => void;
+  viewingApplication: boolean;
 }
 
 const modalParent = document.getElementById('modal-root');

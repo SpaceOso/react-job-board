@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { ROOT_URL } from './index';
 
-export const FIND_JOB_BY_ID = 'FIND_JOB_BY_ID';
 export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS';
 export const GET_JOBS_ERROR = 'GET_JOBS_ERROR';
 export const FETCHING_JOBS = 'FETCHING_JOBS';

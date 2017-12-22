@@ -35,8 +35,6 @@ export type CLEAR_ALL_ERRORS = typeof CLEAR_ALL_ERRORS;
 // =====================================
 // 	JOB ACTIONS
 // =====================================
-export const FIND_JOB_BY_ID = 'FIND_JOB_BY_ID';
-export type FIND_JOB_BY_ID = typeof FIND_JOB_BY_ID;
 
 export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS';
 export type GET_JOBS_SUCCESS = typeof GET_JOBS_SUCCESS;

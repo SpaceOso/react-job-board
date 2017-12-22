@@ -8,7 +8,6 @@ import JobPostLayout from './JobPostLayout';
 import './styles/JobPostContainer.scss';
 
 function mapStateToProps({ currentJobPost }: StoreState) {
-
   return {
     currentJobPost,
   };

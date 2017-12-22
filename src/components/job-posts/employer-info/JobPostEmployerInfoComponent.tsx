@@ -38,7 +38,13 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
     }
 
     const employer: Employer = this.props.employer;
-    const logo = employer.logoImg.length > 0 ? `${IMG_URL}${employer.logoImg}` : `${LOCAL_URL}${require('../../../assets/images/no-icon.svg')}`;
+    let logo: string = `${LOCAL_URL}${require('../../../assets/images/no-icon.svg')}`;;
+    if (employer.logoImg !== null) {
+      if (employer.logoImg.length > 0) {
+        logo = `${IMG_URL}${employer.logoImg}`;
+      }
+    }
+
     return (
       <aside className="jp-employer-aside">
         <img className="company-logo panel-shadow" src={logo} alt={`${employer.name} Logo`}/>
@@ -48,7 +54,7 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
         </div>
         <SocialMediaComponent employer={employer}/>
         <Fade key={'josbs'}>
-          <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching} />
+          <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching}/>
         </Fade>
       </aside>
     );

@@ -8,11 +8,13 @@ import JobPostInfoComponent from './JobPostInfoComponent';
 
 // styles
 import './styles/JobPostContainer.scss';
-import TestComponent from '../tests/TestComponent'
+import TestComponent from '../tests/TestComponent';
+import Fade from '../animations/Fade';
+import { TransitionGroup } from 'react-transition-group'
+
+import '../animations/animationStyles.scss';
 
 interface JobPostProps extends RouteComponentProps<any> {
-  // job: Job
-  // employer: Employer,
   getJobById: (arg) => {};
   loadJob: () => {};
   resetCurrentJob: () => {};
@@ -21,11 +23,6 @@ interface JobPostProps extends RouteComponentProps<any> {
 }
 
 interface MyState {
-  // jobPostEmployerInfo: {
-  //   employerName: string,
-  //   employerLogo: string,
-  //   employerId: string,
-  // };
   jobInfoLoaded: boolean;
   currentJobPost: CurrentJobPost | null;
 }
@@ -70,23 +67,24 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
   render() {
 
     console.log('layout, props.currentEmployer', this.props.currentJobPost);
-    // if (this.props.currentJobPost.isFetching === undefined || this.props.currentJobPost.isFetching === true) {
     if (this.state.currentJobPost === null) {
       return (
-       null
+        <div className="job-post-container">
+          there is no employer
+        </div>
       );
     }
 
-    if (this.props.currentJobPost.Employer !== null) {
+    if (this.props.currentJobPost.Employer !== null ) {
       return (
         <div className="job-post-container">
-          {/*<CSSTransition classNames={'tester'} timeout={500}/>*/}
-          <TestComponent />
-          <JobPostInfoComponent
-            job={this.props.currentJobPost}
-            isFetching={this.props.currentJobPost.isFetching}
-            addApplicantToJob={this.handleJobApplicantInfo}
-          />
+          <Fade key={this.props.currentJobPost.title} in={!this.props.currentJobPost.isFetching}>
+            <JobPostInfoComponent
+              job={this.props.currentJobPost}
+              isFetching={this.props.currentJobPost.isFetching}
+              addApplicantToJob={this.handleJobApplicantInfo}
+            />
+          </Fade>
           <JobPostEmployerInfoComponent isFetching={this.props.currentJobPost.isFetching} employer={this.props.currentJobPost.Employer} loadJob={this.loadNewJob} currentJob={this.props.currentJobPost.id}/>
         </div>
       );

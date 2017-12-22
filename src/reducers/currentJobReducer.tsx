@@ -1,8 +1,6 @@
 import {
   DONE_FETCHING,
-  FETCHING_JOBS,
   FETCHING_SINGLE_JOB,
-  FIND_JOB_BY_ID,
   RESET_CURRENT_JOB,
   SINGLE_JOB_SUCCESS,
 } from '../actions/jobActions';
@@ -38,20 +36,11 @@ const thisState: CurrentJobPost = {
   },
 };
 
-function currentJobPostReducer(state: CurrentJobPost, action): CurrentJobPost {
+function currentJobPostReducer(state = thisState, action) {
   switch (action.type) {
-
-    case FIND_JOB_BY_ID:
-      return {
-        ...state,
-        // employer: {...action.payload.data.employer},
-        // currentJob: {...action.payload.data.job}
-      };
     case RESET_CURRENT_JOB:
       return {
-        ...state,
-        // currentJob: undefined,
-        // employer: undefined
+        ...thisState,
       };
     case DONE_FETCHING: {
       return {
@@ -65,16 +54,13 @@ function currentJobPostReducer(state: CurrentJobPost, action): CurrentJobPost {
         isFetching: true,
       };
     case SINGLE_JOB_SUCCESS:
-      console.log('inside reducuer:', action.payload);
       return {
         ...state,
         ...action.payload.data.job,
         isFetching: false,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 }
 
