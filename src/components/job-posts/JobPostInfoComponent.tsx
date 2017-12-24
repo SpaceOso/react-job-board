@@ -5,8 +5,8 @@ import { Job } from '../../types/index';
 import Fade from '../animations/Fade';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 import ApplicationComponent from './application/ApplicationComponent';
-import { TransitionGroup } from 'react-transition-group'
-import TestComponent from '../tests/TestComponent'
+import { TransitionGroup } from 'react-transition-group';
+import TestComponent from '../tests/TestComponent';
 
 // import './styles/JobPostContainer.scss';
 
