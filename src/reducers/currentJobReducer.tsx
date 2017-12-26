@@ -42,21 +42,21 @@ function currentJobPostReducer(state = thisState, action) {
       return {
         ...thisState,
       };
+    case FETCHING_SINGLE_JOB:
+      return {
+        ...state,
+        isFetching: true,
+      };
     case DONE_FETCHING: {
       return {
         ...state,
         isFetching: false,
       };
     }
-    case FETCHING_SINGLE_JOB:
-      return {
-        ...state,
-        isFetching: true,
-      };
     case SINGLE_JOB_SUCCESS:
       return {
         ...state,
-        ...action.payload.data.job,
+        ...action.payload,
         isFetching: false,
       };
     default:

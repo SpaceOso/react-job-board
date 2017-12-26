@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { Job } from '../types';
 import { ROOT_URL } from './index';
 
 export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS';
@@ -29,7 +30,7 @@ export function fetchingJobs() {
   return {
     type: FETCHING_JOBS,
     payload: 'nothing here',
-  }
+  };
 }
 
 export function doneFetchingJobs() {
@@ -62,7 +63,8 @@ export function resetCurrentJob() {
   };
 }
 
-export function singleJobSuccess(data) {
+export function singleJobSuccess(data: Job) {
+  console.log('data:', data);
   return {
     type: SINGLE_JOB_SUCCESS,
     payload: data,
@@ -93,14 +95,6 @@ export function addApplicantToJob(applicantInfo) {
     }
   }
 
-  /*if(applicantInfo.coverLetter !== null || applicantInfo.coverLetter !== 'undefined'){
-    data.set('coverLetter', applicantInfo.coverLetter);
-  }
-
-  if(applicantInfo.resume !== null || applicantInfo.resume !== 'undefined'){
-    data.set('resume', applicantInfo.resume);
-  }*/
-
   return (dispatch) => {
     dispatch(fetchingJobs());
     console.log('in the job actions creating applicant with:', data);
@@ -120,8 +114,8 @@ export function getJobById(id) {
     dispatch(fetchSingleJob());
     axios.get(`${ROOT_URL}${'api/jobposts/'}${id}`)
       .then((response) => {
-        console.log('the response from searching by id:', response);
-        dispatch(singleJobSuccess(response));
+        console.log('the response from searching by id:', response.data.job);
+        dispatch(singleJobSuccess(response.data.job));
       })
       .catch((error) => {
       });
