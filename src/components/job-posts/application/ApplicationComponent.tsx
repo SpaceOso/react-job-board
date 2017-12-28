@@ -89,20 +89,25 @@ class ApplicationComponent extends React.Component<MyProps> {
   }
 
   render() {
+    if (this.props.viewingApplication === false) {
+      return null;
+    }
     const cancelButton = { click: this.props.cancelApplication, btnText: 'Cancel' };
     return (
       <ModalComponent>
         <div className="modal">
-          <SimpleForm
-            header={`Apply to ${this.props.jobTitle}`}
-            inputs={this.locationInputs}
-            submitBtnText={'Submit Application'}
-            verifyInputs={null}
-            onSubmitCB={this.handleApplicationSubmit}
-            joined={true}
-            style={{ width: 'auto' }}
-            cancelButton={cancelButton}
-          />
+          <Fade key="application-form-comp" in={this.props.viewingApplication}>
+            <SimpleForm
+              header={`Apply to ${this.props.jobTitle}`}
+              inputs={this.locationInputs}
+              submitBtnText={'Submit Application'}
+              verifyInputs={null}
+              onSubmitCB={this.handleApplicationSubmit}
+              joined={true}
+              style={{ width: 'auto' }}
+              cancelButton={cancelButton}
+            />
+          </Fade>
         </div>
       </ModalComponent>
     );
