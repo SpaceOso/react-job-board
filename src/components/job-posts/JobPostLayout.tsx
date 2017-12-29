@@ -13,7 +13,7 @@ import TestComponent from '../tests/TestComponent';
 import './styles/JobPostContainer.scss';
 
 import '../animations/animationStyles.scss';
-import ApplicationComponent from './application/ApplicationComponent'
+import ApplicationComponent from './application/ApplicationComponent';
 
 interface JobPostProps extends RouteComponentProps<any> {
   getJobById: (arg) => {};
@@ -31,15 +31,16 @@ interface MyState {
 }
 
 class JobPostLayout extends React.Component<JobPostProps, MyState> {
+  state: MyState = {
+    jobInfoLoaded: false,
+    currentJobPost: null,
+    isApplying: false,
+    didApply: false,
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      jobInfoLoaded: false,
-      currentJobPost: null,
-      isApplying: false,
-      didApply: false,
-    };
     this.loadNewJob = this.loadNewJob.bind(this);
     this.handleJobApplicantInfo = this.handleJobApplicantInfo.bind(this);
     this.handleApplication = this.handleApplication.bind(this);
@@ -47,23 +48,33 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
     this.handleApplicationCancel = this.handleApplicationCancel.bind(this);
   }
 
-  // gets called when this.state.isApplying === true
   displayJobApplication() {
-    if (this.state.isApplying) {
-      return (
-        <ApplicationComponent
-          employerId={this.props.currentJobPost.employerId}
-          jobId={this.props.currentJobPost.id}
-          jobTitle={this.props.currentJobPost.title}
-          handleApplicantInfo={this.props.addApplicantToJob}
-          cancelApplication={this.handleApplicationCancel}
-          viewingApplication={this.state.isApplying}
-        />
-      );
-    }
     return (
-      <div style={{ display: 'none', position: 'absolute' }}/>
+      <ApplicationComponent
+        employerId={this.props.currentJobPost.employerId}
+        jobId={this.props.currentJobPost.id}
+        jobTitle={this.props.currentJobPost.title}
+        handleApplicantInfo={this.props.addApplicantToJob}
+        cancelApplication={this.handleApplicationCancel}
+        viewingApplication={this.state.isApplying}
+      />
     );
+
+    /* if (this.state.isApplying) {
+       return (
+         <ApplicationComponent
+           employerId={this.props.currentJobPost.employerId}
+           jobId={this.props.currentJobPost.id}
+           jobTitle={this.props.currentJobPost.title}
+           handleApplicantInfo={this.props.addApplicantToJob}
+           cancelApplication={this.handleApplicationCancel}
+           viewingApplication={this.state.isApplying}
+         />
+       );
+     }
+     return (
+       <div style={{ display: 'none', position: 'absolute' }}/>
+     );*/
   }
 
   shouldComponentUpdate() {
@@ -79,9 +90,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
   // Will fire when apply button is clicked
   handleApplication() {
     console.log('application button clicked');
-    if (this.state.isApplying === false) {
-      this.setState({ isApplying: true });
-    }
+    this.setState({ isApplying: !this.state.isApplying });
   }
 
   componentDidMount() {
@@ -92,6 +101,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
     this.setState({
       jobInfoLoaded: true,
       currentJobPost: this.props.currentJobPost,
+      isApplying: false,
     });
   }
 
@@ -121,10 +131,21 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
       />
     );
 
+    const applicationComponent = (
+      <ApplicationComponent
+        employerId={this.props.currentJobPost.employerId}
+        jobId={this.props.currentJobPost.id}
+        jobTitle={this.props.currentJobPost.title}
+        handleApplicantInfo={this.props.addApplicantToJob}
+        cancelApplication={this.handleApplicationCancel}
+        viewingApplication={this.state.isApplying}
+      />
+    );
+
     return (
       <div className="job-post-container">
         <Fade key={'application-container'} in={this.state.isApplying}>
-          {this.displayJobApplication()}
+          {applicationComponent}
         </Fade>
         <Fade key={'post-container'} in={!this.props.currentJobPost.isFetching}>
           {jobPostInfoComponent}

@@ -19,28 +19,28 @@ class ApplicationComponent extends React.Component<MyProps> {
   private locationInputs = [
     {
       label: 'First Name',
-      required: true,
+      required: false,
       type: 'text',
       placeHolder: 'First Name',
       id: 'fName',
     },
     {
       label: 'Last Name',
-      required: true,
+      required: false,
       type: 'text',
       placeHolder: 'Last Name',
       id: 'lName',
     },
     {
       label: 'email',
-      required: true,
+      required: false,
       type: 'text',
       placeHolder: 'email',
       id: 'email',
     },
     {
       label: 'Phone Number',
-      required: true,
+      required: false,
       type: 'tel',
       placeHolder: '555-555-555',
       id: 'phoneNumber',
@@ -54,7 +54,7 @@ class ApplicationComponent extends React.Component<MyProps> {
     },
     {
       label: 'Resume',
-      required: true,
+      required: false,
       type: 'file',
       name: 'resume',
       accept: '.pdf',
@@ -90,13 +90,15 @@ class ApplicationComponent extends React.Component<MyProps> {
 
   render() {
     if (this.props.viewingApplication === false) {
-      return null;
+      return (
+          <div style={{ display: 'none', position: 'absolute' }}/>
+      );
     }
     const cancelButton = { click: this.props.cancelApplication, btnText: 'Cancel' };
     return (
-      <ModalComponent>
-        <div className="modal">
-          <Fade key="application-form-comp" in={this.props.viewingApplication}>
+        <ModalComponent>
+          <div className="modal">
+            <h1>{`${this.props.viewingApplication}`}</h1>
             <SimpleForm
               header={`Apply to ${this.props.jobTitle}`}
               inputs={this.locationInputs}
@@ -107,9 +109,8 @@ class ApplicationComponent extends React.Component<MyProps> {
               style={{ width: 'auto' }}
               cancelButton={cancelButton}
             />
-          </Fade>
-        </div>
-      </ModalComponent>
+          </div>
+        </ModalComponent>
     );
   }
 }
