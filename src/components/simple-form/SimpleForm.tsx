@@ -25,7 +25,7 @@ interface MyProps {
   onSubmitCB: (any) => void;
   joined?: boolean;
   style?: {};
-  cancelButton?: { click: () => void, btnText: string };
+  cancelButton?: { click: (e: React.FormEvent<HTMLInputElement>) => void, btnText: string };
 }
 
 class SimpleForm extends React.Component<MyProps, any> {
@@ -230,8 +230,8 @@ class SimpleForm extends React.Component<MyProps, any> {
         <form action="" onSubmit={this.handleSubmit}>
           <h1>{this.props.header}</h1>
           <div>{this.createInputs()}</div>
-          {this.props.cancelButton ? <button className="btn-standard" onClick={this.props.cancelButton.click}> {this.props.cancelButton.btnText} </button> : null}
-          <button className="btn-standard">Submit Form</button>
+          {this.props.cancelButton ? < input type={'button'} className="btn-standard" onClick={this.props.cancelButton.click} value={this.props.cancelButton.btnText} /> : null}
+          <button className="btn-standard">Submit</button>
         </form>
         {/*<div className="form-error-box">Erorr: Please see errors above.</div>*/}
       </div>

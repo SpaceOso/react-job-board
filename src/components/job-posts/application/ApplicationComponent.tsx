@@ -2,45 +2,42 @@ import * as React from 'react';
 
 import ModalComponent from '../../modal/ModalComponent';
 import SimpleForm from '../../simple-form/SimpleForm';
-import Fade from '../../animations/Fade';
 
 interface MyProps {
   jobId: string | null;
   jobTitle: string;
   employerId: string | null;
   handleApplicantInfo: (applicantInfo) => {};
-  cancelApplication: () => void;
+  cancelApplication: (e: React.SyntheticEvent<HTMLInputElement>) => void;
   viewingApplication: boolean;
 }
-
-const modalParent = document.getElementById('modal-root');
 
 class ApplicationComponent extends React.Component<MyProps> {
   private locationInputs = [
     {
       label: 'First Name',
-      required: false,
+      required: true,
       type: 'text',
       placeHolder: 'First Name',
       id: 'fName',
     },
     {
       label: 'Last Name',
-      required: false,
+      required: true,
       type: 'text',
       placeHolder: 'Last Name',
       id: 'lName',
     },
     {
       label: 'email',
-      required: false,
+      required: true,
       type: 'text',
       placeHolder: 'email',
       id: 'email',
     },
     {
       label: 'Phone Number',
-      required: false,
+      required: true,
       type: 'tel',
       placeHolder: '555-555-555',
       id: 'phoneNumber',
@@ -54,7 +51,7 @@ class ApplicationComponent extends React.Component<MyProps> {
     },
     {
       label: 'Resume',
-      required: false,
+      required: true,
       type: 'file',
       name: 'resume',
       accept: '.pdf',
@@ -78,7 +75,7 @@ class ApplicationComponent extends React.Component<MyProps> {
   }
 
   handleApplicationSubmit(data) {
-    console.log('data from job application...', data);
+    alert('employer info submitted');
     /*We only get the info from the form here. We need to add the employer and jobId info to this.*/
     const updatedData = {
       ...data,
@@ -89,22 +86,26 @@ class ApplicationComponent extends React.Component<MyProps> {
   }
 
   render() {
-    const cancelButton = { click: this.props.cancelApplication, btnText: 'Cancel' };
+    const cancelButton = {
+      click: this.props.cancelApplication,
+      btnText: 'Cancel',
+    };
+
     return (
-        <ModalComponent>
-          <div className="modal">
-            <SimpleForm
-              header={`Apply to ${this.props.jobTitle}`}
-              inputs={this.locationInputs}
-              submitBtnText={'Submit Application'}
-              verifyInputs={null}
-              onSubmitCB={this.handleApplicationSubmit}
-              joined={true}
-              style={{ width: 'auto' }}
-              cancelButton={cancelButton}
-            />
-          </div>
-        </ModalComponent>
+      <ModalComponent>
+        <div className="modal">
+          <SimpleForm
+            header={`Apply to ${this.props.jobTitle}`}
+            inputs={this.locationInputs}
+            submitBtnText={'Submit Application'}
+            verifyInputs={null}
+            onSubmitCB={this.handleApplicationSubmit}
+            joined={true}
+            style={{ width: 'auto' }}
+            cancelButton={cancelButton}
+          />
+        </div>
+      </ModalComponent>
     );
   }
 }

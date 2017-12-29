@@ -7,7 +7,6 @@ import { Job } from '../../types/index';
 
 interface JobPostInfoProps {
   job: Job;
-  addApplicantToJob?;
   handleApplicationClick: () => void;
 }
 
