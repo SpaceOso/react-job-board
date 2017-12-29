@@ -89,16 +89,10 @@ class ApplicationComponent extends React.Component<MyProps> {
   }
 
   render() {
-    if (this.props.viewingApplication === false) {
-      return (
-          <div style={{ display: 'none', position: 'absolute' }}/>
-      );
-    }
     const cancelButton = { click: this.props.cancelApplication, btnText: 'Cancel' };
     return (
         <ModalComponent>
           <div className="modal">
-            <h1>{`${this.props.viewingApplication}`}</h1>
             <SimpleForm
               header={`Apply to ${this.props.jobTitle}`}
               inputs={this.locationInputs}

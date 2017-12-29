@@ -144,7 +144,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
 
     return (
       <div className="job-post-container">
-        <Fade key={'application-container'} in={this.state.isApplying}>
+        <Fade key={'application-container'} in={this.state.isApplying} unmountOnExit={true} mountOnEnter={true}>
           {applicationComponent}
         </Fade>
         <Fade key={'post-container'} in={!this.props.currentJobPost.isFetching}>
