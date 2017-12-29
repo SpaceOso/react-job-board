@@ -75,7 +75,6 @@ class ApplicationComponent extends React.Component<MyProps> {
   }
 
   handleApplicationSubmit(data) {
-    alert('employer info submitted');
     /*We only get the info from the form here. We need to add the employer and jobId info to this.*/
     const updatedData = {
       ...data,
