@@ -3,16 +3,17 @@ import { RouteComponentProps } from 'react-router';
 // import { CSSTransition } from 'react-transition-group';
 import { CurrentJobPost } from '../../types/index';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
+import { TransitionGroup } from 'react-transition-group';
+import Fade from '../animations/Fade';
 import JobPostEmployerInfoComponent from './employer-info/JobPostEmployerInfoComponent';
 import JobPostInfoComponent from './JobPostInfoComponent';
+import TestComponent from '../tests/TestComponent';
 
 // styles
 import './styles/JobPostContainer.scss';
-import TestComponent from '../tests/TestComponent';
-import Fade from '../animations/Fade';
-import { TransitionGroup } from 'react-transition-group'
 
 import '../animations/animationStyles.scss';
+import ApplicationComponent from './application/ApplicationComponent';
 
 interface JobPostProps extends RouteComponentProps<any> {
   getJobById: (arg) => {};
@@ -25,18 +26,71 @@ interface JobPostProps extends RouteComponentProps<any> {
 interface MyState {
   jobInfoLoaded: boolean;
   currentJobPost: CurrentJobPost | null;
+  isApplying: boolean;
+  didApply: boolean;
 }
 
 class JobPostLayout extends React.Component<JobPostProps, MyState> {
+  state: MyState = {
+    jobInfoLoaded: false,
+    currentJobPost: null,
+    isApplying: false,
+    didApply: false,
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      jobInfoLoaded: false,
-      currentJobPost: null,
-    };
     this.loadNewJob = this.loadNewJob.bind(this);
     this.handleJobApplicantInfo = this.handleJobApplicantInfo.bind(this);
+    this.handleApplication = this.handleApplication.bind(this);
+    this.displayJobApplication = this.displayJobApplication.bind(this);
+    this.handleApplicationCancel = this.handleApplicationCancel.bind(this);
+  }
+
+  displayJobApplication() {
+    return (
+      <ApplicationComponent
+        employerId={this.props.currentJobPost.employerId}
+        jobId={this.props.currentJobPost.id}
+        jobTitle={this.props.currentJobPost.title}
+        handleApplicantInfo={this.props.addApplicantToJob}
+        cancelApplication={this.handleApplicationCancel}
+        viewingApplication={this.state.isApplying}
+      />
+    );
+
+    /* if (this.state.isApplying) {
+       return (
+         <ApplicationComponent
+           employerId={this.props.currentJobPost.employerId}
+           jobId={this.props.currentJobPost.id}
+           jobTitle={this.props.currentJobPost.title}
+           handleApplicantInfo={this.props.addApplicantToJob}
+           cancelApplication={this.handleApplicationCancel}
+           viewingApplication={this.state.isApplying}
+         />
+       );
+     }
+     return (
+       <div style={{ display: 'none', position: 'absolute' }}/>
+     );*/
+  }
+
+  shouldComponentUpdate() {
+    console.log('yes');
+    return true;
+  }
+
+  handleApplicationCancel() {
+    console.log('job application canceled');
+    this.setState({ isApplying: false });
+  }
+
+  // Will fire when apply button is clicked
+  handleApplication() {
+    console.log('application button clicked');
+    this.setState({ isApplying: !this.state.isApplying });
   }
 
   componentDidMount() {
@@ -47,6 +101,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
     this.setState({
       jobInfoLoaded: true,
       currentJobPost: this.props.currentJobPost,
+      isApplying: false,
     });
   }
 
@@ -55,7 +110,7 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
   }
 
   loadNewJob(jobId) {
-    this.props.resetCurrentJob();
+    // this.props.resetCurrentJob();
     this.props.getJobById(jobId);
   }
 
@@ -67,29 +122,38 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
   render() {
 
     console.log('layout, props.currentEmployer', this.props.currentJobPost);
-    if (this.state.currentJobPost === null) {
-      return (
-        <div className="job-post-container">
-          there is no employer
-        </div>
-      );
-    }
 
-    if (this.props.currentJobPost.Employer !== null ) {
-      return (
-        <div className="job-post-container">
-          <Fade key={this.props.currentJobPost.title} in={!this.props.currentJobPost.isFetching}>
-            <JobPostInfoComponent
-              job={this.props.currentJobPost}
-              isFetching={this.props.currentJobPost.isFetching}
-              addApplicantToJob={this.handleJobApplicantInfo}
-            />
-          </Fade>
-          <JobPostEmployerInfoComponent isFetching={this.props.currentJobPost.isFetching} employer={this.props.currentJobPost.Employer} loadJob={this.loadNewJob} currentJob={this.props.currentJobPost.id}/>
-        </div>
-      );
-    }
-    return null;
+    const jobPostInfoComponent = (
+      <JobPostInfoComponent
+        job={this.props.currentJobPost}
+        addApplicantToJob={this.handleJobApplicantInfo}
+        handleApplicationClick={this.handleApplication}
+      />
+    );
+
+    const applicationComponent = (
+      <ApplicationComponent
+        employerId={this.props.currentJobPost.employerId}
+        jobId={this.props.currentJobPost.id}
+        jobTitle={this.props.currentJobPost.title}
+        handleApplicantInfo={this.props.addApplicantToJob}
+        cancelApplication={this.handleApplicationCancel}
+        viewingApplication={this.state.isApplying}
+      />
+    );
+
+    return (
+      <div className="job-post-container">
+        <Fade key={'application-container'} in={this.state.isApplying} unmountOnExit={true} mountOnEnter={true}>
+          {applicationComponent}
+        </Fade>
+        <Fade key={'post-container'} in={!this.props.currentJobPost.isFetching}>
+          {jobPostInfoComponent}
+        </Fade>
+        <JobPostEmployerInfoComponent isFetching={this.props.currentJobPost.isFetching} employer={this.props.currentJobPost.Employer} loadJob={this.loadNewJob} currentJob={this.props.currentJobPost.id}/>
+      </div>
+    );
+
   }
 }
 

@@ -38,7 +38,8 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
     }
 
     const employer: Employer = this.props.employer;
-    let logo: string = `${LOCAL_URL}${require('../../../assets/images/no-icon.svg')}`;;
+    let logo: string = `${LOCAL_URL}${require('../../../assets/images/no-icon.svg')}`;
+    ;
     if (employer.logoImg !== null) {
       if (employer.logoImg.length > 0) {
         logo = `${IMG_URL}${employer.logoImg}`;
@@ -53,9 +54,7 @@ class JobPostEmployerInfoComponent extends React.Component<MyProps, any> {
           <p className="jp-employer-location">{`${employer.location.city}, ${employer.location.state}`}</p>
         </div>
         <SocialMediaComponent employer={employer}/>
-        <Fade key={'josbs'}>
-          <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching}/>
-        </Fade>
+        <OtherJobsComponent employer={employer} handleClick={this.handleClick} currentJob={this.props.currentJob} isFetching={this.props.isFetching}/>
       </aside>
     );
   }

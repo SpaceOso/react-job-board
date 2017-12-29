@@ -19,28 +19,28 @@ class ApplicationComponent extends React.Component<MyProps> {
   private locationInputs = [
     {
       label: 'First Name',
-      required: true,
+      required: false,
       type: 'text',
       placeHolder: 'First Name',
       id: 'fName',
     },
     {
       label: 'Last Name',
-      required: true,
+      required: false,
       type: 'text',
       placeHolder: 'Last Name',
       id: 'lName',
     },
     {
       label: 'email',
-      required: true,
+      required: false,
       type: 'text',
       placeHolder: 'email',
       id: 'email',
     },
     {
       label: 'Phone Number',
-      required: true,
+      required: false,
       type: 'tel',
       placeHolder: '555-555-555',
       id: 'phoneNumber',
@@ -54,7 +54,7 @@ class ApplicationComponent extends React.Component<MyProps> {
     },
     {
       label: 'Resume',
-      required: true,
+      required: false,
       type: 'file',
       name: 'resume',
       accept: '.pdf',
@@ -91,20 +91,20 @@ class ApplicationComponent extends React.Component<MyProps> {
   render() {
     const cancelButton = { click: this.props.cancelApplication, btnText: 'Cancel' };
     return (
-      <ModalComponent>
-        <div className="modal">
-          <SimpleForm
-            header={`Apply to ${this.props.jobTitle}`}
-            inputs={this.locationInputs}
-            submitBtnText={'Submit Application'}
-            verifyInputs={null}
-            onSubmitCB={this.handleApplicationSubmit}
-            joined={true}
-            style={{ width: 'auto' }}
-            cancelButton={cancelButton}
-          />
-        </div>
-      </ModalComponent>
+        <ModalComponent>
+          <div className="modal">
+            <SimpleForm
+              header={`Apply to ${this.props.jobTitle}`}
+              inputs={this.locationInputs}
+              submitBtnText={'Submit Application'}
+              verifyInputs={null}
+              onSubmitCB={this.handleApplicationSubmit}
+              joined={true}
+              style={{ width: 'auto' }}
+              cancelButton={cancelButton}
+            />
+          </div>
+        </ModalComponent>
     );
   }
 }
