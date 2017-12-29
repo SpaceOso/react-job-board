@@ -44,46 +44,16 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
     this.loadNewJob = this.loadNewJob.bind(this);
     this.handleJobApplicantInfo = this.handleJobApplicantInfo.bind(this);
     this.handleApplication = this.handleApplication.bind(this);
-    this.displayJobApplication = this.displayJobApplication.bind(this);
     this.handleApplicationCancel = this.handleApplicationCancel.bind(this);
   }
 
-  displayJobApplication() {
-    return (
-      <ApplicationComponent
-        employerId={this.props.currentJobPost.employerId}
-        jobId={this.props.currentJobPost.id}
-        jobTitle={this.props.currentJobPost.title}
-        handleApplicantInfo={this.props.addApplicantToJob}
-        cancelApplication={this.handleApplicationCancel}
-        viewingApplication={this.state.isApplying}
-      />
-    );
-
-    /* if (this.state.isApplying) {
-       return (
-         <ApplicationComponent
-           employerId={this.props.currentJobPost.employerId}
-           jobId={this.props.currentJobPost.id}
-           jobTitle={this.props.currentJobPost.title}
-           handleApplicantInfo={this.props.addApplicantToJob}
-           cancelApplication={this.handleApplicationCancel}
-           viewingApplication={this.state.isApplying}
-         />
-       );
-     }
-     return (
-       <div style={{ display: 'none', position: 'absolute' }}/>
-     );*/
-  }
-
   shouldComponentUpdate() {
-    console.log('yes');
     return true;
   }
 
-  handleApplicationCancel() {
+  handleApplicationCancel(e: React.SyntheticEvent<HTMLInputElement> ) {
     console.log('job application canceled');
+    e.preventDefault();
     this.setState({ isApplying: false });
   }
 
@@ -126,7 +96,6 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
     const jobPostInfoComponent = (
       <JobPostInfoComponent
         job={this.props.currentJobPost}
-        addApplicantToJob={this.handleJobApplicantInfo}
         handleApplicationClick={this.handleApplication}
       />
     );
