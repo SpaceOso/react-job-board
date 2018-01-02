@@ -4,7 +4,7 @@
   "description": "A job board app made with React",
   "main": "./src/index",
   "scripts": {
-    "start": "node -r dotenv/config bin/www -w app.js -w server",
+    "start": "node -r dotenv/config bin/www.js -w app.js -w server",
     "server": "set NODE_ENV=development&& nodemon  bin/www.js",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
     "build": "webpack --env.dev=prod",
