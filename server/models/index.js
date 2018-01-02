@@ -12,8 +12,6 @@ const config= require(`${__dirname}/../config/config.js`)[env]; //env is the pro
 // const config= require(`${__dirname}/../config/config.js`)['production']; //env is the property of the config object
 const db = {};
 
-console.log(config);
-
 if(env === 'production'){
 	pg.defaults.ssl = true;
 }
