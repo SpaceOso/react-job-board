@@ -8,5 +8,5 @@
 *.iml
 /node_modules/
 out
-/public/uploads/*
+/public/uploads/
 gen
