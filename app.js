@@ -7,6 +7,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+var users = require('./server/controllers/userController');
 // var mongoose = require('mongoose');
 
 // ROUTES
@@ -18,6 +21,26 @@ const applicantRoutes = require('./server/routes/applicantRoutes');
 
 //AUTHCHECK
 let authCheck = require('./server/routes/authCheck');
+
+
+
+// Configure the local strategy for use by Passport.
+//
+// The local strategy require a `verify` function which receives the credentials
+// (`username` and `password`) submitted by the user.  The function must verify
+// that the password is correct and then invoke `cb` with a user object, which
+// will be set at `req.user` in route handlers after authentication.
+passport.use(new Strategy(
+    function(username, password, cb) {
+        users.login()
+
+        db.users.findByUsername(username, function(err, user) {
+            if (err) { return cb(err); }
+            if (!user) { return cb(null, false); }
+            if (user.password != password) { return cb(null, false); }
+            return cb(null, user);
+        });
+    }));
 
 
 var app = express();
