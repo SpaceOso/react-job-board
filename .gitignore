@@ -5,10 +5,8 @@
 # IntelliJ project files
 .env
 .idea
-*.iml
 /art/
 /node_modules/
 out
-/public/uploads/
+/public/uploads/*
 gen
-public/uploads/

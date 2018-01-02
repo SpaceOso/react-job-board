@@ -7,7 +7,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var mongoose = require('mongoose');
 
 // ROUTES
 const registerRoute = require('./server/routes/registerRoute');
@@ -21,7 +20,6 @@ let authCheck = require('./server/routes/authCheck');
 
 
 var app = express();
-console.log("node_env:", process.env.NODE_ENV);
 
 var dbURL = 'localhost:27017/JobBoard';
 
@@ -32,7 +30,6 @@ if (process.env.NODE_ENV === 'development') {
     dbURL = process.env.DB_URL;
 }
 
-// mongoose.connect(dbURL);
 
 app.set('view engine', 'hbs');
 // view engine setup
@@ -49,9 +46,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 //this was the default start up
 app.use(express.static(path.join(__dirname, 'public')));
-
-//after me changing to try and find a working upload folder
-// app.use(express.static(path.join(__dirname, 'jobBoard/dist')));
 
 var allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
