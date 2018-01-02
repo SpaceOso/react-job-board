@@ -6,7 +6,9 @@
 .env
 .idea
 *.iml
+/art/
 /node_modules/
 out
 /public/uploads/*
 gen
+public/uploads/
