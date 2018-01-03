@@ -5,7 +5,7 @@
  */
 
 
-require('dotenv').config();
+// require('dotenv').config();
 var debug = require('debug')('node-rest:server');
 var http = require('http');
 var app = require('../app');
