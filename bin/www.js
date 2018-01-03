@@ -15,7 +15,7 @@ console.log('server loaded');
 /**
  * Get port from environment and store in Express.
  */
-
+console.log('env.port:', process.env.PORT);
 var port = normalizePort(process.env.PORT || '4200');
 // var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
