@@ -1,6 +1,7 @@
 /**
  * Created by Rico on 9/1/16.
  */
+console.log('app loaded');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');

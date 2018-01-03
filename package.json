@@ -1,6 +1,9 @@
 {
   "name": "job-board",
   "version": "1.0.0",
+  "engines": {
+    "node": "9.2.0"
+  },
   "description": "A job board app made with React",
   "main": "./src/index",
   "scripts": {
