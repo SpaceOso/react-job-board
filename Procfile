@@ -1,1 +1,1 @@
-web: set NODE_ENV=prod&&  bin/www.js
+web: set NODE_ENV=production&&  bin/www.js

@@ -20,6 +20,7 @@ module.exports = env => ({
                 'NODE_ENV': JSON.stringify(env.dev)
             },
         }),
+        // new webpack.optimize.UglifyJsPlugin(),
 		new DotenvPlugin({
 			sample: './.env.hide',
 			path: './.env',
