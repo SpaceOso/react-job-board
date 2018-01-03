@@ -1,16 +1,16 @@
-declare let process : {
-	env: {
-		NODE_ENV: string
-	}
+declare let process: {
+  env: {
+    NODE_ENV: string
+  }
 };
 
 let URL_Test = 'https://mr-job-board.herokuapp.com/';
 
 
-	console.log(process.env.NODE_ENV);
-if(process.env.NODE_ENV === "development"){
-	console.log("WE ARE IN DEVELOPMENT MODE!!!!!!!!!!!!");
-	URL_Test = 'http://localhost:4200/';
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === "development") {
+  console.log("WE ARE IN DEVELOPMENT MODE!!!!!!!!!!!!");
+  URL_Test = 'http://localhost:4200/';
 }
 
 export const ROOT_URL = URL_Test;
@@ -19,18 +19,18 @@ console.log("and the url we're using..", ROOT_URL);
 // 	SITE ACTIONS
 // =====================================
 export const SITE_IS_FETCHING = 'SITE_IS_FETCHING';
-export type SITE_IS_FETCHING =  typeof SITE_IS_FETCHING;
+export type SITE_IS_FETCHING = typeof SITE_IS_FETCHING;
 
 export const SITE_IDLE = 'SITE_IDLE';
-export type SITE_IDLE = typeof  SITE_IDLE;
+export type SITE_IDLE = typeof SITE_IDLE;
 
-export const ADD_LOGIN_ERROR ='ADD_LOGIN_ERROR';
+export const ADD_LOGIN_ERROR = 'ADD_LOGIN_ERROR';
 export type ADD_LOGIN_ERROR = typeof ADD_LOGIN_ERROR;
 
-export const REMOVE_LOGIN_ERROR ='REMOVE_LOGIN_ERROR';
+export const REMOVE_LOGIN_ERROR = 'REMOVE_LOGIN_ERROR';
 export type REMOVE_LOGIN_ERROR = typeof REMOVE_LOGIN_ERROR;
 
-export const CLEAR_ALL_ERRORS ='CLEAR_ALL_ERRORS';
+export const CLEAR_ALL_ERRORS = 'CLEAR_ALL_ERRORS';
 export type CLEAR_ALL_ERRORS = typeof CLEAR_ALL_ERRORS;
 // =====================================
 // 	JOB ACTIONS
