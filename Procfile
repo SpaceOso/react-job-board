@@ -1,1 +1,1 @@
-web: set NODE_ENV=production&& node bin/www.js
+web: node -r dotenv/config bin/www.js -w app.js
