@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   console.log('We are in prod mode');
   set_IMG_URL = 'https://s3.us-east-2.amazonaws.com/mrjobboard/';
-  set_LOCAL_URL = 'http://mr-job-board.herokuapp.com/';
+  set_LOCAL_URL = 'https://mr-job-board.herokuapp.com/';
 }
 
 export const IMG_URL = set_IMG_URL;
