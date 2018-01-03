@@ -21,7 +21,7 @@ export const JobListItem: React.SFC<Props> = (props) => {
 				{/*LOGO*/}
 				<div className="job-list-logo">
 					<img src={job.Employer.logoImg ?
-						`${IMG_URL}${job.Employer.logoImg}` : require('../../../../images/no-icon.svg')}
+						`${IMG_URL}${job.Employer.logoImg}` : require('../../../../images/icon/no-icon.svg')}
 					/>
 				</div>
 				{/*JOB INFORMATION*/}

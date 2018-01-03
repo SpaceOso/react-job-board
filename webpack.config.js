@@ -3,8 +3,8 @@ const webpack = require('webpack');
 const DotenvPlugin = require('webpack-dotenv-plugin');
 
 module.exports = env => ({
-	context: resolve('src'),
-	entry: "./index.tsx",
+	// context: resolve('src'),
+	entry: "./src/index.tsx",
 	output: {
 		path: resolve('public'),
 		filename: "bundle.js",

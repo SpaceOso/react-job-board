@@ -13,19 +13,19 @@ class UserDashboardNavMenu extends React.Component<MyProps> {
     return (
       <div className="user-dashboard-nav">
         <NavLink className="user-dashboard-btn" to={`${this.props.match.url}/home`} activeClassName={'selected'}>
-          <img src={`${require('../../../../images/icon-home.svg')}`}/>Home
+          <img src={`${require('../../../../images/icon/iconHome.svg')}`}/>Home
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/applicants`}>
-          <img src={`${require('../../../../images/icon-applicant-stack.svg')}`}/>Applicants
+          <img src={`${require('../../../../images/icon/iconApplicantStack.svg')}`}/>Applicants
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/createjob`}>
-          <img src={`${require('../../../../images/icon-job-posts.svg')}`}/>Post A Job
+          <img src={`${require('../../../../images/icon/iconJobPosts.svg')}`}/>Post A Job
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/editpostings`}>
-          <img src={`${require('../../../../images/icon-edit-posts.svg')}`}/>Edit Postings
+          <img src={`${require('../../../../images/icon/iconEditPosts.svg')}`}/>Edit Postings
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/profile`}>
-          <img src={`${require('../../../../images/icon-profile-page.svg')}`}/>Profile / Edit
+          <img src={`${require('../../../../images/icon/iconProfilePage.svg')}`}/>Profile / Edit
         </NavLink>
       </div>
     );

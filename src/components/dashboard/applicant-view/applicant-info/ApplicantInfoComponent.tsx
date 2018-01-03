@@ -76,7 +76,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
     const socialSites = [
       {
         link: 'website',
-        icon: 'icon-web.svg',
+        icon: 'iconWeb.svg',
       },
     ];
 
