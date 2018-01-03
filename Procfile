@@ -1,1 +1,1 @@
-web: node -r dotenv/config bin/www.js
+web: node bin/www.js
