@@ -1,1 +1,1 @@
-web: node bin/www.js
+web: set NODE_ENV=prod&&  bin/www.js
