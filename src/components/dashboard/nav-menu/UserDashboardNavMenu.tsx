@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-//styles
-import "./UserDashboardNavMenu.scss";
-import { RouteComponentProps } from "react-router";
-import { LOCAL_URL } from "../../../utils/utils";
+// styles
+import './UserDashboardNavMenu.scss';
 
 interface MyProps {
-  match
+  match;
 }
 
 class UserDashboardNavMenu extends React.Component<MyProps> {
@@ -15,22 +13,22 @@ class UserDashboardNavMenu extends React.Component<MyProps> {
     return (
       <div className="user-dashboard-nav">
         <NavLink className="user-dashboard-btn" to={`${this.props.match.url}/home`} activeClassName={'selected'}>
-          <img src={`${require('../../../assets/images/icon-home.svg')}`}/>Home
+          <img src={`${require('../../../../images/icon-home.svg')}`}/>Home
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/applicants`}>
-          <img src={`${require('../../../assets/images/icon-applicant-stack.svg')}`}/>Applicants
+          <img src={`${require('../../../../images/icon-applicant-stack.svg')}`}/>Applicants
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/createjob`}>
-          <img src={`${require('../../../assets/images/icon-job-posts.svg')}`}/>Post A Job
+          <img src={`${require('../../../../images/icon-job-posts.svg')}`}/>Post A Job
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/editpostings`}>
-          <img src={`${require('../../../assets/images/icon-edit-posts.svg')}`}/>Edit Postings
+          <img src={`${require('../../../../images/icon-edit-posts.svg')}`}/>Edit Postings
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/profile`}>
-          <img src={`${require('../../../assets/images/icon-profile-page.svg')}`}/>Profile / Edit
+          <img src={`${require('../../../../images/icon-profile-page.svg')}`}/>Profile / Edit
         </NavLink>
       </div>
-    )
+    );
   }
 }
 

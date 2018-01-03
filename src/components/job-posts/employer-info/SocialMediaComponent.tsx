@@ -18,7 +18,7 @@ function socialMediaComponent(props: MyProps) {
     website = (
       <li>
         <a href={`${props.employer.facebook}`} target="blank">
-          <img src={`${LOCAL_URL}${require('../../../assets/images/icon-web.svg')}`}/>
+          <img src={`${LOCAL_URL}${require('../../../../images/icon-web.svg')}`}/>
         </a>
       </li>
     );
@@ -28,7 +28,7 @@ function socialMediaComponent(props: MyProps) {
     faceBook = (
       <li>
         <a href={`${props.employer.facebook}`} target="blank">
-          <img src={`${LOCAL_URL}${require('../../../assets/images/icon-facebook.svg')}`}/>
+          <img src={`${LOCAL_URL}${require('../../../../images/icon-facebook.svg')}`}/>
         </a>
       </li>
     );
@@ -38,7 +38,7 @@ function socialMediaComponent(props: MyProps) {
     twitter = (
       <li>
         <a href={`${props.employer.twitter}`} target="blank">
-          <img src={`${LOCAL_URL}${require('../../../assets/images/icon-twitter.svg')}`}/>
+          <img src={`${LOCAL_URL}${require('../../../../images/icon-twitter.svg')}`}/>
         </a>
       </li>
     );
@@ -48,7 +48,7 @@ function socialMediaComponent(props: MyProps) {
     linkedIn = (
       <li>
         <a href={`${props.employer.linkedIn}`} target="blank">
-          <img src={`${LOCAL_URL}${require('../../../assets/images/icon-linkedin.svg')}`}/>
+          <img src={`${LOCAL_URL}${require('../../../../images/icon-linkedin.svg')}`}/>
         </a>
       </li>
     );
