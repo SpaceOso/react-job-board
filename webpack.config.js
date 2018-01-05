@@ -41,8 +41,8 @@ module.exports = env => ({
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].[ext]',
-                            useRelativePath: true
+                            name: '[path][name].[ext]',
+                            publicPath: '/'
                         }
                     }
                 ]

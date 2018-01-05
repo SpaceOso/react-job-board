@@ -113,7 +113,8 @@ class DashboardMainLayout extends React.Component<Props, any> {
             {/*EDIT JOB COMPONENT*/}
             <Route
               path={`${this.props.match.path}/editpostings`}
-              render={this.editJobsLayout}
+              render={this.underConstruction}
+              // render={this.editJobsLayout}
             />
             {/*SINGLE APPLICANT VIEW CONTAINER*/}
             <Route
