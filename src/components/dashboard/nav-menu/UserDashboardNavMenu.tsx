@@ -14,12 +14,10 @@ class UserDashboardNavMenu extends React.Component<MyProps> {
     return (
       <div className="user-dashboard-nav">
         <NavLink className="user-dashboard-btn" to={`${this.props.match.url}/home`} activeClassName={'selected'}>
-          <img src={`${images.iconHome}`}/>Home
-          {/*<img src={`${require('../../../../images/icon/iconHome.svg')}`}/>Home*/}
+          <img src={`${require(('../../../../images/icon/iconHome.svg'))}`}/>Home
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/applicants`}>
-          <img src={`${images.iconApplicantStack}`}/>Applicants
-          {/*<img src={`${require('../../../../images/icon/iconApplicantStack.svg')}`}/>Applicants*/}
+          <img src={`${require('../../../../images/icon/iconApplicantStack.svg')}`}/>Applicants
         </NavLink>
         <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/createjob`}>
           <img src={`${require('../../../../images/icon/iconJobPosts.svg')}`}/>Post A Job
