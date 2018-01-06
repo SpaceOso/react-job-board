@@ -23,7 +23,7 @@ module.exports = {
         }
 
         if(req.files.coverLetter !== undefined){
-        	coverLetter = req.files.coverLetter[0].filename;
+        	coverLetter = req.files.coverLetter[0].key;
 		}
 
 

@@ -1,20 +1,18 @@
 declare let process: {
   env: {
-    NODE_ENV: string
-  }
+    NODE_ENV: string;
+  };
 };
 
 let URL_Test = 'https://mr-job-board.herokuapp.com/';
 
-
 console.log(process.env.NODE_ENV);
-if (process.env.NODE_ENV === "development") {
-  console.log("WE ARE IN DEVELOPMENT MODE!!!!!!!!!!!!");
+if (process.env.NODE_ENV === 'development') {
   URL_Test = 'http://localhost:4200/';
 }
 
 export const ROOT_URL = URL_Test;
-console.log("and the url we're using..", ROOT_URL);
+console.log('and the url we\'re using..', ROOT_URL);
 // =====================================
 // 	SITE ACTIONS
 // =====================================
