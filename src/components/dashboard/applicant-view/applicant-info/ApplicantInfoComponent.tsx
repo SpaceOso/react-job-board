@@ -86,7 +86,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
         return (
           <li key={key}>
             <a href={this.props.applicant[ link ]}>
-              <img src={`${require(`../../../../../images/${social.icon}`)}`} alt="link"/>
+              <img src={`${require(`../../../../../images/icon/${social.icon}`)}`} alt="link"/>
             </a>
           </li>
         );
