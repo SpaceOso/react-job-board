@@ -28,6 +28,7 @@ if(process.env.NODE_ENV !== 'development'){
 		s3: s3,
 		bucket: S3_BUCKET,
 		acl: 'public-read',
+        contentType: 'application/pdf',
 		key: function (req, file, cb) {
 			console.log("in multer options with:", file);
 			let ext = path.extname(file.originalname);

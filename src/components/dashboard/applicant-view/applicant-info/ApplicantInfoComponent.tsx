@@ -48,6 +48,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
   }
 
   setDocumentToReview(document) {
+    console.log('reviewing document:', document);
     this.setState({ documentInReview: document });
   }
 

@@ -9,12 +9,15 @@ interface MyProps {
 class Iframe extends React.Component<MyProps> {
   render() {
     return (
-      <object
-        data={this.props.src}
-        height={this.props.height}
-        width={this.props.width}
-        style={{ height: this.props.height }}
-      />
+      <div>
+        I should be display the resume with: {this.props.src}
+        <object
+          data={this.props.src}
+          height={this.props.height}
+          width={this.props.width}
+          style={{ height: this.props.height }}
+        />
+      </div>
     );
   }
 }

@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 declare let process: {
   env: {
     NODE_ENV: string,
     SECRET_KEY: string,
-  }
+  };
 };
 
 let URL_Test = 'https://mr-job-board.herokuapp.com/';
@@ -27,12 +26,12 @@ export const LOCAL_URL = set_LOCAL_URL;
 import axios from 'axios';
 
 export function setAuth(token) {
-  console.log("setAuth()");
+  console.log('setAuth()');
   if (token) {
 
     localStorage.setItem('tkn', token);
     console.log('setAuth() token:', token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.defaults.headers.common[ 'Authorization' ] = `Bearer ${token}`;
   } else {
     delete axios.defaults.headers.common[ 'Authorization' ];
   }

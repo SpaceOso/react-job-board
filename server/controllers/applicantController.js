@@ -41,11 +41,12 @@ module.exports = {
 			})
 			.then((applicant) => {
 				//TODO need to add applicant to JobApplications
+				console.log('new applicant:', applicant);
 				return Job.findById(req.body.jobId)
 					.then(job => {
 						return job.addApplicant(applicant)
 							.then((JobApplication) => {
-								console.log("applicant added..", JobApplication);
+								console.log("applicant added..", applicant);
 								res.status(201).send(JobApplication);
 							})
 
