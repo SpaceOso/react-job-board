@@ -115,7 +115,6 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
         <div className={'applicant-info'}>
           <div className={'applicant-details'}>
             <h1>{applicant.firstName} {applicant.lastName}</h1>
-            <h3>{JSON.stringify(applicant)}</h3>
             <p>{applicantPhone}</p>
             <p>{applicantEmail}</p>
             {this.createSocialLinks()}
