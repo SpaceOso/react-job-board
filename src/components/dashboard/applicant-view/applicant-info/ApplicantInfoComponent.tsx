@@ -97,8 +97,6 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
   }
 
   setHeight(ref) {
-    console.log('SETHEIGHT....', ref);
-    console.log(ref.offsetHeight);
     if (ref !== null) {
       this.setState({ placeholderHeight: `${(ref.offsetHeight - 25)}px` });
     }
@@ -116,6 +114,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
         <div className={'applicant-info'}>
           <div className={'applicant-details'}>
             <h1>{applicant.firstName} {applicant.lastName}</h1>
+            <h3>{JSON.stringify(applicant)}</h3>
             <p>{applicantPhone}</p>
             <p>{applicantEmail}</p>
             {this.createSocialLinks()}

@@ -18,7 +18,8 @@ module.exports = {
 		console.log('coverLetter', req.files.coverLetter);
 
         if ( req.files.resume !== undefined) {
-           resume = req.files.resume[0].filename;
+           // resume = req.files.resume[0].filename;
+           resume = req.files.resume[0].key;
         }
 
         if(req.files.coverLetter !== undefined){
