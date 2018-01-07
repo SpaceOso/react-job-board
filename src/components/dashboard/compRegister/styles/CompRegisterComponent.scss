@@ -2,8 +2,8 @@
 
 .comp-register{
   //width: 80%;
-  background-color: $white;
-
+  //background-color: $white;
+  margin: auto;
   .form-container{
     display: flex;
     flex-direction: column;
@@ -15,7 +15,10 @@
     }
 
 
-    #location-group,
+    #location-group{
+      text-align: left;
+    }
+
     #social-media{
       text-align: left;
       padding: 10px;

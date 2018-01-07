@@ -137,10 +137,11 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
         {/*<div><img src="/public/assets/uploads/k2cjh.jpg" alt=""/></div>*/}
         <div className="form-container">
           <div id="location-group">
-            <h3>tester</h3>
             <SimpleForm
-              header={'location'}
+              header={'Employer Information'}
               inputs={this.inputs}
+              joined={true}
+              style={{width: 'auto'}}
               submitBtnText={'Enter Company'}
               verifyInputs={null}
               onSubmitCB={this.handleEmployerSubmit}
