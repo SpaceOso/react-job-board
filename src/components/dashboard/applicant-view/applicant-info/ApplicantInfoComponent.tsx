@@ -48,13 +48,10 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
   }
 
   setDocumentToReview(document) {
-    console.log('reviewing document:', document);
     this.setState({ documentInReview: document });
   }
 
   componentDidMount() {
-    console.log('This dev ref:', this.divRef);
-    console.log('the height:', this.divRef.offsetHeight);
     this.setState({ placeholderHeight: `${this.divRef.offsetHeight}px` });
     this.divRef.height = '20px';
   }
@@ -70,7 +67,6 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
     this.props.saveApplicantInfo(statusUpdate);
     this.setState({ statusUpdated: false });
 
-    console.log(statusUpdate);
   }
 
   createSocialLinks() {

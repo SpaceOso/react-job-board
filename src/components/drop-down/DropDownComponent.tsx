@@ -14,8 +14,6 @@ class DropDownComponent extends React.Component<MyProps, any> {
 
   componentDidMount() {
     if (this.props.list !== null) {
-      console.log('this list:', this.props.list);
-      console.log('we have this many options:', this.props.list.length);
     }
   }
 

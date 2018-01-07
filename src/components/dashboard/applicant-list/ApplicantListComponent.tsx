@@ -94,7 +94,6 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
         </div>
       );
     }
-    console.log('new applicants..', this.state.currentJob.Applicants.length);
     return (
       <div>
         <h1>Candidates for {this.state.currentJob.title} - {this.state.currentJob.location.city}</h1>
@@ -117,15 +116,9 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
   }
 
   handleJobSelectionChange(jobId) {
-    console.log('handleJobSelectionChange:', jobId);
-    if (this.state.currentJob !== null) {
-      console.log(this.state.currentJob.id);
-    }
     if (this.props.jobs !== null) {
       this.props.jobs.forEach((job) => {
         if (job.id === jobId) {
-          console.log('we found a matching job:', jobId);
-          console.log(job);
           this.setState({ currentJob: job });
         }
       });

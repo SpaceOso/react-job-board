@@ -32,8 +32,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
 
   componentWillMount() {
     if (this.props.employer.id !== null) {
-      console.log('we will mount, we are looking up the job posts');
-      console.log(this.props);
       this.props.fetchEmployerJobs(this.props.employer.id);
     }
   }
@@ -80,7 +78,6 @@ class UserDashboardComponent extends React.Component<Props, any> {
   render() {
 
     if (this.state.isFetching === true) {
-      console.log('employer is fetching so showing spinner');
       if (this.props.employer.isFetching !== true) {
         this.setState({ fetching: false });
       }

@@ -48,7 +48,6 @@ export function getJobs() {
 
     axios.get(`${ROOT_URL}api/jobposts`)
       .then((response) => {
-        console.log('the response for jobs:', response);
         dispatch(getJobsSuccess(response));
       })
       .catch((error) => {
@@ -97,10 +96,8 @@ export function addApplicantToJob(applicantInfo) {
 
   return (dispatch) => {
     dispatch(fetchingJobs());
-    console.log('in the job actions creating applicant with:', data);
     axios.post(`${ROOT_URL}api/createapplicant`, data)
       .then((response) => {
-        console.log('The response that we get after we create an applicant...', response);
         dispatch(doneFetchingJobs());
       })
       .catch((error) => {
@@ -114,7 +111,6 @@ export function getJobById(id) {
     dispatch(fetchSingleJob());
     axios.get(`${ROOT_URL}${'api/jobposts/'}${id}`)
       .then((response) => {
-        console.log('the response from searching by id:', response.data.job);
         dispatch(singleJobSuccess(response.data.job));
       })
       .catch((error) => {

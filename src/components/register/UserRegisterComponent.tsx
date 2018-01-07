@@ -95,7 +95,6 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
   }
 
   handleSubmit(userModel: AuthUser) {
-    console.log('form has been submitted with:', userModel);
     const newUser: AuthUser = {
       email: userModel.email,
       firstName: userModel.firstName,

@@ -16,8 +16,6 @@ class JobPostInfoComponent extends React.Component<JobPostInfoProps> {
   }
 
   render() {
-    console.log('jobPostInfoComponent job:', this.props.job);
-
     // if we don't have a job available yet send out an empty component
     if (this.props.job.id === '') {
       return (

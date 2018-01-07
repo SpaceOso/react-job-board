@@ -6,7 +6,6 @@ class TestComponent extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = { items: [ 'hello', 'world', 'click', 'me' ] };
-    console.log('dang it');
     this.handleAdd = this.handleAdd.bind(this);
   }
 

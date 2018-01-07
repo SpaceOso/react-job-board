@@ -52,14 +52,12 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
   }
 
   handleApplicationCancel(e: React.SyntheticEvent<HTMLInputElement> ) {
-    console.log('job application canceled');
     e.preventDefault();
     this.setState({ isApplying: false });
   }
 
   // Will fire when apply button is clicked
   handleApplication() {
-    console.log('application button clicked');
     this.setState({ isApplying: !this.state.isApplying });
   }
 
@@ -90,8 +88,6 @@ class JobPostLayout extends React.Component<JobPostProps, MyState> {
   }
 
   render() {
-
-    console.log('layout, props.currentEmployer', this.props.currentJobPost);
 
     const jobPostInfoComponent = (
       <JobPostInfoComponent

@@ -8,7 +8,6 @@ const sequelize = require('sequelize');
 module.exports = {
 	create(req, res) {
 		"use strict";
-		// console.log("user information:", req.body);
 		return JbUser
 			.create({
 				firstName: req.body.firstName,
@@ -133,13 +132,8 @@ module.exports = {
 
 	addEmployer(req, res, next) {
 		"use strict";
-		console.log("adding employer");
-		console.log('employer bod:', req.body);
 		//checking to see if we have a logoImg uploaded
 		let filename = '';
-
-		console.log('the req..', req.file);
-
 
 		if (req.file !== undefined) {
 			if (req.file.key !== undefined) {

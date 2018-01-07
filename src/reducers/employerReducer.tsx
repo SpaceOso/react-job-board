@@ -44,11 +44,9 @@ function employerReducer(state = defaultState, action): any {
     case EDITING_JOB_POST_SUCCESS:
       let newArr;
       if (state.jobs !== null) {
-        console.log('state.jobs was not null');
         newArr = state.jobs.slice();
         newArr.push(action.payload);
       } else {
-        console.log('state.jobs WAS null');
         newArr = [];
         newArr.push(action.payload);
       }

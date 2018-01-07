@@ -9,8 +9,6 @@ type Props = {
 
 const JobAtGlanceComponent: React.SFC<Props> = (props) => {
 	const{children, ...restProps} = props;
-	console.log("job at glance childreN: ", children);
-	console.log("job at glance props: ", restProps);
 
 	return(
 		<div>

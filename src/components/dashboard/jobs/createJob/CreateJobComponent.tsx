@@ -52,7 +52,6 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
   }
 
   handleJobSubmit(event: any): void {
-    console.log("the job information:", this.state);
     this.props.submitJobPost({ ...this.state, employerId: this.props.employer });
     event.preventDefault();
     this.setState(initialState);
@@ -67,7 +66,6 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
   };
 
   handleJobDescriptionChange(content) {
-    // console.log("setting job description content with:", content);
     const updatedContent = content.replace(/style="([^"]*)"/g, '');
     this.setState({ description: updatedContent });
   }

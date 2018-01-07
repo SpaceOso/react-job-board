@@ -113,11 +113,9 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
   handleEmployerSubmit(formData) {
     /** If there was a file uploaded update logoImg state property */
     if (formData.logo !== undefined) {
-      console.log('sending:', formData, formData.logo);
       this.props.submitData(formData, formData.logo);
     } else {
       this.props.submitData(formData, null);
-      console.log('only sending:', formData);
     }
 
   }

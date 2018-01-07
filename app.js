@@ -1,7 +1,6 @@
 /**
  * Created by Rico on 9/1/16.
  */
-console.log('app loaded');
 var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
@@ -37,8 +36,6 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 // uncomment after placing your favicon in /public
-console.log(path.join(__dirname, 'public'));
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

@@ -51,7 +51,6 @@ export function setSiteIdle() {
 }
 
 export function siteFetch() {
-  console.log('siteFetch()');
   return {
     type: SITE_IS_FETCHING,
     payload: true,
@@ -151,7 +150,6 @@ export function setUser(user: User) {
 // =============================
 
 export function logInUserError(error) {
-  console.log('logInUserError', error);
   return {
     type: ADD_LOGIN_ERROR,
     payload: { typeOfError: 'user', message: error },
@@ -190,7 +188,6 @@ export function logInOnLoad(token) {
       .then((response) => {
 
         // response contains uer, which is our decoded token
-        console.log('the response from logInOnLoad:', response);
         // set token as part of our request headers
         setAuth(token);
 
@@ -213,7 +210,6 @@ export function logInOnLoad(token) {
 
 // this will dispatch the users email and password to server for verification
 export function logInUser(user) {
-  console.log('calling logInUser...', user);
   /*user = {
     email
     password
@@ -242,7 +238,6 @@ export function logInUser(user) {
       })
       .catch((error) => {
         dispatch(setSiteIdle());
-        console.log('the error returned when logging in:', error);
         dispatch(logInUserError(error));
 
       });

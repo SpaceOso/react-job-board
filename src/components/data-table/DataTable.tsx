@@ -111,8 +111,6 @@ class DataTable extends React.Component<MyProps, MyState> {
       }
       if (currentPage >= 0 && currentPage < this.state.pages.length) {
         this.setState({ currentPage });
-      } else {
-        console.log('we blocked from loading a page outside of scope');
       }
     } else {
       this.setState({ currentPage: newPage });

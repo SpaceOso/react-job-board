@@ -46,15 +46,12 @@ export function editingJobPost() {
 }
 
 export function fetchAllEmployerJobModels(employerId) {
-  console.log('fetching jobs:', employerId);
   return (dispatch) => {
-    console.log('YOU HAVE REQUESTED TO OBTAIN ALL THE JOBS OF THE EMPLOYER WITH', employerId);
     dispatch(siteFetch());
     dispatch(employerFetching());
 
     axios.get(`${ROOT_URL}employer/${employerId}/get-jobs`)
       .then((jobs) => {
-        console.log('we have the jobs!', jobs);
         dispatch(getThisEmployerJobsSuccess(jobs));
         dispatch(employerIdle());
       });
@@ -62,7 +59,6 @@ export function fetchAllEmployerJobModels(employerId) {
 }
 
 export function editingJobPostSuccess(jobPost) {
-  console.log('will be dispatching editingJobPostSucces:', jobPost);
   return {
     type: EDITING_JOB_POST_SUCCESS,
     payload: jobPost,
@@ -122,7 +118,6 @@ export function submitEmployerRegistration(employerInfo, file: File) {
     data.append('file', file);
   }
 
-  console.log('employerInfo:', employerInfo);
   for (const entries in employerInfo) {
     if (employerInfo.hasOwnProperty(entries)) {
 
@@ -155,15 +150,12 @@ export function submitEmployerRegistration(employerInfo, file: File) {
 export function saveApplicantStatus(applicantInfo) {
   return (dispatch) => {
     dispatch(siteFetch());
-    console.log('saving application status with:', applicantInfo);
 
     axios.post(`${ROOT_URL}employer/update/${applicantInfo.id}`, applicantInfo)
       .then((response) => {
-        console.log('the response from savingApplicantStatus:', response);
         dispatch(setSiteIdle());
       })
       .catch((error) => {
-        console.log(error);
         dispatch(setSiteIdle());
       });
   };

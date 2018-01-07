@@ -20,7 +20,6 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
     if (this.props.jobs === null || this.props.jobs === undefined || this.props.jobs.length <= 0) {
       return this.createEmptyMessageComponent();
     }
-    console.log('the employer:', this.props);
 
     const jobList = this.props.jobs.map((job, index) => {
       return (

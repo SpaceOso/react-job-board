@@ -69,11 +69,8 @@ class SimpleForm extends React.Component<MyProps, any> {
    * @param event
    */
   handleChange(key, event): any {
-    console.log('HANDLE CHANGE!!!!');
     const keyObject = { ...this.state.inputValues };
 
-    console.log('the change is:', key);
-    console.log('the event is :', event);
     keyObject[ key ].content = event;
 
     this.setState({ inputValues: keyObject });

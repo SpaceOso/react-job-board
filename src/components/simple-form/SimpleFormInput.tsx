@@ -15,7 +15,6 @@ class SimpleFormInput extends React.Component<MyProps> {
   }
 
   handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log('event:', e.currentTarget.value);
     this.props.changeCB(this.props.iID, e.currentTarget.value);
   }
 

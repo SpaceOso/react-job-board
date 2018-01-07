@@ -21,16 +21,13 @@ class EditJobComponent extends React.Component<myProps, myState> {
 			description: ''
 		};
 
-		console.log("edit job component initialized");
 		this.handleJobDescriptionChange = this.handleJobDescriptionChange.bind(this);
 	}
 
 	componentWillUnmount(){
-		console.log("I'm being deleted!");
 	}
 	
 	handleJobDescriptionChange(content){
-		console.log("setting job description content with:", content);
 		this.setState({description: content});
 	}
 	
