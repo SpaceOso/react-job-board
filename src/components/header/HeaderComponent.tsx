@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 // actions
-import { User } from '../../types/index';
+import { User } from '../../types';
 
 interface MyProps {
   user: User;
@@ -43,15 +43,11 @@ class HeaderComponent extends React.Component<MyProps, any> {
     if (this.props.user === null || this.props.user.isAuth === false || this.props.user.isAuth === undefined) {
       return (
         <div>
-          <Link to={'/register'}>
-            <div className="nav-item">
-              Sign Up
-            </div>
+          <Link to={'/register'} className="nav-item">
+            Sign Up
           </Link>
-          <Link to={'/login'}>
-            <div className="nav-item">
+          <Link to={'/login'} className="nav-item">
               Log In
-            </div>
           </Link>
         </div>
       );
@@ -78,7 +74,6 @@ class HeaderComponent extends React.Component<MyProps, any> {
             <h1>Job Board</h1>
           </div>
         </Link>
-
         {this.displayDashboardLink()}
 
         {this.props.user !== null ? this.showLogOut() : null}
