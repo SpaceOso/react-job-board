@@ -179,7 +179,6 @@ module.exports = {
 						plain: true
 					})
 					.then((user) => {
-						console.log("user has been updated with an employer..", user);
 						let localUser = {
 							employerId: user[1].employerId,
 							firstName: user[1].firstName,
@@ -192,7 +191,7 @@ module.exports = {
 							name: employer.name,
 							logoImg: employer.logoImg,
 							id: employer.id,
-							jobs: employer.jobs,
+							jobs: [],
 							website: employer.website,
 							twitter: employer.twitter,
 							facebook: employer.facebook,

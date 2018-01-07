@@ -2,7 +2,7 @@ import * as React from 'react';
 
 // styles
 import { Redirect, RouteComponentProps } from 'react-router';
-import { User } from '../../../types/index';
+import { User } from '../../../types';
 import SimpleForm, { SFInput } from '../../simple-form/SimpleForm';
 import { default as SpinnerComponent } from '../../spinners/spinnerComponent';
 import './styles/CompRegisterComponent.scss';
@@ -134,7 +134,6 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
     return (
       <div className="comp-register">
         <h1>We need to set up your employer before we can start!</h1>
-        {/*<div><img src="/public/assets/uploads/k2cjh.jpg" alt=""/></div>*/}
         <div className="form-container">
           <div id="location-group">
             <SimpleForm
