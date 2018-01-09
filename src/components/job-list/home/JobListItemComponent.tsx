@@ -12,7 +12,7 @@ export interface Props {
   job: Job;
 }
 
-export const JobListItem: React.SFC<Props> = (props) => {
+const jobListItemComponent: React.SFC<Props> = (props) => {
   const { job } = props;
   return (
     // LOGO
@@ -42,4 +42,4 @@ export const JobListItem: React.SFC<Props> = (props) => {
   );
 };
 
-export default JobListItem;
+export default jobListItemComponent;

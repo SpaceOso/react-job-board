@@ -10,9 +10,11 @@ function jobReducer(state: StoreState, action) {
       const newJobs = {};
       const jobDateRegex: RegExp = /.+?(?=T)/g;
 
+
       for (const job in action.payload.data) {
         if (action.payload.data.hasOwnProperty(job)) {
           const currentJob = action.payload.data[ job ];
+          console.log('date:', currentJob.createdAt);
           const splitDate = currentJob.createdAt.match(jobDateRegex)[ 0 ].split('-');
           currentJob.createdAt = `${splitDate[ 1 ]}-${splitDate[ 2 ]}-${splitDate[ 0 ]}`;
 

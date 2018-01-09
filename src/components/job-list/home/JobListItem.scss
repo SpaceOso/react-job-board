@@ -71,15 +71,40 @@
 
 }
 
-@media (max-width: 768px){
-  .job-list-item .job-list-logo{
-    display: none;
+@media (max-width: 768px) {
+  .job-list-container{
+
+  }
+  .job-list-item {
+
+    .job-list-logo {
+      display: none;
+    }
+
+    .link-container{
+      flex-direction: column;
+    }
+
+    .post-info{
+      float: none;
+      display: block;
+      width: auto;
+      padding-left: 1%;
+      height: 100%;
+      align-self: flex-start;
+      text-align: left;
+
+      .post-date,
+      .post-location{
+        display: inline;
+        margin: 0 1%;
+      }
+    }
   }
 }
 
-
-@media (max-width: 412px){
-  .job-list-item .post-info{
+@media (max-width: 412px) {
+  .job-list-item .post-info {
     display: none;
   }
 }
