@@ -10,7 +10,6 @@
   margin: 5px 0;
   padding: 10px;
   border: 1px solid $borders;
-  //border-bottom: 5px solid $header;
   .link-container {
     width: 100%;
     height: 100%;
@@ -18,14 +17,9 @@
   }
 
   .job-list-logo {
-    //height: 80px;
-    //width: 80px;
     width: 10%;
     display: inline-block;
-    //float: left;
     img {
-      //height: 100%;
-      //width: 100%;
       max-width: 100%;
     }
   }
@@ -75,4 +69,17 @@
     }
   }
 
+}
+
+@media (max-width: 768px){
+  .job-list-item .job-list-logo{
+    display: none;
+  }
+}
+
+
+@media (max-width: 412px){
+  .job-list-item .post-info{
+    display: none;
+  }
 }
