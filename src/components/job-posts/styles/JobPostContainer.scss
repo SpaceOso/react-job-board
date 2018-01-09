@@ -40,3 +40,28 @@
     margin: 0 0 15px 0;
   }
 }
+
+@media (max-width: 1124px) {
+
+  .job-post-container{
+    margin: 0;
+    width: 100%;
+    text-align: center;
+
+    .job-post{
+      margin-right: 8px;
+    }
+  }
+
+}
+
+@media(max-width: 916px){
+  .job-post-container{
+    .job-post{
+      width: auto;
+    }
+  }
+  .jp-employer-aside{
+    display: none;
+  }
+}
