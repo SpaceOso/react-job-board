@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ const jobListItemComponent: React.SFC<Props> = (props) => {
           </p>
         </div>
         <div className="post-info">
-          <p className="post-date">{job.createdAt}</p>
+          <p className="post-date">{moment(new Date(job.createdAt)).fromNow()}</p>
           <p className="post-location">{`${job.Employer.location.city},${job.Employer.location.state}`}</p>
         </div>
       </Link>
