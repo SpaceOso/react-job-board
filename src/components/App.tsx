@@ -10,7 +10,7 @@ import NotFoundComponent from './not-found/NotFoundComponent';
 import UserRegisterContainer from './register/UserRegisterContainer';
 
 // actions
-import { Employer, SiteErrors, SiteFetching, User } from '../types/index';
+import { Employer, SiteErrors, SiteFetching, User } from '../types';
 import ProtectedComponent from './dashboard/protected/ProtectedComponent';
 
 interface Props {
@@ -28,7 +28,7 @@ class App extends React.Component<Props> {
 
     this.checkReload = this.checkReload.bind(this);
 
-    this.checkReload();
+    this.checkReload = this.checkReload.bind(this);
   }
 
   checkReload() {

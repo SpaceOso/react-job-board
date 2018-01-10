@@ -8,10 +8,13 @@
   flex-direction: row;
   flex: 0 0 auto;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   color: $headerFont;
   border-bottom: 5px solid $accentColor;
 
+  .mobile-nav-menu-btn{
+    margin-right: 20px;
+  }
   #header-logo{
     margin-left: 23px;
   }

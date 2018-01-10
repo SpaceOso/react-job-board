@@ -9,20 +9,64 @@ interface MyProps {
   logOutUser: () => {};
 }
 
-class HeaderComponent extends React.Component<MyProps, any> {
+interface MyState {
+  auth: boolean;
+  loggedIn: boolean;
+  mobile: boolean;
+}
+
+class HeaderComponent extends React.Component<MyProps, MyState> {
+  state: MyState = {
+    auth: false,
+    loggedIn: false,
+    mobile: false,
+  };
+
   constructor(props) {
     super(props);
 
     this.logOut = this.logOut.bind(this);
     this.showLogOut = this.showLogOut.bind(this);
+    this.displayMobileMenu = this.displayMobileMenu.bind(this);
     this.displayDashboardLink = this.displayDashboardLink.bind(this);
   }
 
-  logOut() {
+  componentDidMount() {
+    this.setState({
+      mobile: window.innerWidth <= 540,
+      loggedIn: this.props.user === null,
+      auth: this.props.user.isAuth,
+    });
+    console.log(this.state);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('nextProps:', nextState);
+    if (this.props.user.isAuth !== nextProps.user.isAuth) {
+      return true;
+    }
+
+    if (this.state.mobile !== nextState.mobile) {
+      return true;
+    }
+
+    return false;
+  }
+
+  displayMobileMenu(): JSX.Element {
+    console.log('testing mobile');
+    return (
+      <div className="mobile-nav-menu-btn">
+        <i className="fas fa-bars fa-2x" style={{ color: 'red' }}/>
+      </div>
+    );
+  }
+
+  logOut(): void {
     this.props.logOutUser();
   }
 
-  showLogOut() {
+  showLogOut(): null | JSX.Element {
     const logOut = (
       <Link to={'/'} onClick={this.logOut}>
         <div className="nav-item">
@@ -31,7 +75,7 @@ class HeaderComponent extends React.Component<MyProps, any> {
       </Link>
     );
 
-    return this.props.user.isAuth === undefined || this.props.user.isAuth === false ? '' : logOut;
+    return this.props.user.isAuth === undefined || this.props.user.isAuth === false ? null : logOut;
   }
 
   /**
@@ -47,8 +91,9 @@ class HeaderComponent extends React.Component<MyProps, any> {
             Sign Up
           </Link>
           <Link to={'/login'} className="nav-item">
-              Log In
+            Log In
           </Link>
+
         </div>
       );
     }
@@ -67,6 +112,7 @@ class HeaderComponent extends React.Component<MyProps, any> {
   }
 
   render() {
+    console.log('header rendering:');
     return (
       <div className="header-component">
         <Link to="/">
@@ -74,10 +120,8 @@ class HeaderComponent extends React.Component<MyProps, any> {
             <h1>Job Board</h1>
           </div>
         </Link>
-        {this.displayDashboardLink()}
-
+        {this.state.mobile ? this.displayMobileMenu() : this.displayDashboardLink()}
         {this.props.user !== null ? this.showLogOut() : null}
-
       </div>
     );
   }

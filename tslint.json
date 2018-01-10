@@ -10,6 +10,7 @@
     "rules": {
         "no-console": [false],
         "import-name": true,
+        "member-ordering": [false],
         "max-line-length": [false],
         "interface-name": [false],
         "jsx-boolean-value": false,
