@@ -82,31 +82,33 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
    * This will check if the user has an employer registered or not determine which route the nav menu should link to
    * @return {JSX.Element} - Link element to either /login - dashboard/home - dashboard/register
    */
-  displayDashboardLink(): JSX.Element {
+  displayDashboardLink(): JSX.Element[] {
+    const navButtons: JSX.Element[] = [];
 
     if (this.props.user === null || this.props.user.isAuth === false || this.props.user.isAuth === undefined) {
-      return (
-        <div>
-          {/*  <Link to={'/register'} className="nav-item">
-            Sign Up
-          </Link>*/}
-          <Link to={'/login'} className="nav-item">
-            Log In
-          </Link>
+      navButtons.push(
+        <Link to={'/login'} className="nav-item" key={'login-btn'}>
+          Log In
+        </Link>,
+      );
+    } else {
+      const dashboardLink = `/user/dashboard/${this.props.user.id}`;
 
-        </div>
+      const dashLink = this.props.user.employerId !== null ? dashboardLink + '/home' : dashboardLink + '/register';
+
+      navButtons.push(
+        <Link to={dashLink} className="nav-item" id={'dashboard-btn'} key={'dash-btn'}>
+          Dashboard
+        </Link>,
+      );
+      navButtons.push(
+        <Link to={'/'} onClick={this.logOut} className="nav-item" key={'logout-btn'}>
+          Log Out
+        </Link>,
       );
     }
 
-    const dashboardLink = `/user/dashboard/${this.props.user.id}`;
-
-    const dashLink = this.props.user.employerId !== null ? dashboardLink + '/home' : dashboardLink + '/register';
-
-    return (
-      <Link to={dashLink} className="nav-item" id={'dashboard-btn'}>
-        Dashboard
-      </Link>
-    );
+    return navButtons;
   }
 
   render() {
@@ -119,7 +121,6 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
           </div>
         </Link>
         {this.state.mobile ? this.displayMobileMenu() : this.displayDashboardLink()}
-        {this.props.user !== null ? this.showLogOut() : null}
       </div>
     );
   }
