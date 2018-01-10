@@ -22,6 +22,10 @@
   .nav-item{
     margin: 0 50px;
     font-size: 1.8rem;
+
+    &#dashboard-btn{
+      margin-left: auto;
+    }
   }
   #nav-links{
 

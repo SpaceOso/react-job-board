@@ -96,7 +96,6 @@ class LogInComponent extends React.Component<MyProps, MyState> {
         (
           <div className="employer-register-Component">
             {this.handleLoginRoute()}
-            <h1>Enter the following information to log in</h1>
             <h3>{this.props.siteErrors.login !== null ? this.props.siteErrors.login.message : null}</h3>
             <div>
               {this.props.siteFetching.isFetching ? <SpinnerComponent/> : null}
@@ -112,7 +111,7 @@ class LogInComponent extends React.Component<MyProps, MyState> {
               <p>
                 Don't have an account?
               </p>
-              <Link to={'/register'}>
+              <Link to={'/register'} className="link-standard">
                 Create one free
               </Link>
             </div>

@@ -87,7 +87,7 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
     if (this.props.user === null || this.props.user.isAuth === false || this.props.user.isAuth === undefined) {
       return (
         <div>
-        {/*  <Link to={'/register'} className="nav-item">
+          {/*  <Link to={'/register'} className="nav-item">
             Sign Up
           </Link>*/}
           <Link to={'/login'} className="nav-item">
@@ -103,10 +103,8 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
     const dashLink = this.props.user.employerId !== null ? dashboardLink + '/home' : dashboardLink + '/register';
 
     return (
-      <Link to={dashLink}>
-        <div className="nav-item">
-          Dashboard
-        </div>
+      <Link to={dashLink} className="nav-item" id={'dashboard-btn'}>
+        Dashboard
       </Link>
     );
   }
