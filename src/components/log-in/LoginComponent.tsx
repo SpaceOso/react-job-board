@@ -9,6 +9,7 @@ import { default as SpinnerComponent } from '../spinners/spinnerComponent';
  * styles
  */
 import './styles/LoginComponent.scss';
+import { Link } from 'react-router-dom'
 
 interface MyProps {
   user: User;
@@ -107,7 +108,15 @@ class LogInComponent extends React.Component<MyProps, MyState> {
               verifyInputs={null}
               onSubmitCB={this.handleSubmit}
             />
-        </div>
+            <div>
+              <p>
+                Don't have an account?
+              </p>
+              <Link to={'/register'}>
+                Create one free
+              </Link>
+            </div>
+          </div>
         )
     );
   }

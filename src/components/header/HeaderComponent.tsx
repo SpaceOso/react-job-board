@@ -87,9 +87,9 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
     if (this.props.user === null || this.props.user.isAuth === false || this.props.user.isAuth === undefined) {
       return (
         <div>
-          <Link to={'/register'} className="nav-item">
+        {/*  <Link to={'/register'} className="nav-item">
             Sign Up
-          </Link>
+          </Link>*/}
           <Link to={'/login'} className="nav-item">
             Log In
           </Link>
