@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 
 // actions
 import { User } from '../../types';
-import SideMenu from '../side-menu/SideMenu'
-import ModalComponent from '../modal/ModalComponent'
+import SideMenu from '../side-menu/SideMenu';
+import ModalComponent from '../modal/ModalComponent';
+import { Simulate } from 'react-dom/test-utils';
+import Fade from '../animations/Fade';
+import Slide from '../animations/Slide';
 
 interface MyProps {
   user: User;
@@ -79,9 +82,11 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
   displayMobileMenu() {
     const thisEl = document.getElementById('header');
     return (
-      <ModalComponent el={thisEl}>
-        <SideMenu links={this.displayDashboardLink()} handleClick={this.toggleMobileMenu}/>
-      </ModalComponent>
+      <Fade key={'mobile-nav-menu'} in={this.state.menuOpen} unmountOnExit={true} mountOnEnter={true}>
+        <ModalComponent el={thisEl} key={'mobile-nav-menu'}>
+          <SideMenu links={this.displayDashboardLink()} handleClick={this.toggleMobileMenu}/>
+        </ModalComponent>
+      </Fade>
     );
   }
 
@@ -123,6 +128,7 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
   }
 
   render() {
+    const thisEl = document.getElementById('header');
     console.log('header rendering:');
     return (
       <div className="header-component" id={'header'}>
@@ -132,7 +138,13 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
           </div>
         </Link>
         {this.state.mobile ? this.displayMobileMenuButton() : this.displayDashboardLink()}
-        {this.state.menuOpen ? this.displayMobileMenu() : null}
+        {/*{this.state.menuOpen ? this.displayMobileMenu() : null}*/}
+
+        <Slide key={'mobile-nav-menu'} in={this.state.menuOpen} unmountOnExit={true} mountOnEnter={true}>
+          <ModalComponent el={thisEl} key={'mobile-nav-menu'}>
+            <SideMenu links={this.displayDashboardLink()} handleClick={this.toggleMobileMenu}/>
+          </ModalComponent>
+        </Slide>
       </div>
     );
   }

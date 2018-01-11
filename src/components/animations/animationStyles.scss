@@ -20,6 +20,29 @@
 }
 
 
+.slide{
+  left: 0;
+}
+
+.slide-enter{
+  left: -500px;
+}
+
+.slide-enter.slide-enter-active {
+  left: 0;
+  transition: left 500ms ease-in-out;
+}
+
+.slide-exit{
+  left: 0;
+}
+
+.slide-exit.slide-exit-active{
+  left: -500px;
+  transition: left 500ms ease-in-out;
+}
+
+
 /**--- example styles ---**/
 .container {
   padding: 20px;
