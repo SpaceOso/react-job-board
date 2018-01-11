@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 // actions
 import { User } from '../../types';
+import SideMenu from '../side-menu/SideMenu'
+import ModalComponent from '../modal/ModalComponent'
 
 interface MyProps {
   user: User;
@@ -13,6 +15,7 @@ interface MyState {
   auth: boolean;
   loggedIn: boolean;
   mobile: boolean;
+  menuOpen: boolean;
 }
 
 class HeaderComponent extends React.Component<MyProps, MyState> {
@@ -20,15 +23,17 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
     auth: false,
     loggedIn: false,
     mobile: false,
+    menuOpen: false,
   };
 
   constructor(props) {
     super(props);
 
     this.logOut = this.logOut.bind(this);
-    this.showLogOut = this.showLogOut.bind(this);
-    this.displayMobileMenu = this.displayMobileMenu.bind(this);
+    this.displayMobileMenuButton = this.displayMobileMenuButton.bind(this);
     this.displayDashboardLink = this.displayDashboardLink.bind(this);
+    this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
+    this.displayMobileMenu = this.displayMobileMenu.bind(this);
   }
 
   componentDidMount() {
@@ -50,32 +55,38 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
       return true;
     }
 
+    if (this.state.menuOpen !== nextState.menuOpen) {
+      nextState.menuOpen ? document.body.classList.add('noScroll') : document.body.classList.remove('noScroll');
+      return true;
+    }
+
     return false;
   }
 
-  displayMobileMenu(): JSX.Element {
+  toggleMobileMenu() {
+    this.setState({ menuOpen: !this.state.menuOpen });
+  }
+
+  displayMobileMenuButton(): JSX.Element {
     console.log('testing mobile');
     return (
-      <div className="mobile-nav-menu-btn">
+      <div className="mobile-nav-menu-btn" onClick={this.toggleMobileMenu}>
         <i className="fas fa-bars fa-2x" style={{ color: 'red' }}/>
       </div>
     );
   }
 
-  logOut(): void {
-    this.props.logOutUser();
+  displayMobileMenu() {
+    const thisEl = document.getElementById('header');
+    return (
+      <ModalComponent el={thisEl}>
+        <SideMenu links={this.displayDashboardLink()} handleClick={this.toggleMobileMenu}/>
+      </ModalComponent>
+    );
   }
 
-  showLogOut(): null | JSX.Element {
-    const logOut = (
-      <Link to={'/'} onClick={this.logOut}>
-        <div className="nav-item">
-          Log Out
-        </div>
-      </Link>
-    );
-
-    return this.props.user.isAuth === undefined || this.props.user.isAuth === false ? null : logOut;
+  logOut(): void {
+    this.props.logOutUser();
   }
 
   /**
@@ -114,13 +125,14 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
   render() {
     console.log('header rendering:');
     return (
-      <div className="header-component">
+      <div className="header-component" id={'header'}>
         <Link to="/">
           <div id="header-logo">
             <h1>Job Board</h1>
           </div>
         </Link>
-        {this.state.mobile ? this.displayMobileMenu() : this.displayDashboardLink()}
+        {this.state.mobile ? this.displayMobileMenuButton() : this.displayDashboardLink()}
+        {this.state.menuOpen ? this.displayMobileMenu() : null}
       </div>
     );
   }

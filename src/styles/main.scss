@@ -15,6 +15,9 @@ body {
   color: $carbon;
   margin: 0;
 }
+.noScroll { /* ...or body.dialogShowing */
+  overflow: hidden;
+}
 
 *, *:before, *:after {
   box-sizing: inherit;
