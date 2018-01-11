@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 // actions
 import { User } from '../../types';
-import SideMenu from '../side-menu/SideMenu';
-import ModalComponent from '../modal/ModalComponent';
 import Slide from '../animations/Slide';
+import ModalComponent from '../modal/ModalComponent';
+import SideMenu from '../side-menu/SideMenu';
 
 interface MyProps {
   user: User;
@@ -42,11 +42,9 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
       loggedIn: this.props.user === null,
       auth: this.props.user.isAuth,
     });
-    console.log(this.state);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('nextProps:', nextState);
     if (this.props.user.isAuth !== nextProps.user.isAuth) {
       return true;
     }
@@ -68,7 +66,6 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
   }
 
   displayMobileMenuButton(): JSX.Element {
-    console.log('testing mobile');
     return (
       <div className="mobile-nav-menu-btn" onClick={this.toggleMobileMenu}>
         <i className="fas fa-bars fa-2x" style={{ color: 'red' }}/>
@@ -115,7 +112,6 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
 
   render() {
     const thisEl = document.getElementById('header');
-    console.log('header rendering:');
     return (
       <div className="header-component" id={'header'}>
         <Link to="/">

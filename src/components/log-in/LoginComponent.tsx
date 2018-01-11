@@ -1,7 +1,9 @@
 import * as React from 'react';
 
+import * as bcrypt from 'bcryptjs';
 import { Redirect } from 'react-router';
-import { SiteErrors, SiteFetching, User } from '../../types/index';
+import { Link } from 'react-router-dom';
+import { SiteErrors, SiteFetching, User } from '../../types';
 import SimpleForm from '../simple-form/SimpleForm';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 
@@ -9,7 +11,6 @@ import { default as SpinnerComponent } from '../spinners/spinnerComponent';
  * styles
  */
 import './styles/LoginComponent.scss';
-import { Link } from 'react-router-dom'
 
 interface MyProps {
   user: User;
@@ -69,6 +70,21 @@ class LogInComponent extends React.Component<MyProps, MyState> {
   }
 
   handleSubmit(userObject) {
+    let tempHash = '';
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(userObject.password, salt, (error, hash) => {
+        console.log('error', error);
+        console.log('hash', hash);
+        tempHash = hash;
+      });
+    });
+
+    const testHash = '$2a$10$LKz/WhPak9dz4SNgTHOLPukm39ZfSTnx4MU6ilyaQkTn4wyegW1TS';
+
+    bcrypt.compare(userObject.password, testHash, (err, res) =>{
+      console.log('did it match?', res);
+    });
+
     const user = {
       email: userObject.email,
       password: userObject.password, // TODO need to hash this so I'm not sending plain password
