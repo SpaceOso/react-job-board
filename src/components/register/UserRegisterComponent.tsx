@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { AuthUser, SiteFetching, User } from '../../types/index';
 import SimpleForm from '../simple-form/SimpleForm';
@@ -126,6 +126,14 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
             joined={true}
             style={{ width: '57rem' }}
           />
+          <div>
+            <p>
+              Already have an account?
+            </p>
+            <Link to={'/login'} className="link-standard">
+              Login here
+            </Link>
+          </div>
           {/*Once the user registers it should take them to the dashboard*/}
           {this.props.user.isAuth === true ? this.redirectToDashboard() : null}
           {/*This will display once we register our user*/}

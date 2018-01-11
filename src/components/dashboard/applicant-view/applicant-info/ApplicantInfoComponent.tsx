@@ -82,7 +82,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
       if (this.props.applicant[ link ] !== null && this.props.applicant[ link ].length > 0) {
         return (
           <li key={key}>
-            <a href={this.props.applicant[ link ]}>
+            <a  href={`http://${this.props.applicant[ link ]}`} target={'_blank'}>
               <img src={`${require(`../../../../../images/icon/${social.icon}`)}`} alt="link"/>
             </a>
           </li>

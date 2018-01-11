@@ -72,7 +72,7 @@ export interface AuthUser {
 export interface User extends AuthUser {
   id: string | null;
   employerId: string | null;
-  isAuth: boolean | null;
+  isAuth: boolean;
   isFetching: boolean | null;
   error: string | null;
 }

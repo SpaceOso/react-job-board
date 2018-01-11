@@ -15,6 +15,9 @@ body {
   color: $carbon;
   margin: 0;
 }
+.noScroll { /* ...or body.dialogShowing */
+  overflow: hidden;
+}
 
 *, *:before, *:after {
   box-sizing: inherit;
@@ -190,6 +193,16 @@ hr.style1 {
 
 .float-right {
   float: right;
+}
+
+.link-standard{
+  cursor: pointer;
+}
+
+.link-standard:hover{
+  text-decoration: underline;
+  color: $button;
+  font-weight: bold;
 }
 
 /*=======================================*/

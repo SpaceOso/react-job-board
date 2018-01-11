@@ -6,7 +6,14 @@ import './ModalComponent.scss';
 
 const modalParent = document.getElementById('modal-root');
 
-class ModalComponent extends React.Component<any> {
+interface MyProps {
+  el?: any;
+}
+
+class ModalComponent extends React.Component<MyProps, {}> {
+  static defaultProps: Partial<MyProps> = {
+    el: modalParent as Element,
+  };
 
   constructor(props) {
     super(props);
@@ -15,7 +22,7 @@ class ModalComponent extends React.Component<any> {
 
   render() {
     return (
-      ReactDOM.createPortal(this.props.children, modalParent as Element)
+      ReactDOM.createPortal(this.props.children, this.props.el)
     );
 
   }
