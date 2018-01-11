@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { User } from '../../types';
 import SideMenu from '../side-menu/SideMenu';
 import ModalComponent from '../modal/ModalComponent';
-import { Simulate } from 'react-dom/test-utils';
-import Fade from '../animations/Fade';
 import Slide from '../animations/Slide';
 
 interface MyProps {
@@ -36,7 +34,6 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
     this.displayMobileMenuButton = this.displayMobileMenuButton.bind(this);
     this.displayDashboardLink = this.displayDashboardLink.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
-    this.displayMobileMenu = this.displayMobileMenu.bind(this);
   }
 
   componentDidMount() {
@@ -76,17 +73,6 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
       <div className="mobile-nav-menu-btn" onClick={this.toggleMobileMenu}>
         <i className="fas fa-bars fa-2x" style={{ color: 'red' }}/>
       </div>
-    );
-  }
-
-  displayMobileMenu() {
-    const thisEl = document.getElementById('header');
-    return (
-      <Fade key={'mobile-nav-menu'} in={this.state.menuOpen} unmountOnExit={true} mountOnEnter={true}>
-        <ModalComponent el={thisEl} key={'mobile-nav-menu'}>
-          <SideMenu links={this.displayDashboardLink()} handleClick={this.toggleMobileMenu}/>
-        </ModalComponent>
-      </Fade>
     );
   }
 
@@ -138,7 +124,6 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
           </div>
         </Link>
         {this.state.mobile ? this.displayMobileMenuButton() : this.displayDashboardLink()}
-        {/*{this.state.menuOpen ? this.displayMobileMenu() : null}*/}
 
         <Slide key={'mobile-nav-menu'} in={this.state.menuOpen} unmountOnExit={true} mountOnEnter={true}>
           <ModalComponent el={thisEl} key={'mobile-nav-menu'}>

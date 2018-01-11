@@ -7,20 +7,25 @@ interface MyProps {
   handleClick: () => void;
 }
 
-class SideMenu extends React.Component<MyProps, {}> {
-  constructor(props) {
-    super(props);
+const SideMenu: React.SFC<MyProps> = (props) => {
 
+  const createNavLinks = () => {
+    return props.links.map((link, i) => {
+      return (
+        <li key={i}>
+          {link}
+        </li>
+      );
+    });
   };
 
-  render() {
-
-    return (
-      <div className={'side-menu'} onClick={this.props.handleClick}>
-        {this.props.links}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={'side-menu'} onClick={props.handleClick}>
+      <ul>
+        {createNavLinks()}
+      </ul>
+    </div>
+  );
+};
 
 export default SideMenu;
