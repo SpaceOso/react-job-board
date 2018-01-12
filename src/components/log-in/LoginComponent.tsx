@@ -70,27 +70,22 @@ class LogInComponent extends React.Component<MyProps, MyState> {
   }
 
   handleSubmit(userObject) {
-    let tempHash = '';
+    console.log('login pass:', userObject.password);
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(userObject.password, salt, (error, hash) => {
         console.log('error', error);
         console.log('hash', hash);
-        tempHash = hash;
+        const user = {
+          email: userObject.email,
+          password: userObject.password, // TODO need to hash this so I'm not sending plain password
+        };
+
+        console.log('user:', user);
+
+        this.props.logInUser(user);
       });
     });
 
-    const testHash = '$2a$10$LKz/WhPak9dz4SNgTHOLPukm39ZfSTnx4MU6ilyaQkTn4wyegW1TS';
-
-    bcrypt.compare(userObject.password, testHash, (err, res) =>{
-      console.log('did it match?', res);
-    });
-
-    const user = {
-      email: userObject.email,
-      password: userObject.password, // TODO need to hash this so I'm not sending plain password
-    };
-
-    this.props.logInUser(user);
   }
 
   handleLoginRoute() {
