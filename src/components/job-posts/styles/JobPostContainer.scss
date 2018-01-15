@@ -19,7 +19,7 @@
 
   .job-header-container {
     border: 1px solid $borders;
-    max-height: 70px;
+    //max-height: 70px;
     margin-bottom: 15px;
     background-color: $panelBg;
     text-align: left;
@@ -37,7 +37,8 @@
   .jp-job-header {
     color: $jobTitle;
     font-weight: bold;
-    margin: 0 0 15px 0;
+    //margin: 0 0 15px 0;
+    margin: 0;
   }
 }
 
@@ -52,7 +53,6 @@
       margin-right: 8px;
     }
   }
-
 }
 
 @media(max-width: 916px){
@@ -64,4 +64,17 @@
   .jp-employer-aside{
     display: none;
   }
+}
+
+@media(max-width: 555px){
+  .job-post{
+    .job-header-container{
+      max-height: none;
+    }
+    .jp-job-header{
+      font-size: 1.8rem;
+      margin: 0;
+    }
+  }
+
 }

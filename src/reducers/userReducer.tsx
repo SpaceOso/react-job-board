@@ -13,10 +13,10 @@ import { User } from "../types/index";
 
 const defaultState: User = {
   id: null,
-  firstName: null,
-  lastName: null,
-  email: null,
-  password: null,
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
   employerId: null,
   isAuth: false,
   isFetching: false,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // components
 import { logInUser } from '../../actions/authActions';
-import { StoreState, User } from '../../types/index';
+import { StoreState, User } from '../../types';
 import LoginComponent from './LoginComponent';
 // styles
 import './styles/LoginComponent.scss';

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { AuthUser, SiteFetching, User } from '../../types/index';
+import * as bcrypt from 'bcryptjs';
+import { AuthUser, SiteFetching, User } from '../../types';
 import SimpleForm from '../simple-form/SimpleForm';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 
@@ -95,15 +96,28 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
   }
 
   handleSubmit(userModel: AuthUser) {
-    const newUser: AuthUser = {
-      email: userModel.email,
-      firstName: userModel.firstName,
-      lastName: userModel.lastName,
-      password: userModel.password,
-    };
+    let tempHash = '';
 
-    console.log('we\'re trying to submit newUser:', newUser);
-    this.props.registerUser(newUser);
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(userModel.password, salt, (error, hash) => {
+        console.log('error', error);
+        console.log('hash', hash);
+
+        const newUser: AuthUser = {
+          email: userModel.email,
+          firstName: userModel.firstName,
+          lastName: userModel.lastName,
+          password: hash,
+        };
+
+        console.log('we\'re trying to submit newUser:', newUser);
+        this.props.registerUser(newUser);
+      });
+    });
+
+    // bcrypt.compare(userModel.password, testHash, (err, res) => {
+    //   console.log('did it match?', res);
+    // });
   }
 
   redirectToDashboard() {
@@ -122,7 +136,7 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
             inputs={this.inputs}
             submitBtnText="Register Account"
             onSubmitCB={this.handleSubmit}
-            verifyInputs={['email', 'password']}
+            verifyInputs={[ 'email', 'password' ]}
             joined={true}
             style={{ width: '57rem' }}
           />
@@ -147,9 +161,9 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
 
     if (this.props.siteFetching.isFetching === true) {
       return <SpinnerComponent/>;
-    } else {
-      return this.returnRegisterForm();
     }
+
+    return this.returnRegisterForm();
   }
 }
 

@@ -17,7 +17,7 @@ function socialMediaComponent(props: MyProps) {
   if (props.employer.website !== undefined) {
     website = (
       <li>
-        <a href={`${props.employer.facebook}`} target="blank">
+        <a href={`http://${props.employer.facebook}`} target="blank">
           <img src={`${LOCAL_URL}${require('../../../../images/icon/iconWeb.svg')}`}/>
         </a>
       </li>
@@ -27,7 +27,7 @@ function socialMediaComponent(props: MyProps) {
   if (props.employer.facebook !== undefined) {
     faceBook = (
       <li>
-        <a href={`${props.employer.facebook}`} target="blank">
+        <a href={`http://${props.employer.facebook}`} target="blank">
           <img src={`${LOCAL_URL}${require('../../../../images/icon/iconFacebook.svg')}`}/>
         </a>
       </li>
@@ -37,7 +37,7 @@ function socialMediaComponent(props: MyProps) {
   if (props.employer.twitter !== undefined) {
     twitter = (
       <li>
-        <a href={`${props.employer.twitter}`} target="blank">
+        <a href={`http://${props.employer.twitter}`} target="blank">
           <img src={`${LOCAL_URL}${require('../../../../images/icon/iconTwitter.svg')}`}/>
         </a>
       </li>
@@ -47,7 +47,7 @@ function socialMediaComponent(props: MyProps) {
   if (props.employer.linkedIn !== undefined) {
     linkedIn = (
       <li>
-        <a href={`${props.employer.linkedIn}`} target="blank">
+        <a href={`http://${props.employer.linkedIn}`} target="blank">
           <img src={`${LOCAL_URL}${require('../../../../images/icon/iconLinkedin.svg')}`}/>
         </a>
       </li>

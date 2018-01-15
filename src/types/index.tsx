@@ -56,10 +56,10 @@ export interface SiteFetching {
  * @property {(string | null)} password - The users hashed password //todo need to has this
  */
 export interface AuthUser {
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
-  password: string | null;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 /**
