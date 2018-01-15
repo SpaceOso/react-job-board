@@ -44,14 +44,17 @@ module.exports = {
 
     loadOnLogin(req, res) {
         "use strict";
-
+        console.log('loadOnLogin:');
         let token = req.body.token;
         jwt.verify(token, process.env.SECRET_KEY, function (err, decoded) {
 
             if (err) {
-                return res.status(401).json({
-                    message: "invalid credentials on reload."
-                })
+                if (err.message === 'jwt expired') {
+                    console.log('we need another token');
+                    return res.status(401).json({
+                        message: "credentials expired",
+                    })
+                }
             }
 
             if (decoded) {
@@ -92,7 +95,6 @@ module.exports = {
     },
 
     login(req, res, next) {
-        console.log('trying to log in...');
         "use strict";
         return JbUser
             .find({
@@ -133,7 +135,6 @@ module.exports = {
                 });
             })
             .catch((err) => {
-                    console.log("userPromise error:", err);
                     res.status(404).send(err);
                 }
             );

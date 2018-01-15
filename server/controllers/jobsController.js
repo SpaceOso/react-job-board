@@ -28,19 +28,15 @@ module.exports = {
 				order: [['createdAt', 'DESC']]
 			})
 			.then((jobs) => {
-				console.log("WE FOUND ALL THE JOBS");
-				console.log("the jobs:", jobs);
 				res.status(201).send(jobs);
 			})
 			.catch((error) => {
-				console.log(error);
 				res.status(201).send(error)
 			});
 	},
 
 	getById(req, res) {
 		"use strict";
-		console.log("getting job by id..", req.params.jobId);
 		return Job
 			.findById(req.params.jobId, {
 				include: [{
@@ -58,7 +54,6 @@ module.exports = {
 
 			})
 			.catch((error) => {
-				console.log("there was an error...", error);
 				res.status(401).send(error)
 			});
 	}

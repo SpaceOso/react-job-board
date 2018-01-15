@@ -69,7 +69,6 @@ export function registerUser(userObject) {
    employer: null
    },*/
 
-  console.log('authActions:', userObject);
 
   return (dispatch) => {
 
@@ -150,7 +149,6 @@ export function setUser(user: User) {
 // =============================
 
 export function logInUserError(error) {
-  console.log('loginUserError:', error);
   return {
     type: ADD_LOGIN_ERROR,
     payload: { typeOfError: 'user', message: error },
@@ -187,7 +185,6 @@ export function logInOnLoad(token) {
     dispatch(siteFetch());
     axios.post(`${ROOT_URL}login/logcheck`, { token })
       .then((response) => {
-
         // response contains uer, which is our decoded token
         // set token as part of our request headers
         setAuth(token);
@@ -201,8 +198,12 @@ export function logInOnLoad(token) {
 
       })
       .catch((error) => {
-        console.log('so do we have some error', error);
         // dispatch(logInUserError(error.response.status));
+        const errorMsg = error.response.data.message;
+        if (errorMsg === 'credentials expired') {
+          // TODO we need to send them to the log in page
+          console.log('we need to have them re-log');
+        }
         dispatch(clearAllErrors());
         dispatch(setSiteIdle());
       });
@@ -218,6 +219,7 @@ export function logInUser(user) {
   return (dispatch) => {
 
     dispatch(siteFetch());
+    localStorage.clear();
 
     axios.post(`${ROOT_URL}login`, user)
       .then((response) => {
