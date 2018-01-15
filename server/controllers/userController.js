@@ -91,7 +91,7 @@ module.exports = {
         });
     },
 
-    login(req, res) {
+    login(req, res, next) {
         console.log('trying to log in...');
         "use strict";
         return JbUser
@@ -103,17 +103,11 @@ module.exports = {
             })
             .then((userModel) => {
                 if (!userModel) {
-                    console.log('no userModel...');
-                    return res.status(500).json({status:500, message: 'internal error', type:'internal'});
-                    // return Promise.reject(new Error('fail'));
+                    return res.status(500).json({message: "Username or password not valid"});
                 }
 
                 if (bcrypt.compareSync(req.body.password, userModel.password) === false) {
-                    console.log('passwords dont match');
-                    return res.status(400).json({
-                        message: 'Todo Not Found',
-                    });
-                    // return Promise.reject("No matching user information found.");
+                    return res.status(500).json({message: "Username or password not valid"});
                 }
 
                 let user = {

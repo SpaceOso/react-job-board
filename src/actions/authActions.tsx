@@ -237,9 +237,8 @@ export function logInUser(user) {
 
       })
       .catch((error) => {
-        console.log('there was an error trying to log on..', error);
         dispatch(setSiteIdle());
-        dispatch(logInUserError(error.message));
+        dispatch(logInUserError(error.response.data.message));
 
       });
   };
