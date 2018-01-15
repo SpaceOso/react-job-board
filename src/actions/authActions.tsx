@@ -150,6 +150,7 @@ export function setUser(user: User) {
 // =============================
 
 export function logInUserError(error) {
+  console.log('loginUserError:', error);
   return {
     type: ADD_LOGIN_ERROR,
     payload: { typeOfError: 'user', message: error },
@@ -236,8 +237,9 @@ export function logInUser(user) {
 
       })
       .catch((error) => {
+        console.log('there was an error trying to log on..', error);
         dispatch(setSiteIdle());
-        dispatch(logInUserError(error));
+        dispatch(logInUserError(error.message));
 
       });
   };

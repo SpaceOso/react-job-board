@@ -9,8 +9,8 @@ const sequelize = require('sequelize');
 module.exports = {
     create(req, res) {
         "use strict";
-        bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(req.body.password, salt, function(err, hash) {
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(req.body.password, salt, function (err, hash) {
                 // Store hash in your password DB.
                 return JbUser
                     .create({
@@ -92,6 +92,7 @@ module.exports = {
     },
 
     login(req, res) {
+        console.log('trying to log in...');
         "use strict";
         return JbUser
             .find({
@@ -102,11 +103,17 @@ module.exports = {
             })
             .then((userModel) => {
                 if (!userModel) {
-                    return Promise.reject("There was no user found.");
+                    console.log('no userModel...');
+                    return res.status(500).json({status:500, message: 'internal error', type:'internal'});
+                    // return Promise.reject(new Error('fail'));
                 }
 
-                if(bcrypt.compareSync(req.body.password, userModel.password) === false){
-                    return Promise.reject("No matching user information found.");
+                if (bcrypt.compareSync(req.body.password, userModel.password) === false) {
+                    console.log('passwords dont match');
+                    return res.status(400).json({
+                        message: 'Todo Not Found',
+                    });
+                    // return Promise.reject("No matching user information found.");
                 }
 
                 let user = {
@@ -131,7 +138,11 @@ module.exports = {
                     token: token
                 });
             })
-            .catch(err => console.log("userPromise error:", err));
+            .catch((err) => {
+                    console.log("userPromise error:", err);
+                    res.status(404).send(err);
+                }
+            );
     },
 
     addEmployer(req, res, next) {

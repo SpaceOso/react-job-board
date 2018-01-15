@@ -91,12 +91,12 @@ if (app.get('env') === 'development') {
     console.log("in development error");
     app.use(function (err, req, res, next) {
         res.render('index');
-        // res.status(err.status || 500);
-        // /*res.json({
-        //     rico: "nope shouldn't be here either",
-        //     message: err.message,
-        //     error: err
-        // });*/
+        res.status(err.status || 500);
+        res.json({
+            rico: "nope shouldn't be here either",
+            message: err.message,
+            error: err
+        });
     });
 }
 
@@ -105,12 +105,12 @@ if (app.get('env') === 'development') {
 app.use(function (err, req, res, next) {
     console.log("in prod error");
     res.render('index');
-    //res.status(err.status || 500);
-    // res.render('error', {
-    //     rico: "nope shouldn't be here",
-    //     message: err.message,
-    //     error: {}
-    // });
+    res.status(err.status || 500);
+    res.render('error', {
+        rico: "nope shouldn't be here",
+        message: err.message,
+        error: {}
+    });
 });
 
 

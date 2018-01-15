@@ -73,7 +73,7 @@ class LogInComponent extends React.Component<MyProps, MyState> {
 
     const user = {
       email: userObject.email,
-      password: userObject.password, // TODO need to hash this so I'm not sending plain password
+      password: userObject.password,
     };
 
     this.props.logInUser(user);
