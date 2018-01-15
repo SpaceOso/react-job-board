@@ -99,10 +99,7 @@ module.exports = {
                 if (!userModel) {
                     return Promise.reject("There was no user found.");
                 }
-                console.log('body', req.body.password);
-                console.log('user', userModel.password);
 
-                // bcrypt.compare(req.body.password, userModel.password, (err, res) => {
                 if(bcrypt.compareSync(req.body.password, userModel.password) === false){
                     return Promise.reject("No matching user information found.");
                 }
@@ -139,17 +136,14 @@ module.exports = {
 
         if (req.file !== undefined) {
             if (req.file.key !== undefined) {
-                console.log('key:', req.file.key);
                 filename = req.file.key;
             }
 
             if (req.file.filename !== undefined) {
-                console.log('req.file.filename', req.file.filename);
                 filename = req.file.filename;
             }
         }
 
-        console.log("filename", filename);
 
         return Employer
             .create({
@@ -167,7 +161,6 @@ module.exports = {
                 linkedIn: req.body.linkedIn
             })
             .then((employer) => {
-                console.log("the employer created:", employer);
                 return JbUser.update({employerId: employer.id},
                     {
                         where: {id: req.body.userId},
@@ -219,7 +212,6 @@ module.exports = {
             })
             .catch((error) => {
                 res.status(400).send(error);
-                console.log("error getting users:", error);
             })
     }
 };
