@@ -9,31 +9,36 @@ const sequelize = require('sequelize');
 module.exports = {
     create(req, res) {
         "use strict";
-        return JbUser
-            .create({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                password: req.body.password
-            })
-            .then((user) => {
-                let userSignature = {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    employerId: null,
-                    id: user.id
-                };
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(req.body.password, salt, function(err, hash) {
+                // Store hash in your password DB.
+                return JbUser
+                    .create({
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName,
+                        email: req.body.email,
+                        password: hash
+                    })
+                    .then((user) => {
+                        let userSignature = {
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            email: user.email,
+                            employerId: null,
+                            id: user.id
+                        };
 
-                let token = jwt.sign(userSignature, process.env.SECRET_KEY, {expiresIn: "1 day"});
-                res.status(201).json({
-                    user: userSignature,
-                    token: token
-                });
-            })
-            .catch((error) => {
-                res.status(400).send(error);
-            })
+                        let token = jwt.sign(userSignature, process.env.SECRET_KEY, {expiresIn: "1 day"});
+                        res.status(201).json({
+                            user: userSignature,
+                            token: token
+                        });
+                    })
+                    .catch((error) => {
+                        res.status(400).send(error);
+                    })
+            });
+        });
 
     },
 

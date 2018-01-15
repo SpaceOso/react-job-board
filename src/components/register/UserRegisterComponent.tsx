@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import * as bcrypt from 'bcryptjs';
 import { AuthUser, SiteFetching, User } from '../../types';
 import SimpleForm from '../simple-form/SimpleForm';
 import { default as SpinnerComponent } from '../spinners/spinnerComponent';
@@ -9,7 +8,7 @@ import { default as SpinnerComponent } from '../spinners/spinnerComponent';
 // styles
 import './styles/UserRegister.scss';
 
-export interface RegisterComponent {
+export interface MyProps {
   event: Event;
   redirect: false;
   registerUser: (user: AuthUser) => any;
@@ -33,11 +32,11 @@ interface FormInputs {
   id: string;
 }
 
-interface RegisterComponentState {
+interface MyState {
   redirect: false;
 }
 
-class UserRegisterComponent extends React.Component<RegisterComponent, RegisterComponentState> {
+class UserRegisterComponent extends React.Component<MyProps, MyState> {
   private inputs: FormInputs[] = [
     {
       label: 'First Name',
@@ -96,28 +95,16 @@ class UserRegisterComponent extends React.Component<RegisterComponent, RegisterC
   }
 
   handleSubmit(userModel: AuthUser) {
-    let tempHash = '';
 
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(userModel.password, salt, (error, hash) => {
-        console.log('error', error);
-        console.log('hash', hash);
+    const newUser: AuthUser = {
+      email: userModel.email,
+      firstName: userModel.firstName,
+      lastName: userModel.lastName,
+      password: userModel.password,
+    };
 
-        const newUser: AuthUser = {
-          email: userModel.email,
-          firstName: userModel.firstName,
-          lastName: userModel.lastName,
-          password: hash,
-        };
-
-        console.log('we\'re trying to submit newUser:', newUser);
-        this.props.registerUser(newUser);
-      });
-    });
-
-    // bcrypt.compare(userModel.password, testHash, (err, res) => {
-    //   console.log('did it match?', res);
-    // });
+    console.log('we\'re trying to submit newUser:', newUser);
+    this.props.registerUser(newUser);
   }
 
   redirectToDashboard() {
