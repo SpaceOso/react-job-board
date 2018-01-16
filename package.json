@@ -11,10 +11,10 @@
     "start": "node -r dotenv/config bin/www.js -w app.js",
     "server": "set NODE_ENV=development&& nodemon  bin/www.js",
     "test": "mocha  --require ts-node/register src/**/*.spec.ts",
-    "build": "webpack --env.dev=production",
+    "build": "webpack --config webpack.prod.js",
     "build:dev": "set NODE_ENV=development webpack --env.dev --hot",
-    "dev": "webpack-dev-server --env.dev=development --history-api-fallback --port 3000 --hot --host 0.0.0.0",
-    "devprod": "webpack-dev-server --env.dev=prod --history-api-fallback --port 3000 --hot --host 0.0.0.0"
+    "dev": "webpack-dev-server --open --config webpack.dev.js --history-api-fallback --port 3000 --hot",
+    "devprod": "webpack-dev-server --env.dev=prod --history-api-fallback --port 3000 --hot"
   },
   "repository": {
     "type": "git",
@@ -112,6 +112,7 @@
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
-    "webpack-dotenv-plugin": "^2.0.2"
+    "webpack-dotenv-plugin": "^2.0.2",
+    "webpack-merge": "^4.1.1"
   }
 }
