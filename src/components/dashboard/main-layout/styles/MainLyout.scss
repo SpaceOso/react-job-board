@@ -9,4 +9,8 @@
 
 .dashboard-info-panel{
   @include dashboard-main-section();
+
+  @media (min-width: 768px) {
+    padding: 1% 1%;
+  }
 }

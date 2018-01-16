@@ -12,4 +12,7 @@
     display: inline-block;
   }
 
+  @media(min-width: 508px){
+    width: 100%;
+  }
 }

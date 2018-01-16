@@ -4,8 +4,8 @@ import * as React from 'react';
 import './UserDashboardHome.scss';
 
 import { IMG_URL } from '../../../utils/utils';
+import { default as SpinnerComponent } from '../../spinners/spinnerComponent';
 import JobPostUpdatesComponent from '../jobs/job-post-updates/JobPostUpdatesComponent';
-import SpinnerComponent from '../../spinners/spinnerComponent';
 
 interface MyProps {
   user;

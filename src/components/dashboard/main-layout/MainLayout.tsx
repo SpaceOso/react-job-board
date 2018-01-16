@@ -3,16 +3,16 @@ import { Route, Switch } from 'react-router-dom';
 
 // components
 import { RouteComponentProps } from 'react-router';
-import { Applicants, Employer, User } from '../../../types/index';
+import { Applicants, Employer, User } from '../../../types';
 import ApplicantListComponent from '../applicant-list/ApplicantListComponent';
 import ApplicantViewContainer from '../applicant-view/ApplicantViewContainer';
-import UserDashboardHome from '../home/UserDashboardHome';
 import CreateJobComponent from '../jobs/createJob/CreateJobComponent';
 import EditJobsLayout from '../jobs/editJob/EditJobsLayout';
+import UnderConstruction from '../../under-construction/UnderConstruction';
+import UserDashboardHome from '../home/UserDashboardHome';
 import UserDashboardNavMenu from '../nav-menu/UserDashboardNavMenu';
 // styles
 import './styles/MainLyout.scss';
-import UnderConstruction from '../../under-construction/UnderConstruction'
 
 interface Props extends RouteComponentProps<any> {
   user: User;
@@ -22,11 +22,13 @@ interface Props extends RouteComponentProps<any> {
 
 interface State {
   selectedApplicant: Applicants | null;
+  mobile: boolean;
 }
 
 class DashboardMainLayout extends React.Component<Props, any> {
   state: State = {
     selectedApplicant: null,
+    mobile: false,
   };
 
   constructor(props) {
@@ -40,11 +42,17 @@ class DashboardMainLayout extends React.Component<Props, any> {
     this.underConstruction = this.underConstruction.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      mobile: window.innerWidth <= 768,
+    });
+  }
+
   handleApplicantSelect(selectedApplicant) {
     this.setState({ selectedApplicant });
   }
 
-  createJobComponent = (props) => {
+  createJobComponent = () => {
     return (
       <CreateJobComponent
         userId={this.props.user.id}
@@ -64,7 +72,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
     );
   }
 
-  applicantVewContainer = (state) => {
+  applicantVewContainer = () => {
     return (
       <ApplicantViewContainer
         applicant={this.state.selectedApplicant}
@@ -84,7 +92,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
     );
   }
 
-  userDashboardHome = (props) => {
+  userDashboardHome = () => {
     return (
       <UserDashboardHome
         user={this.props.user}
@@ -93,7 +101,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
     );
   }
 
-  underConstruction = (props) => {
+  underConstruction = () => {
     return (
       <UnderConstruction/>
     );
@@ -102,7 +110,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
   render() {
     return (
       <div className="dashboard-layout">
-        <UserDashboardNavMenu match={this.props.match}/>
+        {this.state.mobile ? null : <UserDashboardNavMenu match={this.props.match}/>}
         <div className="dashboard-info-panel">
           <Switch>
             {/*CREATE JOB COMPONENT*/}

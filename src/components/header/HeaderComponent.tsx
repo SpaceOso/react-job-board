@@ -38,7 +38,7 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
 
   componentDidMount() {
     this.setState({
-      mobile: window.innerWidth <= 540,
+      mobile: window.innerWidth <= 768,
       loggedIn: this.props.user === null,
       auth: this.props.user.isAuth,
     });
