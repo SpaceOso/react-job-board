@@ -10,24 +10,28 @@ interface MyProps {
 }
 
 class UserDashboardNavMenu extends React.Component<MyProps> {
+
   render() {
+
+    let navAttributes = [
+      { title: 'Dashboard', link: 'home', img: 'fa-home' },
+      { title: 'Applicants', link: 'applicants', img: 'fa-users' },
+      { title: 'Post a Job', link: 'createjob', img: 'fa-file' },
+      { title: 'Edit Postings', link: 'editpostings', img: 'fa-pencil-alt' },
+      { title: 'Profile Edit', link: 'profile', img: ' fa-user-circle' },
+    ];
+    let navBtns = navAttributes.map((link) => {
+      return (
+        <NavLink key={link.link} className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/${link.link}`}>
+          <i style={{ fontSize: '23px' }} className={`fas ${link.img}`}/>
+          <span style={{ marginLeft: '9px' }}>{link.title}</span>
+        </NavLink>
+      );
+    });
+
     return (
       <div className="user-dashboard-nav">
-        <NavLink className="user-dashboard-btn" to={`${this.props.match.url}/home`} activeClassName={'selected'}>
-          <img src={`${require(('../../../../images/icon/iconHome.svg'))}`}/>Home
-        </NavLink>
-        <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/applicants`}>
-          <img src={`${require('../../../../images/icon/iconApplicantStack.svg')}`}/>Applicants
-        </NavLink>
-        <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/createjob`}>
-          <img src={`${require('../../../../images/icon/iconJobPosts.svg')}`}/>Post A Job
-        </NavLink>
-        <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/editpostings`}>
-          <img src={`${require('../../../../images/icon/iconEditPosts.svg')}`}/>Edit Postings
-        </NavLink>
-        <NavLink className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/profile`}>
-          <img src={`${require('../../../../images/icon/iconProfilePage.svg')}`}/>Profile / Edit
-        </NavLink>
+        {navBtns}
       </div>
     );
   }

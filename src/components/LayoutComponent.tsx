@@ -17,7 +17,7 @@ class LayoutComponent extends React.Component<Props> {
   render() {
     return (
       <div className="app-wrapper">
-        <HeaderComponent user={this.props.user} logOutUser={this.props.logOutUser}/>
+        <HeaderComponent {...this.props} user={this.props.user} logOutUser={this.props.logOutUser} />
         {this.props.children}
         <FooterComponent/>
       </div>

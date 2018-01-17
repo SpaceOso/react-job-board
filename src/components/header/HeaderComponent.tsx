@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 // actions
 import { User } from '../../types';
@@ -10,6 +10,7 @@ import SideMenu from '../side-menu/SideMenu';
 interface MyProps {
   user: User;
   logOutUser: () => {};
+  restProps?: any;
 }
 
 interface MyState {
@@ -34,6 +35,7 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
     this.displayMobileMenuButton = this.displayMobileMenuButton.bind(this);
     this.displayDashboardLink = this.displayDashboardLink.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
+    this.createMobileLinks = this.createMobileLinks.bind(this);
   }
 
   componentDidMount() {
@@ -95,6 +97,17 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
 
       const dashLink = this.props.user.employerId !== null ? dashboardLink + '/home' : dashboardLink + '/register';
 
+      if (this.state.mobile) {
+        navButtons.push(...this.createMobileLinks(dashboardLink));
+
+        navButtons.push(
+          <NavLink key={'log-out'} onClick={this.logOut} className="user-dashboard-btn" activeClassName={'selected'} to={'/'}>
+            <i className={`fas fa-sign-out-alt`}/>Log Out
+          </NavLink>,
+        );
+        return navButtons;
+      }
+
       navButtons.push(
         <Link to={dashLink} className="nav-item" id={'dashboard-btn'} key={'dash-btn'}>
           Dashboard
@@ -108,6 +121,25 @@ class HeaderComponent extends React.Component<MyProps, MyState> {
     }
 
     return navButtons;
+  }
+
+  createMobileLinks(dashboardLink) {
+    const navAttributes = [
+      { title: 'Dashboard', link: 'home', img: 'fa-home' },
+      { title: 'Applicants', link: 'applicants', img: 'fa-users' },
+      { title: 'Post a Job', link: 'createjob', img: 'fa-file' },
+      { title: 'Edit Postings', link: 'editpostings', img: 'fa-pencil-alt' },
+      { title: 'Profile Edit', link: 'profile', img: ' fa-user-circle' },
+    ];
+
+    return navAttributes.map((link) => {
+      return (
+        <NavLink key={link.link} className="user-dashboard-btn" activeClassName={'selected'} to={`${dashboardLink}/${link.link}`}>
+          <i style={{ fontSize: '23px' }} className={`fas ${link.img}`}/>
+          <span style={{ marginLeft: '9px' }}>{link.title}</span>
+        </NavLink>
+      );
+    });
   }
 
   render() {
