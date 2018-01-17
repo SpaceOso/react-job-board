@@ -54,3 +54,6 @@ $contentPadding: 15px;
   @include panelBorders();
   @include panelShadow();
 }
+
+$break-large: 1024px;
+$break-med: 1024px;

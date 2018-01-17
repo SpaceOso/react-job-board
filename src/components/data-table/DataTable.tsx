@@ -73,7 +73,7 @@ class DataTable extends React.Component<MyProps, MyState> {
   }
 
   createHeaders() {
-    return this.props.columnInfo.map(column => <th key={column.header}>{column.header}</th>);
+    return this.props.columnInfo.map(column => <th key={column.header} data-column={column.header}>{column.header}</th>);
   }
 
   createRowData(rowObj) {
@@ -92,11 +92,11 @@ class DataTable extends React.Component<MyProps, MyState> {
             }*/
           combinedDataArr.push(rowObj[ column.properties[ i ] ]);
         }
-        return <td key={`${rowObj.id}${value}`}>{combinedDataArr.join(' ')}</td>;
+        return <td key={`${rowObj.id}${value}`} data-column={column.property}>{combinedDataArr.join(' ')}</td>;
 
       }
 
-      return <td key={`${rowObj.id}${value}`}>{rowObj[ column.property ]}</td>;
+      return <td key={`${rowObj.id}${value}`} data-column={column.property}>{rowObj[ column.property ]}</td>;
     });
   }
 

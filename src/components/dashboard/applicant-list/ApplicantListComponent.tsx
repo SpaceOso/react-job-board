@@ -58,7 +58,7 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
         join: true,
         property: 'firstName',
         properties: ['firstName', 'lastName'],
-        header: 'First Name',
+        header: 'Name',
       },
       {
         property: 'email',
@@ -71,11 +71,6 @@ class ApplicantListComponent extends React.Component<MyProps, MyState> {
       {
         property: 'interest',
         header: 'Interest',
-      },
-      {
-        join: true,
-        properties: [ 'city', 'state' ],
-        header: 'Location',
       },
     ];
 

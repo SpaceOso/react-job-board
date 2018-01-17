@@ -13,14 +13,14 @@ class UserDashboardNavMenu extends React.Component<MyProps> {
 
   render() {
 
-    let navAttributes = [
+    const navAttributes = [
       { title: 'Dashboard', link: 'home', img: 'fa-home' },
       { title: 'Applicants', link: 'applicants', img: 'fa-users' },
       { title: 'Post a Job', link: 'createjob', img: 'fa-file' },
       { title: 'Edit Postings', link: 'editpostings', img: 'fa-pencil-alt' },
       { title: 'Profile Edit', link: 'profile', img: ' fa-user-circle' },
     ];
-    let navBtns = navAttributes.map((link) => {
+    const navBtns = navAttributes.map((link) => {
       return (
         <NavLink key={link.link} className="user-dashboard-btn" activeClassName={'selected'} to={`${this.props.match.url}/${link.link}`}>
           <i style={{ fontSize: '23px' }} className={`fas ${link.img}`}/>

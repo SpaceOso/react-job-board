@@ -44,7 +44,7 @@ class DashboardMainLayout extends React.Component<Props, any> {
 
   componentDidMount() {
     this.setState({
-      mobile: window.innerWidth <= 768,
+      mobile: window.innerWidth <= 1046,
     });
   }
 
