@@ -57,4 +57,11 @@
       display: none;
     }
   }
+
+  @media(max-width: 450px){
+    th[data-column='Email'],
+    td[data-column='email']{
+      display: none;
+    }
+  }
 }

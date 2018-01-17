@@ -82,7 +82,7 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
       if (this.props.applicant[ link ] !== null && this.props.applicant[ link ].length > 0) {
         return (
           <li key={key}>
-            <a  href={`http://${this.props.applicant[ link ]}`} target={'_blank'}>
+            <a href={`http://${this.props.applicant[ link ]}`} target={'_blank'}>
               <img src={`${require(`../../../../../images/icon/${social.icon}`)}`} alt="link"/>
             </a>
           </li>
@@ -115,13 +115,15 @@ class ApplicantInfoComponent extends React.Component<MyProps, MyState> {
             <p>{applicantEmail}</p>
             {this.createSocialLinks()}
           </div>
-          <div className={'applicant-status'}>
-            <div>
+          <div className="applicant-status">
+            <div id="status-block">
               <h1>Status:</h1>
               <select value={this.state.status} onChange={this.handleChange} id="status">
                 <option value="reviewed">Reviewed</option>
                 <option value="needs-review">Needs Review</option>
               </select>
+            </div>
+            <div id="interest-block">
               <h1>Interest:</h1>
               <select value={this.state.interest} onChange={this.handleChange} id="interest">
                 <option value="Interested">Interested</option>

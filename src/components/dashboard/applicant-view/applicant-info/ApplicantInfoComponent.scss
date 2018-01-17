@@ -61,4 +61,31 @@
     width: 100%;
     padding-top: 11px;
   }
+
+  #status-block,
+  #interest-block{
+    display: inline-block;
+  }
+
+  @media(max-width: 822px){
+    .applicant-status{
+      //float: none;
+      display: block;
+      width: 264px;
+      text-align: right;
+      h1{
+        font-size: 1.8rem;
+      }
+      #status-block,
+      #interest-block{
+        display: block;
+      }
+    }
+  }
+
+  @media(max-width: 560px){
+    .applicant-status{
+      float: none;
+    }
+  }
 }
