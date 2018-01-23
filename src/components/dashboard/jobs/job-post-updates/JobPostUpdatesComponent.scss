@@ -17,6 +17,12 @@
   .job-post-update-list{
     list-style-type: none;
     padding: 0;
+    .job-update-item{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+    }
     li{
       padding: 19px 5px;
       border-bottom: 2px solid $borders;

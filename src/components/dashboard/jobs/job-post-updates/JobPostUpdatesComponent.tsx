@@ -23,9 +23,11 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
 
     const jobList = this.props.jobs.map((job, index) => {
       return (
-        <li key={job.id ? job.id : index} className={'job-update-item'}>
-          <h3 className={'job-title'}>{job.title}</h3> - {job.location.city}, {job.location.state}
-          <span className={'float-right'}>{job.Applicants.length} applicants</span>
+        <li key={job.id ? job.id : index} className="job-update-item">
+          <h3 className="job-title">{job.title}</h3> {job.location.city}, {job.location.state}
+          <div>
+            {job.Applicants.length} applicants
+          </div>
         </li>
       );
     });

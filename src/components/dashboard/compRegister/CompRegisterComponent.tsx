@@ -75,7 +75,7 @@ class CompRegisterComponent extends React.Component<CompRegisterProps, MyState> 
       label: 'city:',
       required: true,
       type: 'text',
-      placeHolder: 'text',
+      placeHolder: 'city',
       id: 'city',
     },
     {
