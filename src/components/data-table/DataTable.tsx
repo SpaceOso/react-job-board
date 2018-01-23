@@ -78,22 +78,30 @@ class DataTable extends React.Component<MyProps, MyState> {
 
   createRowData(rowObj) {
     return this.props.columnInfo.map((column, value) => {
+
       if (column.join !== undefined && column.join === true) {
 
         const combinedDataArr: string[] = [];
+
         for (let i = 0; i < column.properties.length; i += 1) {
-
-          // TODO need to implement this, this checks to see if the property is nested 'location.city'
-          /*	if(column.properties[i].includes('.')){
-              let dividedString = column.properties[i].split('.');
-              let key = dividedString[0];
-              let value = dividedString[1];
-              combinedDataArr.push(rowObj[key]);
-            }*/
-          combinedDataArr.push(rowObj[ column.properties[ i ] ]);
+          if (column.properties[ i ].includes('.')) {
+            const dividedString = column.properties[ i ].split('.');
+            const key = dividedString[ 0 ];
+            const value = dividedString[ 1 ];
+            combinedDataArr.push(rowObj[ key ][ value ]);
+          } else {
+            combinedDataArr.push(rowObj[ column.properties[ i ] ]);
+          }
         }
-        return <td key={`${rowObj.id}${value}`} data-column={column.property}>{combinedDataArr.join(' ')}</td>;
 
+        return <td key={`${rowObj.id}${value}`} data-column={column.property}>{combinedDataArr.join(column.connector ? column.connector : ' ')}</td>;
+      }
+
+      if (column.special !== undefined) {
+        if (column.special === 'count') {
+          console.log('prop..', column.property);
+          return <td key={`${rowObj.id}${value}`} data-column={column.property}>{rowObj[ column.property ].length}</td>;
+        }
       }
 
       return <td key={`${rowObj.id}${value}`} data-column={column.property}>{rowObj[ column.property ]}</td>;
@@ -135,14 +143,14 @@ class DataTable extends React.Component<MyProps, MyState> {
 
       let specialClassName = '';
 
-       // if there is a special class it will add it to every row where the property matches the specialClass key
+      // if there is a special class it will add it to every row where the property matches the specialClass key
       if (this.props.specialClasses !== null) {
         specialClassName = this.props.specialClasses[ rowObj.interest ];
       }
 
       return (
         <tr
-          className={rowObj.id === this.state.activeDataRow.id ? `selected ${specialClassName}` : `data-row ${specialClassName}`}
+          className={rowObj.id === this.state.activeDataRow.id ? `data-row selected ${specialClassName}` : `data-row ${specialClassName}`}
           key={rowObj.id}
           onClick={(event) => this.onClick(rowObj, event)}
         >

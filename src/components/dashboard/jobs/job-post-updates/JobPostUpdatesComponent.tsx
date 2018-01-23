@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { EmployerJobView } from "../../../../types/index";
+import { EmployerJobView } from '../../../../types';
+import DataTable from '../../../data-table/DataTable';
 
 // styles
 import './JobPostUpdatesComponent.scss';
@@ -14,25 +15,38 @@ class JobPostUpdatesComponent extends React.Component<IProps, {}> {
     super(props);
 
     this.createList = this.createList.bind(this);
+    this.handleJobClick = this.handleJobClick.bind(this);
+  }
+
+  handleJobClick(event) {
+    console.log('job has been clicked', event);
   }
 
   createList() {
     if (this.props.jobs === null || this.props.jobs === undefined || this.props.jobs.length <= 0) {
       return this.createEmptyMessageComponent();
     }
-
-    const jobList = this.props.jobs.map((job, index) => {
-      return (
-        <li key={job.id ? job.id : index} className="job-update-item">
-          <h3 className="job-title">{job.title}</h3> {job.location.city}, {job.location.state}
-          <div>
-            {job.Applicants.length} applicants
-          </div>
-        </li>
-      );
-    });
-
-    return (<ul className={'job-post-update-list'}>{jobList}</ul>);
+    const dataInfo = [
+      {
+        property: 'title',
+        header: 'Title',
+      },
+      {
+        join: true,
+        property: 'city',
+        properties: [ 'location.city', 'location.state' ],
+        connector: ', ',
+        header: 'Location',
+      },
+      {
+        property: 'Applicants',
+        special: 'count',
+        header: 'Applicants',
+      },
+    ];
+    return (
+      <DataTable rowData={this.props.jobs} columnInfo={dataInfo} handleClick={this.handleJobClick} totalRows={5} specialClasses={null} itemId={'2343'}/>
+    );
   }
 
   createEmptyMessageComponent() {
