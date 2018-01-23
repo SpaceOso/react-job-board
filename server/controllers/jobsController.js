@@ -28,10 +28,10 @@ module.exports = {
 				order: [['createdAt', 'DESC']]
 			})
 			.then((jobs) => {
-				res.status(201).send(jobs);
+				res.status(200).send(jobs);
 			})
 			.catch((error) => {
-				res.status(201).send(error)
+				res.status(404).send(error)
 			});
 	},
 
