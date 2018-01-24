@@ -12,7 +12,7 @@ module.exports = {
 				employerId: req.body.employerId.id
 			})
 			.then((job) => {
-				res.status(201).send({
+				res.status(200).send({
 					job
 				});
 			})
@@ -47,9 +47,7 @@ module.exports = {
 				job.Employer.getJobs()
 					.then(employerJobs => {
 						job.dataValues.Employer.dataValues.jobs = employerJobs;
-						res.status(201).send({
-							job: job.dataValues
-						});
+						res.status(200).send(job.dataValues);
 					})
 
 			})

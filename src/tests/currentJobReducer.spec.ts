@@ -1,9 +1,10 @@
 import { expect } from 'chai';
 import 'mocha';
+import { doneFetchingJobs, fetchingJobs, resetCurrentJob, setCurrentJob, singleJobSuccess } from '../actions/jobActions';
 import { default as currentJobPostReducer } from '../reducers/currentJobReducer';
-import { Job } from '../types';
+import { CurrentJobPost, Job } from '../types';
 
-const emptyJobPost = {
+const emptyJobPost: CurrentJobPost = {
   id: '',
   title: '',
   description: '',
@@ -34,7 +35,7 @@ const emptyJobPost = {
 };
 const jobReducer = currentJobPostReducer;
 
-const mockJob: Job = {
+const mockJob: CurrentJobPost = {
   createdAt: '12/12/12',
   description: 'Mock Test Job',
   Employer: {
@@ -61,6 +62,7 @@ const mockJob: Job = {
     zip: '1234556',
   },
   title: 'mock job title yo',
+  isFetching: false,
 };
 
 describe('CurrentJobPostReducer', () => {
@@ -68,19 +70,24 @@ describe('CurrentJobPostReducer', () => {
     expect(jobReducer(undefined, {})).eql(emptyJobPost);
   });
 
-  it('should return with isFetching true', () => {
-    expect(jobReducer(emptyJobPost, { type: 'FETCHING_SINGLE_JOB' })).eql({ ...emptyJobPost, isFetching: true });
+  it('fetchingJobs() should return with isFetching true', () => {
+    expect(jobReducer(undefined, fetchingJobs())).eql({ ...emptyJobPost, isFetching: true });
   });
 
-  it('should return with isFetching false', () => {
-    expect(jobReducer(emptyJobPost, { type: 'DONE_FETCHING' })).eql({ ...emptyJobPost, isFetching: false });
+  it('doneFetchingJobs() should return with isFetching false', () => {
+    expect(jobReducer(undefined, doneFetchingJobs())).eql({ ...emptyJobPost, isFetching: false });
   });
 
-  it('should return with a job that matches our mockJob', () => {
-    const data: object = {
-      job: mockJob,
-    };
-    expect(jobReducer(emptyJobPost, { type: 'SINGLE_JOB_SUCCESS', payload: data }));
+  it('singleJobSuccess should return with a job that matches our mockJob', () => {
+    expect(jobReducer(undefined, singleJobSuccess(mockJob))).eql({ ...mockJob, isFetching: false });
+  });
+
+  it('resetCurrentJob should reset job to a blank job', () => {
+    expect(jobReducer(mockJob, resetCurrentJob())).eql({ ...emptyJobPost, isFetching: false });
+  });
+
+  it('SET_CURRENT_JOB should return with a job that matches our mockJob', () => {
+    expect(jobReducer(undefined, setCurrentJob(mockJob))).eql({ ...mockJob, isFetching: false });
   });
 
 });

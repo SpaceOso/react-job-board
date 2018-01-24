@@ -1,10 +1,9 @@
 import {
-  DONE_FETCHING,
-  FETCHING_SINGLE_JOB,
-  RESET_CURRENT_JOB,
+  DONE_FETCHING, FETCHING_JOBS,
+  RESET_CURRENT_JOB, SET_CURRENT_JOB,
   SINGLE_JOB_SUCCESS,
 } from '../actions/jobActions';
-import { CurrentJobPost } from '../types/index';
+import { CurrentJobPost } from '../types';
 
 const thisState: CurrentJobPost = {
   id: '',
@@ -38,11 +37,7 @@ const thisState: CurrentJobPost = {
 
 function currentJobPostReducer(state = thisState, action) {
   switch (action.type) {
-    case RESET_CURRENT_JOB:
-      return {
-        ...thisState,
-      };
-    case FETCHING_SINGLE_JOB:
+    case FETCHING_JOBS:
       return {
         ...state,
         isFetching: true,
@@ -53,11 +48,22 @@ function currentJobPostReducer(state = thisState, action) {
         isFetching: false,
       };
     }
+    case SET_CURRENT_JOB: {
+      return {
+        ...state,
+        ...action.payload,
+        isFetching: false,
+      };
+    }
     case SINGLE_JOB_SUCCESS:
       return {
         ...state,
         ...action.payload,
         isFetching: false,
+      };
+    case RESET_CURRENT_JOB:
+      return {
+        ...thisState,
       };
     default:
       return state;

@@ -4,7 +4,9 @@ import 'mocha';
 import * as app from '../../app';
 import { default as currentJobPostReducer } from '../reducers/currentJobReducer';
 import { Job } from '../types';
+
 let should = chai.should();
+const expect = chai.expect;
 
 const emptyJobPost = {
   id: '',
@@ -68,18 +70,41 @@ const mockJob: Job = {
 
 chai.use(chaiHttp);
 
-describe('CurrentJobPostReducer', () => {
-  it('should get all the jobs', (done) => {
-    console.log('inside the test');
-    chai.request('http://localhost:4200')
+const url = 'http://localhost:4200';
+const jobKeys = ['id', 'title', 'location', 'description', 'createdAt', 'updatedAt', 'employerId', 'Employer'];
+const employerKeys = ['id', 'name', 'location', 'logoImg', 'website', 'twitter', 'facebook', 'linkedIn', 'createdAt', 'updatedAt'];
+
+describe('/api/jobposts/', () => {
+
+  it('should GET all the jobs', (done) => {
+    chai.request(url)
       .get('/api/jobposts/')
       .end((err, res) => {
-        console.log("we have a ressponse");
         res.should.have.status(200);
-        res.should.be.a('array');
+        res.body.should.be.a('array');
+
+        if (res.body.length > 0) {
+          res.body.map((job) => {
+            expect(job).to.have.all.keys(jobKeys);
+            expect(job.Employer).to.have.all.keys(employerKeys);
+          });
+        }
         done();
       });
   });
 
-})
-;
+  it('should GET a SINGLE job', (done) => {
+    chai.request(url)
+      .get('/api/jobposts/bd74369e-009b-11e8-a3d8-509a4c1c45f2')
+      .end((err, res) => {
+        const singleJobKey = ['id', 'name', 'location', 'logoImg', 'website', 'twitter', 'facebook', 'linkedIn', 'createdAt', 'updatedAt', 'jobs'];
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.all.keys(jobKeys);
+        expect(res.body.Employer).to.have.all.keys(singleJobKey);
+        res.body.Employer.jobs.should.be.a('array');
+        done();
+      });
+  });
+
+});
