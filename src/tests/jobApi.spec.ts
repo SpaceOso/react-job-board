@@ -72,7 +72,7 @@ chai.use(chaiHttp);
 
 const url = 'http://localhost:4200';
 const jobKeys = ['id', 'title', 'location', 'description', 'createdAt', 'updatedAt', 'employerId', 'Employer'];
-const employerKeys = ['id', 'name', 'location', 'logoImg', 'website', 'twitter', 'facebook', 'linkedIn', 'createdAt', 'updatedAt'];
+export const employerKeys = ['id', 'name', 'location', 'logoImg', 'website', 'twitter', 'facebook', 'linkedIn', 'createdAt', 'updatedAt'];
 
 describe('/api/jobposts/', () => {
 
@@ -95,7 +95,7 @@ describe('/api/jobposts/', () => {
 
   it('should GET a SINGLE job', (done) => {
     chai.request(url)
-      .get('/api/jobposts/bd74369e-009b-11e8-a3d8-509a4c1c45f2')
+      .get('/api/jobposts/12312312-1234-1234-1234-123412341234')
       .end((err, res) => {
         const singleJobKey = ['id', 'name', 'location', 'logoImg', 'website', 'twitter', 'facebook', 'linkedIn', 'createdAt', 'updatedAt', 'jobs'];
         res.should.have.status(200);
