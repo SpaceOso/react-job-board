@@ -9,8 +9,8 @@ import {
   SET_EMPLOYER,
 } from '../actions/authActions';
 
-import { EDITING_JOB_POST_SUCCESS, EMPLOYER_FETCHING, EMPLOYER_IDLE } from '../actions/index';
-import { Employer } from '../types/index';
+import { EDITING_JOB_POST_SUCCESS, EMPLOYER_FETCHING, EMPLOYER_IDLE } from '../actions';
+import { Employer } from '../types';
 
 const defaultState: Employer = {
   id: '',
@@ -19,7 +19,7 @@ const defaultState: Employer = {
     address: '',
     city: '',
     state: '',
-    zip: '0',
+    zip: '',
   },
   logoImg: '',
   website: '',
@@ -81,9 +81,7 @@ function employerReducer(state = defaultState, action): any {
         ...action.payload,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 }
 
