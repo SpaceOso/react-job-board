@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import 'mocha';
 import { doneFetchingJobs, fetchingJobs, resetCurrentJob, setCurrentJob, singleJobSuccess } from '../actions/jobActions';
 import { default as currentJobPostReducer } from '../reducers/currentJobReducer';
-import { CurrentJobPost, Employer, Job } from '../types';
 import employerReducer from '../reducers/employerReducer';
+import { CurrentJobPost, Employer, Job } from '../types';
 
 const emptyJobPost: CurrentJobPost = {
   id: '',

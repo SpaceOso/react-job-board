@@ -2,7 +2,7 @@ import * as React from 'react';
 
 // utils
 import { setFormState } from '../../../../utils/utils';
-import SpinnerComponent from '../../../spinners/spinnerComponent';
+import { default as SpinnerComponent } from '../../../spinners/spinnerComponent';
 import TinymceComponent from '../../../tinymce/TinymceComponent';
 
 import './CreateJobComponent.scss';
@@ -36,14 +36,6 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
     super(props);
 
     this.state = initialState;
-    /*this.state = {
-      title: "",
-      description: "",
-      city: '',
-      state: '',
-      zip: '',
-      keywords: [],
-    };*/
 
     this.handleJobSubmit = this.handleJobSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -52,7 +44,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
   }
 
   handleJobSubmit(event: any): void {
-    this.props.submitJobPost({ ...this.state, employerId: this.props.employer });
+    this.props.submitJobPost({ ...this.state, employerId: this.props.employer.id });
     event.preventDefault();
     this.setState(initialState);
   }
@@ -62,8 +54,8 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
   }
 
   handleEditorChange = (e) => {
-    console.log('Content was updated:', e.target.getContent());
-  };
+    // console.log('Content was updated:', e.target.getContent());
+  }
 
   handleJobDescriptionChange(content) {
     const updatedContent = content.replace(/style="([^"]*)"/g, '');
@@ -84,7 +76,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
               id="job-title"
               placeholder="Enter Job Title"
               value={this.state.title}
-              onChange={(event) => this.handleChange(this.state, "title", event.target.value)}
+              onChange={(event) => this.handleChange(this.state, 'title', event.target.value)}
             />
             <div>
               <h3>Job Location</h3>
@@ -95,7 +87,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
                 id="job-city"
                 placeholder="Enter Job city"
                 value={this.state.city}
-                onChange={(event) => this.handleChange(this.state, "city", event.target.value)}
+                onChange={(event) => this.handleChange(this.state, 'city', event.target.value)}
               />
               <label htmlFor="job-city">State</label>
               <input
@@ -104,7 +96,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
                 id="job-state"
                 placeholder="Enter Job State"
                 value={this.state.state}
-                onChange={(event) => this.handleChange(this.state, "state", event.target.value)}
+                onChange={(event) => this.handleChange(this.state, 'state', event.target.value)}
               />
               <label htmlFor="job-city">Zip</label>
               <input
@@ -113,7 +105,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
                 id="job-zip"
                 placeholder="Enter Job Zip"
                 value={this.state.zip}
-                onChange={(event) => this.handleChange(this.state, "zip", event.target.value)}
+                onChange={(event) => this.handleChange(this.state, 'zip', event.target.value)}
               />
             </div>
           </div>
@@ -133,7 +125,7 @@ class CreateJobComponent extends React.Component<MyProps, MyState> {
               id="keywords"
               placeholder="Enter keywords"
               value={this.state.keywords}
-              onChange={(event) => this.handleChange(this.state, "keywords", event.target.value)}
+              onChange={(event) => this.handleChange(this.state, 'keywords', event.target.value)}
             />
           </div>
           <button>Submit Job</button>

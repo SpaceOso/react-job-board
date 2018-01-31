@@ -8,6 +8,8 @@ module.exports = {
 
     createJob(req, res) {
         "use strict";
+        console.log("in create job");
+        console.log(req.body);
         return Job
             .create({
                 title: req.body.title,
@@ -17,13 +19,11 @@ module.exports = {
                     zip: req.body.zip
                 },
                 description: req.body.description,
-                employerId: req.body.employerId.id
+                employerId: req.body.employerId
             })
             .then((job) => {
                 job.dataValues.Applicants = [];
-                res.status(201).send({
-                    job
-                });
+                return res.status(201).send(job);
             })
             .catch((error) => {
                 // console.log(error);

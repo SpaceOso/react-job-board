@@ -20,7 +20,7 @@ describe('/api/login/', () => {
     };
     const userKeys = ['id', 'firstName', 'lastName', 'email', 'employerId'];
 
-    chai.request(app)
+    chai.request(url)
       .post('/login')
       .send(userDetails)
       .end((err, res) => {
@@ -44,7 +44,7 @@ describe('/api/login/', () => {
     };
 
     const errorMessage = 'Username or password not valid';
-    chai.request(app)
+    chai.request(url)
       .post('/login')
       .send(wrongCredentials)
       .end((err, res) => {
@@ -61,7 +61,7 @@ describe('/api/login/', () => {
       email: 'noemployer@gmail.com',
       password: '123',
     };
-    chai.request(app)
+    chai.request(url)
       .post('/login')
       .send(userDetails)
       .end((err, res) => {

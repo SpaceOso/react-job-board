@@ -92,7 +92,7 @@ export function saveJobPost(jobPostInfo, userId) {
 
     axios.post(`${ROOT_URL}employer/createJob`, jobPostInfo)
       .then((response) => {
-        dispatch(editingJobPostSuccess(response.data.job));
+        dispatch(editingJobPostSuccess(response.data));
         dispatch(setSiteIdle());
       })
       .catch((error) => {

@@ -77,7 +77,7 @@ export const employerKeys = ['id', 'name', 'location', 'logoImg', 'website', 'tw
 describe('/api/jobposts/', () => {
 
   it('should GET all the jobs', (done) => {
-    chai.request(app)
+    chai.request(url)
       .get('/api/jobposts/')
       .end((err, res) => {
         res.should.have.status(200);
@@ -94,7 +94,7 @@ describe('/api/jobposts/', () => {
   });
 
   it('should GET a SINGLE job', (done) => {
-    chai.request(app)
+    chai.request(url)
       .get('/api/jobposts/12312312-1234-1234-1234-123412341234')
       .end((err, res) => {
         const singleJobKey = ['id', 'name', 'location', 'logoImg', 'website', 'twitter', 'facebook', 'linkedIn', 'createdAt', 'updatedAt', 'jobs'];
