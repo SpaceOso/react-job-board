@@ -2,7 +2,7 @@
 
 A project I've been working on to learn the ins and outs of web applications. Front end is developed in react using Node with Express and PostgreSQL for the backend.
 
-This project is still farm from finished but if you would like to view the current progress you can visit:
+This project is still far from finished but if you would like to view the current progress you can visit:
 
 http://mr-job-board.herokuapp.com/
 
