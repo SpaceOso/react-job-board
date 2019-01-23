@@ -5,7 +5,9 @@
  */
 
 
-// require('dotenv').config();
+require('dotenv-safe').config({
+  allowEmptyValues: true
+});
 var debug = require('debug')('node-rest:server');
 var http = require('http');
 var app = require('../app');

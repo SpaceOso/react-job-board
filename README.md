@@ -17,7 +17,7 @@ This site is not currently secured so please don't use actual email and password
 
 ### Prerequisites
 
-You will need to have a PostgreSQL database with uuid-ossp library. Run the following SQL:
+You will need to have a PostgreSQL database with uuid-ossp library. Run the following SQL while in the database:
 
 ````
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
